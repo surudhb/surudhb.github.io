@@ -1,5 +1,4 @@
 import React from "react"
-import "../styles/global.scss"
-import { Container } from "react-bootstrap"
+import Layout from "../components/Layout"
 
-export default () => <Container>Hello World!</Container>
+export default () => <Layout>Hello World!</Layout>
