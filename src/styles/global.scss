@@ -15,6 +15,7 @@ $theme-colors: (
 
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css?family=Raleway");
+@import "../../static/fonts/Aurabesh/fonts.css";
 
 html,
 body {
@@ -59,4 +60,8 @@ img:hover {
 
 .icons:hover {
   color: $gray-800;
+}
+
+.aurebesh:hover {
+  font-family: "Aurabesh", "Raleway", sans-serif;
 }
