@@ -43,6 +43,15 @@ img:hover {
   animation: pulse 0.5s;
 }
 
+.brand-icon {
+  font-size: 3rem;
+  color: $gray-700;
+}
+
+.brand-icon:hover {
+  color: $gray-800;
+}
+
 .icons {
   font-size: 3.75rem;
   color: $gray-600;

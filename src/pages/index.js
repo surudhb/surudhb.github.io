@@ -17,7 +17,9 @@ export default () => (
     <Jumbotron fluid className="bg-white text-center py-0">
       <Container>
         <h1 style={{ fontSize: "5rem" }}>Surudh Bhutani</h1>
-        <p>Software Engineer by day. Rebel scum by night.</p>
+        <p>
+          <i>Software Engineer by day, Rebel scum by night.</i>
+        </p>
       </Container>
       <hr className="my-3" style={{ width: "50%" }}></hr>
       <Container style={{ width: "50%" }}>

@@ -1,18 +1,15 @@
 import React from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import { Link } from "gatsby"
+import "../Icons.js"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default () => {
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Navbar.Brand className="ml-5" as={Link} to="/">
-          <img
-            width="40"
-            height="40"
-            src="https://img.icons8.com/ios/500/000000/rebel.png"
-            alt="rebel-scum"
-          />
+          <FontAwesomeIcon icon={["fab", "rebel"]} className="brand-icon" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
