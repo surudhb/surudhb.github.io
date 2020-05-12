@@ -7,13 +7,9 @@ import Footer from "./Footer/Footer"
 
 export default ({ children }) => {
   return (
-    <Container fluid>
+    <Container fluid className="px-0">
       <Header />
-      <Container
-        fluid="lg"
-        className="align-middle"
-        style={{ minHeight: "80vh" }}
-      >
+      <Container fluid="lg" style={{ minHeight: "80vh" }}>
         {children}
       </Container>
       <Footer />

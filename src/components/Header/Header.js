@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar"
 
 export default () => {
   return (
-    <Container fluid>
+    <Container fluid className="px-0">
       <Navbar />
     </Container>
   )
