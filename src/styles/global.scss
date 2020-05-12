@@ -42,3 +42,12 @@ img {
 img:hover {
   animation: pulse 0.5s;
 }
+
+.icons {
+  font-size: 3.75rem;
+  color: $gray-600;
+}
+
+.icons:hover {
+  color: $gray-800;
+}

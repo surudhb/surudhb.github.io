@@ -7,7 +7,12 @@ export default () => {
     <>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Navbar.Brand className="ml-5" as={Link} to="/">
-          Home
+          <img
+            width="40"
+            height="40"
+            src="https://img.icons8.com/ios/500/000000/rebel.png"
+            alt="rebel-scum"
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
