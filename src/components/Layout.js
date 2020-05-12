@@ -9,7 +9,7 @@ export default ({ children }) => {
   return (
     <Container fluid className="px-0">
       <Header />
-      <Container fluid="lg" style={{ minHeight: "80vh" }}>
+      <Container fluid="lg" className="min-vh-100">
         {children}
       </Container>
       <Footer />
