@@ -1,4 +1,4 @@
-@import "./colors.scss";
+@import "colors";
 
 $theme-colors: (
   primary: $purple,
@@ -11,7 +11,7 @@ $theme-colors: (
   dark: $gray-800,
 ) !default;
 
-@import "./fonts.scss";
+@import "fonts";
 
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css?family=Raleway");

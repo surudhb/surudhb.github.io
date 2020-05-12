@@ -1,5 +1,5 @@
-@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
-
-.sticky-footer {
-  flex-shrink: none;
+.sticky {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

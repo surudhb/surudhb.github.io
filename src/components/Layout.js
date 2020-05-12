@@ -1,14 +1,16 @@
 import React from "react"
 import "../styles/global.scss"
 import { Container } from "react-bootstrap"
-import Navbar from "./Navbar/Navbar"
+import Header from "./Header/Header"
 import Footer from "./Footer/Footer"
 
 export default ({ children }) => {
   return (
     <>
-      <Navbar />
-      <Container fluid>{children}</Container>
+      <Header />
+      <Container fluid style={{ minHeight: "100%" }}>
+        {children}
+      </Container>
       <Footer />
     </>
   )

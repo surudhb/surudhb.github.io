@@ -1,14 +1,15 @@
 import React from "react"
 import { Container, Row, Col } from "react-bootstrap"
-import "./footer.module.scss"
+import footerStyles from "./footer.module.scss"
 
 export default () => (
-  <footer className="py-3">
+  <footer className={footerStyles.sticky}>
     <Container fluid className="text-center">
       <Row>
-        <Col>
+        <Col className="text-muted">
           <small>
-            Surudh Bhutani &copy; {new Date().getFullYear()}. Made with ❤ &{" "}
+            Surudh Bhutani &copy; {new Date().getFullYear()}. Made with{" "}
+            <span style={{ color: "red" }}>❤</span> &{" "}
             <a href="https://www.gatsbyjs.org/">Gatsby</a>
           </small>
         </Col>
