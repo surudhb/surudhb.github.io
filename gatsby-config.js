@@ -9,6 +9,26 @@ module.exports = {
   siteMetadata: {
     title: `Surudh Bhutani`,
     author: `Surudh Bhutani`,
+    about: `This is a blurb about me because I cant decide what to actually put here`,
+    education: [`University of Waterloo`, `University of Ottawa`],
+    technicalLanguages: [
+      `Node.js`,
+      `React.js`,
+      `Swift`,
+      `Java`,
+      `C/C++`,
+      `RoR`,
+    ],
+    languages: [`English`, `Hindi`, `Aurebesh`],
+    technologies: [`Docker`, `Git`, `Jira`, `Heroku`, `Puppet`, `Postman`],
+    technicalInterests: [
+      `Node.js`,
+      `React.js`,
+      `Full-stack development`,
+      `Back-end development`,
+      `Automation`,
+    ],
+    interests: [`Comic books`, `Star Wars`, `Avatar`, `Hiking`, `Pro-karting`],
   },
   plugins: [
     {

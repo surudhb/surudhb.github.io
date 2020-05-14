@@ -4,10 +4,9 @@ import Layout from "../components/Layout"
 import { Container, Jumbotron, Form, FormControl } from "react-bootstrap"
 
 export default ({ data }) => {
-  const emptyQuery = ""
   const [state, setState] = useState({
     filteredData: [],
-    query: emptyQuery,
+    query: "",
   })
 
   const allPosts = data.allMarkdownRemark.edges || []
@@ -21,6 +20,7 @@ export default ({ data }) => {
       // standardize query
       const stdQuery = query.toLowerCase()
       return (
+        post.node.excerpt.toLowerCase().includes(stdQuery) ||
         (description && description.toLowerCase().includes(stdQuery)) ||
         title.toLowerCase().includes(stdQuery) ||
         (tags && tags.join("").toLowerCase().includes(stdQuery))
@@ -33,7 +33,7 @@ export default ({ data }) => {
   }
 
   const { filteredData, query } = state
-  const filteredPosts = query !== emptyQuery ? filteredData : allPosts
+  const filteredPosts = query !== "" ? filteredData : allPosts
 
   return (
     <Layout>
