@@ -18,16 +18,16 @@ export default () => {
         >
           <Nav className="mx-5">
             <Nav.Link as={Link} to="/blog">
-              Blog
+              <span className="aurebesh">Blog</span>
             </Nav.Link>
             <Nav.Link className="ml-2" as={Link} to="/about">
-              About
+              <span className="aurebesh">About</span>
             </Nav.Link>
             <Nav.Link className="ml-2" as={Link} to="/projects">
-              Projects
+              <span className="aurebesh">Projects</span>
             </Nav.Link>
             <Nav.Link className="ml-2" as={Link} to="/resume">
-              Resume
+              <span className="aurebesh">Resume</span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

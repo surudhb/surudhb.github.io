@@ -101,3 +101,13 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## Known Issues
 
 - Sourcemap error
+
+## TODO
+
+- Projects page
+- About page
+- blog main page styling
+- blog template page styling
+- upload resume
+- filter search on blog page
+- audio file for r2d2 and vader on hover
