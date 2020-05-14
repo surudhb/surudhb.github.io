@@ -1,16 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/Layout"
-import { Container, Jumbotron } from "react-bootstrap"
+import { Layout, JumboTitle } from "../components/Components"
+import { Container } from "react-bootstrap"
 
 export default ({ data }) => {
   const profile = data.site.siteMetadata
   return (
     <Layout>
       <Container className="text-center">
-        <Jumbotron className="bg-white pt-5 pb-0">
-          <h1>About Me</h1>
-        </Jumbotron>
+        <JumboTitle title="About Me" />
         <section>
           <p>{profile.about}</p>
         </section>

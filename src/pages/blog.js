@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
-import Layout from "../components/Layout"
+import { Link } from "gatsby"
+import { Layout, JumboTitle } from "../components/Components"
 import { Container, Jumbotron, Form, FormControl } from "react-bootstrap"
 
 export default ({ data }) => {
@@ -38,9 +38,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <Container fluid className="text-center">
-        <Jumbotron className="bg-white pt-5 pb-0">
-          <h1>My Blog</h1>
-        </Jumbotron>
+        <JumboTitle title="My Blog" />
         <Container className="mx-5 px-5 mb-5">
           <Form className="aurebesh">
             <FormControl
@@ -73,26 +71,3 @@ export default ({ data }) => {
     </Layout>
   )
 }
-
-export const query = graphql`
-  query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            description
-            tags
-            date(formatString: "DD MMMM, YYYY")
-          }
-          fields {
-            slug
-          }
-          excerpt
-        }
-      }
-    }
-  }
-`
