@@ -15,7 +15,9 @@ export default ({ data }) => {
         <section>
           <h5>Education</h5>
           {profile.education.map(institution => (
-            <span>{institution} </span>
+            <div key={institution}>
+              <span>{institution}</span>
+            </div>
           ))}
         </section>
       </Container>

@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import { Layout } from "../components/Components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Container, Row, Col, Jumbotron, Image } from "react-bootstrap"
@@ -67,9 +66,9 @@ export default () => (
               </a>
             </Col>
             <Col>
-              <Link to="/resume">
+              <a href="../../resume.pdf" target="_blank" download>
                 <FontAwesomeIcon icon={["fas", "file-alt"]} className="icons" />
-              </Link>
+              </a>
             </Col>
           </Row>
         </Container>

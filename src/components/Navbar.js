@@ -1,7 +1,7 @@
 import React from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import { Link } from "gatsby"
-import "../Icons.js"
+import "./Icons.js"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default () => {

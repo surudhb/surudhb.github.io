@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import { Layout, JumboTitle } from "../components/Components"
 import { Container, Jumbotron, Form, FormControl } from "react-bootstrap"
 
@@ -54,16 +54,21 @@ export default ({ data }) => {
           </Jumbotron>
           <section>
             {filteredPosts.map(({ node }) => (
-              <article key={node.id} className="aurebesh">
-                <Link to={node.fields.slug} style={{ textDecoration: "none" }}>
-                  <header>
-                    <h4>{node.frontmatter.title}</h4>
-                    <p>{node.frontmatter.date}</p>
-                  </header>
-                  <p>{node.excerpt}</p>
-                </Link>
-                <br />
-              </article>
+              <div key={node.id}>
+                <article className="aurebesh">
+                  <Link
+                    to={node.fields.slug}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <header>
+                      <h4>{node.frontmatter.title}</h4>
+                      <p>{node.frontmatter.date}</p>
+                    </header>
+                    <p>{node.excerpt}</p>
+                  </Link>
+                  <br />
+                </article>
+              </div>
             ))}
           </section>
         </Container>
@@ -71,3 +76,30 @@ export default ({ data }) => {
     </Layout>
   )
 }
+
+export const query = graphql`
+  query {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/blog/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          timeToRead
+          frontmatter {
+            title
+            description
+            tags
+            date(formatString: "DD MMMM, YYYY")
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
+      }
+    }
+  }
+`
