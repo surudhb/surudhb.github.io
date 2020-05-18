@@ -16,8 +16,8 @@ export default () => {
           id="responsive-navbar-nav"
           style={{ justifyContent: "flex-end" }}
         >
-          <Nav className="mx-5">
-            <Nav.Link as={Link} to="/blog">
+          <Nav className="pr-3 mr-4">
+            <Nav.Link className="ml-2" as={Link} to="/blog">
               <span className="aurebesh">Blog</span>
             </Nav.Link>
             <Nav.Link className="ml-2" as={Link} to="/about">
