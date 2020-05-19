@@ -101,6 +101,7 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## Known Issues
 
 - Sourcemap error
+- Blog posts just keep getting crammed into one row
 
 ## TODO
 

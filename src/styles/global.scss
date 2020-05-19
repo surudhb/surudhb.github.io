@@ -65,3 +65,10 @@ img:hover {
 .aurebesh:hover {
   font-family: "Aurabesh", "Raleway", sans-serif;
 }
+
+// temporary font size scaling shenanigans
+
+html {
+  font-size: calc(14px + (18 - 16) * ((70vw - 700px) / (1500 - 700)));
+  line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px) / (1600 - 300)));
+}

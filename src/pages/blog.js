@@ -61,7 +61,7 @@ export default ({ data }) => {
           </Jumbotron>
           <Row>
             {filteredPosts.map(({ node }) => (
-              <Col key={node.id}>
+              <Col key={node.id} className="col-4 p-3">
                 <Row className="justify-content-center">
                   <BlogLink
                     to={node.fields.slug}

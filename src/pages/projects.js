@@ -1,7 +1,7 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
-import { Layout, JumboTitle } from "../components/Components"
-import { Container, Image } from "react-bootstrap"
+import { graphql } from "gatsby"
+import { Layout, JumboTitle, ProjectLink } from "../components/Components"
+import { Container } from "react-bootstrap"
 
 export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
@@ -13,24 +13,14 @@ export default ({ data }) => {
           <section>
             {allProjects.map(({ node }) => (
               <div key={node.id}>
-                <article className="aurebesh">
-                  <Link
-                    to={node.fields.slug}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <header>
-                      <Image src={node.frontmatter.image} rounded />
-                      <h4>{node.frontmatter.title}</h4>
-                      <p>
-                        {node.frontmatter.tags.map(tag => (
-                          <span key={tag}>tag </span>
-                        ))}
-                      </p>
-                    </header>
-                    <p>{node.excerpt}</p>
-                  </Link>
-                  <hr />
-                </article>
+                <ProjectLink
+                  to={node.fields.slug}
+                  img={node.frontmatter.image}
+                  title={node.frontmatter.title}
+                  tags={node.frontmatter.tags}
+                  excerpt={node.excerpt}
+                />
+                <hr />
               </div>
             ))}
           </section>
