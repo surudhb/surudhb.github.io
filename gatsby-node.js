@@ -9,7 +9,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     const path = `content/${contentType}/`
     const { createNodeField } = actions
     const slug = createFilePath({ node, getNode, basePath: path })
-    createNodeField({ node, name: `slug`, value: `${contentType}${slug}` })
+    createNodeField({ node, name: `slug`, value: `/${contentType}${slug}` })
     createNodeField({
       node,
       name: `templatePath`,

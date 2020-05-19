@@ -1,7 +1,14 @@
 import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
-import { Layout, JumboTitle } from "../components/Components"
-import { Container, Jumbotron, Form, FormControl } from "react-bootstrap"
+import { graphql } from "gatsby"
+import { Layout, JumboTitle, BlogLink } from "../components/Components"
+import {
+  Container,
+  Jumbotron,
+  Form,
+  FormControl,
+  Row,
+  Col,
+} from "react-bootstrap"
 
 export default ({ data }) => {
   const [state, setState] = useState({
@@ -49,28 +56,23 @@ export default ({ data }) => {
           </Form>
         </Container>
         <Container fluid className="text-left">
-          <Jumbotron className="bg-white pl-0 pt-2">
+          <Jumbotron className="bg-white pl-0 pt-2 pb-0">
             <h3>All Posts ({data.allMarkdownRemark.totalCount})</h3>
           </Jumbotron>
-          <section>
+          <Row>
             {filteredPosts.map(({ node }) => (
-              <div key={node.id}>
-                <article className="aurebesh">
-                  <Link
+              <Col key={node.id}>
+                <Row className="justify-content-center">
+                  <BlogLink
                     to={node.fields.slug}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <header>
-                      <h4>{node.frontmatter.title}</h4>
-                      <p>{node.frontmatter.date}</p>
-                    </header>
-                    <p>{node.excerpt}</p>
-                  </Link>
-                  <br />
-                </article>
-              </div>
+                    title={node.frontmatter.title}
+                    subtitle={node.frontmatter.date}
+                    excerpt={node.excerpt}
+                  />
+                </Row>
+              </Col>
             ))}
-          </section>
+          </Row>
         </Container>
       </Container>
     </Layout>
