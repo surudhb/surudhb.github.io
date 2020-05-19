@@ -65,6 +65,7 @@ export default ({ data }) => {
                 <Row className="justify-content-center">
                   <BlogLink
                     to={node.fields.slug}
+                    featuredImage={node.frontmatter.featuredImage}
                     title={node.frontmatter.title}
                     subtitle={node.frontmatter.date}
                     excerpt={node.excerpt}
