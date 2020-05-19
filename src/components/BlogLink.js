@@ -1,22 +1,10 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 import Img from "gatsby-image"
 import Card from "react-bootstrap/Card"
 import "../styles/global.scss"
 
 export default props => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(relativePath: { eq: "content/blog/hello-world/1.jpg" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `)
-
   return (
     <Card
       as={Link}
@@ -27,7 +15,11 @@ export default props => {
         color: "#343a40",
       }}
     >
-      <Card.Img as={Img} fluid={data.file.childImageSharp.fluid} />
+      <Card.Img
+        as={Img}
+        fluid={props.featuredImage}
+        style={{ height: "9vw" }}
+      />
       <Card.Body className="pt-3 mt-3">
         <Card.Title>
           <h4>{props.title}</h4>

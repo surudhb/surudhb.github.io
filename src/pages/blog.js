@@ -16,6 +16,13 @@ export default ({ data }) => {
     query: "",
   })
 
+  const allFeaturedImages = data.allFile.edges || []
+  const featuredImageMap = allFeaturedImages.reduce((map, obj) => {
+    const slug = obj.node.relativePath.match(/\/[blog].*\/|$/)[0]
+    map[slug] = obj.node.childImageSharp.fluid
+    return map
+  }, {})
+
   const allPosts = data.allMarkdownRemark.edges || []
 
   const handleChange = e => {
@@ -65,7 +72,7 @@ export default ({ data }) => {
                 <Row className="justify-content-center">
                   <BlogLink
                     to={node.fields.slug}
-                    featuredImage={node.frontmatter.featuredImage}
+                    featuredImage={featuredImageMap[`${node.fields.slug}`]}
                     title={node.frontmatter.title}
                     subtitle={node.frontmatter.date}
                     excerpt={node.excerpt}
@@ -101,6 +108,24 @@ export const query = graphql`
             slug
           }
           excerpt
+        }
+      }
+    }
+    allFile(
+      filter: {
+        extension: { eq: "jpg" }
+        relativePath: { regex: "/feature/" }
+        relativeDirectory: { regex: "/content/blog/" }
+      }
+    ) {
+      edges {
+        node {
+          childImageSharp {
+            fluid(maxWidth: 200) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+          relativePath
         }
       }
     }
