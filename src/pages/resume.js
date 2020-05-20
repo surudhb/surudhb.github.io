@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 export default () => {
   return (
     <Layout>
-      <Container fluid className="text-center">
+      <Container fluid className="pt-2 mt-5 text-center">
         <JumboTitle title="Resume">
           <a href="../../resume.pdf" target="_blank" download>
             <FontAwesomeIcon

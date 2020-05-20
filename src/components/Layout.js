@@ -22,13 +22,13 @@ export default ({ children }) => {
   const themeClass = `theme-${appThemes[selectedTheme]}`
 
   return (
-    <Container fluid className={themeClass}>
+    <Container fluid className={"px-0 " + themeClass}>
       <Container fluid className="px-0 app-container">
-        <Header />
+        <Header themeClass={themeClass} />
         <Container fluid="lg" className="min-vh-100">
           {children}
         </Container>
-        <Footer handler={handleChangeTheme} />
+        <Footer handler={handleChangeTheme} themeClass={themeClass} />
       </Container>
     </Container>
   )

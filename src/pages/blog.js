@@ -51,9 +51,9 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <Container fluid className="text-center">
+      <Container fluid className="pt-2 mt-5 text-center">
         <JumboTitle title="My Blog" />
-        <Container className="mx-5 px-5 mb-5">
+        <Container className="px-5 mb-5 text-center">
           <Form className="aurebesh">
             <FormControl
               type="text"

@@ -112,3 +112,4 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 - upload resume
 - filter search on blog page
 - audio file for r2d2 and vader on hover
+- Use CONTEXT to manage theme handling across the app

@@ -1,7 +1,8 @@
 import React from "react"
 import { Container, Row, Col } from "react-bootstrap"
 
-export default ({ handler }) => {
+export default ({ handler, themeClass }) => {
+  const heart = themeClass === "theme-rebellion" ? "cyan" : "red"
   return (
     <footer className={styles.sticky}>
       <Container fluid className="text-center">
@@ -9,13 +10,16 @@ export default ({ handler }) => {
           <Col className="text-muted">
             Surudh Bhutani &copy; {new Date().getFullYear()}. Made with{" "}
             <button
-              style={styles.buttonStyle}
+              style={{ color: `${heart}` }}
               onMouseOver={handler}
               onFocus={handler}
             >
               ❤
             </button>{" "}
-            & <a href="https://www.gatsbyjs.org/">Gatsby</a>
+            &{" "}
+            <a style={{ color: `${heart}` }} href="https://www.gatsbyjs.org/">
+              Gatsby
+            </a>
           </Col>
         </Row>
       </Container>
@@ -28,10 +32,5 @@ const styles = {
     left: 0,
     bottom: 0,
     width: "100%",
-  },
-  buttonStyle: {
-    color: "cyan",
-    border: "none",
-    background: "white",
   },
 }

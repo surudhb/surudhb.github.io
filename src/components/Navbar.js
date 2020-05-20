@@ -4,11 +4,13 @@ import { Link } from "gatsby"
 import "./Icons.js"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export default () => {
+export default ({ themeClass }) => {
+  const theme = themeClass === "theme-rebellion" ? "light" : "dark"
+  const brand = theme === "light" ? "rebel" : "empire"
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar fixed="top" collapseOnSelect expand="lg" bg={theme} variant={theme}>
       <Navbar.Brand className="pl-5 ml-5" as={Link} to="/">
-        <FontAwesomeIcon icon={["fab", "rebel"]} className="brand-icon" />
+        <FontAwesomeIcon icon={["fab", `${brand}`]} className="brand-icon" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse
@@ -17,16 +19,16 @@ export default () => {
       >
         <Nav className="pr-3 mr-4">
           <Nav.Link className="ml-2" as={Link} to="/blog">
-            <span className="">Blog</span>
+            <span>Blog</span>
           </Nav.Link>
           <Nav.Link className="ml-2" as={Link} to="/about">
-            <span className="">About</span>
+            <span>About</span>
           </Nav.Link>
           <Nav.Link className="ml-2" as={Link} to="/projects">
-            <span className="">Projects</span>
+            <span>Projects</span>
           </Nav.Link>
           <Nav.Link className="ml-2" as={Link} to="/resume">
-            <span className="">Resume</span>
+            <span>Resume</span>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

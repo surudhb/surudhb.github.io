@@ -7,7 +7,7 @@ export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
   return (
     <Layout>
-      <Container className="text-center">
+      <Container className="pt-2 mt-5 text-center">
         <JumboTitle title="My Projects" />
         <Container className="text-left">
           <section>

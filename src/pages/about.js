@@ -7,7 +7,7 @@ export default ({ data }) => {
   const profile = data.site.siteMetadata
   return (
     <Layout>
-      <Container className="text-center">
+      <Container className="pt-2 mt-5 text-center">
         <JumboTitle title="About Me" />
         <section>
           <p>{profile.about}</p>

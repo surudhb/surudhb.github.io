@@ -1,3 +1,5 @@
+@import "colors";
+
 /*
  * Theme definitions
  */
@@ -5,21 +7,13 @@
 $themes: (
   rebellion: (
     backgroundColor: white,
-    textColor: #408bbd,
-    buttonTextColor: #408bbd,
-    buttonTextTransform: none,
-    buttonTextHoverColor: #61b0e7,
-    buttonColor: #fff,
-    buttonBorder: 2px solid #408bbd,
+    textColor: #00d1ec,
+    themeColor: cyan,
   ),
   empire: (
     backgroundColor: #222,
     textColor: #ddd,
-    buttonTextColor: #aaa,
-    buttonTextTransform: uppercase,
-    buttonTextHoverColor: #ddd,
-    buttonColor: #333,
-    buttonBorder: 1px solid #333,
+    themeColor: red,
   ),
 );
 
@@ -60,6 +54,13 @@ body {
 html,
 body {
   height: 100%;
+  @include themify($themes) {
+    background: themed("backgroundColor");
+  }
+}
+
+button {
+  border: none;
 }
 
 #app-root {
@@ -85,6 +86,14 @@ body {
   .title {
     font-family: sans-serif;
     font-weight: lighter;
+  }
+
+  Nav a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+    @include themify($themes) {
+      text-decoration-color: themed("themeColor");
+    }
   }
 
   @include themify($themes) {
