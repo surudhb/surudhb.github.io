@@ -1,18 +1,18 @@
 import React from "react"
 import { Container, Row, Col } from "react-bootstrap"
-import { faBorderNone } from "@fortawesome/free-solid-svg-icons"
 
-export default () => {
-  const handleMouseOver = e => {
-    console.log(e.target)
-  }
+export default ({ handler }) => {
   return (
     <footer className={styles.sticky}>
       <Container fluid className="text-center">
         <Row>
           <Col className="text-muted">
             Surudh Bhutani &copy; {new Date().getFullYear()}. Made with{" "}
-            <button style={styles.buttonStyle} onMouseOver={handleMouseOver}>
+            <button
+              style={styles.buttonStyle}
+              onMouseOver={handler}
+              onFocus={handler}
+            >
               ❤
             </button>{" "}
             & <a href="https://www.gatsbyjs.org/">Gatsby</a>
