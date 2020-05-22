@@ -59,6 +59,14 @@ img:hover {
 .icons:hover {
   &.dark {
     color: $white;
+    &.github,
+    &.fcc,
+    &.file {
+      background: $black;
+    }
+    &.fcc {
+      border-radius: unset;
+    }
   }
   &.light {
     &.github {
