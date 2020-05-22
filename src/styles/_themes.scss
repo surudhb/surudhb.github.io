@@ -7,13 +7,15 @@
 $themes: (
   light: (
     backgroundColor: white,
-    textColor: #008cff,
-    themeColor: #008cff,
+    textColor: $black,
+    themeColor: $dark-blue,
+    titleColor: $dark-blue,
   ),
   dark: (
     backgroundColor: #222,
-    textColor: #ddd,
-    themeColor: red,
+    textColor: $gray-300,
+    titleColor: $white,
+    themeColor: $dark-red,
   ),
 );
 
@@ -88,9 +90,21 @@ button {
     font-weight: lighter;
   }
 
+  .page-title,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @include themify($themes) {
+      color: themed("titleColor");
+    }
+  }
+
   Nav a:hover {
     text-decoration: underline;
     text-decoration-thickness: 0.1rem;
+    color: $gray-200;
     @include themify($themes) {
       text-decoration-color: themed("themeColor");
     }

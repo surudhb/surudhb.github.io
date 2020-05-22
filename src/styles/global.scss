@@ -47,6 +47,8 @@ img:hover {
   }
   &.empire {
     color: $white;
+    border-radius: 50%;
+    background: $black;
   }
 }
 
@@ -56,9 +58,32 @@ img:hover {
   border-radius: 50%;
 }
 
-.icons:hover {
+.bg-vader-dark {
+  background: $dark-gray;
+}
+
+.search {
   &.dark {
     color: $white;
+    caret-color: gray;
+    &:focus {
+      box-shadow: 0 0 0 0.1rem rgba($dark-red, 0.8);
+      border-color: rgba($dark-red, 0.8);
+    }
+  }
+  &.light:focus {
+    box-shadow: 0 0 0 0.1rem rgba($dark-blue, 0.8);
+    border-color: rgba($dark-blue, 0.8);
+  }
+}
+
+.bg-none {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+.icons:hover {
+  &.dark {
+    color: $dark-red;
     &.github,
     &.fcc,
     &.file {

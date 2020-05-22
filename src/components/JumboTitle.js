@@ -3,9 +3,9 @@ import { Jumbotron } from "react-bootstrap"
 
 export default ({ title, children }) => {
   return (
-    <Jumbotron className="bg-white pt-5 pb-0">
+    <Jumbotron className="bg-none pt-5 pb-0 page-title">
       <h1>
-        {title} <span>{children}</span>
+        {title} <span>{children}</span>{" "}
       </h1>
     </Jumbotron>
   )

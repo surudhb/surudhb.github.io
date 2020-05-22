@@ -18,7 +18,7 @@ export default () => {
                   height="130"
                   src={
                     dark
-                      ? `../../icons/darth-vader-dark.png`
+                      ? `../../icons/darth-vader-red.png`
                       : `../../icons/r2-d2-light.png`
                   }
                   alt={dark ? "Darth Vader" : "R2-D2"}
@@ -31,7 +31,7 @@ export default () => {
               >
                 <Container className="py-my-0">
                   <h1 style={{ fontSize: "5rem", color: "black" }}>
-                    <span style={{ color: "#666666" }}>Surudh</span> Bhutani
+                    <span style={{ color: "#ced4da" }}>Surudh</span> Bhutani
                   </h1>
                   <p>
                     <i>
@@ -42,7 +42,7 @@ export default () => {
                     </i>
                   </p>
                 </Container>
-                <hr className="my-3" style={{ width: "50%" }}></hr>
+                <hr className="my-3" style={{ width: "50%" }} />
                 <Container style={{ width: "50%" }}>
                   <Row className="text-center">
                     <Col>

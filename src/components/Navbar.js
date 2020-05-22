@@ -13,7 +13,7 @@ export default () => {
           fixed="top"
           collapseOnSelect
           expand="lg"
-          bg={theme.dark ? "dark" : "light"}
+          bg={theme.dark ? "vader-dark" : "light"}
           variant={theme.dark ? "dark" : "light"}
         >
           <Navbar.Brand className="pl-5 ml-5" as={Link} to="/">

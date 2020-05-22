@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { Layout, JumboTitle, BlogLink } from "../components/Components"
+import ThemeContext from "../utils/theme-context"
 import {
   Container,
   Jumbotron,
@@ -50,40 +51,45 @@ export default ({ data }) => {
   const filteredPosts = query !== "" ? filteredData : allPosts
 
   return (
-    <Layout>
-      <Container fluid className="pt-2 mt-5 text-center">
-        <JumboTitle title="My Blog" />
-        <Container className="px-5 mb-5 text-center">
-          <Form className="aurebesh">
-            <FormControl
-              type="text"
-              placeholder="Search"
-              onChange={handleChange}
-            />
-          </Form>
-        </Container>
-        <Container fluid className="text-left">
-          <Jumbotron className="bg-white pl-0 pt-2 pb-0">
-            <h3>All Posts ({data.allMarkdownRemark.totalCount})</h3>
-          </Jumbotron>
-          <Row>
-            {filteredPosts.map(({ node }) => (
-              <Col key={node.id} className="col-4 p-3">
-                <Row className="justify-content-center">
-                  <BlogLink
-                    to={node.fields.slug}
-                    featuredImage={featuredImageMap[`${node.fields.slug}`]}
-                    title={node.frontmatter.title}
-                    subtitle={node.frontmatter.date}
-                    excerpt={node.excerpt}
-                  />
-                </Row>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </Container>
-    </Layout>
+    <ThemeContext.Consumer>
+      {({ dark }) => (
+        <Layout>
+          <Container fluid className="pt-2 mt-5 text-center">
+            <JumboTitle title="My Blog" />
+            <Container className="px-5 mb-5 text-center">
+              <Form className="aurebesh">
+                <FormControl
+                  className={`bg-none search ${dark ? "dark" : "light"}`}
+                  type="text"
+                  placeholder="Search"
+                  onChange={handleChange}
+                />
+              </Form>
+            </Container>
+            <Container fluid className="text-left">
+              <Jumbotron className="bg-none pl-0 pt-2 pb-0">
+                <h3>All Posts ({data.allMarkdownRemark.totalCount})</h3>
+              </Jumbotron>
+              <Row>
+                {filteredPosts.map(({ node }) => (
+                  <Col key={node.id} className="col-4 p-3">
+                    <Row className="justify-content-center">
+                      <BlogLink
+                        to={node.fields.slug}
+                        featuredImage={featuredImageMap[`${node.fields.slug}`]}
+                        title={node.frontmatter.title}
+                        subtitle={node.frontmatter.date}
+                        excerpt={node.excerpt}
+                      />
+                    </Row>
+                  </Col>
+                ))}
+              </Row>
+            </Container>
+          </Container>
+        </Layout>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 
