@@ -29,7 +29,7 @@ export default () => {
                   className="p-0"
                   variant={theme}
                   style={{
-                    color: `${theme.dark ? "maroon" : "#008cff"}`,
+                    color: `${theme.dark ? "#fd1212" : "#008cff"}`,
                     backgroundColor: "rgba(0,0,0,0)",
                     border: "none",
                   }}
@@ -40,7 +40,7 @@ export default () => {
                 &{" "}
                 <a
                   className="p-0"
-                  style={{ color: `${theme.dark ? "maroon" : "#008cff"}` }}
+                  style={{ color: `${theme.dark ? "#fd1212" : "#008cff"}` }}
                   href="https://www.gatsbyjs.org/"
                 >
                   Gatsby

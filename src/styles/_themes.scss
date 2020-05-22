@@ -10,11 +10,14 @@ $themes: (
     textColor: $black,
     themeColor: $dark-blue,
     titleColor: $dark-blue,
+    titleHoverColor: $faded-red,
+    textHoverColor: $gray-700,
   ),
   dark: (
     backgroundColor: #222,
     textColor: $gray-300,
     titleColor: $white,
+    titleHoverColor: $faded-red,
     themeColor: $dark-red,
   ),
 );
@@ -98,6 +101,20 @@ button {
   h5 {
     @include themify($themes) {
       color: themed("titleColor");
+    }
+  }
+
+  .project-link {
+    @include themify($themes) {
+      h4:hover {
+        color: themed("titleHoverColor");
+      }
+    }
+  }
+
+  p {
+    @include themify($themes) {
+      color: themed("textColor");
     }
   }
 
