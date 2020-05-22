@@ -1,35 +1,28 @@
-import React, { useState } from "react"
+import React from "react"
 import "../styles/global.scss"
+import ThemeContext from "../utils/theme-context"
 import "./Icons.js"
 import { Container } from "react-bootstrap"
 import Header from "./Header"
 import Footer from "./Footer"
 
 export default ({ children }) => {
-  const [state, setState] = useState({
-    appThemes: ["rebellion", "empire"],
-    selectedTheme: 0,
-  })
-
-  const { appThemes, selectedTheme } = state
-  const handleChangeTheme = e => {
-    setState({
-      appThemes,
-      selectedTheme: (selectedTheme + 1) % appThemes.length,
-    })
-  }
-
-  const themeClass = `theme-${appThemes[selectedTheme]}`
-
   return (
-    <Container fluid className={"px-0 " + themeClass}>
-      <Container fluid className="px-0 app-container">
-        <Header themeClass={themeClass} />
-        <Container fluid="lg" className="min-vh-100">
-          {children}
+    <ThemeContext.Consumer>
+      {theme => (
+        <Container
+          fluid
+          className={`px-0 theme-${theme.dark ? "dark" : "light"}`}
+        >
+          <Container fluid className="px-0 app-container">
+            <Header />
+            <Container fluid="lg" className="min-vh-100">
+              {children}
+            </Container>
+            <Footer />
+          </Container>
         </Container>
-        <Footer handler={handleChangeTheme} themeClass={themeClass} />
-      </Container>
-    </Container>
+      )}
+    </ThemeContext.Consumer>
   )
 }

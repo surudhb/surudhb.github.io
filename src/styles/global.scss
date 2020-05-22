@@ -30,24 +30,53 @@ img {
 }
 
 img:hover {
-  animation: pulse 2s;
+  animation: pulse 3s;
 }
 
 .brand-icon {
   font-size: 3rem;
   color: $gray-700;
+  &.empire {
+    color: $gray-500;
+  }
 }
 
 .brand-icon:hover {
-  color: $white;
+  &.rebel {
+    color: $faded-red;
+  }
+  &.empire {
+    color: $white;
+  }
 }
 
 .icons {
   font-size: 3.75rem;
   color: $gray-600;
+  border-radius: 50%;
 }
 
 .icons:hover {
+  &.dark {
+    color: $white;
+  }
+  &.light {
+    &.github {
+      color: $black;
+    }
+    &.linkedin {
+      color: $linkedin-blue;
+    }
+    &.fcc {
+      color: $fcc-green;
+    }
+    &.mail {
+      color: $pink;
+    }
+    &.file {
+      color: $dark-blue;
+    }
+  }
   color: $gray-800;
 }
 
