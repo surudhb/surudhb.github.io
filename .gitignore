@@ -72,3 +72,6 @@ yarn-error.log
 
 # content folder
 src/content
+
+# static folder
+static/

@@ -113,3 +113,5 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 - filter search on blog page
 - audio file for r2d2 and vader on hover
 - Use CONTEXT to manage theme handling across the app
+- add query on index page to detemrine whether to show im looking text
+- toggle theme button styling

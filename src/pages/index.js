@@ -23,6 +23,9 @@ export default () => {
                   }
                   alt={dark ? "Darth Vader" : "R2-D2"}
                 />
+                <p>
+                  <b> Hey! I am looking for new opportunities :)</b>
+                </p>
               </Container>
               <Jumbotron
                 fluid
@@ -30,7 +33,12 @@ export default () => {
                 style={{ background: "rgba(0,0,0,0)" }}
               >
                 <Container className="py-my-0">
-                  <h1 style={{ fontSize: "5rem", color: "black" }}>
+                  <h1
+                    style={{
+                      fontSize: "5rem",
+                      color: "black",
+                    }}
+                  >
                     <span style={{ color: "#ced4da" }}>Surudh</span> Bhutani
                   </h1>
                   <p>
