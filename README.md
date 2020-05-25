@@ -101,17 +101,14 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## Known Issues
 
 - Sourcemap error
-- Blog posts just keep getting crammed into one row
+- Bug with theme toggle
 
 ## TODO
 
 - Projects page
+- project template page
 - About page
-- blog main page styling
 - blog template page styling
 - upload resume
-- filter search on blog page
-- audio file for r2d2 and vader on hover
-- Use CONTEXT to manage theme handling across the app
 - add query on index page to detemrine whether to show im looking text
 - toggle theme button styling

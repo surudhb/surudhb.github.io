@@ -46,7 +46,7 @@ export default () => {
               <Nav.Link className="ml-2" as={Link} to="/resume">
                 <span>Resume</span>
               </Nav.Link>
-              <Nav.Item
+              {/* <Nav.Item
                 className="ml-2"
                 as={ToggleButtonGroup}
                 onChange={theme.toggleDark}
@@ -77,7 +77,7 @@ export default () => {
                     className="m-auto"
                   />
                 </ToggleButton>
-              </Nav.Item>
+              </Nav.Item> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
