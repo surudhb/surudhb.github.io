@@ -39,9 +39,17 @@ export default ({ data }) => {
                 style={{ maxWidth: "75%" }}
                 className="m-auto text-justify"
               >
+                <p className="text-center">
+                  Coding Monkey | Puns & Dad-Jokes enthusiast | Coffee addict |
+                  2010 Regional Chess Tourney 2nd Runner-up
+                </p>
                 <p style={{ textIndent: "5em" }}>
                   Hello there! My name is <b>Surudh Bhutani</b>. I am a{" "}
-                  <a href="https://www.dictionary.com/e/fictional-characters/padawan/">
+                  <a
+                    href="https://www.dictionary.com/e/fictional-characters/padawan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     padawan
                   </a>{" "}
                   <b>Software Developer</b> discovering the ways of the code.
@@ -55,6 +63,8 @@ export default ({ data }) => {
                   />{" "}
                   <a
                     href="https://uwaterloo.ca/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       textDecorationColor: `${dark ? "#FFD54F" : "#E4B429"}`,
                     }}
@@ -73,26 +83,35 @@ export default ({ data }) => {
                   />{" "}
                   <a
                     href="https://www.uottawa.ca/en"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ textDecorationColor: "#8f001a" }}
                   >
                     <span style={{ color: "#8f001a" }}>
                       <b>University of Ottawa</b>
                     </span>
-                  </a>
-                  {". "}I graduated with a B.SE from the former institution in
-                  September 2018 and am currently located in Ontario, Canada 🇨🇦.
-                </p>
-                <p style={{ textIndent: "5em" }}>
-                  I have a variety of experience in React.js, Node.js, Swift,
-                  Java, C/C++
+                  </a>{" "}
+                  and graduating from the former with a B.SE in September 2018.
+                  I am currently quarantining in Ontario, Canada 🇨🇦.
                 </p>
                 <p style={{ textIndent: "5em" }}>
                   In my spare time, you can find me tinkering around with new JS
-                  libraries, tutoring, arguing about: comics, vfx and video
-                  games, and drafting opinionated pieces on the implications of
-                  technology on the future of humankind. Check out my{" "}
-                  <Link to="/projects">projects</Link> to see what I've been up
-                  to!
+                  libraries, tutoring, actively trying to beat a 10-year-old{" "}
+                  <a
+                    href="https://www.playmagnus.com/en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Magnus Carlsen
+                  </a>
+                  , passionately arguing about: comics, vfx and video games, and
+                  drafting opinionated pieces on the paradox that is human
+                  nature.
+                </p>
+                <p style={{ textIndent: "5em" }}>
+                  Check out my <Link to="/projects">projects</Link> to see what
+                  I've been up to! Or check out my <Link to="/blog">blog</Link>{" "}
+                  to see what's recently caught my eye!
                 </p>
               </article>
               <article style={{ maxWidth: "75%" }} className="m-auto">
