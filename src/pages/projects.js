@@ -8,9 +8,17 @@ export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
 
   const allFeaturedImages = data.allFile.edges || []
+
+  // display max 3 featured images for each project
   const featuredImageMap = allFeaturedImages.reduce((map, obj) => {
     const slug = obj.node.relativePath.match(/\/[projects].*\/|$/)[0]
-    map[slug] = obj.node.childImageSharp.fluid
+    if (map.hasOwnProperty(slug)) {
+      if (map[slug].length <= 3) map[slug].push(obj.node.childImageSharp.fluid)
+    } else {
+      const arr = []
+      arr.push(obj.node.childImageSharp.fluid)
+      map[slug] = arr
+    }
     return map
   }, {})
 
@@ -23,15 +31,20 @@ export default ({ data }) => {
             <Container className="text-left">
               <section>
                 {allProjects.map(({ node }) => (
-                  <div key={node.id}>
+                  <div key={node.id} className="p-3">
                     <ProjectLink
                       to={node.fields.slug}
-                      featuredImage={featuredImageMap[`${node.fields.slug}`]}
+                      featuredImages={featuredImageMap[`${node.fields.slug}`]}
                       title={node.frontmatter.title}
                       tags={node.frontmatter.tags}
                       excerpt={node.excerpt}
                     />
-                    <hr style={{ background: "#adb5bd" }} />
+                    <hr
+                      style={{
+                        background: `${dark ? "#8a0900" : "#008cff"}`,
+                        height: "0.05rem",
+                      }}
+                    />
                   </div>
                 ))}
               </section>

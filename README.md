@@ -112,3 +112,4 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 - upload resume
 - add query on index page to detemrine whether to show im looking text
 - toggle theme button styling
+- query project frontmatter to determine whether project has live demo link (github mandatory)
