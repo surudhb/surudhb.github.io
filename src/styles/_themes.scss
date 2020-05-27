@@ -106,7 +106,7 @@ button {
 
   .project-link {
     @include themify($themes) {
-      h4:hover {
+      h2:hover {
         color: themed("titleHoverColor");
       }
     }

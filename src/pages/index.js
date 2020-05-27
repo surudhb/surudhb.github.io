@@ -1,10 +1,11 @@
 import React from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import ThemeContext from "../utils/theme-context"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Container, Row, Col, Jumbotron, Image } from "react-bootstrap"
 
-export default () => {
+export default ({ data }) => {
   return (
     <ThemeContext.Consumer>
       {({ dark }) => (
@@ -23,9 +24,11 @@ export default () => {
                   }
                   alt={dark ? "Darth Vader" : "R2-D2"}
                 />
-                <p>
-                  <b> Hey! I am looking for new opportunities :)</b>
-                </p>
+                {data.site.siteMetadata.unemployed && (
+                  <p>
+                    <b> Hey! I am looking for new opportunities :)</b>
+                  </p>
+                )}
               </Container>
               <Jumbotron
                 fluid
@@ -121,3 +124,13 @@ export default () => {
     </ThemeContext.Consumer>
   )
 }
+
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        unemployed
+      }
+    }
+  }
+`

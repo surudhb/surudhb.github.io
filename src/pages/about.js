@@ -40,8 +40,9 @@ export default ({ data }) => {
                 className="m-auto text-justify"
               >
                 <p className="text-center">
-                  Coding Monkey | Puns & Dad-Jokes enthusiast | Coffee addict |
-                  2010 Regional Chess Tourney 2nd Runner-up
+                  <b>Coding Monkey</b> | <b>Dad-Joke enthusiast</b> |{" "}
+                  <b>Coffee addict</b> |{" "}
+                  <b>2010 Regional Chess 2nd Runner-up</b>
                 </p>
                 <p style={{ textIndent: "5em" }}>
                   Hello there! My name is <b>Surudh Bhutani</b>. I am a{" "}
@@ -105,7 +106,7 @@ export default ({ data }) => {
                     Magnus Carlsen
                   </a>
                   , passionately arguing about: comics, vfx and video games, and
-                  drafting opinionated pieces on the paradox that is human
+                  having long and winded discussions on history and human
                   nature.
                 </p>
                 <p style={{ textIndent: "5em" }}>

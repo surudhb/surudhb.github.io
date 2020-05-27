@@ -1,11 +1,5 @@
 import React from "react"
-import {
-  Navbar,
-  Nav,
-  ToggleButtonGroup,
-  ToggleButton,
-  Image,
-} from "react-bootstrap"
+import { Navbar, Nav } from "react-bootstrap"
 import { Link } from "gatsby"
 import "./Icons.js"
 import ThemeContext from "../utils/theme-context"
@@ -46,38 +40,6 @@ export default () => {
               <Nav.Link className="ml-2" as={Link} to="/resume">
                 <span>Resume</span>
               </Nav.Link>
-              {/* <Nav.Item
-                className="ml-2"
-                as={ToggleButtonGroup}
-                onChange={theme.toggleDark}
-                defaultValue={1}
-                name="options"
-                type="radio"
-              >
-                <ToggleButton
-                  value={1}
-                  className="bg-warning m-auto checkbox-inline"
-                >
-                  <Image
-                    rounded
-                    width="20"
-                    height="20"
-                    src={`../../icons/c3po-toggle.png`}
-                    alt="Light mode"
-                    className="m-auto"
-                  />
-                </ToggleButton>
-                <ToggleButton value={2} className="bg-dark">
-                  <Image
-                    rounded
-                    width="20"
-                    height="20"
-                    src={`../../icons/stormtrooper-toggle.png`}
-                    alt="Dark mode"
-                    className="m-auto"
-                  />
-                </ToggleButton>
-              </Nav.Item> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

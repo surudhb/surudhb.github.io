@@ -1,15 +1,18 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/Layout"
+import { Layout, JumboTitle } from "../components/Components"
+import { Container } from "react-bootstrap"
 
 export default ({ data }) => {
   const post = data.markdownRemark
   return (
     <Layout>
-      <div>
-        <h1>{post.frontmatter.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
-      </div>
+      <Container className="pt-5 mt-5 text-center" fluid>
+        <JumboTitle title={post.frontmatter.title} />
+        <Container className="text-justify">
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        </Container>
+      </Container>
     </Layout>
   )
 }
