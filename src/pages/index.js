@@ -54,7 +54,7 @@ export default ({ data }) => {
                   </p>
                 </Container>
                 <hr className="my-3" style={{ width: "50%" }} />
-                <Container style={{ width: "50%" }}>
+                <Container style={{ width: "60%" }}>
                   <Row className="text-center">
                     <Col>
                       <a
@@ -91,6 +91,18 @@ export default ({ data }) => {
                         <FontAwesomeIcon
                           icon={["fab", "free-code-camp"]}
                           className={`icons fcc ${dark ? "dark" : "light"}`}
+                        />
+                      </a>
+                    </Col>
+                    <Col>
+                      <a
+                        href="https://www.hackerrank.com/surudhbhutani"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FontAwesomeIcon
+                          icon={["fab", "hackerrank"]}
+                          className={`icons hr ${dark ? "dark" : "light"}`}
                         />
                       </a>
                     </Col>

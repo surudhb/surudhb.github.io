@@ -27,12 +27,7 @@ export default ({ data }) => {
                       tags={node.frontmatter.tags}
                       excerpt={node.excerpt}
                     />
-                    <hr
-                      style={{
-                        background: `${dark ? "#8a0900" : "#008cff"}`,
-                        height: "0.05rem",
-                      }}
-                    />
+                    <hr />
                   </div>
                 ))}
               </section>

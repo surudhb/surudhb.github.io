@@ -93,7 +93,10 @@ export default ({ data }) => {
                     </span>
                   </a>{" "}
                   and graduating from the former with a B.SE in September 2018.
-                  I am currently quarantining in Ontario, Canada 🇨🇦.
+                  I am currently quarantining in Ontario, Canada 🇨🇦.{" "}
+                  <i>
+                    <small>#StayHomeStaySafe</small>
+                  </i>
                 </p>
                 <p style={{ textIndent: "5em" }}>
                   In my spare time, you can find me tinkering around with new JS

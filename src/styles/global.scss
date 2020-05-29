@@ -86,7 +86,8 @@ img:hover {
     color: $dark-red;
     &.github,
     &.fcc,
-    &.file {
+    &.file,
+    &.hr {
       background: $black;
     }
     &.fcc {
@@ -102,6 +103,9 @@ img:hover {
     }
     &.fcc {
       color: $fcc-green;
+    }
+    &.hr {
+      color: $hr-green;
     }
     &.mail {
       color: $pink;

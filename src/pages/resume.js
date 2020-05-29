@@ -10,6 +10,8 @@ export default ({ data }) => {
   const images = data.allFile.edges || []
   const imageMap = Utils.getImageMap(images, /\/[work].*\/|$/)
 
+  console.log(history)
+
   return (
     <ThemeContext.Consumer>
       {({ dark }) => (
@@ -24,18 +26,15 @@ export default ({ data }) => {
                 />
               </a>
             </JumboTitle>
-            <Container fluid>
+            <Container className="mt-5 pt-3" fluid>
               {history.map(({ node }) => (
                 <div key={node.id}>
                   <WorkHistory
-                    company={node.frontmatter.company}
-                    companyImage={imageMap[node.fields.slug]}
-                    position={node.frontmatter.position}
-                    tags={node.frontmatter.tags}
-                    startDate={node.frontmatter.startDate}
-                    endDate={node.frontmatter.endDate}
+                    frontmatter={node.frontmatter}
+                    image={imageMap[node.fields.slug]}
                     html={node.html}
                   />
+                  <hr />
                 </div>
               ))}
             </Container>
@@ -58,10 +57,11 @@ export const query = graphql`
           html
           frontmatter {
             company
+            location
             position
             tags
-            startDate(formatString: "DD MMMM, YYYY")
-            endDate(formatString: "DD MMMM, YYYY")
+            startDate(formatString: "MMMM")
+            endDate(formatString: "MMMM, YYYY")
           }
           fields {
             slug
@@ -71,7 +71,7 @@ export const query = graphql`
     }
     allFile(
       filter: {
-        extension: { eq: "jpeg" }
+        extension: { eq: "png" }
         relativePath: { regex: "/company/" }
         relativeDirectory: { regex: "/content/work/" }
       }
