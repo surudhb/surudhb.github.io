@@ -2,25 +2,13 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Layout, JumboTitle, ProjectLink } from "../components/Components"
 import { Container } from "react-bootstrap"
-import ThemeContext from "../utils/theme-context"
+import { ThemeContext, Utils } from "../utils/Utils"
 
 export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
-
   const allFeaturedImages = data.allFile.edges || []
-
-  // display max 3 featured images for each project
-  const featuredImageMap = allFeaturedImages.reduce((map, obj) => {
-    const slug = obj.node.relativePath.match(/\/[projects].*\/|$/)[0]
-    if (map.hasOwnProperty(slug)) {
-      if (map[slug].length <= 3) map[slug].push(obj.node.childImageSharp.fluid)
-    } else {
-      const arr = []
-      arr.push(obj.node.childImageSharp.fluid)
-      map[slug] = arr
-    }
-    return map
-  }, {})
+  const regex = /\/[projects].*\/|$/
+  const featuredImageMap = Utils.getImageMap(allFeaturedImages, regex, true, 3)
 
   return (
     <ThemeContext.Consumer>
@@ -34,7 +22,7 @@ export default ({ data }) => {
                   <div key={node.id} className="p-3">
                     <ProjectLink
                       to={node.fields.slug}
-                      featuredImages={featuredImageMap[`${node.fields.slug}`]}
+                      featuredImages={featuredImageMap[node.fields.slug]}
                       title={node.frontmatter.title}
                       tags={node.frontmatter.tags}
                       excerpt={node.excerpt}

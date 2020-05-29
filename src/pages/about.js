@@ -6,7 +6,7 @@ import ThemeContext from "../utils/theme-context"
 
 export default ({ data }) => {
   const MediaLink = ({ title, author, link }) => (
-    <li style={{ color: "gray" }}>
+    <li key={title} style={{ color: "gray" }}>
       <a href={link}>{title}</a> -<i>{author}</i>
     </li>
   )
@@ -42,7 +42,7 @@ export default ({ data }) => {
                 <p className="text-center">
                   <b>Coding Monkey</b> | <b>Dad-Joke enthusiast</b> |{" "}
                   <b>Coffee addict</b> |{" "}
-                  <b>2010 Regional Chess 2nd Runner-up</b>
+                  <b>2010 Chess Regionals 2nd Runner-up</b>
                 </p>
                 <p style={{ textIndent: "5em" }}>
                   Hello there! My name is <b>Surudh Bhutani</b>. I am a{" "}
@@ -142,15 +142,15 @@ export default ({ data }) => {
                     Here are a couple of books from my reading list:
                   </small>
                 </h4>
-                <p>
-                  <ul style={{ listStyle: "none" }}>{bookLinks}</ul>
-                </p>
+                <ul style={{ fontSize: "0.9rem", listStyle: "none" }}>
+                  {bookLinks}
+                </ul>
                 <h4 className={`pt-4 ${dark ? "text-white" : "text-dark"}`}>
                   <small>Here are a couple of shows from my watch list:</small>
                 </h4>
-                <p>
-                  <ul style={{ listStyle: "none" }}>{showLinks}</ul>
-                </p>
+                <ul style={{ fontSize: "0.9rem", listStyle: "none" }}>
+                  {showLinks}
+                </ul>
                 <h4 className={`pt-4 ${dark ? "text-white" : "text-dark"}`}>
                   <small>Here are a couple of movies from my watch list:</small>
                 </h4>

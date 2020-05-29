@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { Layout, JumboTitle, BlogLink } from "../components/Components"
-import ThemeContext from "../utils/theme-context"
+import { ThemeContext, Utils } from "../utils/Utils"
 import {
   Container,
   Jumbotron,
@@ -18,13 +18,9 @@ export default ({ data }) => {
   })
 
   const allFeaturedImages = data.allFile.edges || []
-  const featuredImageMap = allFeaturedImages.reduce((map, obj) => {
-    const slug = obj.node.relativePath.match(/\/[blog].*\/|$/)[0]
-    map[slug] = obj.node.childImageSharp.fluid
-    return map
-  }, {})
-
   const allPosts = data.allMarkdownRemark.edges || []
+  const regex = /\/[blog].*\/|$/
+  const featuredImageMap = Utils.getImageMap(allFeaturedImages, regex)
 
   const handleChange = e => {
     const query = e.target.value
@@ -72,11 +68,11 @@ export default ({ data }) => {
               </Jumbotron>
               <Row>
                 {filteredPosts.map(({ node }) => (
-                  <Col key={node.id} className="col-4 p-3">
+                  <Col key={node.id} className="col-4 px-3 my-2">
                     <Row className="justify-content-center">
                       <BlogLink
                         to={node.fields.slug}
-                        featuredImage={featuredImageMap[`${node.fields.slug}`]}
+                        featuredImage={featuredImageMap[node.fields.slug]}
                         title={node.frontmatter.title}
                         subtitle={node.frontmatter.date}
                         excerpt={node.excerpt}

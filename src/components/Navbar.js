@@ -1,7 +1,7 @@
 import React from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import { Link } from "gatsby"
-import "./Icons.js"
+import "./Fontawesome.js"
 import ThemeContext from "../utils/theme-context"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

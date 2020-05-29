@@ -1,7 +1,7 @@
 import React from "react"
 import "../styles/global.scss"
 import ThemeContext from "../utils/theme-context"
-import "./Icons.js"
+import "./Fontawesome.js"
 import { Container } from "react-bootstrap"
 import Header from "./Header"
 import Footer from "./Footer"
