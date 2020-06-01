@@ -1,12 +1,26 @@
 import React from "react"
 import { graphql } from "gatsby"
 import PostTemplate from "./post-template"
+import Badge from "react-bootstrap/Badge"
+
+const SubTitle = ({ tags }) => {
+  return (
+    <div className="mb-5">
+      {tags.map(tag => (
+        <Badge key={tag} pill variant="dark" className="px-3 mr-1">
+          <p className="text-white my-0">{tag}</p>
+        </Badge>
+      ))}
+    </div>
+  )
+}
 
 export default ({ data }) => {
   const post = data.markdownRemark
   return (
     <PostTemplate
       title={post.frontmatter.title}
+      subTitle={<SubTitle tags={post.frontmatter.tags} />}
       excerpt={post.excerpt}
       html={post.html}
     />
@@ -22,6 +36,7 @@ export const query = graphql`
         tags
       }
       excerpt
+      timeToRead
     }
   }
 `

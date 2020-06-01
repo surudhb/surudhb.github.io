@@ -19,7 +19,7 @@ export default props => {
           >
             <Row>
               {props.featuredImages.map(image => (
-                <Col>
+                <Col key={image.src}>
                   <Img
                     fluid={image}
                     style={{ maxWidth: "13rem" }}

@@ -110,8 +110,7 @@ export default ({ data }) => {
                     Magnus Carlsen
                   </a>
                   , passionately arguing about: comics, vfx and video games, and
-                  having long and winded discussions on history and human
-                  nature.
+                  having long-winded discussions on history and human nature.
                 </p>
                 <p style={{ textIndent: "5em" }}>
                   Check out my <Link to="/projects">projects</Link> to see what

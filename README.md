@@ -105,6 +105,6 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## TODO
 
 - upload resume
-- toggle theme button styling
 - query project frontmatter to determine whether project has live demo link (github mandatory)
 - Add SEO to project and blog posts
+- ProjectLink.js unique keys for images
