@@ -12,7 +12,7 @@ export default ({ data }) => {
     <ThemeContext.Consumer>
       {({ dark }) => (
         <Layout>
-          <SEO title="Surudh Bhutani's Personal Website" />
+          <SEO title="Home" />
           <Container className="pt-5 mt-5" fluid>
             <Container className="text-center pt-5 mt-5" fluid>
               <Container fluid>

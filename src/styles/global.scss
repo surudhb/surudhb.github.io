@@ -33,6 +33,30 @@ img:hover {
   animation: pulse 3s;
 }
 
+.custom-control-input {
+  outline: none;
+  border-color: none;
+  box-shadow: none;
+}
+
+.custom-control-input ~ .custom-control-label::before {
+  border-color: $yellow;
+  background-color: $yellow;
+}
+
+.custom-switch .custom-control-input ~ .custom-control-label::after {
+  background-color: $white;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $dark-gray;
+  background-color: $devil-gray;
+}
+
+.custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+  background-color: $white;
+}
+
 .brand-icon {
   font-size: 3rem;
   color: $gray-700;

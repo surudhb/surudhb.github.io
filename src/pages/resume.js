@@ -10,8 +10,6 @@ export default ({ data }) => {
   const images = data.allFile.edges || []
   const imageMap = Utils.getImageMap(images, /\/[work].*\/|$/)
 
-  console.log(history)
-
   return (
     <ThemeContext.Consumer>
       {({ dark }) => (

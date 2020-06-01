@@ -1,5 +1,5 @@
 import React from "react"
-import { Navbar, Nav } from "react-bootstrap"
+import { Navbar, Nav, Form } from "react-bootstrap"
 import { Link } from "gatsby"
 import "./Fontawesome.js"
 import ThemeContext from "../utils/theme-context"
@@ -40,6 +40,17 @@ export default () => {
               <Nav.Link className="ml-2" as={Link} to="/resume">
                 <span>Resume</span>
               </Nav.Link>
+            </Nav>
+            <Nav>
+              <Form>
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  label=""
+                  checked={theme.dark}
+                  onChange={theme.toggleDark}
+                />
+              </Form>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
