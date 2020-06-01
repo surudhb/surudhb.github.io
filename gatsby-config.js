@@ -9,6 +9,29 @@ module.exports = {
   siteMetadata: {
     title: `Surudh Bhutani`,
     author: `Surudh Bhutani`,
+    description: `Surudh Bhutani's personal website. Check out my resume, projects and blog.`,
+    keywords: [
+      `Surudh`,
+      `Bhutani`,
+      `personal`,
+      `site`,
+      `software`,
+      `developer`,
+      `resume`,
+      `portfolio`,
+      `blog`,
+      `projects`,
+      `github`,
+      `email`,
+      `linkedin`,
+      `University of Waterloo`,
+      `University of Ottawa`,
+      `Software Engineering`,
+      `BSE`,
+    ],
+    twitterUsername: `@SurudhB2909`,
+    url: process.env.URL || process.env.DEPLOY_URL || ``,
+    image: `./static/c3po-toggle.png`,
     unemployed: true,
     education: [`University of Waterloo`, `University of Ottawa`],
     technicalLanguages: [
@@ -123,7 +146,6 @@ module.exports = {
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -131,8 +153,13 @@ module.exports = {
         short_name: `Surudh Bhutani`,
         description: `This is my personal site.`,
         start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#fff`,
+        display: `standalone`,
         icon: `${__dirname}/favicons/surudh-bhutani-512x512.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-react-helmet`,
   ],
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import { Layout, JumboTitle, BlogLink } from "../components/Components"
-import { ThemeContext, Utils } from "../utils/Utils"
+import { Layout, JumboTitle, BlogLink } from "../components"
+import { ThemeContext, Utils } from "../utils"
 import {
   Container,
   Jumbotron,
@@ -68,7 +68,7 @@ export default ({ data }) => {
               </Jumbotron>
               <Row>
                 {filteredPosts.map(({ node }) => (
-                  <Col key={node.id} className="col-4 px-3 my-2">
+                  <Col key={node.id} className="col-4 px-3 py-1 my-2">
                     <Row className="justify-content-center">
                       <BlogLink
                         to={node.fields.slug}

@@ -1,5 +1,5 @@
 import React from "react"
-import { Layout, JumboTitle } from "../components/Components"
+import { Layout, JumboTitle } from "../components"
 import { Container } from "react-bootstrap"
 
 export default () => {

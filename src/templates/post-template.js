@@ -1,10 +1,13 @@
 import React from "react"
 import Container from "react-bootstrap/Container"
-import { Layout, JumboTitle } from "../components/Components"
+import { Layout, JumboTitle } from "../components"
+
+import SEO from "../utils/seo"
 
 export default ({ title, html }) => {
   return (
     <Layout>
+      <SEO title={title} />
       <Container className="pt-5 mt-5 text-center" fluid>
         <JumboTitle title={title} />
         <Container className="text-justify">

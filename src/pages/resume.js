@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Layout, JumboTitle, WorkHistory } from "../components/Components"
+import { Layout, JumboTitle, WorkHistory } from "../components"
 import { Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { ThemeContext, Utils } from "../utils/Utils"
+import { ThemeContext, Utils } from "../utils"
 
 export default ({ data }) => {
   const history = data.allMarkdownRemark.edges || []

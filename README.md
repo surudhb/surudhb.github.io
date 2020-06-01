@@ -101,15 +101,10 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## Known Issues
 
 - Sourcemap error
-- Bug with theme toggle
 
 ## TODO
 
-- Projects page
-- project template page
-- About page
-- blog template page styling
 - upload resume
-- add query on index page to detemrine whether to show im looking text
 - toggle theme button styling
 - query project frontmatter to determine whether project has live demo link (github mandatory)
+- Add SEO to project and blog posts

@@ -1,11 +1,16 @@
 // https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/
 
 import React from "react"
-import vaderSound from "../../static/sounds/Darth-Vader.mp3"
-import r2d2Sound from "../../static/sounds/R2-D2.mp3"
+import { Howl } from "howler"
 
-const vaderAudio = new Audio(vaderSound)
-const r2d2Audio = new Audio(r2d2Sound)
+const vaderAudio = new Howl({
+  src: ["../../sounds/Darth-Vader.mp3"],
+  format: ["mp3"],
+})
+const r2d2Audio = new Howl({
+  src: ["../../sounds/R2-D2.mp3"],
+  format: ["mp3"],
+})
 
 const defaultState = {
   dark: false,
@@ -28,10 +33,8 @@ class ThemeProvider extends React.Component {
     let dark = !this.state.dark
     localStorage.setItem("dark", JSON.stringify(dark))
     this.setState({ dark })
-    vaderAudio.pause()
-    vaderAudio.currentTime = 0
-    r2d2Audio.pause()
-    r2d2Audio.currentTime = 0
+    vaderAudio.stop()
+    r2d2Audio.stop()
     dark ? vaderAudio.play() : r2d2Audio.play()
   }
 

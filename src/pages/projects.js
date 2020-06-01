@@ -1,8 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Layout, JumboTitle, ProjectLink } from "../components/Components"
+import { Layout, JumboTitle, ProjectLink } from "../components"
 import { Container } from "react-bootstrap"
-import { ThemeContext, Utils } from "../utils/Utils"
+import { ThemeContext, Utils } from "../utils"
 
 export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []

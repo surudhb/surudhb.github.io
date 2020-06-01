@@ -9,7 +9,7 @@ body {
   font-family: "Raleway", sans-serif;
   height: 100%;
   width: 100%;
-  font-size: calc(14px + (18 - 14) * ((70vw - 700px) / (1500 - 700)));
+  font-size: calc(14px + (18 - 12) * ((70vw - 800px) / (1600 - 400)));
   line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px) / (1600 - 300)));
 }
 
@@ -54,6 +54,7 @@ img:hover {
 
 .icons {
   font-size: 3.75rem;
+  margin: auto;
   color: $gray-600;
   border-radius: 50%;
 }

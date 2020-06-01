@@ -5,16 +5,20 @@ import ThemeContext from "../utils/theme-context"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Container, Row, Col, Jumbotron, Image } from "react-bootstrap"
 
+import SEO from "../utils/seo"
+
 export default ({ data }) => {
   return (
     <ThemeContext.Consumer>
       {({ dark }) => (
         <Layout>
+          <SEO title="Surudh Bhutani's Personal Website" />
           <Container className="pt-5 mt-5" fluid>
             <Container className="text-center pt-5 mt-5" fluid>
               <Container fluid>
                 <Image
                   rounded
+                  fluid
                   width="130"
                   height="130"
                   src={
