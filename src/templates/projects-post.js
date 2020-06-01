@@ -4,7 +4,13 @@ import PostTemplate from "./post-template"
 
 export default ({ data }) => {
   const post = data.markdownRemark
-  return <PostTemplate title={post.frontmatter.title} html={post.html} />
+  return (
+    <PostTemplate
+      title={post.frontmatter.title}
+      excerpt={post.excerpt}
+      html={post.html}
+    />
+  )
 }
 
 export const query = graphql`
@@ -15,6 +21,7 @@ export const query = graphql`
         title
         tags
       }
+      excerpt
     }
   }
 `

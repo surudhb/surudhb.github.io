@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { Layout, JumboTitle, WorkHistory } from "../components"
 import { Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { ThemeContext, Utils } from "../utils"
+import { ThemeContext, Utils, SEO } from "../utils"
 
 export default ({ data }) => {
   const history = data.allMarkdownRemark.edges || []
@@ -14,6 +14,7 @@ export default ({ data }) => {
     <ThemeContext.Consumer>
       {({ dark }) => (
         <Layout>
+          <SEO title="Resume" />
           <Container fluid className="pt-2 mt-5 text-center">
             <JumboTitle title="Resume">
               <a href="../../resume.pdf" target="_blank" download>

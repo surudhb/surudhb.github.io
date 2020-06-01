@@ -33,12 +33,22 @@ img:hover {
   animation: pulse 3s;
 }
 
-.custom-control-input {
-  outline: none;
-  border-color: none;
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border: none;
   box-shadow: none;
 }
 
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: none;
+}
+
+.custom-control-input ~ .custom-control-label {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+// light mode
 .custom-control-input ~ .custom-control-label::before {
   border-color: $yellow;
   background-color: $yellow;
@@ -48,6 +58,7 @@ img:hover {
   background-color: $white;
 }
 
+// dark mode
 .custom-control-input:checked ~ .custom-control-label::before {
   border-color: $dark-gray;
   background-color: $devil-gray;

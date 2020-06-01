@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { Layout, JumboTitle, BlogLink } from "../components"
-import { ThemeContext, Utils } from "../utils"
+import { ThemeContext, Utils, SEO } from "../utils"
 import {
   Container,
   Jumbotron,
@@ -50,6 +50,7 @@ export default ({ data }) => {
     <ThemeContext.Consumer>
       {({ dark }) => (
         <Layout>
+          <SEO title="Blog" />
           <Container fluid className="pt-2 mt-5 text-center">
             <JumboTitle title="My Blog" />
             <Container className="px-5 mb-5 text-center">

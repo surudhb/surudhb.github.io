@@ -1,4 +1,5 @@
 import ThemeContext from "./theme-context"
 import Utils from "./helpers"
+import SEO from "./seo"
 
-export { Utils, ThemeContext }
+export { Utils, ThemeContext, SEO }

@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Layout, JumboTitle, ProjectLink } from "../components"
 import { Container } from "react-bootstrap"
-import { ThemeContext, Utils } from "../utils"
+import { ThemeContext, Utils, SEO } from "../utils"
 
 export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
@@ -14,6 +14,7 @@ export default ({ data }) => {
     <ThemeContext.Consumer>
       {({ dark }) => (
         <Layout>
+          <SEO title="Projects" />
           <Container className="pt-2 mt-5 text-center">
             <JumboTitle title="My Projects" />
             <Container className="text-left">

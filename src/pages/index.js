@@ -1,11 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout"
-import ThemeContext from "../utils/theme-context"
+import { ThemeContext, SEO } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Container, Row, Col, Jumbotron, Image } from "react-bootstrap"
-
-import SEO from "../utils/seo"
 
 export default ({ data }) => {
   return (

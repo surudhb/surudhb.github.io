@@ -2,9 +2,7 @@ import React from "react"
 import { Layout, JumboTitle } from "../components"
 import { Container, Image } from "react-bootstrap"
 import { Link, graphql } from "gatsby"
-import ThemeContext from "../utils/theme-context"
-
-import SEO from "../utils/seo"
+import { ThemeContext, SEO } from "../utils"
 
 export default ({ data }) => {
   const MediaLink = ({ title, author, link }) => (
@@ -25,7 +23,7 @@ export default ({ data }) => {
     <ThemeContext.Consumer>
       {({ dark }) => (
         <Layout>
-          <SEO title="Everything you need to know about Surudh Bhutani" />
+          <SEO title="About" />
           <Container className="pt-2 mt-5 text-center">
             <JumboTitle title="About Me" />
             <section className="mt-5">
