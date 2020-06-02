@@ -2,16 +2,14 @@ import React from "react"
 import { graphql } from "gatsby"
 import PostTemplate from "./post-template"
 
-const SubTitle = ({ ttr, date, author }) => {
-  return (
-    <div className="mb-5">
-      <h5 className="text-muted">
-        Time to read: {ttr}
-        <small>min</small> | {date} | {author}
-      </h5>
-    </div>
-  )
-}
+const SubTitle = ({ ttr, date, author }) => (
+  <div className="mb-5">
+    <h5 className="text-muted">
+      Time to read: {ttr}
+      <small>min</small> | {date} | {author}
+    </h5>
+  </div>
+)
 
 export default ({ data }) => {
   const post = data.markdownRemark

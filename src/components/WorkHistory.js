@@ -29,48 +29,43 @@ const CompanyCard = props => {
   )
 }
 
-export default props => {
-  return (
-    <ThemeContext.Consumer>
-      {({ dark }) => (
-        <Container
-          style={{ overflow: "auto", padding: "1rem" }}
-          className="project-link text-center"
-        >
-          <Row>
-            <Col className="col-4">
-              <CompanyCard
-                frontmatter={props.frontmatter}
-                image={props.image}
-              />
-            </Col>
-            <Col className="col-8">
-              <div
-                className="text-justify mt-5"
-                dangerouslySetInnerHTML={{ __html: props.html }}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col className="col-4"></Col>
-            <Col className="col-8">
-              <div className="margin-bottom">
-                {props.frontmatter.tags.map(tag => (
-                  <Badge
-                    key={tag}
-                    pill
-                    variant={dark ? "dark" : "light"}
-                    className={`mr-2 ${dark && "bg-vader-dark"}`}
-                    style={{ fontSize: "1rem" }}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      )}
-    </ThemeContext.Consumer>
-  )
-}
+export default props => (
+  <ThemeContext.Consumer>
+    {({ dark }) => (
+      <Container
+        style={{ overflow: "auto", padding: "1rem" }}
+        className="project-link text-center"
+      >
+        <Row>
+          <Col className="col-4">
+            <CompanyCard frontmatter={props.frontmatter} image={props.image} />
+          </Col>
+          <Col className="col-8">
+            <div
+              className="text-justify mt-5"
+              dangerouslySetInnerHTML={{ __html: props.html }}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="col-4"></Col>
+          <Col className="col-8">
+            <div className="margin-bottom">
+              {props.frontmatter.tags.map(tag => (
+                <Badge
+                  key={tag}
+                  pill
+                  variant={dark ? "dark" : "light"}
+                  className={`mr-2 ${dark && "bg-vader-dark"}`}
+                  style={{ fontSize: "1rem" }}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    )}
+  </ThemeContext.Consumer>
+)
