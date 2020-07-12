@@ -1,16 +1,16 @@
-@import "themes";
+@import "../../static/fonts/fonts.css";
 
-@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import url("https://fonts.googleapis.com/css?family=Raleway");
-@import "../../static/fonts/Aurabesh/fonts.css";
+@import "themes";
 
 html,
 body {
+  margin: 0;
   font-family: "Raleway", sans-serif;
+  font-display: swap;
   height: 100%;
   width: 100%;
-  font-size: calc(14px + (18 - 12) * ((70vw - 800px) / (1600 - 400)));
-  line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px) / (1600 - 300)));
+  // font-size: calc(16px * ((80vw - 700px) / (1600 - 400)));
+  // line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px) / (1600 - 300)));
 }
 
 * {
@@ -18,21 +18,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 20px;
+.app-container * {
+  transition: color 0.45s ease-in-out;
+  transition: background 0.45s ease-in-out;
 }
 
-img {
-  margin-bottom: 15px;
-  max-width: 100%;
+.bg-none {
+  background: rgba(0, 0, 0, 0) !important;
 }
 
-img:hover {
-  animation: pulse 3s;
+.aurebesh:hover {
+  font-family: "Aurebesh", sans-serif;
+  font-display: swap;
 }
 
+.i-5 {
+  text-indent: 5vmin;
+}
+
+/** Toggle Switch Styling START */
 .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
   border: none;
   box-shadow: none;
@@ -60,99 +64,44 @@ img:hover {
 
 // dark mode
 .custom-control-input:checked ~ .custom-control-label::before {
-  border-color: $dark-gray;
-  background-color: $devil-gray;
+  border-color: $black;
+  background-color: $black;
 }
 
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-  background-color: $white;
+  background-color: $red;
 }
+/** Toggle Switch Styling END */
 
-.brand-icon {
-  font-size: 3rem;
-  color: $gray-700;
-  &.empire {
-    color: $gray-500;
-  }
-}
-
-.brand-icon:hover {
-  &.rebel {
-    color: $faded-red;
-  }
-  &.empire {
-    color: $white;
-    border-radius: 50%;
-    background: $black;
-  }
+/** Home Page Icon Styling START */
+.icons-container a {
+  margin: 0 1rem;
 }
 
 .icons {
   font-size: 3.75rem;
-  margin: auto;
+  margin: 0.1rem;
   color: $gray-600;
-  border-radius: 50%;
 }
 
-.bg-vader-dark {
-  background: $dark-gray;
-}
-
-.search {
-  &.dark {
+.brand-icon {
+  font-size: 2.75rem;
+  color: $gray-700;
+  &:hover {
+    color: $faded-red;
+  }
+  &.empire {
+    border-radius: 50%;
     color: $white;
-    caret-color: gray;
-    &:focus {
-      box-shadow: 0 0 0 0.1rem rgba($dark-red, 0.8);
-      border-color: rgba($dark-red, 0.8);
-    }
-  }
-  &.light:focus {
-    box-shadow: 0 0 0 0.1rem rgba($dark-blue, 0.8);
-    border-color: rgba($dark-blue, 0.8);
-  }
-}
-
-.bg-none {
-  background: rgba(0, 0, 0, 0) !important;
-}
-
-.icons:hover {
-  &.dark {
-    color: $dark-red;
-    &.github,
-    &.fcc,
-    &.file,
-    &.hr {
-      background: $black;
-    }
-    &.fcc {
-      border-radius: unset;
-    }
-  }
-  &.light {
-    &.github {
+    background: $black;
+    &:hover {
       color: $black;
-    }
-    &.linkedin {
-      color: $linkedin-blue;
-    }
-    &.fcc {
-      color: $fcc-green;
-    }
-    &.hr {
-      color: $hr-green;
-    }
-    &.mail {
-      color: $pink;
-    }
-    &.file {
-      color: $dark-blue;
+      background: $white;
     }
   }
-  color: $gray-800;
 }
+/** Home Page Icon Styling END */
 
-.aurebesh:hover {
-  font-family: "Aurabesh", "Raleway", sans-serif;
+.unemployed {
+  font-size: 1.35rem;
 }

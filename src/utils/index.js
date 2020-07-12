@@ -1,5 +1,3 @@
-import ThemeContext from "./theme-context"
-import Utils from "./helpers"
-import SEO from "./seo"
-
-export { Utils, ThemeContext, SEO }
+export { default as SEO } from "./seo"
+export { default as ThemeContext } from "./theme"
+export { default as Utils } from "./helpers"

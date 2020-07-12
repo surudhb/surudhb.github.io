@@ -1,8 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Layout, JumboTitle, ProjectLink } from "../components"
-import { Container } from "react-bootstrap"
-import { ThemeContext, Utils, SEO } from "../utils"
+import { PageLayout, PageTitle, ProjectLink } from "../components"
+import { SEO, Utils } from "../utils"
+import Container from "react-bootstrap/Container"
 
 export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
@@ -11,32 +11,26 @@ export default ({ data }) => {
   const featuredImageMap = Utils.getImageMap(allFeaturedImages, regex, true, 3)
 
   return (
-    <ThemeContext.Consumer>
-      {({ dark }) => (
-        <Layout>
-          <SEO title="Projects" />
-          <Container className="pt-2 mt-5 text-center">
-            <JumboTitle title="My Projects" />
-            <Container className="text-left">
-              <section>
-                {allProjects.map(({ node }) => (
-                  <div key={node.id} className="p-3">
-                    <ProjectLink
-                      to={node.fields.slug}
-                      featuredImages={featuredImageMap[node.fields.slug]}
-                      title={node.frontmatter.title}
-                      tags={node.frontmatter.tags}
-                      excerpt={node.excerpt}
-                    />
-                    <hr />
-                  </div>
-                ))}
-              </section>
-            </Container>
-          </Container>
-        </Layout>
-      )}
-    </ThemeContext.Consumer>
+    <PageLayout>
+      <SEO title="Projects" />
+      <PageTitle title="Projects" />
+      <Container className="text-left">
+        <section>
+          {allProjects.map(({ node }) => (
+            <div key={node.id} className="p-3">
+              <ProjectLink
+                to={node.fields.slug}
+                featuredImages={featuredImageMap[node.fields.slug]}
+                title={node.frontmatter.title}
+                tags={node.frontmatter.tags}
+                excerpt={node.excerpt}
+              />
+              <hr />
+            </div>
+          ))}
+        </section>
+      </Container>
+    </PageLayout>
   )
 }
 

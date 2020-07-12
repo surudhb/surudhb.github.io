@@ -1,3 +1,5 @@
+/** https://www.gatsbyjs.org/docs/add-seo-component/ */
+
 import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
@@ -71,7 +73,7 @@ const query = graphql`
         description
         author
         keywords
-        url
+        siteUrl
       }
     }
   }

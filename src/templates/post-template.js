@@ -1,18 +1,18 @@
 import React from "react"
 import Container from "react-bootstrap/Container"
-import { Layout, JumboTitle } from "../components"
+import { PageLayout, PageTitle } from "../components"
 
 import SEO from "../utils/seo"
 
 export default ({ title, excerpt, html, subTitle }) => (
-  <Layout>
+  <PageLayout>
     <SEO title={title} description={excerpt} />
-    <Container className="pt-2 mt-5 text-center" fluid>
-      <JumboTitle title={title} />
+    <Container className="text-center" fluid>
+      <PageTitle title={title} />
       {subTitle}
       <Container className="text-justify">
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </Container>
     </Container>
-  </Layout>
+  </PageLayout>
 )

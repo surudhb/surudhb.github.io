@@ -1,15 +1,8 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
-import { Layout, JumboTitle, BlogLink } from "../components"
-import { ThemeContext, Utils, SEO } from "../utils"
-import {
-  Container,
-  Jumbotron,
-  Form,
-  FormControl,
-  Row,
-  Col,
-} from "react-bootstrap"
+import { PageLayout, PageTitle, BlogLink } from "../components"
+import { SEO, Utils } from "../utils"
+import { Container, Form, FormControl } from "react-bootstrap"
 
 export default ({ data }) => {
   const [state, setState] = useState({
@@ -27,16 +20,18 @@ export default ({ data }) => {
 
     const filteredData = allPosts.filter(post => {
       // query will run on the following fields
-      const { description, title, tags } = post.node.frontmatter
+      const { description, title, tags, author } = post.node.frontmatter
       // standardize query
       const stdQuery = query.toLowerCase()
       return (
         post.node.excerpt.toLowerCase().includes(stdQuery) ||
         (description && description.toLowerCase().includes(stdQuery)) ||
         title.toLowerCase().includes(stdQuery) ||
+        author.toLowerCase().includes(stdQuery) ||
         (tags && tags.join("").toLowerCase().includes(stdQuery))
       )
     })
+
     setState({
       query,
       filteredData,
@@ -47,46 +42,36 @@ export default ({ data }) => {
   const filteredPosts = query !== "" ? filteredData : allPosts
 
   return (
-    <ThemeContext.Consumer>
-      {({ dark }) => (
-        <Layout>
-          <SEO title="Blog" />
-          <Container fluid className="pt-2 mt-5 text-center">
-            <JumboTitle title="My Blog" />
-            <Container className="px-5 mb-5 text-center">
-              <Form className="aurebesh">
-                <FormControl
-                  className={`bg-none search ${dark ? "dark" : "light"}`}
-                  type="text"
-                  placeholder="Search"
-                  onChange={handleChange}
-                />
-              </Form>
-            </Container>
-            <Container fluid className="text-left">
-              <Jumbotron className="bg-none pl-0 pt-2 pb-0">
-                <h3>All Posts ({data.allMarkdownRemark.totalCount})</h3>
-              </Jumbotron>
-              <Row>
-                {filteredPosts.map(({ node }) => (
-                  <Col key={node.id} className="col-4 px-3 py-1 my-2">
-                    <Row className="justify-content-center">
-                      <BlogLink
-                        to={node.fields.slug}
-                        featuredImage={featuredImageMap[node.fields.slug]}
-                        title={node.frontmatter.title}
-                        subtitle={node.frontmatter.date}
-                        excerpt={node.excerpt}
-                      />
-                    </Row>
-                  </Col>
-                ))}
-              </Row>
-            </Container>
-          </Container>
-        </Layout>
-      )}
-    </ThemeContext.Consumer>
+    <PageLayout>
+      <SEO title="Blog" />
+      <PageTitle title="My Blog" />
+      <Container className="px-5 mb-5 text-center">
+        <Form className="aurebesh blog-filter">
+          <FormControl
+            className="bg-none search"
+            type="text"
+            placeholder="Search"
+            onChange={handleChange}
+          />
+        </Form>
+      </Container>
+      <Container
+        fluid
+        className="p-3 w-auto text-left d-flex flex-wrap justify-content-center"
+      >
+        {filteredPosts.map(({ node }) => (
+          <div key={node.id} className="p-3">
+            <BlogLink
+              to={node.fields.slug}
+              featuredImage={featuredImageMap[node.fields.slug]}
+              title={node.frontmatter.title}
+              subtitle={node.frontmatter.date}
+              excerpt={node.excerpt}
+            />
+          </div>
+        ))}
+      </Container>
+    </PageLayout>
   )
 }
 
@@ -100,11 +85,11 @@ export const query = graphql`
       edges {
         node {
           id
-          timeToRead
           frontmatter {
             title
             description
             tags
+            author
             date(formatString: "DD MMMM, YYYY")
           }
           fields {
@@ -124,7 +109,7 @@ export const query = graphql`
       edges {
         node {
           childImageSharp {
-            fluid(maxWidth: 200) {
+            fluid(maxWidth: 400) {
               ...GatsbyImageSharpFluid
             }
           }

@@ -9,49 +9,31 @@ module.exports = {
   siteMetadata: {
     title: `Surudh Bhutani`,
     author: `Surudh Bhutani`,
-    description: `Surudh Bhutani's personal website. Check out my resume, projects and blog.`,
+    firstName: `Surudh`,
+    lastName: `Bhutani`,
+    description: `Surudh Bhutani's personal site`,
+    occupation: `Software Engineer`,
     keywords: [
       `Surudh`,
       `Bhutani`,
-      `personal`,
-      `site`,
-      `software`,
-      `developer`,
-      `resume`,
-      `portfolio`,
-      `blog`,
-      `projects`,
-      `github`,
-      `email`,
-      `linkedin`,
-      `University of Waterloo`,
-      `University of Ottawa`,
-      `Software Engineering`,
-      `BSE`,
+      `Personal`,
+      `Blog`,
+      `Resume`,
+      `Projects`,
+      `Work`,
+      `Github`,
+      `LinkedIn`,
     ],
-    twitterUsername: `@SurudhB2909`,
-    url: process.env.URL || process.env.DEPLOY_URL || ``,
-    image: `./static/c3po-toggle.png`,
+    siteUrl:
+      process.env.URL || process.env.DEPLOY_URL || `http://localhost:8000`,
     unemployed: true,
-    education: [`University of Waterloo`, `University of Ottawa`],
-    technicalLanguages: [
-      `Node.js`,
-      `React.js`,
-      `Swift`,
-      `Java`,
-      `C/C++`,
-      `RoR`,
+    designations: [
+      `High-School Chess Champ`,
+      `UWaterloo S.Eng.`,
+      `Full-Stack Dev`,
+      `Skydiver`,
+      `F1 Enthusiast`,
     ],
-    languages: [`English`, `Hindi`, `Aurebesh`],
-    technologies: [`Docker`, `Git`, `Jira`, `Heroku`, `Puppet`, `Postman`],
-    technicalInterests: [
-      `Node.js`,
-      `React.js`,
-      `Full-stack development`,
-      `Back-end development`,
-      `Automation`,
-    ],
-    interests: [`Comic books`, `Star Wars`, `Avatar`, `Hiking`, `Pro-karting`],
     readingList: [
       {
         title: `Sapiens: A Brief History of Humankind`,
@@ -64,19 +46,9 @@ module.exports = {
         link: `https://www.goodreads.com/book/show/31170723-behave`,
       },
       {
-        title: `Homo Deus: A History of Tomorrow`,
-        author: `Yuval Noah Harari`,
-        link: `https://www.goodreads.com/book/show/31138556-homo-deus`,
-      },
-      {
         title: `The Gene: An Intimate History`,
-        author: `Siddhartha Mukeherjee`,
+        author: `Siddhartha Mukherjee`,
         link: `https://www.goodreads.com/book/show/27276428-the-gene`,
-      },
-      {
-        title: `The Emperor of All Maladies: A Biography of Cancer`,
-        author: `Siddhartha Mukeherjee`,
-        link: `https://www.goodreads.com/book/show/7170627-the-emperor-of-all-maladies`,
       },
       {
         title: `The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma`,
@@ -96,24 +68,14 @@ module.exports = {
         link: `https://www.imdb.com/title/tt9561862/`,
       },
       {
-        title: `Batman: The Animated Series`,
-        author: `Bob Kane, Eric Radomski, Bruce Timm `,
-        link: `https://www.imdb.com/title/tt0103359/`,
-      },
-      {
         title: `Star Wars: The Clone Wars`,
         author: `George Lucas, Dave Filoni`,
         link: `https://www.imdb.com/title/tt0458290/`,
       },
       {
-        title: `Rick and Morty`,
-        author: ` Dan Harmon, Justin Roiland`,
-        link: `https://www.imdb.com/title/tt2861424/`,
-      },
-      {
-        title: `Death Note`,
-        author: `Mamoru Miyano, Brad Swaile, Vincent Tong`,
-        link: `https://www.imdb.com/title/tt0877057/`,
+        title: `Young Justice`,
+        author: `Greg Weisman, Brandon Viettie, Geoff Johns`,
+        link: `https://www.imdb.com/title/tt1641384/`,
       },
     ],
     moviesList: [
@@ -123,18 +85,25 @@ module.exports = {
         link: `https://www.imdb.com/title/tt0470752/`,
       },
       {
-        title: `The Matrix`,
-        author: `The Wachowski Brothers`,
-        link: `https://www.imdb.com/title/tt0133093/`,
-      },
-      {
         title: `The Lunchbox`,
         author: `Ritesh Batra`,
         link: `https://www.imdb.com/title/tt2350496/`,
       },
+      {
+        title: `Nightcrawler`,
+        author: `Dan Gilroy`,
+        link: `https://www.imdb.com/title/tt2872718/`,
+      },
+      {
+        title: `Mad Max: Fury Road`,
+        author: `George Miller`,
+        link: `https://www.imdb.com/title/tt1392190/`,
+      },
     ],
   },
   plugins: [
+    `gatsby-plugin-preload-link-crossorigin`,
+    `gatsby-plugin-catch-links`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -149,17 +118,31 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Surudh Bhutani's Personal Site`,
-        short_name: `Surudh Bhutani`,
+        name: `John Doe's Personal Site`,
+        short_name: `J.Doe`,
         description: `This is my personal site.`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#fff`,
         display: `standalone`,
-        icon: `${__dirname}/favicons/surudh-bhutani-512x512.png`, // This path is relative to the root of the site.
+        icon: `${__dirname}/static/favicon.ico`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: "gatsby-plugin-google-fonts",
+      options: {
+        fonts: ["Raleway:300,400"],
+        display: "swap",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `tomato`,
+        showSpinner: true,
+      },
+    },
   ],
 }

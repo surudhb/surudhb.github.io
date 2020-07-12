@@ -1,19 +1,8 @@
-import Footer from "./Footer"
-import Header from "./Header"
-import Navbar from "./Navbar"
-import BlogLink from "./BlogLink"
-import ProjectLink from "./ProjectLink"
-import WorkHistory from "./WorkHistory"
-import JumboTitle from "./JumboTitle"
-import Layout from "./Layout"
-
-export {
-  Footer,
-  Header,
-  Navbar,
-  BlogLink,
-  ProjectLink,
-  WorkHistory,
-  JumboTitle,
-  Layout,
-}
+export { default as BlogLink } from "./BlogLink"
+export { default as Footer } from "./Footer"
+export { default as Header } from "./Header"
+export { default as Navbar } from "./Navbar"
+export { default as PageLayout } from "./PageLayout"
+export { default as PageTitle } from "./PageTitle"
+export { default as ProjectLink } from "./ProjectLink"
+export { default as WorkHistory } from "./WorkHistory"
