@@ -10,6 +10,12 @@ export default () => {
         <span className="heart">&nbsp;❤&nbsp;</span> &&nbsp;
         <a href="https://www.gatsbyjs.org/">Gatsby</a>
       </span>
+      <span className="ml-5">
+        <span>a</span>
+        <span>b</span>
+        <span>c</span>
+        <span>d</span>
+      </span>
     </div>
   )
 }
