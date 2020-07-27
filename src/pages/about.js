@@ -7,7 +7,7 @@ import { ThemeContext, SEO } from "../utils"
 export default ({ data }) => {
   const MediaLink = ({ title, author, link }) => (
     <li key={title} style={{ color: "gray" }}>
-      <a rel="noopener noreferrer" href={link}>
+      <a target="_blank" rel="noopener noreferrer" href={link}>
         {title}
       </a>
       <div className="d-md-inline-flex">
@@ -23,7 +23,7 @@ export default ({ data }) => {
     designations,
     unemployed,
   } = data.site.siteMetadata
-  const { dark, toString } = useContext(ThemeContext)
+  const { toString } = useContext(ThemeContext)
 
   const bookLinks = readingList.map(book => MediaLink(book))
   const showLinks = showsList.map(show => MediaLink(show))
@@ -50,7 +50,7 @@ export default ({ data }) => {
             ))}
           </p>
           <p className="i-5 mt-md-4 pt-md-2 mb-md-4">
-            Hello there! My name is <b>{`${author}`}</b>. I am a Software&nbsp;
+            Hello there! My name is <b>{`${author}`}</b>. I am a&nbsp;
             <a
               href="https://www.dictionary.com/e/fictional-characters/padawan/"
               target="_blank"
@@ -58,7 +58,7 @@ export default ({ data }) => {
             >
               padawan
             </a>
-            &nbsp;discovering the ways of the <code>code</code>.
+            &nbsp;developer discovering the ways of the <code>code</code>.
           </p>
           <p className="i-5">
             I've had the privilege of studying Software Engineering at both the{" "}
@@ -72,10 +72,7 @@ export default ({ data }) => {
               href="https://uwaterloo.ca/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                textDecorationColor: `${dark ? "#FFD54F" : "#E4B429"}`,
-                color: `${dark ? "#FFD54F" : "#E4B429"}`,
-              }}
+              className="waterloo-link"
             >
               <b>University of Waterloo</b>
             </a>{" "}
@@ -90,7 +87,7 @@ export default ({ data }) => {
               href="https://www.uottawa.ca/en"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecorationColor: "#8f001a", color: "#8f001a" }}
+              className="ottawa-link"
             >
               <b>University of Ottawa</b>
             </a>{" "}
@@ -124,8 +121,8 @@ export default ({ data }) => {
             >
               Dead By Daylight
             </a>
-            , improving karting times at my local track, tutoring part-time or
-            desperately trying to beat a 10-year-old{" "}
+            , karting on weekends, tutoring part-time or desperately trying to
+            beat a 10-year-old{" "}
             <a
               href="https://www.playmagnus.com/en"
               target="_blank"
@@ -152,7 +149,7 @@ export default ({ data }) => {
                   like what you <Link to="/resume">see</Link>, let's get
                   in&nbsp;
                   <a
-                    href="mailto:surudhb@gmail.com"
+                    href="https://www.linkedin.com/in/surudh-bhutani/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

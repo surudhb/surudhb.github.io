@@ -3,20 +3,36 @@ import Img from "gatsby-image"
 import { Container, Row, Col, Badge } from "react-bootstrap"
 
 const CompanyCard = ({ frontmatter, image }) => {
-  const { company, position, startDate, endDate, location } = frontmatter
+  const { company, position, link, startDate, endDate, location } = frontmatter
   return (
-    <Container fluid className="m-auto work-history">
-      <Img
-        fluid={image}
-        style={{
-          maxHeight: "15vmax",
-          maxWidth: "15vmax",
-          borderRadius: company !== "Royal Victoria Hospital" && "50%",
-        }}
-        className="m-auto"
-      />
-      <div className="md-font">
-        <h2 className="m-auto pt-2">{company}</h2>
+    <Container fluid className="m-auto">
+      <a
+        className="text-decoration-none"
+        target="_blank"
+        rel="noopener noreferrer"
+        href={link}
+      >
+        <Img
+          fluid={image}
+          style={{
+            maxHeight: "12vmax",
+            maxWidth: "12vmax",
+            borderRadius: company !== "Royal Victoria Hospital" && "50%",
+          }}
+          className="m-auto"
+        />
+      </a>
+      <div>
+        <h2 className="m-auto pt-2 nav-links">
+          <a
+            className="text-decoration-none"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={link}
+          >
+            {company}
+          </a>
+        </h2>
         <h5 className="text-muted">{location}</h5>
         <h4 className="mt-2">{position}</h4>
         <h5 className="text-muted mt-2">
@@ -34,11 +50,8 @@ export default ({ html, frontmatter, image }) => {
         <Col className="col-md-4 col-12">
           <CompanyCard frontmatter={frontmatter} image={image} />
         </Col>
-        <Col className="col-md-8 col-12">
-          <p
-            className="text-justify mt-2"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+        <Col className="col-md-8 col-12 m-auto">
+          <p className="text-left" dangerouslySetInnerHTML={{ __html: html }} />
         </Col>
       </Row>
       <Row>

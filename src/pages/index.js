@@ -21,29 +21,24 @@ export default ({ data }) => {
           alt={dark ? "Darth Vader" : "R2-D2"}
         />
         {unemployed && (
-          <p className="mt-2">
+          <p className="mt-2" style={{ fontSize: "1.1vmax" }}>
             <b> Hey! I am looking for new opportunities :)</b>
           </p>
         )}
         <div className="py-0 my-0">
-          <h1
-            style={{
-              fontSize: "5rem",
-              color: "black",
-            }}
-          >
+          <h1 className="display-4" style={{ fontSize: "5vmax" }}>
             <span className="first-name">{firstName}</span>&nbsp;
             <span className="last-name">{lastName}</span>
           </h1>
-          <p>
+          <p style={{ fontSize: "1vmax" }}>
             <i>
               {occupation} by day,&nbsp;
-              {dark ? `Imperial enforcer by night` : `Rebel scum by night`}
+              {dark ? `Imperial enforcer by night` : `Rebel agent by night`}
             </i>
           </p>
         </div>
         <hr className="my-3 w-25" />
-        <div className="d-md-inline-flex icons-container">
+        <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container">
           <a
             href="https://www.github.com/surudhb"
             target="_blank"
@@ -99,7 +94,7 @@ export default ({ data }) => {
               title="e-mail"
             />
           </a>
-          <a href="../../resume.pdf" target="_blank" download>
+          <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
             <FontAwesomeIcon
               icon={["fas", "file-alt"]}
               className="icons file"

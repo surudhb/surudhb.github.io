@@ -17,4 +17,13 @@ export default {
       return map
     }, {})
   },
+  getInstitutionClass: name => {
+    if (name.includes("Waterloo")) {
+      return `waterloo-link`
+    } else if (name.includes("Ottawa")) {
+      return `ottawa-link`
+    } else {
+      return `nd-link`
+    }
+  },
 }

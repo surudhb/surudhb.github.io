@@ -7,10 +7,10 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Surudh Bhutani`,
-    author: `Surudh Bhutani`,
     firstName: `Surudh`,
     lastName: `Bhutani`,
+    title: `Surudh Bhutani`,
+    author: `Surudh Bhutani`,
     description: `Surudh Bhutani's personal site`,
     occupation: `Software Engineer`,
     keywords: [
@@ -33,6 +33,26 @@ module.exports = {
       `Full-Stack Dev`,
       `Skydiver`,
       `F1 Enthusiast`,
+    ],
+    institutions: [
+      {
+        name: `University of Waterloo`,
+        link: `https://uwaterloo.ca/software-engineering/`,
+        program: `B.SE Software Engineering (Honours)`,
+        description: `September 2014 - September 2018`,
+      },
+      {
+        name: `University of Ottawa`,
+        link: `https://engineering.uottawa.ca/undergraduate-programs/software-engineering`,
+        program: `B.SE Software Engineering (Honours, Dean's List)`,
+        description: `September 2013 - April 2014`,
+      },
+      {
+        name: `Notre Dame CSS`,
+        link: `https://www3.dpcdsb.org/NDAME/guidance-courses/i-b-program`,
+        program: `IB Programme`,
+        description: `September 2009 - April 2013`,
+      },
     ],
     readingList: [
       {

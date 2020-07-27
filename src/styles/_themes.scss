@@ -17,6 +17,7 @@ $themes: (
     linkHover: $gray-800,
     themeColor: $dark-blue,
     heartColor: pink,
+    gatsbyColor: #362066,
     titleColor: $dark-blue,
     hrefColor: $dark-blue,
     github: $black,
@@ -41,6 +42,7 @@ $themes: (
     hrefColor: $faded-red,
     themeColor: $dark-red,
     heartColor: red,
+    gatsbyColor: #8a4baf,
     github: $empire-red,
     linkedin: $empire-red,
     fcc: $empire-red,
@@ -111,13 +113,19 @@ $themes: (
 
 .footer {
   @include themify($themes) {
-    background: themed("backgroundColor");
+    background: themed("navBackground");
   }
 }
 
 .heart {
   @include themify($themes) {
     color: themed("heartColor");
+  }
+}
+
+.gatsby-logo {
+  @include themify($themes) {
+    color: themed("gatsbyColor");
   }
 }
 
@@ -196,8 +204,15 @@ div {
   }
 }
 
+span,
 p {
   @include themify($themes) {
     color: themed("textColor");
+  }
+}
+
+hr {
+  @include themify($themes) {
+    background: themed("navBackground");
   }
 }

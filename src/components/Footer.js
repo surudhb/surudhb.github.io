@@ -1,20 +1,32 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 export default () => {
   const { author } = useStaticQuery(query).site.siteMetadata
   return (
-    <div className="footer text-muted text-center">
+    <div
+      style={{ fontSize: "0.9rem" }}
+      className="mt-2 py-3 msx-0 footer text-muted text-center"
+    >
       <span className="m-auto">
         <b>{author}</b> &copy; {new Date().getFullYear()}. Made with&nbsp;
         <span className="heart">&nbsp;❤&nbsp;</span> &&nbsp;
-        <a href="https://www.gatsbyjs.org/">Gatsby</a>
+        <a className="gatsby-logo" href="https://www.gatsbyjs.org/">
+          Gatsby
+        </a>
       </span>
-      <span className="ml-5">
-        <span>a</span>
-        <span>b</span>
-        <span>c</span>
-        <span>d</span>
+      <span className="ml-5 nav-links">
+        <small>
+          <Link className="ml-3" to="/experiments">
+            Experiments
+          </Link>
+          <Link className="ml-3" to="/timeline">
+            Timeline
+          </Link>
+          <Link className="ml-3" to="/sitemap">
+            Sitemap
+          </Link>
+        </small>
       </span>
     </div>
   )

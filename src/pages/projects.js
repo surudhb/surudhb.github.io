@@ -23,6 +23,8 @@ export default ({ data }) => {
                 featuredImages={featuredImageMap[node.fields.slug]}
                 title={node.frontmatter.title}
                 tags={node.frontmatter.tags}
+                github={node.frontmatter.github}
+                live={node.frontmatter.live}
                 excerpt={node.excerpt}
               />
               <hr />
@@ -47,7 +49,8 @@ export const query = graphql`
           timeToRead
           frontmatter {
             title
-            description
+            github
+            live
             tags
             date(formatString: "DD MMMM, YYYY")
           }
