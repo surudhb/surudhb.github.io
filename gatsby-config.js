@@ -32,7 +32,7 @@ module.exports = {
       `UWaterloo S.Eng.`,
       `Full-Stack Dev`,
       `Skydiver`,
-      `F1 Enthusiast`,
+      `Rev-head`,
     ],
     institutions: [
       {

@@ -11,7 +11,8 @@ export default ({ title, excerpt, html, subTitle }) => (
       <PageTitle title={title} />
       {subTitle}
       <Container className="text-justify">
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        {html && <div dangerouslySetInnerHTML={{ __html: html }} />}
+        {!html && <div>This page is currently under development.</div>}
       </Container>
     </Container>
   </PageLayout>

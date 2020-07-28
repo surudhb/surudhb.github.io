@@ -19,8 +19,11 @@ export default ({
         <Row>
           {featuredImages &&
             featuredImages.map(image => (
-              <Col key={image.src} className="col-6 m-auto">
-                <Img fluid={image} className="m-auto w-100" />
+              <Col
+                key={image.src}
+                className={`m-auto col-${12 / featuredImages.length}`}
+              >
+                <Img fluid={image} />
               </Col>
             ))}
         </Row>
@@ -56,7 +59,7 @@ export default ({
       <br />
       <div className="mt-3 d-inline-flex">
         {live && (
-          <Button className="rounded-pill  mx-2 px-3 py-1">
+          <Button className="rounded-pill mx-2 px-3 py-1">
             <a
               href={live}
               target="_blank"
