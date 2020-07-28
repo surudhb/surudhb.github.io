@@ -4,7 +4,15 @@ import Img from "gatsby-image"
 import { Container, Badge, Col, Row, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export default ({ excerpt, featuredImages, tags, github, live, title, to }) => {
+export default ({
+  inProgress,
+  featuredImages,
+  tags,
+  github,
+  live,
+  title,
+  to,
+}) => {
   return (
     <Container className="text-center">
       <Link className="text-decoration-none" to={to}>
@@ -16,7 +24,21 @@ export default ({ excerpt, featuredImages, tags, github, live, title, to }) => {
               </Col>
             ))}
         </Row>
-        <h2 className="mt-5">{title}</h2>
+        <h2 className="mt-5">
+          <p>
+            {title}
+            {inProgress && (
+              <small>
+                <small className="align-top">
+                  &nbsp;
+                  <Badge pill variant="warning">
+                    In Progress
+                  </Badge>
+                </small>
+              </small>
+            )}
+          </p>
+        </h2>
       </Link>
       <div className="d-inline-flex">
         {tags.map(tag => (
@@ -33,7 +55,7 @@ export default ({ excerpt, featuredImages, tags, github, live, title, to }) => {
       </div>
       <br />
       <div className="mt-3 d-inline-flex">
-        {github !== "" && (
+        {live && (
           <Button className="rounded-pill  mx-2 px-3 py-1">
             <a
               href={live}
@@ -46,7 +68,7 @@ export default ({ excerpt, featuredImages, tags, github, live, title, to }) => {
             </a>
           </Button>
         )}
-        {live !== "" && (
+        {github && (
           <Button variant="dark" className="mx-2 px-3 py-1">
             <a
               href={github}
@@ -60,7 +82,6 @@ export default ({ excerpt, featuredImages, tags, github, live, title, to }) => {
           </Button>
         )}
       </div>
-      <p className="pt-3 text-justify">{excerpt}</p>
     </Container>
   )
 }

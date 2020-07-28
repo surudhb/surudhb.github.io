@@ -21,11 +21,7 @@ export default ({ data }) => {
               <ProjectLink
                 to={node.fields.slug}
                 featuredImages={featuredImageMap[node.fields.slug]}
-                title={node.frontmatter.title}
-                tags={node.frontmatter.tags}
-                github={node.frontmatter.github}
-                live={node.frontmatter.live}
-                excerpt={node.excerpt}
+                {...node.frontmatter}
               />
               <hr />
             </div>
@@ -51,13 +47,13 @@ export const query = graphql`
             title
             github
             live
+            inProgress
             tags
             date(formatString: "DD MMMM, YYYY")
           }
           fields {
             slug
           }
-          excerpt
         }
       }
     }

@@ -2,5 +2,9 @@ import React from "react"
 import PageLayout from "../components/PageLayout"
 
 export default () => {
-  return <PageLayout>This page is currently under development.</PageLayout>
+  return (
+    <PageLayout>
+      <span>This page is currently under development.</span>
+    </PageLayout>
+  )
 }
