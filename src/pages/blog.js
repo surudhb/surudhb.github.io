@@ -28,7 +28,7 @@ export default ({ data }) => {
         (description && description.toLowerCase().includes(stdQuery)) ||
         title.toLowerCase().includes(stdQuery) ||
         author.toLowerCase().includes(stdQuery) ||
-        (tags && tags.join("").toLowerCase().includes(stdQuery))
+        (tags && tags.join(" ").toLowerCase().includes(stdQuery))
       )
     })
 
@@ -66,7 +66,7 @@ export default ({ data }) => {
               featuredImage={featuredImageMap[node.fields.slug]}
               title={node.frontmatter.title}
               subtitle={node.frontmatter.date}
-              excerpt={node.excerpt}
+              excerpt={node.frontmatter.excerpt || node.excerpt}
             />
           </div>
         ))}
@@ -87,6 +87,7 @@ export const query = graphql`
           id
           frontmatter {
             title
+            excerpt
             description
             tags
             author
@@ -101,7 +102,7 @@ export const query = graphql`
     }
     allFile(
       filter: {
-        extension: { eq: "jpg" }
+        extension: { regex: "/png|jpg/" }
         relativePath: { regex: "/feature/" }
         relativeDirectory: { regex: "/content/blog/" }
       }

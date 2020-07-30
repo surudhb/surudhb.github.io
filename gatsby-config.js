@@ -132,14 +132,27 @@ module.exports = {
       },
     },
     `gatsby-plugin-sass`,
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        excerpt_separator: `<!-- end -->`,
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
+        ],
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `John Doe's Personal Site`,
-        short_name: `J.Doe`,
+        name: `Surudh Bhutani's Personal Site`,
+        short_name: `S.Bhutani`,
         description: `This is my personal site.`,
         start_url: `/`,
         background_color: `#fff`,
