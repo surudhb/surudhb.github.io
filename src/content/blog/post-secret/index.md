@@ -20,4 +20,4 @@ You will enter a place without judgement. A place where remorse and gratitude ex
 
 I would like to share with you a window that a friend of mine shared with me a long time ago. A window that peeks at these very souls; as part of an effort to provide them and us with healing, relief and moments of reflection.
 
-I <a href="https://postsecret.com/" target="_blank">hope you find</a> what we did :)
+I <a href="https://postsecret.com/" target="_blank">hope you find</a> what _we_ did :)

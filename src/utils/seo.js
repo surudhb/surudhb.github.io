@@ -25,6 +25,10 @@ const SEO = ({ description, lang, meta, image: img, title, pathname }) => {
         { property: `og:title`, content: title },
         { property: `og:description`, content: metaDescription },
         { property: `og:type`, content: `website` },
+        {
+          name: `cache-control`,
+          content: `public, max-age=0, must-revalidate`,
+        },
         { name: `twitter:creator`, content: site.siteMetadata.author },
         { name: `twitter:title`, content: `title` },
         { name: `twitter:description`, content: metaDescription },
