@@ -3,7 +3,7 @@ company: "FutureAdvisor"
 location: "San Francisco, CA"
 link: "https://app.futureadvisor.com/"
 position: "Software Engineering Intern"
-tags: ["React.js", "Webpack", "Storybook.js", "Docker", "Ruby"]
+tags: ["React.js", "Webpack", "Jest", "Storybook.js", "Docker", "Ruby"]
 startDate: "2017-09-04"
 endDate: "2017-12-21"
 ---
