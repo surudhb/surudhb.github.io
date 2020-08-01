@@ -180,10 +180,20 @@ export default ({ data }) => {
             {showLinks}
           </ul>
           <h5 className="watch-list-title pt-4">
-            Here are a couple of movies from my watch list:
+            Check out my girlfriend's poetry:
           </h5>
-          <p>
-            <i>...waaaay too many to list.</i>
+          <p style={{ fontSize: "0.9rem" }}>
+            <a
+              href="https://monicaiyer.tumblr.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              mind tricks and other paraphernalia
+            </a>
+            &nbsp;
+            <span className="text-muted">
+              <i>-Monica Iyer</i>
+            </span>
           </p>
         </article>
       </Container>
