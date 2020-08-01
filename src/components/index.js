@@ -1,4 +1,5 @@
 export { default as BlogLink } from "./BlogLink"
+export { default as CompanyCard } from "./CompanyCard"
 export { default as Footer } from "./Footer"
 export { default as Header } from "./Header"
 export { default as Navbar } from "./Navbar"

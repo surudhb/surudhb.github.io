@@ -26,7 +26,7 @@ export default ({ data }) => {
           </p>
         )}
         <div className="py-0 my-0">
-          <h1 className="display-4" style={{ fontSize: "5vmax" }}>
+          <h1 className="display-1" style={{ fontSize: "4.5vmax" }}>
             <span className="first-name">{firstName}</span>&nbsp;
             <span className="last-name">{lastName}</span>
           </h1>
@@ -61,7 +61,7 @@ export default ({ data }) => {
               title="LinkedIn"
             />
           </a>
-          <a
+          {/* <a
             href="https://www.freecodecamp.org/surudhb"
             target="_blank"
             rel="noopener noreferrer"
@@ -71,7 +71,7 @@ export default ({ data }) => {
               className="icons fcc"
               title="FreeCodeCamp"
             />
-          </a>
+          </a> */}
           <a
             href="https://www.hackerrank.com/surudhbhutani"
             target="_blank"

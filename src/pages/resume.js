@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { PageLayout, PageTitle, WorkHistory } from "../components"
+import { CompanyCard, PageLayout, PageTitle, WorkHistory } from "../components"
 import { SEO, Utils } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Container from "react-bootstrap/Container"
+import { Container, Col, Row } from "react-bootstrap"
 
 export default ({ data }) => {
   const institutions = data.site.siteMetadata.institutions || []
@@ -23,38 +23,17 @@ export default ({ data }) => {
           />
         </a>
       </PageTitle>
-      <Container fluid></Container>
       <Container className="mt-5 pt-3" fluid>
         <br />
         <h2 className="m-auto w-75 text-left">Education</h2>
         <hr className="mt-0 w-75" />
-        <Container fluid className="w-75 text-left">
-          <ul>
-            {institutions.map(({ name, program, link, description }) => (
-              <li
-                className="text-left"
-                key={name}
-                style={{ fontSize: "1.15rem" }}
-              >
-                <a
-                  className={Utils.getInstitutionClass(name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={link}
-                >
-                  {name}
-                </a>{" "}
-                <small>
-                  <span>
-                    <b>{program}</b>:{" "}
-                  </span>
-                  <span className="float-md-right">{description}</span>
-                </small>
-                <br />
-              </li>
-            ))}
-          </ul>
-        </Container>
+        <Row className="w-75 m-auto">
+          {institutions.map(frontmatter => (
+            <Col className="col-xl-4 col-12">
+              <CompanyCard frontmatter={frontmatter} />
+            </Col>
+          ))}
+        </Row>
         <br />
         <h2 className="m-auto w-75 text-left">Experience</h2>
         <hr className="mt-0 w-75" />
@@ -79,10 +58,12 @@ export const query = graphql`
     site {
       siteMetadata {
         institutions {
-          name
+          company
           link
-          program
-          description
+          position
+          startDate
+          endDate
+          slug
         }
       }
     }
@@ -100,7 +81,7 @@ export const query = graphql`
             link
             position
             tags
-            startDate(formatString: "MMMM")
+            startDate(formatString: "MMMM, YYYY")
             endDate(formatString: "MMMM, YYYY")
           }
           fields {

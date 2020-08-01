@@ -72,7 +72,7 @@ export default ({ data }) => {
               href="https://uwaterloo.ca/"
               target="_blank"
               rel="noopener noreferrer"
-              className="waterloo-link"
+              className="uwaterloo"
             >
               <b>University of Waterloo</b>
             </a>{" "}
@@ -87,7 +87,7 @@ export default ({ data }) => {
               href="https://www.uottawa.ca/en"
               target="_blank"
               rel="noopener noreferrer"
-              className="ottawa-link"
+              className="uottawa"
             >
               <b>University of Ottawa</b>
             </a>{" "}

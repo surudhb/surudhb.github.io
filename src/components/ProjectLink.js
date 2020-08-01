@@ -35,7 +35,7 @@ export default ({
                 <small className="align-top">
                   &nbsp;
                   <Badge pill variant="warning">
-                    In Progress
+                    <span className="text-dark">In Progress</span>
                   </Badge>
                 </small>
               </small>
