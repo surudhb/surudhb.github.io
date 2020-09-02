@@ -15,18 +15,18 @@ export default ({
 }) => {
   return (
     <Container className="text-center">
+      <Row>
+        {featuredImages &&
+          featuredImages.map(image => (
+            <Col
+              key={image.src}
+              className={`m-auto col-${12 / featuredImages.length}`}
+            >
+              <Img fluid={image} />
+            </Col>
+          ))}
+      </Row>
       <Link className="text-decoration-none" to={to}>
-        <Row>
-          {featuredImages &&
-            featuredImages.map(image => (
-              <Col
-                key={image.src}
-                className={`m-auto col-${12 / featuredImages.length}`}
-              >
-                <Img fluid={image} />
-              </Col>
-            ))}
-        </Row>
         <h2 className="mt-5">
           <p>
             {title}
@@ -34,8 +34,8 @@ export default ({
               <small>
                 <small className="align-top">
                   &nbsp;
-                  <Badge pill variant="warning">
-                    <span className="text-dark">In Progress</span>
+                  <Badge pill variant="success">
+                    <span>In Progress</span>
                   </Badge>
                 </small>
               </small>
@@ -66,7 +66,8 @@ export default ({
               rel="noopener noreferrer"
               className="text-white text-decoration-none"
             >
-              See me live&nbsp;&nbsp;
+              <FontAwesomeIcon icon={["fa", "window-maximize"]} />
+              &nbsp;See me live&nbsp;&nbsp;
               <FontAwesomeIcon icon={["fa", "link"]} />
             </a>
           </Button>
@@ -79,11 +80,17 @@ export default ({
               rel="noopener noreferrer"
               className="text-white text-decoration-none"
             >
-              Github&nbsp;&nbsp;
+              <FontAwesomeIcon icon={["fab", "github"]} />
+              &nbsp;Github&nbsp;&nbsp;
               <FontAwesomeIcon icon={["fa", "link"]} />
             </a>
           </Button>
         )}
+        <Link className="text-decoration-none" to={to}>
+          <Button variant="outline-warning" className="mx-2 px-3 py-1">
+            Learn More
+          </Button>
+        </Link>
       </div>
     </Container>
   )
