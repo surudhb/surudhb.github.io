@@ -7,7 +7,7 @@ author: "Surudh Bhutani"
 date: "2020-07-30"
 ---
 
-<img src="../post-secret/feature.png" alt="Post Secret"/><p style="text-align:center;">Post Secret.</p>
+<img src="./feature.png" alt="Post Secret"/><p style="text-align:center;">Post Secret.</p>
 I'd like to share a secret with you.
 
 In fact, I would like to share many secrets with you.
