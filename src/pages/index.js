@@ -61,17 +61,6 @@ export default ({ data }) => {
               title="LinkedIn"
             />
           </a>
-          {/* <a
-            href="https://www.freecodecamp.org/surudhb"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={["fab", "free-code-camp"]}
-              className="icons fcc"
-              title="FreeCodeCamp"
-            />
-          </a> */}
           <a
             href="https://www.hackerrank.com/surudhbhutani"
             target="_blank"

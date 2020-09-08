@@ -12,86 +12,84 @@ export default ({
   live,
   title,
   to,
-}) => {
-  return (
-    <Container className="text-center">
-      <Row>
-        {featuredImages &&
-          featuredImages.map(image => (
-            <Col
-              key={image.src}
-              className={`m-auto col-${12 / featuredImages.length}`}
-            >
-              <Img fluid={image} />
-            </Col>
-          ))}
-      </Row>
-      <Link className="text-decoration-none" to={to}>
-        <h2 className="mt-5">
-          <p>
-            {title}
-            {inProgress && (
-              <small>
-                <small className="align-top">
-                  &nbsp;
-                  <Badge pill variant="success">
-                    <span>In Progress</span>
-                  </Badge>
-                </small>
-              </small>
-            )}
-          </p>
-        </h2>
-      </Link>
-      <div className="d-inline-flex">
-        {tags.map(tag => (
-          <Badge
-            key={tag}
-            pill
-            className="mr-1 mr-md-2 p-0 px-2 px-md-3 resume-tags"
+}) => (
+  <Container className="text-center">
+    <Row>
+      {featuredImages &&
+        featuredImages.map(image => (
+          <Col
+            key={image.src}
+            className={`m-auto col-${12 / featuredImages.length}`}
           >
-            <h5>
-              <small>{tag}</small>
-            </h5>
-          </Badge>
+            <Img fluid={image} />
+          </Col>
         ))}
-      </div>
-      <br />
-      <div className="mt-3 d-inline-flex">
-        {live && (
-          <Button className="rounded-pill mx-2 px-3 py-1">
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-decoration-none"
-            >
-              <FontAwesomeIcon icon={["fa", "window-maximize"]} />
-              &nbsp;See me live&nbsp;&nbsp;
-              <FontAwesomeIcon icon={["fa", "link"]} />
-            </a>
-          </Button>
-        )}
-        {github && (
-          <Button variant="dark" className="mx-2 px-3 py-1">
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-decoration-none"
-            >
-              <FontAwesomeIcon icon={["fab", "github"]} />
-              &nbsp;Github&nbsp;&nbsp;
-              <FontAwesomeIcon icon={["fa", "link"]} />
-            </a>
-          </Button>
-        )}
-        <Link className="text-decoration-none" to={to}>
-          <Button variant="outline-warning" className="mx-2 px-3 py-1">
-            Learn More
-          </Button>
-        </Link>
-      </div>
-    </Container>
-  )
-}
+    </Row>
+    <Link className="text-decoration-none" to={to}>
+      <h2 className="mt-5">
+        <p>
+          {title}
+          {inProgress && (
+            <small>
+              <small className="align-top">
+                &nbsp;
+                <Badge pill variant="success">
+                  <span>In Progress</span>
+                </Badge>
+              </small>
+            </small>
+          )}
+        </p>
+      </h2>
+    </Link>
+    <div className="d-inline-flex">
+      {tags.map(tag => (
+        <Badge
+          key={tag}
+          pill
+          className="mr-1 mr-md-2 p-0 px-2 px-md-3 resume-tags"
+        >
+          <h5>
+            <small>{tag}</small>
+          </h5>
+        </Badge>
+      ))}
+    </div>
+    <br />
+    <div className="mt-3 d-inline-flex">
+      {live && (
+        <Button className="rounded-pill mx-2 px-3 py-1">
+          <a
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-decoration-none"
+          >
+            <FontAwesomeIcon icon={["fa", "window-maximize"]} />
+            &nbsp;See me live&nbsp;&nbsp;
+            <FontAwesomeIcon icon={["fa", "link"]} />
+          </a>
+        </Button>
+      )}
+      {github && (
+        <Button variant="dark" className="mx-2 px-3 py-1">
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-decoration-none"
+          >
+            <FontAwesomeIcon icon={["fab", "github"]} />
+            &nbsp;Github&nbsp;&nbsp;
+            <FontAwesomeIcon icon={["fa", "link"]} />
+          </a>
+        </Button>
+      )}
+      <Link className="text-decoration-none" to={to}>
+        <Button variant="outline-warning" className="mx-2 px-3 py-1">
+          Learn More
+        </Button>
+      </Link>
+    </div>
+  </Container>
+)
