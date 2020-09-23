@@ -82,15 +82,21 @@ How <b>accurate</b> is your <b>retention</b> of the comprehension section? <br /
 
 #### 1. <a href="https://www.khanacademy.org/prep/lsat" target="_blank">Khan Academy's LSAT Prep</a> (Highly Recommended)
 
-The is the <b>only resource you need</b> from the list. Khan Academy's LSAT Prep is extremely well-structured. It walks you through excercises, paces you up to take more complex questions in the same category, offers you the option to take upto 10 complete practice tests and provides you with around 300-400 unique excercises.
+This is the <b>only resource you need</b> from the list. Khan Academy's LSAT Prep is extremely well-structured. It walks you through excercises, paces you up to take more complex questions in the same category, offers you the option to take upto 10 complete practice tests and provides you with around 300-400 unique excercises.
 
 It keeps track of your scores for all the practice tests and excercises it offers. It gives you the option to select a study plan that offers up to 10 unique past tests for you to take like the real deal. It offers you flexibility on the scheduling of these practice tests. It helps yous set a desired score and tailors the set of excercises based on your current performance. There is no way for me to convince of you this other than saying go <a href="https://www.khanacademy.org/prep/lsat/intro" target="_blank">sign up</a> for it.
 
-#### 2. <a href="http://www.thelsattrainer.com/" target="_blank">The LSAT Trainer - <i>Mike Kim</i></a> (Optional)<br />
+#### 2. <a href="http://www.thelsattrainer.com/" target="_blank">The LSAT Trainer - <i>Mike Kim</i></a> (Optional)
 
-#### 3. <a href="https://www.lsac.org/lsat/lsat-prep/prep-books-ebooks/10-actual-official-lsat-prepteststm" target="_blank">10 LSAC Official PrepTests</a><br /></p>
+This is a resource I would recommend <b><em>only if</em></b> the first option does not seem enough. If you are having trouble understanding some of the patterns of questions and their wordings -- Mike dives into efficient ways of reaching an understanding solid enough to tackle the test. There are several free videos by loads of people, and I suspect as the digital LSAT becomes more and more adopted into the norm, there will be more and more content supporting and endorsing it (with explanations, examples, etc from fellow preppers).
 
-<b>NOTE: I ABSOLUTELY DO NOT RECOMMEND SPLURGING MONEY ON PREP BOOKS/COURSES BY KAPLAN, PRINCETON, MANHATTAN PREP, ETC. THESE BOOKS AND COURSES ARE WORDY, EXPENSIVE AND COMPLETELY UNNECESSARY. THERE IS NOTHING THEY HAVE TO OFFER WHICH YOU CANNOT ACCESS OR DO BY YOURSELF.</b>
+#### 3. <a href="https://www.lsac.org/lsat/lsat-prep/prep-books-ebooks/10-actual-official-lsat-prepteststm" target="_blank">10 LSAC Official PrepTests</a> (Even more optional)</p>
+
+If you have spare time on your hands before the test, and you have exhausted Khan Academy as a resource, and you wish to prep more. Get the official prep test. The newer the version, the better and the cheaper the better. Avoid purschasing tests older than 5-6 years than when you are taking the test. The LSAT is offered several times a year and it is revised accordingly. Older tests will do you no good.
+
+<b>NOTE: I ABSOLUTELY DO NOT RECOMMEND SPLURGING MONEY ON PREP BOOKS/COURSES BY KAPLAN, PRINCETON, MANHATTAN PREP, ETC. THESE BOOKS AND COURSES ARE WORDY, EXPENSIVE AND COMPLETELY UNNECESSARY. THERE IS NOTHING THEY HAVE TO OFFER WHICH YOU CANNOT ACCESS ELSEWHERE OR DO BY YOURSELF.</b><br /><br />
+
+## Words of Wisdom
 
 ### Take the Diagnostic ASAP
 
@@ -99,3 +105,34 @@ There is no better way to get started other than getting started. Your first pri
 The diagnostic test is a shorter version of the LSAT testing your performance in each category. This will be the first of many completely zoned-in, crunch time, time commitments that you will make, so get used to it.
 
 <img src="./diagnostic-score.png" alt="Khan Academy Diagnostic" />
+
+### Stick to your study plan
+
+Whatever study plan you come up with to tackle the test is yours to decide. How good that plan is trivial, following through on that plan however is harder. Stick to your study plan. Cramming is not the way to go about this. This test is analogous to math tests in high school where practice was more useful than understanding concepts. Remember, your goal is to beat time, not the question. You'll be able to every single question correctly within the first 2 weeks (give or take).
+
+### Set realistic expectations
+
+Pace your growth. Your score will fluctuate with each test that you take. Therefore, it is important to set realistic goals.
+
+### Consistency beats everything
+
+Title. Shorter sessions over a larger period of time done regularly will benefit you more than having huge 12-hour cramming sessions on weekends. You are trying to develop a habit of processing the question in the quickest amount of time and that requires practice.
+
+### Get a good night's sleep
+
+Trivial but important. The LSAT is a marathon and a sprint. A good night's sleep will go a long way to ensure you do not burn out nor do you get a slow start on the day of.
+
+### tl;dr
+
+<ol>
+<li>Khan Academy's LSAT prep is the best resource to prepare. AND IT IS FREE.</li>
+<li>This is not an aptitude test. The LSAT tests your ability to do a handful of specific tasks really well.</li>
+<li>Set realistic expectations and aim to grow and practice consistently.</li>
+</ol>
+<br/>
+
+## Why do I care?
+
+I took the LSAT for the first time in April 2019. I followed pretty much all the advice I'm bestowing upon you in this post except for one. Getting a good night's sleep. And that made me walk away with a 167. I hope you can learn from my mistakes and do even better. I spent about 2 months of 2-3 hours each day using Khan Academy. I got through about 3 practice tests although they offer up to 10. I also made the mistake of booking the test too late (the closest spot to my house was booked 3-4 weeks in advance) -- I therefore had to almost travel to USA since that was the nearest test centre available. Luckily, I submitted a request to find a closer centre and they were able to accomodate me 1.5 hrs awway from my house. All in all, not bad, but not great either. I should've reserved a spot earlier.
+
+Hopfully this post serves as a decent enough starting point for those looking to take the LSAT.
