@@ -1,1 +1,0 @@
-{"componentChunkName":"component---src-templates-projects-post-js","path":"/projects/test-1/","result":{"data":{"markdownRemark":{"html":"","frontmatter":{"title":"Project X","tags":["GatsbyJS","ReactJS","GraphQL","ContextAPI","Bootstrap v4"]},"excerpt":""}},"pageContext":{"slug":"/projects/test-1/","templatePath":"./src/templates/projects-post.js"}}}
