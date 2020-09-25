@@ -12,20 +12,19 @@ $themes: (
     navBackground: $gray-100,
     secondary: $gray-900,
     textColor: $black,
-    firstName: orange,
+    firstName: lightgreen,
     lastName: $black,
     linkHover: $gray-800,
-    themeColor: $dark-blue,
-    heartColor: pink,
+    heartColor: lightgreen,
     gatsbyColor: #362066,
-    titleColor: $dark-blue,
-    hrefColor: $dark-blue,
+    titleColor: lightgreen,
+    hrefColor: lightgreen,
     github: $black,
     linkedin: $linkedin-blue,
     fcc: $fcc-green,
     hr: $hr-green,
     mail: $yellow,
-    file: $dark-blue,
+    file: lightgreen,
     iconBackground: $white,
     cardBackground: $white,
   ),
@@ -40,7 +39,6 @@ $themes: (
     lastName: $empire-red,
     titleColor: $faded-red,
     hrefColor: $faded-red,
-    themeColor: $dark-red,
     heartColor: red,
     gatsbyColor: #8a4baf,
     github: $empire-red,
@@ -158,12 +156,6 @@ $themes: (
   }
 }
 
-.resume-tags {
-  @include themify($themes) {
-    background: themed("navBackground");
-  }
-}
-
 .icons:hover {
   @include themify($themes) {
     background: themed("iconBackground");
@@ -185,6 +177,12 @@ $themes: (
     &.file {
       color: themed("file");
     }
+  }
+}
+
+.resume-icons {
+  @include themify($themes) {
+    color: themed("textColor");
   }
 }
 

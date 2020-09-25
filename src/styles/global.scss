@@ -52,8 +52,8 @@ body {
 
 // light mode
 .custom-control-input ~ .custom-control-label::before {
-  border-color: $yellow;
-  background-color: $yellow;
+  border-color: lightgreen;
+  background-color: lightgreen;
 }
 
 .custom-switch .custom-control-input ~ .custom-control-label::after {
@@ -62,7 +62,7 @@ body {
 
 // dark mode
 .custom-control-input:checked ~ .custom-control-label::before {
-  border-color: $black;
+  border-color: $gray-900;
   background-color: $black;
 }
 
@@ -82,11 +82,16 @@ body {
   color: $gray-600;
 }
 
+.resume-icons {
+  font-size: 5rem;
+  margin: 2rem;
+}
+
 .brand-icon {
-  font-size: 2.75rem;
+  font-size: 3rem;
   color: $gray-700;
   &:hover {
-    color: $faded-red;
+    color: lightgreen;
   }
   &.empire {
     border-radius: 50%;
@@ -99,6 +104,14 @@ body {
   }
 }
 /** Home Page Icon Styling END */
+
+.p-large {
+  font-size: 18px;
+}
+
+.resume-tags {
+  background: $gray-900;
+}
 
 .unemployed {
   font-size: 1.35rem;

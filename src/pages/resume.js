@@ -25,9 +25,52 @@ export default ({ data }) => {
       </PageTitle>
       <Container className="mt-5 pt-3" fluid>
         <br />
+        <h2 className="m-auto w-75 text-left">Technologies</h2>
+        <hr className="w-75 my-0" />
+        <br />
+        <FontAwesomeIcon icon={["fab", "java"]} className="resume-icons java" />
+        <FontAwesomeIcon
+          icon={["fab", "js-square"]}
+          className="resume-icons js"
+        />
+        <FontAwesomeIcon
+          icon={["fab", "html5"]}
+          className="resume-icons html"
+        />
+        <FontAwesomeIcon icon={["fab", "css3"]} className="resume-icons css" />
+        <FontAwesomeIcon
+          icon={["fab", "swift"]}
+          className="resume-icons swift"
+        />
+        <br />
+        <FontAwesomeIcon
+          icon={["fab", "react"]}
+          className="resume-icons reactjs"
+        />
+        <FontAwesomeIcon
+          icon={["fab", "node"]}
+          className="resume-icons nodejs"
+        />
+        <FontAwesomeIcon
+          icon={["fab", "bootstrap"]}
+          className="resume-icons bootstrap"
+        />
+        <FontAwesomeIcon
+          icon={["fab", "sass"]}
+          className="resume-icons github"
+        />
+        <br />
+        <FontAwesomeIcon
+          icon={["fab", "github-alt"]}
+          className="resume-icons"
+        />
+        <FontAwesomeIcon icon={["fab", "jira"]} className="resume-icons" />
+        <FontAwesomeIcon icon={["fab", "docker"]} className="resume-icons" />
+
         <h2 className="m-auto w-75 text-left">Education</h2>
-        <hr className="mt-0 w-75" />
-        <Row className="w-75 m-auto">
+        <hr className="w-75 my-0" />
+        <br />
+        <Row className="w-50 m-auto">
           {institutions.map(frontmatter => (
             <Col className="col-xl-4 col-12">
               <CompanyCard frontmatter={frontmatter} />
@@ -36,7 +79,7 @@ export default ({ data }) => {
         </Row>
         <br />
         <h2 className="m-auto w-75 text-left">Experience</h2>
-        <hr className="mt-0 w-75" />
+        <hr className="w-75 my-0" />
         <br />
         {history.map(({ node }) => (
           <div key={node.id}>
@@ -45,7 +88,7 @@ export default ({ data }) => {
               image={imageMap[node.fields.slug]}
               html={node.html}
             />
-            <hr className="w-75" />
+            <br />
           </div>
         ))}
       </Container>

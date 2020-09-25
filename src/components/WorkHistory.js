@@ -9,7 +9,10 @@ export default ({ html, frontmatter, image }) => (
         <CompanyCard frontmatter={frontmatter} image={image} />
       </Col>
       <Col className="col-md-8 col-12 m-auto">
-        <p className="text-left" dangerouslySetInnerHTML={{ __html: html }} />
+        <p
+          className="text-left p-large"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </Col>
     </Row>
     <Row>

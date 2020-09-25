@@ -23,7 +23,7 @@ export default ({ data }) => {
                 featuredImages={featuredImageMap[node.fields.slug]}
                 {...node.frontmatter}
               />
-              <hr />
+              <br />
             </div>
           ))}
         </section>

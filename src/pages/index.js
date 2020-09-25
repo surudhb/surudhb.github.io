@@ -85,7 +85,7 @@ export default ({ data }) => {
           </a>
           <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
             <FontAwesomeIcon
-              icon={["fas", "file-alt"]}
+              icon={["fas", "file-download"]}
               className="icons file"
               title="Resume"
             />

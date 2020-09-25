@@ -98,10 +98,11 @@ export default ({ data }) => {
             coding I enjoy and what parts I don't.
           </p>
           <p className="i-5">
-            My technical interests lie in <b>full-stack development</b> and
+            My technical interests lie in{" "}
+            <b>front-end, full-stack development</b> and
             <b>&nbsp;iOS development</b>. I have the most experience with&nbsp;
             <code>JavaScript</code>
-            &nbsp;based-technologies:&nbsp;
+            &nbsp;based frameworks and technologies:&nbsp;
             <code>React.js</code>, <code>Gatsby.js</code>, <code>Node.js</code>
             &nbsp;and&nbsp;
             <code>Express.js</code>. I am currently enjoying learning&nbsp;
@@ -130,8 +131,7 @@ export default ({ data }) => {
             >
               Magnus Carlsen
             </a>
-            &nbsp;at chess. I also aim to spend a certain part of every day
-            trying to learn to cook a new dish.
+            &nbsp;at chess. I also aim to read one chapter a day.
           </p>
           <p className="i-5">
             Check out my <Link to="/projects">projects</Link> to see what I've
