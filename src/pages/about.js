@@ -98,8 +98,7 @@ export default ({ data }) => {
             coding I enjoy and what parts I don't.
           </p>
           <p className="i-5">
-            My technical interests lie in{" "}
-            <b>front-end, full-stack development</b> and
+            My technical interests lie in <b>front-end, full-stack</b> and
             <b>&nbsp;iOS development</b>. I have the most experience with&nbsp;
             <code>JavaScript</code>
             &nbsp;based frameworks and technologies:&nbsp;

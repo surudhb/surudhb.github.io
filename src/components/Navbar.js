@@ -34,7 +34,7 @@ export default () => {
           <Nav.Link className="ml-2" as={Link} to="/resume" title="Resume">
             Resume
           </Nav.Link>
-          <Form className="ml-3 my-auto">
+          <Form className="ml-3 my-2 pt-1">
             <Form.Check
               type="switch"
               id="custom-switch"

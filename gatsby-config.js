@@ -126,6 +126,25 @@ module.exports = {
         link: `https://www.imdb.com/title/tt1392190/`,
       },
     ],
+    dialogues: {
+      light: [
+        "I am a part of the rebellion!",
+        "My name is R2-D2.",
+        "Beep beep boop",
+        "I was the droid they were looking for",
+        "Now there are two of them",
+        "I am no jedi, but I am a believer in the high ground",
+      ],
+      dark: [
+        "My name is Darth Vader",
+        "Anakin Skywalker was weak",
+        "The force is strong",
+        "I find your lack of faith disturbing",
+        "Apology accepted",
+        "You cannot hide forever",
+        "You would be wise to surrender",
+      ],
+    },
   },
   plugins: [
     `gatsby-plugin-preload-link-crossorigin`,

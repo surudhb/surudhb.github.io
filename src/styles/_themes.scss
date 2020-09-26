@@ -9,7 +9,7 @@ $themes: (
   light: (
     backgroundColor: white,
     footerBackground: white,
-    navBackground: $gray-100,
+    navBackground: white,
     secondary: $gray-900,
     textColor: $black,
     firstName: lightgreen,
@@ -29,12 +29,12 @@ $themes: (
     cardBackground: $white,
   ),
   dark: (
-    backgroundColor: #222,
+    backgroundColor: rgb(11, 16, 20),
     footerBackground: #222,
     secondary: $gray-100,
-    navBackground: $dark-gray,
-    linkHover: $gray-200,
-    textColor: $gray-300,
+    navBackground: rgb(11, 16, 20),
+    linkHover: $gray-100,
+    textColor: $gray-200,
     firstName: $gray-100,
     lastName: $empire-red,
     titleColor: $faded-red,
@@ -48,7 +48,7 @@ $themes: (
     mail: $empire-red,
     file: $empire-red,
     iconBackground: $black,
-    cardBackground: $dark-gray,
+    cardBackground: rgb(1, 10, 20),
   ),
 );
 
@@ -159,6 +159,31 @@ $themes: (
 .icons:hover {
   @include themify($themes) {
     background: themed("iconBackground");
+    &.github {
+      color: themed("github");
+    }
+    &.linkedin {
+      color: themed("linkedin");
+    }
+    &.fcc {
+      color: themed("fcc");
+    }
+    &.hr {
+      color: themed("hr");
+    }
+    &.mail {
+      color: themed("mail");
+    }
+    &.file {
+      color: themed("file");
+    }
+  }
+}
+
+.home-icons {
+  @include themify($themes) {
+    background: themed("iconBackground");
+    font-size: 5rem;
     &.github {
       color: themed("github");
     }

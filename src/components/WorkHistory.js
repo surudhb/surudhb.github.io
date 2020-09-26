@@ -5,10 +5,10 @@ import { Container, Row, Col, Badge } from "react-bootstrap"
 export default ({ html, frontmatter, image }) => (
   <Container className="p-1 project-link text-center">
     <Row>
-      <Col className="col-md-4 col-12">
+      <Col className="col-12 my-4">
         <CompanyCard frontmatter={frontmatter} image={image} />
       </Col>
-      <Col className="col-md-8 col-12 m-auto">
+      <Col className="col-12 col-lg-8 m-auto">
         <p
           className="text-left p-large"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -16,8 +16,7 @@ export default ({ html, frontmatter, image }) => (
       </Col>
     </Row>
     <Row>
-      <Col className="col-md-4"></Col>
-      <Col className="col-md-7 col-12">
+      <Col className="col-12">
         <div className="d-inline-flex">
           {frontmatter.tags.map(tag => (
             <Badge
