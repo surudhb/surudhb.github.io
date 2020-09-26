@@ -21,6 +21,7 @@ $themes: (
     hrefColor: lightgreen,
     github: $black,
     linkedin: $linkedin-blue,
+    angellist: black,
     fcc: $fcc-green,
     hr: $hr-green,
     mail: $yellow,
@@ -43,6 +44,7 @@ $themes: (
     gatsbyColor: #8a4baf,
     github: $empire-red,
     linkedin: $empire-red,
+    angellist: black,
     fcc: $empire-red,
     hr: $empire-red,
     mail: $empire-red,
@@ -156,30 +158,6 @@ $themes: (
   }
 }
 
-.icons:hover {
-  @include themify($themes) {
-    background: themed("iconBackground");
-    &.github {
-      color: themed("github");
-    }
-    &.linkedin {
-      color: themed("linkedin");
-    }
-    &.fcc {
-      color: themed("fcc");
-    }
-    &.hr {
-      color: themed("hr");
-    }
-    &.mail {
-      color: themed("mail");
-    }
-    &.file {
-      color: themed("file");
-    }
-  }
-}
-
 .home-icons {
   @include themify($themes) {
     background: themed("iconBackground");
@@ -189,6 +167,9 @@ $themes: (
     }
     &.linkedin {
       color: themed("linkedin");
+    }
+    &.angellist {
+      color: themed("angellist");
     }
     &.fcc {
       color: themed("fcc");

@@ -98,9 +98,12 @@ nav {
 
 .brand-icon {
   font-size: 4.5rem;
-  color: $gray-700;
+  border-radius: 50%;
+  color: lightgreen;
+  background: white;
   &:hover {
-    color: lightgreen;
+    color: white;
+    background: lightgreen;
   }
   &.empire {
     border-radius: 50%;

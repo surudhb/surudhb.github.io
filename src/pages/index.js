@@ -81,6 +81,17 @@ export default ({ data }) => {
           />
         </a>
         <a
+          href="https://angel.co/u/surudh-bhutani"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon
+            icon={["fab", "angellist"]}
+            className="home-icons angellist"
+            title="Angel.co"
+          />
+        </a>
+        <a
           href="https://www.hackerrank.com/surudhbhutani"
           target="_blank"
           rel="noopener noreferrer"
