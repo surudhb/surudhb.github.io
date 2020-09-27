@@ -16,7 +16,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-container * {
+.height-60 {
+  height: 60%;
+}
+
+nav {
+  font-size: 20px;
+}
+
+.app-container {
+  max-width: 1647px;
+}
+
+.app-container > * {
   transition: color 0.45s ease-in-out;
   transition: background 0.45s ease-in-out;
 }
@@ -62,22 +74,22 @@ body {
 
 // dark mode
 .custom-control-input:checked ~ .custom-control-label::before {
-  border-color: $gray-900;
-  background-color: $black;
+  border-color: slategrey;
+  background-color: rgb(13, 23, 37);
 }
 
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-  background-color: $red;
+  background-color: orange;
 }
 /** Toggle Switch Styling END */
 
 /** Home Page Icon Styling START */
 .icons-container a {
-  margin: 0 1rem;
+  margin: 0 1.3rem;
 }
 
 .icons {
-  font-size: 3.5rem;
+  font-size: 5rem;
   margin: 0.1rem;
   color: $gray-600;
 }
@@ -87,11 +99,18 @@ body {
   margin: 2rem;
 }
 
+.about-icons {
+  font-size: 6rem;
+}
+
 .brand-icon {
-  font-size: 3rem;
-  color: $gray-700;
+  font-size: 4.5rem;
+  border-radius: 50%;
+  color: lightgreen;
+  background: white;
   &:hover {
-    color: lightgreen;
+    color: white;
+    background: lightgreen;
   }
   &.empire {
     border-radius: 50%;
@@ -103,10 +122,9 @@ body {
     }
   }
 }
-/** Home Page Icon Styling END */
 
 .p-large {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .resume-tags {

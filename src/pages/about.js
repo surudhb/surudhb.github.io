@@ -3,16 +3,22 @@ import { PageLayout, PageTitle } from "../components"
 import { Container, Image } from "react-bootstrap"
 import { Link, graphql } from "gatsby"
 import { ThemeContext, SEO } from "../utils"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default ({ data }) => {
   const MediaLink = ({ title, author, link }) => (
-    <li key={title} style={{ color: "gray" }}>
+    <li key={title} style={{ color: "gray" }} className="mb-3">
       <a target="_blank" rel="noopener noreferrer" href={link}>
         {title}
       </a>
-      <div className="d-md-inline-flex">
-        &nbsp;-<i>{author}</i>
-      </div>
+      <br />
+      <span
+        style={{ color: "gray", fontSize: "0.85em" }}
+        className="d-md-inline-flex"
+      >
+        &nbsp;<i>{author}</i>
+      </span>
+      <br />
     </li>
   )
 
@@ -20,6 +26,7 @@ export default ({ data }) => {
     author,
     readingList,
     showsList,
+    moviesList,
     designations,
     unemployed,
   } = data.site.siteMetadata
@@ -27,6 +34,7 @@ export default ({ data }) => {
 
   const bookLinks = readingList.map(book => MediaLink(book))
   const showLinks = showsList.map(show => MediaLink(show))
+  const movieLinks = moviesList.map(movie => MediaLink(movie))
 
   return (
     <PageLayout>
@@ -40,7 +48,7 @@ export default ({ data }) => {
           src={`../../icons/luke-${toString()}.png`}
           alt={author}
         />
-        <article className="w-75 m-auto pt-2 text-justify">
+        <article className="w-75 m-auto pt-2 text-justify p-large">
           <p className="text-center">
             {designations.map((attr, i) => (
               <span key={attr}>
@@ -98,8 +106,7 @@ export default ({ data }) => {
             coding I enjoy and what parts I don't.
           </p>
           <p className="i-5">
-            My technical interests lie in{" "}
-            <b>front-end, full-stack development</b> and
+            My technical interests lie in <b>front-end, full-stack</b> and
             <b>&nbsp;iOS development</b>. I have the most experience with&nbsp;
             <code>JavaScript</code>
             &nbsp;based frameworks and technologies:&nbsp;
@@ -161,40 +168,56 @@ export default ({ data }) => {
             </>
           )}
           <hr />
-          <h5 className="watch-list-title pt-4">
-            Here are a couple of books from my reading list:
-          </h5>
-          <ul
-            className="pl-0"
-            style={{ fontSize: "0.9rem", listStyle: "none" }}
-          >
-            {bookLinks}
-          </ul>
-          <h5 className="watch-list-title pt-4">
-            Here are a couple of shows from my watch list:
-          </h5>
-          <ul
-            className="pl-0"
-            style={{ fontSize: "0.9rem", listStyle: "none" }}
-          >
-            {showLinks}
-          </ul>
-          <h5 className="watch-list-title pt-4">
-            Check out my girlfriend's poetry:
-          </h5>
-          <p style={{ fontSize: "0.9rem" }}>
-            <a
-              href="https://monicaiyer.tumblr.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              mind tricks and other paraphernalia
-            </a>
-            &nbsp;
-            <span className="text-muted">
-              <i>-Monica Iyer</i>
-            </span>
-          </p>
+          <div className="row p-large">
+            <div className="col-6">
+              <FontAwesomeIcon
+                icon={["fas", "journal-whills"]}
+                className="about-icons mt-4 books"
+                title="Reading List"
+              />
+              <h3 className="watch-list-title mt-2">Reading List</h3>
+              <ul className="pl-0 mx-3 list-unstyled">{bookLinks}</ul>
+            </div>
+            <div className="col-6">
+              <FontAwesomeIcon
+                icon={["fas", "tv"]}
+                className="about-icons mt-4 shows"
+                title="Reading List"
+              />
+              <h3 className="watch-list-title mt-2">Binge List</h3>
+              <ul className="pl-0 mx-3 list-unstyled">{showLinks}</ul>
+            </div>
+            <div className="col-6">
+              <FontAwesomeIcon
+                icon={["fas", "film"]}
+                className="about-icons mt-4 movies"
+                title="Reading List"
+              />
+              <h3 className="watch-list-title mt-2">Watch List</h3>
+              <ul className="pl-0 mx-3 list-unstyled">{movieLinks}</ul>
+            </div>
+            <div className="col-6">
+              <FontAwesomeIcon
+                icon={["fas", "pen-nib"]}
+                className="about-icons mt-4 poetry"
+                title="Reading List"
+              />
+              <h3 className="watch-list-title mt-2">Girlfriend's tumblr:</h3>
+              <p>
+                <a
+                  href="https://monicaiyer.tumblr.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  mind tricks and other paraphernalia
+                </a>
+                &nbsp;
+                <span className="text-muted">
+                  <i>-Monica Iyer</i>
+                </span>
+              </p>
+            </div>
+          </div>
         </article>
       </Container>
     </PageLayout>
@@ -215,6 +238,11 @@ export const query = graphql`
           link
         }
         showsList {
+          title
+          author
+          link
+        }
+        moviesList {
           title
           author
           link

@@ -7,8 +7,8 @@
 
 $themes: (
   light: (
-    backgroundColor: white,
-    footerBackground: white,
+    backgroundColor: $gray-100,
+    footerBackground: $gray-100,
     navBackground: $gray-100,
     secondary: $gray-900,
     textColor: $black,
@@ -16,39 +16,49 @@ $themes: (
     lastName: $black,
     linkHover: $gray-800,
     heartColor: lightgreen,
-    gatsbyColor: #362066,
-    titleColor: lightgreen,
-    hrefColor: lightgreen,
+    gatsbyColor: #2c1953,
+    titleColor: #64e264,
+    hrefColor: #90ee90,
     github: $black,
     linkedin: $linkedin-blue,
+    angellist: black,
     fcc: $fcc-green,
     hr: $hr-green,
     mail: $yellow,
     file: lightgreen,
-    iconBackground: $white,
-    cardBackground: $white,
+    iconBackground: $gray-100,
+    cardBackground: $gray-100,
+    books: red,
+    movies: slateblue,
+    shows: $yellow,
+    poetry: #f1c2c2,
   ),
   dark: (
-    backgroundColor: #222,
+    backgroundColor: rgb(11, 16, 20),
     footerBackground: #222,
     secondary: $gray-100,
-    navBackground: $dark-gray,
-    linkHover: $gray-200,
-    textColor: $gray-300,
+    navBackground: rgb(11, 16, 20),
+    linkHover: $gray-100,
+    textColor: $gray-200,
     firstName: $gray-100,
-    lastName: $empire-red,
-    titleColor: $faded-red,
-    hrefColor: $faded-red,
+    lastName: orange,
+    titleColor: orange,
+    hrefColor: orange,
     heartColor: red,
-    gatsbyColor: #8a4baf,
-    github: $empire-red,
-    linkedin: $empire-red,
-    fcc: $empire-red,
-    hr: $empire-red,
-    mail: $empire-red,
-    file: $empire-red,
-    iconBackground: $black,
-    cardBackground: $dark-gray,
+    gatsbyColor: #b163de,
+    github: $gray-100,
+    linkedin: $linkedin-blue,
+    angellist: $gray-100,
+    fcc: skyblue,
+    hr: $hr-green,
+    mail: pink,
+    file: orange,
+    iconBackground: rgb(11, 16, 20),
+    cardBackground: rgb(1, 10, 20),
+    books: $red,
+    movies: $green,
+    shows: $yellow,
+    poetry: $pink,
   ),
 );
 
@@ -104,7 +114,9 @@ $themes: (
   @include themify($themes) {
     color: themed("linkHover") !important;
     &:hover {
-      text-decoration: underline themed("hrefColor") solid;
+      border-style: solid;
+      border-color: themed("hrefColor");
+      // text-decoration: underline themed("hrefColor") solid;
     }
   }
 }
@@ -135,8 +147,9 @@ $themes: (
 
 .card-container {
   @include themify($themes) {
-    width: 25rem;
-    height: 23rem;
+    width: 30rem;
+    height: 25em;
+    border-color: themed("hrefColor");
     text-decoration-color: themed("hrefColor");
     & * {
       background: themed("cardBackground");
@@ -156,14 +169,19 @@ $themes: (
   }
 }
 
-.icons:hover {
+.home-icons {
   @include themify($themes) {
     background: themed("iconBackground");
+    font-size: 5rem;
+    margin: 0.3rem 0.1rem;
     &.github {
       color: themed("github");
     }
     &.linkedin {
       color: themed("linkedin");
+    }
+    &.angellist {
+      color: themed("angellist");
     }
     &.fcc {
       color: themed("fcc");
@@ -180,9 +198,42 @@ $themes: (
   }
 }
 
+.about-icons {
+  @include themify($themes) {
+    background: themed("iconBackground");
+    &.books {
+      color: themed("books");
+    }
+    &.movies {
+      color: themed("movies");
+    }
+    &.shows {
+      color: themed("shows");
+    }
+    &.poetry {
+      color: themed("poetry");
+    }
+  }
+}
+
+.home-icons:hover {
+  @include themify($themes) {
+    transform: translate(0px, -10px);
+  }
+}
+
 .resume-icons {
   @include themify($themes) {
     color: themed("textColor");
+  }
+}
+
+.resume-title-icon {
+  color: gray;
+  @include themify($themes) {
+    &:hover {
+      color: themed("file");
+    }
   }
 }
 

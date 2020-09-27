@@ -24,8 +24,8 @@ export default ({ frontmatter, image }) => {
           <Img
             fluid={image}
             style={{
-              maxHeight: "12vmax",
-              maxWidth: "12vmax",
+              maxHeight: "17vmax",
+              maxWidth: "17vmax",
               borderRadius: company !== "Royal Victoria Hospital" && "50%",
             }}
             className="m-auto"

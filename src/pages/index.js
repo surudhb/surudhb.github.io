@@ -3,94 +3,104 @@ import { graphql } from "gatsby"
 import ThemeContext from "../utils/theme"
 import { PageLayout } from "../components"
 import { SEO } from "../utils"
-import Image from "react-bootstrap/Image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Typewriter from "typewriter-effect"
 
 export default ({ data }) => {
-  const { unemployed, firstName, lastName, occupation } = data.site.siteMetadata
-  const { dark } = useContext(ThemeContext)
+  const {
+    unemployed,
+    firstName,
+    lastName,
+    occupation,
+    dialogues,
+  } = data.site.siteMetadata
+  const { dark, toString } = useContext(ThemeContext)
+  const typewriter_dialogues = dialogues[`${toString()}`]
+  unemployed &&
+    typewriter_dialogues.unshift("Hey! I am looking for new opportunities.")
   return (
     <PageLayout>
       <SEO title="Home" />
-      <div className="text-center px-0 mx-0 pt-5 mt-5">
-        <Image
-          width="150"
-          height="150"
-          fluid
-          src={dark ? `../../icons/darth-vader.png` : `../../icons/r2-d2.png`}
-          alt={dark ? "Darth Vader" : "R2-D2"}
-        />
+      <div className="text-center px-0 mx-0" style={{ marginTop: "15%" }}>
         {unemployed && (
-          <p className="mt-2" style={{ fontSize: "1.1vmax" }}>
-            <b> Hey! I am looking for new opportunities :)</b>
-          </p>
+          <Typewriter
+            options={{
+              strings: typewriter_dialogues,
+              delay: 20,
+              deleteSpeed: 23,
+              autoStart: true,
+              loop: true,
+            }}
+          />
         )}
-        <div className="py-0 my-0">
-          <h1 className="display-1" style={{ fontSize: "4.5vmax" }}>
-            <span className="first-name">{firstName}</span>&nbsp;
-            <span className="last-name">{lastName}</span>
-          </h1>
-          <p style={{ fontSize: "1vmax" }}>
-            <i>
-              {occupation} by day,&nbsp;
-              {dark ? `Imperial enforcer by night` : `Rebel agent by night`}
-            </i>
-          </p>
-        </div>
-        <hr className="my-3 w-25" />
-        <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container">
-          <a
-            href="https://www.github.com/surudhb"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={["fab", "github"]}
-              className="icons github"
-              title="Github"
-            />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/surudh-bhutani/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={["fab", "linkedin"]}
-              className="icons linkedin"
-              title="LinkedIn"
-            />
-          </a>
-          <a
-            href="https://www.hackerrank.com/surudhbhutani"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={["fab", "hackerrank"]}
-              className="icons hr"
-              title="Hackerrank"
-            />
-          </a>
-          <a
-            href="mailto:surudhb@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={["fas", "envelope"]}
-              className="icons mail"
-              title="e-mail"
-            />
-          </a>
-          <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
-            <FontAwesomeIcon
-              icon={["fas", "file-download"]}
-              className="icons file"
-              title="Resume"
-            />
-          </a>
-        </div>
+        <h1 className="display-1" style={{ fontSize: "7vmax" }}>
+          <span className="first-name">{firstName}</span>&nbsp;
+          <span className="last-name">{lastName}</span>
+        </h1>
+      </div>
+      <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container">
+        <a
+          href="https://www.github.com/surudhb"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon
+            icon={["fab", "github"]}
+            className="home-icons github"
+            title="Github"
+          />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/surudh-bhutani/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon
+            icon={["fab", "linkedin"]}
+            className="home-icons linkedin"
+            title="LinkedIn"
+          />
+        </a>
+        <a
+          href="https://angel.co/u/surudh-bhutani"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon
+            icon={["fab", "angellist"]}
+            className="home-icons angellist"
+            title="Angel.co"
+          />
+        </a>
+        <a
+          href="https://www.hackerrank.com/surudhbhutani"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon
+            icon={["fab", "hackerrank"]}
+            className="home-icons hr"
+            title="Hackerrank"
+          />
+        </a>
+        <a
+          href="mailto:surudhb@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon
+            icon={["fas", "envelope"]}
+            className="home-icons mail"
+            title="e-mail"
+          />
+        </a>
+        <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
+          <FontAwesomeIcon
+            icon={["fas", "file-download"]}
+            className="home-icons file"
+            title="Resume"
+          />
+        </a>
       </div>
     </PageLayout>
   )
@@ -100,6 +110,10 @@ export const query = graphql`
   query {
     site {
       siteMetadata {
+        dialogues {
+          light
+          dark
+        }
         unemployed
         firstName
         lastName

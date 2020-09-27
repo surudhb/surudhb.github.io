@@ -99,9 +99,9 @@ module.exports = {
         link: `https://www.imdb.com/title/tt0458290/`,
       },
       {
-        title: `Young Justice`,
-        author: `Greg Weisman, Brandon Viettie, Geoff Johns`,
-        link: `https://www.imdb.com/title/tt1641384/`,
+        title: `The Office`,
+        author: `Greg Daniels, Ricky Gervais, Stephen Merchant`,
+        link: `https://www.imdb.com/title/tt0386676/`,
       },
     ],
     moviesList: [
@@ -126,6 +126,30 @@ module.exports = {
         link: `https://www.imdb.com/title/tt1392190/`,
       },
     ],
+    dialogues: {
+      light: [
+        "I am a frontend developer",
+        "I graduated from the University of Waterloo",
+        "Thanks for checking out my page!",
+        "I studied Software Engineering",
+        "I enjoy learning from Frontend Masters",
+        "I hope to become the mythical full stack developer",
+        "I am no jedi, but I am a believer in the high ground",
+        "Stay safe! Wear a mask! We will get through this :)",
+        "Don't like the theme? Click the toggle button in the menu",
+      ],
+      dark: [
+        "I am a frontend developer",
+        "I graduated from the University of Waterloo",
+        "Stay safe! Wear a mask! We will get through this :)",
+        "Don't like the theme? Click the toggle button in the menu",
+        "I studied Software Engineering",
+        "I enjoy learning from Frontend Masters",
+        "I hope to become the mythical full stack developer",
+        "I find your lack of faith disturbing",
+        "Thanks for checking out my page!",
+      ],
+    },
   },
   plugins: [
     `gatsby-plugin-preload-link-crossorigin`,

@@ -17,9 +17,9 @@ export default ({ data }) => {
         &nbsp;
         <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
           <FontAwesomeIcon
-            style={{ fontSize: "2rem" }}
+            style={{ fontSize: "0.9em" }}
             icon={["fas", "file-download"]}
-            className="icons file"
+            className="resume-title-icon"
           />
         </a>
       </PageTitle>

@@ -15,7 +15,7 @@ export default () => {
           Gatsby
         </a>
       </span>
-      <span className="ml-5 nav-links">
+      {/* <span className="ml-5 nav-links">
         <small>
           <Link className="ml-3" to="/experiments">
             Experiments
@@ -27,7 +27,7 @@ export default () => {
             Sitemap
           </Link>
         </small>
-      </span>
+      </span> */}
     </div>
   )
 }

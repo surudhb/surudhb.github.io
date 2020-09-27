@@ -8,7 +8,8 @@ date: "2020-09-09"
 ---
 
 <img src="./feature.jpg" alt="Mastering the LSAT"/><p style="text-align:center;">Mastering the LSAT</p>
-So you want to go to law school eh? Congratulations, you played yourself.
+
+<p>So you want to go to law school eh? Congratulations, you played yourself.</p>
 <br /><br />
 
 ## The Intro
@@ -124,12 +125,14 @@ Trivial but important. The LSAT is a marathon and a sprint. A good night's sleep
 
 ### tl;dr
 
+<span>
 <ol>
 <li>Khan Academy's LSAT prep is the best resource to prepare. AND IT IS FREE.</li>
 <li>This is not an aptitude test. The LSAT tests your ability to do a handful of specific tasks really well.</li>
 <li>Set realistic expectations and aim to grow and practice consistently.</li>
 </ol>
 <br/>
+</span>
 
 ## Why do I care?
 

@@ -27,19 +27,7 @@ export default ({
     </Row>
     <Link className="text-decoration-none" to={to}>
       <h2 className="mt-5">
-        <p>
-          {title}
-          {inProgress && (
-            <small>
-              <small className="align-top">
-                &nbsp;
-                <Badge pill variant="success">
-                  <span>In Progress</span>
-                </Badge>
-              </small>
-            </small>
-          )}
-        </p>
+        <p>{title}</p>
       </h2>
     </Link>
     <div className="d-inline-flex">
