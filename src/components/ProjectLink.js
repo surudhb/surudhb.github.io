@@ -63,11 +63,11 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
           </a>
         </Button>
       )}
-      <Link className="text-decoration-none" to={to}>
+      {/* <Link className="text-decoration-none" to={to}>
         <Button variant="outline-warning" className="mx-2 px-3 py-1">
           Learn More
         </Button>
-      </Link>
+      </Link> */}
     </div>
   </Container>
 )

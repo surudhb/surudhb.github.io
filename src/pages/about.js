@@ -213,7 +213,7 @@ export default ({ data }) => {
                 </a>
                 &nbsp;
                 <span className="text-muted">
-                  <i>-Monica Iyer</i>
+                  <i>Monica Iyer</i>
                 </span>
               </p>
             </div>
