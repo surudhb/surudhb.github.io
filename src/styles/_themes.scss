@@ -106,7 +106,9 @@ $themes: (
   @include themify($themes) {
     color: themed("linkHover") !important;
     &:hover {
-      text-decoration: underline themed("hrefColor") solid;
+      border-style: solid;
+      border-color: themed("hrefColor");
+      // text-decoration: underline themed("hrefColor") solid;
     }
   }
 }
@@ -162,6 +164,7 @@ $themes: (
   @include themify($themes) {
     background: themed("iconBackground");
     font-size: 5rem;
+    margin: 0.3rem 0.1rem;
     &.github {
       color: themed("github");
     }
@@ -183,6 +186,12 @@ $themes: (
     &.file {
       color: themed("file");
     }
+  }
+}
+
+.home-icons:hover {
+  @include themify($themes) {
+    transform: translate(0px, -10px);
   }
 }
 

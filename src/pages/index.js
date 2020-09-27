@@ -23,13 +23,6 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="Home" />
       <div className="text-center px-0 mx-0" style={{ marginTop: "15%" }}>
-        {/* <Image
-          width="150"
-          height="150"
-          fluid
-          src={dark ? `../../icons/darth-vader.png` : `../../icons/r2-d2.png`}
-          alt={dark ? "Darth Vader" : "R2-D2"}
-        /> */}
         {unemployed && (
           <Typewriter
             options={{
@@ -44,19 +37,6 @@ export default ({ data }) => {
           <span className="last-name">{lastName}</span>
         </h1>
       </div>
-      {/* <FontAwesomeIcon
-          icon={["fab", "react"]}
-          className="resume-icons reactjs"
-        />
-        <FontAwesomeIcon
-          icon={["fab", "node"]}
-          className="resume-icons nodejs"
-        />
-        <FontAwesomeIcon
-          icon={["fab", "bootstrap"]}
-          className="resume-icons bootstrap"
-        /> */}
-      <br />
       <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container">
         <a
           href="https://www.github.com/surudhb"
