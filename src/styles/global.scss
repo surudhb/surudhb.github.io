@@ -17,7 +17,7 @@ body {
 }
 
 .height-60 {
-  height: 60%;
+  height: 65%;
 }
 
 nav {
@@ -116,6 +116,51 @@ nav {
       color: $black;
       background: $white;
     }
+  }
+}
+
+.resume-icons {
+  &.bootstrap {
+    color: $bootstrap;
+  }
+  &.java {
+    color: $java;
+  }
+
+  &.html {
+    color: $html5;
+  }
+
+  &.css {
+    color: $css3;
+  }
+
+  &.swift {
+    color: $swift;
+  }
+
+  &.nodejs {
+    color: $nodejs;
+  }
+
+  &.reactjs {
+    color: $reactjs;
+  }
+
+  &.js {
+    color: $javascript;
+  }
+
+  &.sass {
+    color: $sass;
+  }
+
+  &.jira {
+    color: $jira;
+  }
+
+  &.docker {
+    color: $docker;
   }
 }
 

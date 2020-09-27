@@ -55,21 +55,20 @@ export default ({ data }) => {
           />
         </Form>
       </Container>
-      <Container
-        fluid
-        className="p-3 w-auto text-left d-flex flex-wrap justify-content-center"
-      >
-        {filteredPosts.map(({ node }) => (
-          <div key={node.id} className="p-3">
-            <BlogLink
-              to={node.fields.slug}
-              featuredImage={featuredImageMap[node.fields.slug]}
-              title={node.frontmatter.title}
-              subtitle={node.frontmatter.date}
-              excerpt={node.frontmatter.excerpt || node.excerpt}
-            />
-          </div>
-        ))}
+      <Container className="m-3 text-left m-auto">
+        <div class="row">
+          {filteredPosts.map(({ node }) => (
+            <div key={node.id} className="m-3 col">
+              <BlogLink
+                to={node.fields.slug}
+                featuredImage={featuredImageMap[node.fields.slug]}
+                title={node.frontmatter.title}
+                subtitle={node.frontmatter.date}
+                excerpt={node.frontmatter.excerpt || node.excerpt}
+              />
+            </div>
+          ))}
+        </div>
       </Container>
     </PageLayout>
   )

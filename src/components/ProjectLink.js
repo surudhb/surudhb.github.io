@@ -4,15 +4,7 @@ import Img from "gatsby-image"
 import { Container, Badge, Col, Row, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export default ({
-  inProgress,
-  featuredImages,
-  tags,
-  github,
-  live,
-  title,
-  to,
-}) => (
+export default ({ featuredImages, tags, github, live, title, to }) => (
   <Container className="text-center">
     <Row>
       {featuredImages &&
@@ -37,16 +29,14 @@ export default ({
           pill
           className="mr-1 mr-md-2 p-0 px-2 px-md-3 resume-tags"
         >
-          <h5>
-            <small>{tag}</small>
-          </h5>
+          <h5 className="m-auto">{tag}</h5>
         </Badge>
       ))}
     </div>
     <br />
     <div className="mt-3 d-inline-flex">
       {live && (
-        <Button className="rounded-pill mx-2 px-3 py-1">
+        <Button className="rounded-pill mx-md-2 px-md-3 py-md-1">
           <a
             href={live}
             target="_blank"

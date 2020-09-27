@@ -10,7 +10,7 @@ export default ({ title, excerpt, html, subTitle }) => (
     <Container className="text-center" fluid>
       <PageTitle title={title} />
       {subTitle}
-      <Container className="text-justify">
+      <Container className="text-justify p-large">
         {html && <div dangerouslySetInnerHTML={{ __html: html }} />}
         {!html && <div>This page is currently under development.</div>}
       </Container>

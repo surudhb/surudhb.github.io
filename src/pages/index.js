@@ -7,14 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Typewriter from "typewriter-effect"
 
 export default ({ data }) => {
-  const {
-    unemployed,
-    firstName,
-    lastName,
-    occupation,
-    dialogues,
-  } = data.site.siteMetadata
-  const { dark, toString } = useContext(ThemeContext)
+  const { unemployed, firstName, lastName, dialogues } = data.site.siteMetadata
+  const { toString } = useContext(ThemeContext)
   const typewriter_dialogues = dialogues[`${toString()}`]
   unemployed &&
     typewriter_dialogues.unshift("Hey! I am looking for new opportunities.")

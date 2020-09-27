@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 
 export default () => {
   const { author } = useStaticQuery(query).site.siteMetadata
@@ -15,19 +15,6 @@ export default () => {
           Gatsby
         </a>
       </span>
-      {/* <span className="ml-5 nav-links">
-        <small>
-          <Link className="ml-3" to="/experiments">
-            Experiments
-          </Link>
-          <Link className="ml-3" to="/timeline">
-            Timeline
-          </Link>
-          <Link className="ml-3" to="/sitemap">
-            Sitemap
-          </Link>
-        </small>
-      </span> */}
     </div>
   )
 }
