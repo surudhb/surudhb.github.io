@@ -16,6 +16,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.height-60 {
+  height: 60%;
+}
+
 nav {
   font-size: 20px;
 }
@@ -70,12 +74,12 @@ nav {
 
 // dark mode
 .custom-control-input:checked ~ .custom-control-label::before {
-  border-color: darkslategrey;
+  border-color: slategrey;
   background-color: rgb(13, 23, 37);
 }
 
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-  background-color: $red;
+  background-color: orange;
 }
 /** Toggle Switch Styling END */
 
@@ -93,6 +97,10 @@ nav {
 .resume-icons {
   font-size: 5rem;
   margin: 2rem;
+}
+
+.about-icons {
+  font-size: 6rem;
 }
 
 .brand-icon {
@@ -114,7 +122,6 @@ nav {
     }
   }
 }
-/** Home Page Icon Styling END */
 
 .p-large {
   font-size: 20px;

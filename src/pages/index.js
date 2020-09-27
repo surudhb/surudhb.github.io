@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 import ThemeContext from "../utils/theme"
 import { PageLayout } from "../components"
 import { SEO } from "../utils"
-import Image from "react-bootstrap/Image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Typewriter from "typewriter-effect"
 
@@ -27,6 +26,8 @@ export default ({ data }) => {
           <Typewriter
             options={{
               strings: typewriter_dialogues,
+              delay: 20,
+              deleteSpeed: 23,
               autoStart: true,
               loop: true,
             }}

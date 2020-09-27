@@ -7,18 +7,18 @@
 
 $themes: (
   light: (
-    backgroundColor: white,
-    footerBackground: white,
-    navBackground: white,
+    backgroundColor: $gray-100,
+    footerBackground: $gray-100,
+    navBackground: $gray-100,
     secondary: $gray-900,
     textColor: $black,
     firstName: lightgreen,
     lastName: $black,
     linkHover: $gray-800,
     heartColor: lightgreen,
-    gatsbyColor: #362066,
-    titleColor: lightgreen,
-    hrefColor: lightgreen,
+    gatsbyColor: #2c1953,
+    titleColor: #64e264,
+    hrefColor: #90ee90,
     github: $black,
     linkedin: $linkedin-blue,
     angellist: black,
@@ -26,8 +26,12 @@ $themes: (
     hr: $hr-green,
     mail: $yellow,
     file: lightgreen,
-    iconBackground: $white,
-    cardBackground: $white,
+    iconBackground: $gray-100,
+    cardBackground: $gray-100,
+    books: red,
+    movies: slateblue,
+    shows: $yellow,
+    poetry: #f1c2c2,
   ),
   dark: (
     backgroundColor: rgb(11, 16, 20),
@@ -37,20 +41,24 @@ $themes: (
     linkHover: $gray-100,
     textColor: $gray-200,
     firstName: $gray-100,
-    lastName: $empire-red,
-    titleColor: $faded-red,
-    hrefColor: $faded-red,
+    lastName: orange,
+    titleColor: orange,
+    hrefColor: orange,
     heartColor: red,
-    gatsbyColor: #8a4baf,
-    github: $empire-red,
-    linkedin: $empire-red,
-    angellist: black,
-    fcc: $empire-red,
-    hr: $empire-red,
-    mail: $empire-red,
-    file: $empire-red,
-    iconBackground: $black,
+    gatsbyColor: #b163de,
+    github: $gray-100,
+    linkedin: $linkedin-blue,
+    angellist: $gray-100,
+    fcc: skyblue,
+    hr: $hr-green,
+    mail: pink,
+    file: orange,
+    iconBackground: rgb(11, 16, 20),
     cardBackground: rgb(1, 10, 20),
+    books: $red,
+    movies: $green,
+    shows: $yellow,
+    poetry: $pink,
   ),
 );
 
@@ -139,8 +147,9 @@ $themes: (
 
 .card-container {
   @include themify($themes) {
-    width: 25rem;
-    height: 23rem;
+    width: 30rem;
+    height: 25em;
+    border-color: themed("hrefColor");
     text-decoration-color: themed("hrefColor");
     & * {
       background: themed("cardBackground");
@@ -189,6 +198,24 @@ $themes: (
   }
 }
 
+.about-icons {
+  @include themify($themes) {
+    background: themed("iconBackground");
+    &.books {
+      color: themed("books");
+    }
+    &.movies {
+      color: themed("movies");
+    }
+    &.shows {
+      color: themed("shows");
+    }
+    &.poetry {
+      color: themed("poetry");
+    }
+  }
+}
+
 .home-icons:hover {
   @include themify($themes) {
     transform: translate(0px, -10px);
@@ -198,6 +225,15 @@ $themes: (
 .resume-icons {
   @include themify($themes) {
     color: themed("textColor");
+  }
+}
+
+.resume-title-icon {
+  color: gray;
+  @include themify($themes) {
+    &:hover {
+      color: themed("file");
+    }
   }
 }
 

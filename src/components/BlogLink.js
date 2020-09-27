@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card"
 
 export default props => (
   <Card className="card-container" as={Link} to={props.to}>
-    <Card.Img as={Img} fluid={props.featuredImage} className="h-50" />
+    <Card.Img as={Img} fluid={props.featuredImage} className="height-60" />
     <Card.Body className="pt-4">
       <Card.Title>
         <h4>{props.title}</h4>
