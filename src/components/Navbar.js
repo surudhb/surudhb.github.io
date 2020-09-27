@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import ThemeContext from "../utils/theme"
-import { Navbar, Nav, Form } from "react-bootstrap"
+import { Navbar, Nav } from "react-bootstrap"
 import { Link } from "gatsby"
 import "./Fontawesome.js"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,7 +9,7 @@ export default () => {
   const { dark, toggleDark, toString } = useContext(ThemeContext)
   return (
     <Navbar variant={toString()} fixed="top" collapseOnSelect expand="md">
-      <Navbar.Brand className="pl-5 ml-5" as={Link} to="/">
+      <Navbar.Brand className="ml-md-5" as={Link} to="/">
         <FontAwesomeIcon
           icon={["fab", `${dark ? "empire" : "rebel"}`]}
           className={`brand-icon ${dark ? "empire" : "rebel"}`}
@@ -34,16 +34,27 @@ export default () => {
           <Nav.Link className="ml-2" as={Link} to="/resume" title="Resume">
             Resume
           </Nav.Link>
-          <Form className="ml-3 my-2 pt-1">
-            <Form.Check
-              type="switch"
-              id="custom-switch"
-              label=""
-              title="Toggle Theme"
-              checked={dark}
-              onChange={toggleDark}
-            />
-          </Form>
+          <div
+            onClick={toggleDark}
+            onKeyDown={e => e.key === `Enter` && toggleDark()}
+            role="button"
+            tabIndex={0}
+            className="theme-container m-auto ml-md-3"
+          >
+            {dark ? (
+              <FontAwesomeIcon
+                icon={["fas", "sun"]}
+                className="theme-toggle light-mode"
+                title="Light Mode"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={["fas", "cloud-moon"]}
+                className="theme-toggle dark-mode"
+                title="Dark Mode"
+              />
+            )}
+          </div>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

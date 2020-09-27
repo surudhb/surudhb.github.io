@@ -21,7 +21,7 @@ export default ({ data }) => {
             options={{
               strings: typewriter_dialogues,
               delay: 20,
-              deleteSpeed: 23,
+              deleteSpeed: 30,
               autoStart: true,
               loop: true,
             }}

@@ -42,42 +42,31 @@ nav {
   text-indent: 5vmin;
 }
 
-/** Toggle Switch Styling START */
-.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+.theme-container {
   border: none;
-  box-shadow: none;
-}
-
-.custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: none;
-}
-
-.custom-control-input ~ .custom-control-label {
   outline: none;
-  border: none;
-  box-shadow: none;
 }
 
-// light mode
-.custom-control-input ~ .custom-control-label::before {
-  border-color: lightgreen;
-  background-color: lightgreen;
+.theme-toggle {
+  font-size: 1.5em;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    border: none;
+  }
+  &:active {
+    border: none;
+  }
 }
 
-.custom-switch .custom-control-input ~ .custom-control-label::after {
-  background-color: $white;
+.dark-mode {
+  color: rgb(4, 53, 83);
 }
 
-// dark mode
-.custom-control-input:checked ~ .custom-control-label::before {
-  border-color: slategrey;
-  background-color: rgb(13, 23, 37);
+.light-mode {
+  color: orange;
 }
-
-.custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-  background-color: orange;
-}
-/** Toggle Switch Styling END */
 
 /** Home Page Icon Styling START */
 .icons-container a {
