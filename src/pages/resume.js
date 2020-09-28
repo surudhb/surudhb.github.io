@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { CompanyCard, PageLayout, PageTitle, WorkHistory } from "../components"
 import { SEO, Utils } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Container, Row, Image } from "react-bootstrap"
+import { Row, Image } from "react-bootstrap"
 
 export default ({ data }) => {
   const institutions = data.site.siteMetadata.institutions || []
@@ -23,7 +23,7 @@ export default ({ data }) => {
           />
         </a>
       </PageTitle>
-      <Container className="mx-md-5" fluid>
+      <div>
         <br />
         <h2 className="m-auto w-75 text-left">Technologies</h2>
         <br />
@@ -94,7 +94,7 @@ export default ({ data }) => {
             <br />
           </div>
         ))}
-      </Container>
+      </div>
     </PageLayout>
   )
 }
