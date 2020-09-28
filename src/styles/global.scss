@@ -40,6 +40,14 @@ nav {
   background: rgba(0, 0, 0, 0) !important;
 }
 
+.see-live-button {
+  background-color: rgb(234, 0, 0);
+  border: none;
+  &:hover {
+    background-color: rgb(214, 0, 0);
+  }
+}
+
 .aurebesh:hover {
   font-family: "Aurebesh", sans-serif;
   font-display: swap;
@@ -180,7 +188,7 @@ nav {
 }
 
 .uottawa {
-  color: #b50021 !important;
+  color: #be0023 !important;
 }
 
 .ndame {

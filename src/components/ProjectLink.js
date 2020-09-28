@@ -36,7 +36,7 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
     <br />
     <div className="mt-3 d-inline-flex">
       {live && (
-        <Button className="rounded-pill mx-md-2 px-md-3 py-md-1">
+        <Button className="see-live-button rounded-pill mx-md-2 px-md-3 py-md-1">
           <a
             href={live}
             target="_blank"
