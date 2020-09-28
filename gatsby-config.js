@@ -57,7 +57,7 @@ module.exports = {
         position: `High School, IB Programme (Honour Roll)`,
         startDate: `September, 2009`,
         endDate: `April 2013`,
-        slug: `ndamecss`,
+        slug: `ndame`,
       },
     ],
     readingList: [

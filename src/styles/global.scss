@@ -16,6 +16,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  color: red;
+  &:hover {
+    color: rgb(159, 0, 0);
+  }
+}
+
 .height-60 {
   height: 65%;
 }
@@ -48,6 +55,7 @@ nav {
 }
 
 .theme-toggle {
+  transition: 0.1s ease-in;
   font-size: 1.5em;
   &:hover {
     cursor: pointer;
@@ -172,9 +180,9 @@ nav {
 }
 
 .uottawa {
-  color: #8f001a !important;
+  color: #b50021 !important;
 }
 
-.ndamecss {
+.ndame {
   color: $dark-red !important;
 }

@@ -212,7 +212,10 @@ export default ({ data }) => {
                   mind tricks and other paraphernalia
                 </a>
                 &nbsp;
-                <span className="text-muted">
+                <span
+                  style={{ color: "gray", fontSize: "0.85em" }}
+                  className="d-md-inline-flex"
+                >
                   <i>Monica Iyer</i>
                 </span>
               </p>
