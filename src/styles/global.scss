@@ -41,10 +41,10 @@ nav {
 }
 
 .see-live-button {
-  background-color: rgb(234, 0, 0);
+  background-color: rgb(234, 0, 0) !important;
   border: none;
   &:hover {
-    background-color: rgb(214, 0, 0);
+    background-color: rgb(214, 0, 0) !important;
   }
 }
 
