@@ -55,10 +55,10 @@ export default ({ data }) => {
           />
         </Form>
       </Container>
-      <Container className="m-3 text-left m-auto">
+      <Container className="m-auto text-left">
         <div class="row">
           {filteredPosts.map(({ node }) => (
-            <div key={node.id} className="m-3 col">
+            <div key={node.id} className="my-2 my-md-4 col">
               <BlogLink
                 to={node.fields.slug}
                 featuredImage={featuredImageMap[node.fields.slug]}

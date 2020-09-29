@@ -169,7 +169,7 @@ export default ({ data }) => {
           )}
           <hr />
           <div className="row p-large">
-            <div className="col-6">
+            <div className="col-md-6">
               <FontAwesomeIcon
                 icon={["fas", "journal-whills"]}
                 className="about-icons mt-4 books"
@@ -178,7 +178,7 @@ export default ({ data }) => {
               <h3 className="watch-list-title mt-2">Reading List</h3>
               <ul className="pl-0 mx-3 list-unstyled">{bookLinks}</ul>
             </div>
-            <div className="col-6">
+            <div className="col-md-6">
               <FontAwesomeIcon
                 icon={["fas", "tv"]}
                 className="about-icons mt-4 shows"
@@ -187,7 +187,7 @@ export default ({ data }) => {
               <h3 className="watch-list-title mt-2">Binge List</h3>
               <ul className="pl-0 mx-3 list-unstyled">{showLinks}</ul>
             </div>
-            <div className="col-6">
+            <div className="col-md-6">
               <FontAwesomeIcon
                 icon={["fas", "film"]}
                 className="about-icons mt-4 movies"
@@ -196,7 +196,7 @@ export default ({ data }) => {
               <h3 className="watch-list-title mt-2">Watch List</h3>
               <ul className="pl-0 mx-3 list-unstyled">{movieLinks}</ul>
             </div>
-            <div className="col-6">
+            <div className="col-md-6">
               <FontAwesomeIcon
                 icon={["fas", "pen-nib"]}
                 className="about-icons mt-4 poetry"
@@ -211,12 +211,12 @@ export default ({ data }) => {
                 >
                   mind tricks and other paraphernalia
                 </a>
-                &nbsp;
+                <br />
                 <span
                   style={{ color: "gray", fontSize: "0.85em" }}
                   className="d-md-inline-flex"
                 >
-                  <i>Monica Iyer</i>
+                  <i className="m-auto">Monica Iyer</i>
                 </span>
               </p>
             </div>
