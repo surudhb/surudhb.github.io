@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { graphql } from "gatsby"
+import { Image } from "react-bootstrap"
 import ThemeContext from "../utils/theme"
 import { PageLayout } from "../components"
 import { SEO } from "../utils"
@@ -64,6 +65,18 @@ export default ({ data }) => {
             icon={["fab", "angellist"]}
             className="home-icons angellist"
             title="Angel.co"
+          />
+        </a>
+        <a
+          href="https://triplebyte.com/tb/surudh-bhutani-jnj09dk"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            rounded
+            id="triplebyte"
+            src={`../../icons/triplebyte.png`}
+            alt="TripleByte"
           />
         </a>
         <a

@@ -57,6 +57,14 @@ nav {
   text-indent: 5vmin;
 }
 
+#triplebyte {
+  height: 5rem;
+  transform: translate(0px, 5px);
+  &:hover {
+    transform: translate(0px, -5px);
+  }
+}
+
 .theme-container {
   border: none;
   outline: none;

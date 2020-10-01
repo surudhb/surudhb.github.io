@@ -171,9 +171,9 @@ $themes: (
 
 .home-icons {
   @include themify($themes) {
-    background: themed("iconBackground");
     font-size: 5rem;
     margin: 0.3rem 0.1rem;
+    background: themed("iconBackground");
     &.github {
       color: themed("github");
     }
@@ -217,9 +217,7 @@ $themes: (
 }
 
 .home-icons:hover {
-  @include themify($themes) {
-    transform: translate(0px, -10px);
-  }
+  transform: translate(0px, -10px);
 }
 
 .resume-icons {
