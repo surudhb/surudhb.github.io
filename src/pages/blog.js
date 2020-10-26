@@ -32,10 +32,7 @@ export default ({ data }) => {
       )
     })
 
-    setState({
-      query,
-      filteredData,
-    })
+    setState({query, filteredData})
   }
 
   const { filteredData, query } = state
@@ -55,10 +52,10 @@ export default ({ data }) => {
           />
         </Form>
       </Container>
-      <Container className="m-auto text-left">
-        <div class="row">
+      <Container className="m-auto">
+        <div class="row ml-md-4">
           {filteredPosts.map(({ node }) => (
-            <div key={node.id} className="my-2 my-md-4 col">
+            node.frontmatter.inProgress === false && (<div key={node.id} className="my-2 my-md-4 col">
               <BlogLink
                 to={node.fields.slug}
                 featuredImage={featuredImageMap[node.fields.slug]}
@@ -66,7 +63,7 @@ export default ({ data }) => {
                 subtitle={node.frontmatter.date}
                 excerpt={node.frontmatter.excerpt || node.excerpt}
               />
-            </div>
+            </div>)
           ))}
         </div>
       </Container>
@@ -86,6 +83,7 @@ export const query = graphql`
           id
           frontmatter {
             title
+            inProgress
             excerpt
             description
             tags

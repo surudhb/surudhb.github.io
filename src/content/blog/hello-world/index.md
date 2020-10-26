@@ -1,5 +1,6 @@
 ---
 title: "Hello World"
+inProgress: false
 tags: ["Hello", "World", "Technology", "Coding", "Technical", "Tech"]
 description: "A brief look at Hello World`"
 excerpt: '"Hello World." Its got a similar ring to Neil Armstrong''s first words when he walked on the moon :)...'

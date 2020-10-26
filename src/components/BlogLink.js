@@ -10,7 +10,7 @@ export default props => (
       <Card.Title>
         <h4>{props.title}</h4>
       </Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">
+      <Card.Subtitle className="mb-2 text-light">
         {props.subtitle}
       </Card.Subtitle>
       <Card.Text>{props.excerpt}</Card.Text>

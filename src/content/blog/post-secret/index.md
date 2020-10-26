@@ -1,5 +1,6 @@
 ---
 title: "Post Secret"
+inProgress: false
 tags: ["Post", "Secret", "Mental", "Health", "Balance", "Wellness"]
 description: "We all have our secrets."
 excerpt: "I'd like to share a secret with you."

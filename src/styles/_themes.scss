@@ -27,7 +27,7 @@ $themes: (
     mail: $yellow,
     file: lightgreen,
     iconBackground: $gray-100,
-    cardBackground: $gray-150,
+    cardBackground: slategrey,
     books: red,
     movies: slateblue,
     shows: $yellow,
@@ -148,7 +148,6 @@ $themes: (
 .card-container {
   width: 30rem;
   height: 27em;
-  border: none;
   @include themify($themes) {
     text-decoration-color: themed("hrefColor");
     & * {

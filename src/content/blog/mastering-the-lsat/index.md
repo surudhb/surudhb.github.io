@@ -1,5 +1,6 @@
 ---
 title: "Mastering the LSAT"
+inProgress: false
 tags: ["Master", "LSAT", "tips", "strategy", "Law School", "Admission", "Test"]
 description: "The LSAT is a one-trick pony. So giddy-up."
 excerpt: "If you are backed up against a wall break the goddamn thing down. -Harvey Specter"
