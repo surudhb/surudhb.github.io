@@ -30,6 +30,7 @@ export default ({ data }) => {
         </h1>
       </div>
       <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container">
+        <div>
         <a
           href="https://www.github.com/surudhb"
           target="_blank"
@@ -41,6 +42,8 @@ export default ({ data }) => {
             title="Github"
           />
         </a>
+        </div>
+        <div>
         <a
           href="https://www.linkedin.com/in/surudh-bhutani/"
           target="_blank"
@@ -52,6 +55,8 @@ export default ({ data }) => {
             title="LinkedIn"
           />
         </a>
+        </div>
+        <div>
         <a
           href="https://angel.co/u/surudh-bhutani"
           target="_blank"
@@ -63,18 +68,21 @@ export default ({ data }) => {
             title="Angel.co"
           />
         </a>
+        </div>
+        <div>
         <a
           href="https://triplebyte.com/tb/surudh-bhutani-jnj09dk"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Image
-            rounded
             id="triplebyte"
             src={`../../icons/triplebyte.png`}
             alt="TripleByte"
           />
         </a>
+        </div>
+        <div>
         <a
           href="https://www.hackerrank.com/surudhbhutani"
           target="_blank"
@@ -86,6 +94,8 @@ export default ({ data }) => {
             title="Hackerrank"
           />
         </a>
+        </div>
+        <div>
         <a
           href="mailto:surudhb@gmail.com"
           target="_blank"
@@ -97,6 +107,8 @@ export default ({ data }) => {
             title="e-mail"
           />
         </a>
+        </div>
+        <div>
         <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
           <FontAwesomeIcon
             icon={["fas", "file-download"]}
@@ -104,6 +116,7 @@ export default ({ data }) => {
             title="Resume"
           />
         </a>
+        </div>
       </div>
     </PageLayout>
   )

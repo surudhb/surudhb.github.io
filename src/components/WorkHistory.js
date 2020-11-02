@@ -14,9 +14,9 @@ export default ({ html, frontmatter, image }) => (
             <Badge
               key={tag}
               pill
-              className="ml-2 py-0 px-2 px-md-3 resume-tags"
+              className="mr-1 mr-md-2 py-1 px-2 px-md-3 resume-tags"
             >
-              <h5>{tag}</h5>
+              <h5 className="m-auto">{tag}</h5>
             </Badge>
           ))}
         </div>

@@ -5,8 +5,8 @@ import { Container, Badge, Col, Row, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default ({ featuredImages, tags, github, live, title, to }) => (
-  <Container className="text-center">
-    <Row>
+  <Container className="text-center project-container">
+    {/* <Row>
       {featuredImages &&
         featuredImages.map(image => (
           <Col
@@ -16,7 +16,7 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
             <Img fluid={image} />
           </Col>
         ))}
-    </Row>
+    </Row> */}
     <Link className="text-decoration-none" to={to}>
       <h2 className="mt-5">
         <p>{title}</p>
@@ -27,7 +27,7 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
         <Badge
           key={tag}
           pill
-          className="mr-1 mr-md-2 p-0 px-2 px-md-3 resume-tags"
+          className="mr-1 mr-md-2 py-1 px-2 px-md-3 resume-tags"
         >
           <h5 className="m-auto">{tag}</h5>
         </Badge>
