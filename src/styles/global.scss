@@ -32,8 +32,8 @@ nav {
 }
 
 .app-container > * {
-  transition: color 0.45s ease-in-out;
-  transition: background 0.45s ease-in-out;
+  transition: color 0.1s ease-in-out;
+  transition: background 0.1s ease-in-out;
 }
 
 .bg-none {
@@ -48,9 +48,9 @@ nav {
   }
 }
 
-.aurebesh:hover {
-  font-family: "Aurebesh", sans-serif;
-  font-display: swap;
+.search {
+  border-radius: 20px;
+  -webkit-appearance: none;
 }
 
 .i-5 {
@@ -58,11 +58,10 @@ nav {
 }
 
 #triplebyte {
-  height: 5rem;
-  transform: translate(0px, 5px);
-  &:hover {
-    transform: translate(0px, -5px);
-  }
+  height: 2.5rem;
+  display: block;
+  margin: auto;
+  margin-top: 0.9rem;
 }
 
 .theme-container {
@@ -72,7 +71,9 @@ nav {
 
 .theme-toggle {
   transition: 0.1s ease-in;
-  font-size: 1.5em;
+  display: block;
+  margin: auto;
+  font-size: 1.2em;
   &:hover {
     cursor: pointer;
   }
@@ -93,12 +94,9 @@ nav {
 }
 
 /** Home Page Icon Styling START */
-.icons-container a {
-  margin: 0 1.3rem;
-}
 
 .icons {
-  font-size: 5rem;
+  font-size: 2rem;
   margin: 0.1rem;
   color: $gray-600;
 }

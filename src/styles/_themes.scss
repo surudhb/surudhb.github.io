@@ -15,7 +15,7 @@ $themes: (
     firstName: lightgreen,
     lastName: $black,
     linkHover: $gray-800,
-    heartColor: lightgreen,
+    heartColor: rgb(112, 226, 112),
     gatsbyColor: #2c1953,
     titleColor: #64e264,
     hrefColor: #90ee90,
@@ -27,7 +27,8 @@ $themes: (
     mail: $yellow,
     file: lightgreen,
     iconBackground: $gray-100,
-    cardBackground: slategrey,
+    cardBackground: white,
+    cardShadowColor: #aaaaaa,
     books: red,
     movies: slateblue,
     shows: $yellow,
@@ -44,7 +45,7 @@ $themes: (
     lastName: orange,
     titleColor: orange,
     hrefColor: orange,
-    heartColor: orange,
+    heartColor: rgb(255, 200, 0),
     gatsbyColor: #b163de,
     github: $gray-100,
     linkedin: $linkedin-blue,
@@ -55,6 +56,7 @@ $themes: (
     file: orange,
     iconBackground: rgb(11, 16, 20),
     cardBackground: rgb(1, 10, 20),
+    cardShadowColor: black,
     books: $red,
     movies: $green,
     shows: $yellow,
@@ -114,10 +116,19 @@ $themes: (
   @include themify($themes) {
     color: themed("linkHover") !important;
     &:hover {
-      border-style: solid;
-      border-color: themed("hrefColor");
       // text-decoration: underline themed("hrefColor") solid;
+      color: themed("heartColor") !important;
     }
+  }
+}
+
+.theme-container {
+  padding: 4px;
+  width: 50px;
+  border-radius: 15px;
+  margin: auto;
+  @include themify($themes) {
+    box-shadow: 2px 3px 2px 2px themed("cardShadowColor");
   }
 }
 
@@ -145,13 +156,38 @@ $themes: (
   }
 }
 
+.aurebesh:hover {
+  font-family: "Aurebesh", sans-serif;
+  font-display: swap;
+  border-radius: 20px;
+  @include themify($themes) {
+    box-shadow: 2px 3px 2px 2px themed("cardShadowColor");
+  }
+}
+
+.project-container {
+  margin: auto;
+  padding: 1em;
+  border-radius: 14px;
+  width: 700px;
+  @include themify($themes) {
+    box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
+  }
+}
+
 .card-container {
   width: 30rem;
   height: 27em;
   @include themify($themes) {
+    box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     text-decoration-color: themed("hrefColor");
     & * {
       background: themed("cardBackground");
+    }
+    &:hover {
+      transform: translateY(-10px);
+      transition: all 0.15s ease-in;
+      box-shadow: 12px 14px 5px 5px themed("cardShadowColor");
     }
   }
 }
@@ -168,10 +204,26 @@ $themes: (
   }
 }
 
-.home-icons {
+.icons-container > div {
+  padding: 0.1rem;
+  border-radius: 10%;
+  width: 80px;
+  height: 70px;
+  margin: 1rem;
   @include themify($themes) {
-    font-size: 5rem;
-    margin: 0.3rem 0.1rem;
+    box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
+    &:hover {
+      transform: translateY(-10px);
+      transition: all 0.1s ease-out;
+      box-shadow: 12px 14px 5px 5px themed("cardShadowColor");
+    }
+  }
+}
+
+.home-icons {
+  font-size: 2.5rem;
+  margin: 1rem;
+  @include themify($themes) {
     background: themed("iconBackground");
     &.github {
       color: themed("github");
@@ -213,10 +265,6 @@ $themes: (
       color: themed("poetry");
     }
   }
-}
-
-.home-icons:hover {
-  transform: translate(0px, -10px);
 }
 
 .resume-icons {
