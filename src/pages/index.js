@@ -29,7 +29,7 @@ export default ({ data }) => {
           <span className="last-name">{lastName}</span>
         </h1>
       </div>
-      <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container">
+      <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container align-items-center">
         <div>
         <a
           href="https://www.github.com/surudhb"

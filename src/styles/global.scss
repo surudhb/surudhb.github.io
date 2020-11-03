@@ -2,6 +2,34 @@
 
 @import "themes";
 
+@media (max-width: 767px) {
+  html,
+  body {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  html,
+  body {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  html,
+  body {
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  html,
+  body {
+    font-size: 16px !important;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -51,6 +79,11 @@ nav {
 .search {
   border-radius: 20px;
   -webkit-appearance: none;
+}
+
+.blog-posts-container {
+  min-width: calc(device-width);
+  max-width: 1300px;
 }
 
 .i-5 {
@@ -176,7 +209,7 @@ nav {
 }
 
 .p-large {
-  font-size: 20px;
+  font-size: 1.2rem;
 }
 
 .resume-tags {

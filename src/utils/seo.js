@@ -32,6 +32,7 @@ const SEO = ({ description, lang, meta, image: img, title, pathname }) => {
         { name: `twitter:creator`, content: site.siteMetadata.author },
         { name: `twitter:title`, content: `title` },
         { name: `twitter:description`, content: metaDescription },
+        // { name: `viewport`, content: `width=768`},
       ]
         .concat(
           img

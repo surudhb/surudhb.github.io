@@ -4,7 +4,8 @@ import Img from "gatsby-image"
 import Card from "react-bootstrap/Card"
 
 export default props => (
-  <Card className="card-container" as={Link} to={props.to}>
+  <div className="col-lg-4 col-12 my-4">
+  <Card className="card-container m-auto" as={Link} to={props.to}>
     <Card.Img as={Img} fluid={props.featuredImage} className="height-60" />
     <Card.Body className="pt-4">
       <Card.Title>
@@ -16,4 +17,5 @@ export default props => (
       <Card.Text>{props.excerpt}</Card.Text>
     </Card.Body>
   </Card>
+  </div>
 )

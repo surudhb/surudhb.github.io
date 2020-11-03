@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { PageLayout, PageTitle, BlogLink } from "../components"
 import { SEO, Utils } from "../utils"
-import { Container, Form, FormControl } from "react-bootstrap"
+import Form from "react-bootstrap/Form"
+import FormControl from "react-bootstrap/FormControl"
 
 export default ({ data }) => {
   const [state, setState] = useState({
@@ -42,8 +43,8 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="Blog" />
       <PageTitle title="My Blog" />
-      <Container className="px-5 mb-5 text-center">
-        <Form className="aurebesh blog-filter">
+      <div className="px-5 mb-5 text-center">
+        <Form className="aurebesh blog-filter m-auto">
           <FormControl
             className="bg-none search"
             type="text"
@@ -51,22 +52,20 @@ export default ({ data }) => {
             onChange={handleChange}
           />
         </Form>
-      </Container>
-      <Container className="m-auto">
-        <div class="row ml-md-4">
+      </div>
+        <div className="blog-posts-container row m-auto">
           {filteredPosts.map(({ node }) => (
-            node.frontmatter.inProgress === false && (<div key={node.id} className="my-2 my-md-4 col">
+            node.frontmatter.inProgress === false && (
               <BlogLink
+                key={node.id}
                 to={node.fields.slug}
                 featuredImage={featuredImageMap[node.fields.slug]}
                 title={node.frontmatter.title}
                 subtitle={node.frontmatter.date}
                 excerpt={node.frontmatter.excerpt || node.excerpt}
               />
-            </div>)
-          ))}
+          )))}
         </div>
-      </Container>
     </PageLayout>
   )
 }

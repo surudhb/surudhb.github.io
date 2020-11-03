@@ -14,20 +14,16 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="Projects" />
       <PageTitle title="Projects" />
-      <div className="text-left">
-        <div className="row">
+        <div className="blog-posts-container row m-auto">
           {allProjects.map(({ node }) => (
-            <div className="col">
               <ProjectLink
                 key={node.id}
                 to={node.fields.slug}
                 featuredImages={featuredImageMap[node.fields.slug]}
                 {...node.frontmatter}
               />
-              </div>
           ))}
         </div>
-      </div>
     </PageLayout>
   )
 }

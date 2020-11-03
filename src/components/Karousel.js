@@ -4,14 +4,13 @@ import Img from "gatsby-image"
 
 export default ({ images }) => {
     return (
-        <Carousel className="p-2" interval="2000" style={{width:"100%"}}>
+        <Carousel interval={2000} className="m-1">
             {images.map((image => (
-                <Carousel.Item key={image}>
+                <Carousel.Item key={Math.random()}>
                     <Img
                         fluid={image}
-                        className="m-auto"
-                        style={{height: 'calc(40vh - 4rem)'}}
                         imgStyle={{objectFit: 'contain'}}
+                        style={{height: "15rem"}}
                     />
                 </Carousel.Item>
             )))}

@@ -13,7 +13,7 @@ export default ({ data }) => {
       </a>
       <br />
       <span
-        style={{ color: "gray", fontSize: "0.85em" }}
+        style={{ color: "gray", fontSize: "0.8em" }}
         className="d-md-inline-flex"
       >
         &nbsp;<i>{author}</i>
@@ -40,7 +40,6 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="About Me" />
       <PageTitle title="About Me" />
-      <Container>
         <Image
           rounded
           width="140"
@@ -222,7 +221,6 @@ export default ({ data }) => {
             </div>
           </div>
         </article>
-      </Container>
     </PageLayout>
   )
 }

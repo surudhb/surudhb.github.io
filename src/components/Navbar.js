@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 export default () => {
   const { dark, toggleDark, toString } = useContext(ThemeContext)
   return (
-    <Navbar variant={toString()} fixed="top" collapseOnSelect expand="md">
+    <Navbar variant={toString()} fixed="top" collapseOnSelect expand="sm">
       <Navbar.Brand className="ml-md-5" as={Link} to="/">
         <FontAwesomeIcon
           icon={["fab", `${dark ? "empire" : "rebel"}`]}
@@ -39,7 +39,7 @@ export default () => {
             onKeyDown={e => e.key === `Enter` && toggleDark()}
             role="button"
             tabIndex={0}
-            className="theme-container m-auto ml-md-3"
+            className="theme-container ml-sm-3"
           >
             {dark ? (
               <FontAwesomeIcon
