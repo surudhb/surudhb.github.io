@@ -71,7 +71,9 @@ nav {
 
 .theme-toggle {
   transition: 0.1s ease-in;
-  font-size: 1.5em;
+  display: block;
+  margin: auto;
+  font-size: 1.2em;
   &:hover {
     cursor: pointer;
   }

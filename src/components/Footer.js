@@ -6,7 +6,7 @@ export default () => {
   return (
     <div
       style={{ fontSize: "0.9rem" }}
-      className="mt-2 py-3 msx-0 footer text-muted text-center"
+      className="py-3 msx-0 footer text-muted text-center"
     >
       <span className="m-auto">
         <b>{author}</b> &copy; {new Date().getFullYear()}. Made with&nbsp;

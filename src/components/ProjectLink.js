@@ -1,22 +1,12 @@
 import React from "react"
 import { Link } from "gatsby"
-import Img from "gatsby-image"
-import { Container, Badge, Col, Row, Button } from "react-bootstrap"
+import { Container, Badge, Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Karousel from "./Karousel"
 
 export default ({ featuredImages, tags, github, live, title, to }) => (
-  <Container className="text-center project-container">
-    {/* <Row>
-      {featuredImages &&
-        featuredImages.map(image => (
-          <Col
-            key={image.src}
-            className={`m-auto col-${12 / featuredImages.length}`}
-          >
-            <Img fluid={image} />
-          </Col>
-        ))}
-    </Row> */}
+  <div className="text-center project-container my-4">
+  <Karousel images={featuredImages} />
     <Link className="text-decoration-none" to={to}>
       <h2 className="mt-5">
         <p>{title}</p>
@@ -29,7 +19,7 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
           pill
           className="mr-1 mr-md-2 py-1 px-2 px-md-3 resume-tags"
         >
-          <h5 className="m-auto">{tag}</h5>
+          <h5 style={{fontSize: "1rem"}} className="m-auto">{tag}</h5>
         </Badge>
       ))}
     </div>
@@ -63,11 +53,6 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
           </a>
         </Button>
       )}
-      {/* <Link className="text-decoration-none" to={to}>
-        <Button variant="outline-warning" className="mx-2 px-3 py-1">
-          Learn More
-        </Button>
-      </Link> */}
     </div>
-  </Container>
+  </div>
 )

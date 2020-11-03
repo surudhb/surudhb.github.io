@@ -122,6 +122,16 @@ $themes: (
   }
 }
 
+.theme-container {
+  padding: 4px;
+  width: 50px;
+  border-radius: 15px;
+  margin: auto;
+  @include themify($themes) {
+    box-shadow: 2px 3px 2px 2px themed("cardShadowColor");
+  }
+}
+
 .footer {
   @include themify($themes) {
     background: themed("navBackground");
@@ -158,7 +168,8 @@ $themes: (
 .project-container {
   margin: auto;
   padding: 1em;
-  border-radius: 10px;
+  border-radius: 14px;
+  width: 700px;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
   }
