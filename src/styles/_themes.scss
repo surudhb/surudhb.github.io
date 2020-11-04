@@ -171,6 +171,8 @@ $themes: (
   max-width: 95%;
   height: 27rem;
   border-radius: 0.9rem;
+  animation-name: rotateAndFade;
+  animation-duration: 1s;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     &:hover {
@@ -181,10 +183,19 @@ $themes: (
   }
 }
 
+@keyframes rotateAndFade {
+  from {
+    transform: rotateY(180deg) translate(0, 100px);
+    opacity: 0;
+  }
+}
+
 .card-container {
   width: 600px;
   max-width: 99%;
   height: 29rem;
+  animation-name: scaleAndFade;
+  animation-duration: 0.75s;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     text-decoration-color: themed("hrefColor");
@@ -199,8 +210,17 @@ $themes: (
   }
 }
 
+@keyframes scaleAndFade {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+}
+
 .blog-filter {
   max-width: 900px;
+  animation-name: fadeAndPop;
+  animation-duration: 0.8s;
   @include themify($themes) {
     & input {
       color: themed("titleColor");
@@ -218,6 +238,8 @@ $themes: (
   width: 5rem;
   height: 4.5rem;
   margin: 1rem;
+  animation-name: fadeAndPop;
+  animation-duration: 1s;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     &:hover {
@@ -225,6 +247,16 @@ $themes: (
       transition: all 0.1s ease-out;
       box-shadow: 12px 14px 5px 5px themed("cardShadowColor");
     }
+  }
+}
+
+@keyframes fadeAndPop {
+  from {
+    opacity: 0;
+    box-shadow: none;
+  }
+  to {
+    opacity: 1;
   }
 }
 

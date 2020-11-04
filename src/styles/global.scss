@@ -87,6 +87,15 @@ nav {
 
 .about-container {
   max-width: 1200px;
+  animation-name: slideAndFade;
+  animation-duration: 0.75s;
+}
+
+@keyframes slideAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
 }
 
 .resume-container {
@@ -101,6 +110,7 @@ nav {
 
 .resume-tags-container {
   max-height: 2rem;
+  max-width: 100%;
   overflow: hidden;
 }
 
