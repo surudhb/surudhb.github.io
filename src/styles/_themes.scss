@@ -181,10 +181,6 @@ $themes: (
   }
 }
 
-.resume-container {
-  max-width: 90%;
-}
-
 .card-container {
   width: 600px;
   max-width: 99%;
@@ -204,7 +200,6 @@ $themes: (
 }
 
 .blog-filter {
-  width: calc(device-width * 0.6);
   max-width: 900px;
   @include themify($themes) {
     & input {

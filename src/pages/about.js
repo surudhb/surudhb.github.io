@@ -40,13 +40,14 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="About Me" />
       <PageTitle title="About Me" />
-        <Image
-          rounded
-          width="140"
-          height="140"
-          src={`../../icons/luke-${toString()}.png`}
-          alt={author}
-        />
+      <Image
+        rounded
+        width="140"
+        height="140"
+        src={`../../icons/luke-${toString()}.png`}
+        alt={author}
+      />
+      <div className="about-container m-auto">
         <article className="w-75 m-auto pt-2 text-justify p-large">
           <p className="text-center">
             {designations.map((attr, i) => (
@@ -221,6 +222,7 @@ export default ({ data }) => {
             </div>
           </div>
         </article>
+      </div>
     </PageLayout>
   )
 }

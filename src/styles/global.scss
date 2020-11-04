@@ -82,8 +82,26 @@ nav {
 }
 
 .blog-posts-container {
-  min-width: calc(device-width);
   max-width: 1300px;
+}
+
+.about-container {
+  max-width: 1200px;
+}
+
+.resume-container {
+  max-width: 1300px;
+}
+
+.resume-icons-container,
+.resume-education-container,
+.resume-experience-container {
+  max-width: 90%;
+}
+
+.resume-tags-container {
+  max-height: 2rem;
+  overflow: hidden;
 }
 
 .i-5 {
