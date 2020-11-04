@@ -9,7 +9,7 @@ export default ({ html, frontmatter, image }) => (
         <CompanyCard frontmatter={frontmatter} image={image} />
       </Col>
       <Col className="col-12">
-        <div className="d-inline-flex mb-4">
+        <div className="d-inline-flex mb-4 resume-tags-container">
           {frontmatter.tags.map(tag => (
             <Badge
               key={tag}

@@ -87,10 +87,26 @@ nav {
 
 .about-container {
   max-width: 1200px;
+  animation-name: slideAndFade;
+  animation-duration: 0.5s;
+}
+
+@keyframes slideAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
 }
 
 .resume-container {
   max-width: 1300px;
+}
+
+.resume-icons-container > *,
+.resume-education-container > *,
+.resume-experience-container > * {
+  animation-name: scaleAndFade;
+  animation-duration: 0.4s;
 }
 
 .resume-icons-container,
@@ -101,6 +117,7 @@ nav {
 
 .resume-tags-container {
   max-height: 2rem;
+  max-width: 100%;
   overflow: hidden;
 }
 
@@ -213,6 +230,7 @@ nav {
   border-radius: 50%;
   color: lightgreen;
   background: white;
+  transition: all 0.3s;
   &:hover {
     color: white;
     background: lightgreen;
