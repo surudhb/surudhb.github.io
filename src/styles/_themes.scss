@@ -127,6 +127,7 @@ $themes: (
   width: 50px;
   border-radius: 15px;
   margin: auto;
+  margin-left: 0;
   @include themify($themes) {
     box-shadow: 2px 3px 2px 2px themed("cardShadowColor");
   }
@@ -166,18 +167,24 @@ $themes: (
 }
 
 .project-container {
-  margin: auto;
-  padding: 1em;
-  border-radius: 14px;
-  width: 700px;
+  width: 500px;
+  max-width: 95%;
+  height: 27rem;
+  border-radius: 0.9rem;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
+    &:hover {
+      transform: translateY(-10px);
+      transition: all 0.15s ease-in;
+      box-shadow: 12px 14px 5px 5px themed("cardShadowColor");
+    }
   }
 }
 
 .card-container {
-  width: 30rem;
-  height: 27em;
+  width: 600px;
+  max-width: 99%;
+  height: 29rem;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     text-decoration-color: themed("hrefColor");
@@ -193,6 +200,7 @@ $themes: (
 }
 
 .blog-filter {
+  max-width: 900px;
   @include themify($themes) {
     & input {
       color: themed("titleColor");
@@ -207,8 +215,8 @@ $themes: (
 .icons-container > div {
   padding: 0.1rem;
   border-radius: 10%;
-  width: 80px;
-  height: 70px;
+  width: 5rem;
+  height: 4.5rem;
   margin: 1rem;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");

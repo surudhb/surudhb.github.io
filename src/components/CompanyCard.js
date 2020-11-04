@@ -1,6 +1,5 @@
 import React from "react"
 import Img from "gatsby-image"
-import Container from "react-bootstrap/Container"
 
 export default ({ frontmatter, image }) => {
   const {
@@ -13,7 +12,7 @@ export default ({ frontmatter, image }) => {
     location,
   } = frontmatter
   return (
-    <Container fluid className="m-auto">
+    <div className="m-auto">
       <a
         className="text-decoration-none"
         target="_blank"
@@ -74,6 +73,6 @@ export default ({ frontmatter, image }) => {
           </>
         )}
       </div>
-    </Container>
+    </div>
   )
 }

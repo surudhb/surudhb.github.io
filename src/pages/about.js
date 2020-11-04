@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { PageLayout, PageTitle } from "../components"
-import { Container, Image } from "react-bootstrap"
+import Image from "react-bootstrap/Image"
 import { Link, graphql } from "gatsby"
 import { ThemeContext, SEO } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -13,7 +13,7 @@ export default ({ data }) => {
       </a>
       <br />
       <span
-        style={{ color: "gray", fontSize: "0.85em" }}
+        style={{ color: "gray", fontSize: "0.8em" }}
         className="d-md-inline-flex"
       >
         &nbsp;<i>{author}</i>
@@ -40,14 +40,14 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="About Me" />
       <PageTitle title="About Me" />
-      <Container>
-        <Image
-          rounded
-          width="140"
-          height="140"
-          src={`../../icons/luke-${toString()}.png`}
-          alt={author}
-        />
+      <Image
+        rounded
+        width="140"
+        height="140"
+        src={`../../icons/luke-${toString()}.png`}
+        alt={author}
+      />
+      <div className="about-container m-auto">
         <article className="w-75 m-auto pt-2 text-justify p-large">
           <p className="text-center">
             {designations.map((attr, i) => (
@@ -222,7 +222,7 @@ export default ({ data }) => {
             </div>
           </div>
         </article>
-      </Container>
+      </div>
     </PageLayout>
   )
 }

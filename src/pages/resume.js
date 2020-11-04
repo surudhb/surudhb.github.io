@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { CompanyCard, PageLayout, PageTitle, WorkHistory } from "../components"
 import { SEO, Utils } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Row, Image } from "react-bootstrap"
+import Image from "react-bootstrap/Image"
 
 export default ({ data }) => {
   const institutions = data.site.siteMetadata.institutions || []
@@ -23,77 +23,87 @@ export default ({ data }) => {
           />
         </a>
       </PageTitle>
-      <div>
-        <br />
-        <h2 className="m-auto w-75 text-left">Technologies</h2>
-        <br />
-        <FontAwesomeIcon icon={["fab", "java"]} className="resume-icons java" />
-        <FontAwesomeIcon
-          icon={["fab", "js-square"]}
-          className="resume-icons js"
-        />
-        <FontAwesomeIcon
-          icon={["fab", "html5"]}
-          className="resume-icons html"
-        />
-        <FontAwesomeIcon icon={["fab", "css3"]} className="resume-icons css" />
-        <FontAwesomeIcon
-          icon={["fab", "swift"]}
-          className="resume-icons swift"
-        />
-        <br />
-        <FontAwesomeIcon
-          icon={["fab", "react"]}
-          className="resume-icons reactjs"
-        />
-        <FontAwesomeIcon
-          icon={["fab", "node"]}
-          className="resume-icons nodejs"
-        />
-        <FontAwesomeIcon
-          icon={["fab", "bootstrap"]}
-          className="resume-icons bootstrap"
-        />
-        <FontAwesomeIcon icon={["fab", "sass"]} className="resume-icons sass" />
-        <br />
-        <FontAwesomeIcon
-          icon={["fab", "github-alt"]}
-          className="resume-icons github"
-        />
-        <FontAwesomeIcon icon={["fab", "jira"]} className="resume-icons jira" />
-        <FontAwesomeIcon
-          icon={["fab", "docker"]}
-          className="resume-icons docker"
-        />
-
-        <h2 className="m-auto w-75 text-left">Education</h2>
-        <br />
-        <Row className="w-75 m-auto">
-          {institutions.map(frontmatter => (
-            <div className="col-4">
-              <Image
-                height="100px"
-                rounded
-                src={`../../icons/${frontmatter.slug}.png`}
-                className="align-bottom m-0"
-              />
-              <CompanyCard frontmatter={frontmatter} />
-            </div>
-          ))}
-        </Row>
-        <br />
-        <h2 className="m-auto w-75 text-left">Experience</h2>
-        <br />
-        {history.map(({ node }) => (
-          <div key={node.id}>
+      <div className="m-auto resume-container">
+        <div className="m-auto resume-icons-container">
+          <h2 className="mt-5 text-left">Technologies</h2>
+          <FontAwesomeIcon
+            icon={["fab", "java"]}
+            className="resume-icons java"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "js-square"]}
+            className="resume-icons js"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "html5"]}
+            className="resume-icons html"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "css3"]}
+            className="resume-icons css"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "swift"]}
+            className="resume-icons swift"
+          />
+          <br />
+          <FontAwesomeIcon
+            icon={["fab", "react"]}
+            className="resume-icons reactjs"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "node"]}
+            className="resume-icons nodejs"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "bootstrap"]}
+            className="resume-icons bootstrap"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "sass"]}
+            className="resume-icons sass"
+          />
+          <br />
+          <FontAwesomeIcon
+            icon={["fab", "github-alt"]}
+            className="resume-icons github"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "jira"]}
+            className="resume-icons jira"
+          />
+          <FontAwesomeIcon
+            icon={["fab", "docker"]}
+            className="resume-icons docker"
+          />
+        </div>
+        <div className="m-auto resume-education-container">
+          <h2 className="mt-5 text-left">Education</h2>
+          <div className="m-auto row">
+            {institutions.map(frontmatter => (
+              <div className="col-md-4">
+                <Image
+                  height="100px"
+                  rounded
+                  src={`../../icons/${frontmatter.slug}.png`}
+                  className="align-bottom m-auto"
+                />
+                <CompanyCard frontmatter={frontmatter} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="m-auto resume-experience-container">
+          <h2 className="mt-5 text-left">Experience</h2>
+          {history.map(({ node }) => (
             <WorkHistory
+              key={node.id}
               frontmatter={node.frontmatter}
               image={imageMap[node.fields.slug]}
               html={node.html}
             />
-            <br />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </PageLayout>
   )

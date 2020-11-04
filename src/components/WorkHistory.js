@@ -1,10 +1,10 @@
 import React from "react"
 import CompanyCard from "./CompanyCard"
-import { Container, Row, Col, Badge } from "react-bootstrap"
+import { Row, Col, Badge } from "react-bootstrap"
 
 export default ({ html, frontmatter, image }) => (
-  <Container className="p-1 project-link text-center">
-    <Row>
+  <div className="mb-5">
+    <Row className="p-1 text-center">
       <Col className="col-12 mt-4">
         <CompanyCard frontmatter={frontmatter} image={image} />
       </Col>
@@ -30,5 +30,5 @@ export default ({ html, frontmatter, image }) => (
         />
       </Col>
     </Row>
-  </Container>
+  </div>
 )

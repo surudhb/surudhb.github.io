@@ -2,6 +2,34 @@
 
 @import "themes";
 
+@media (max-width: 767px) {
+  html,
+  body {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  html,
+  body {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  html,
+  body {
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  html,
+  body {
+    font-size: 16px !important;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -53,6 +81,29 @@ nav {
   -webkit-appearance: none;
 }
 
+.blog-posts-container {
+  max-width: 1300px;
+}
+
+.about-container {
+  max-width: 1200px;
+}
+
+.resume-container {
+  max-width: 1300px;
+}
+
+.resume-icons-container,
+.resume-education-container,
+.resume-experience-container {
+  max-width: 90%;
+}
+
+.resume-tags-container {
+  max-height: 2rem;
+  overflow: hidden;
+}
+
 .i-5 {
   text-indent: 5vmin;
 }
@@ -102,35 +153,9 @@ nav {
 }
 
 .resume-icons {
-  font-size: 5rem;
-  margin: 2rem;
-}
-
-.about-icons {
-  font-size: 6rem;
-}
-
-.brand-icon {
   font-size: 4.5rem;
-  border-radius: 50%;
-  color: lightgreen;
-  background: white;
-  &:hover {
-    color: white;
-    background: lightgreen;
-  }
-  &.empire {
-    border-radius: 50%;
-    color: $white;
-    background: $black;
-    &:hover {
-      color: $black;
-      background: $white;
-    }
-  }
-}
-
-.resume-icons {
+  margin-bottom: 2rem;
+  margin-right: 2rem;
   &.bootstrap {
     color: $bootstrap;
   }
@@ -176,7 +201,35 @@ nav {
 }
 
 .p-large {
-  font-size: 20px;
+  font-size: 1.2rem;
+}
+
+.about-icons {
+  font-size: 6rem;
+}
+
+.brand-icon {
+  font-size: 4.5rem;
+  border-radius: 50%;
+  color: lightgreen;
+  background: white;
+  &:hover {
+    color: white;
+    background: lightgreen;
+  }
+  &.empire {
+    border-radius: 50%;
+    color: $white;
+    background: $black;
+    &:hover {
+      color: $black;
+      background: $white;
+    }
+  }
+}
+
+.p-large {
+  font-size: 1.2rem;
 }
 
 .resume-tags {
