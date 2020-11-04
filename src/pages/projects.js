@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import { PageLayout, PageTitle, ProjectLink } from "../components"
 import { SEO, Utils } from "../utils"
-import Container from "react-bootstrap/Container"
 
 export default ({ data }) => {
   const allProjects = data.allMarkdownRemark.edges || []
@@ -14,16 +13,16 @@ export default ({ data }) => {
     <PageLayout>
       <SEO title="Projects" />
       <PageTitle title="Projects" />
-        <div className="blog-posts-container row m-auto">
-          {allProjects.map(({ node }) => (
-              <ProjectLink
-                key={node.id}
-                to={node.fields.slug}
-                featuredImages={featuredImageMap[node.fields.slug]}
-                {...node.frontmatter}
-              />
-          ))}
-        </div>
+      <div className="blog-posts-container row m-auto">
+        {allProjects.map(({ node }) => (
+          <ProjectLink
+            key={node.id}
+            to={node.fields.slug}
+            featuredImages={featuredImageMap[node.fields.slug]}
+            {...node.frontmatter}
+          />
+        ))}
+      </div>
     </PageLayout>
   )
 }

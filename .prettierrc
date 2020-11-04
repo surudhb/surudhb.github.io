@@ -1,5 +1,4 @@
 {
   "arrowParens": "avoid",
-  "semi": false,
-  "editor.formatOnSave": true
+  "semi": false
 }

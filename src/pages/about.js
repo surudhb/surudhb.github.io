@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { PageLayout, PageTitle } from "../components"
-import { Container, Image } from "react-bootstrap"
+import Image from "react-bootstrap/Image"
 import { Link, graphql } from "gatsby"
 import { ThemeContext, SEO } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

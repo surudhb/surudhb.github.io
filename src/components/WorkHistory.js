@@ -1,6 +1,6 @@
 import React from "react"
 import CompanyCard from "./CompanyCard"
-import { Container, Row, Col, Badge } from "react-bootstrap"
+import { Row, Col, Badge } from "react-bootstrap"
 
 export default ({ html, frontmatter, image }) => (
   <div className="mb-5">

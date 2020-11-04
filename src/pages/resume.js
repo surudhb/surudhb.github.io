@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { CompanyCard, PageLayout, PageTitle, WorkHistory } from "../components"
 import { SEO, Utils } from "../utils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Row, Image } from "react-bootstrap"
+import Image from "react-bootstrap/Image"
 
 export default ({ data }) => {
   const institutions = data.site.siteMetadata.institutions || []
