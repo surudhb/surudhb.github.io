@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Karousel from "./Karousel"
 
 export default ({ featuredImages, tags, github, live, title, to }) => (
-  <div className="col-12 col-lg-4 text-center project-container m-4">
+  <div className="col-12 col-md-6 col-xl-4 text-center my-4">
+    <div className="p-1 project-container m-auto">
     <Karousel images={featuredImages} style={{height: "60%"}} />
     <Link className="text-decoration-none" to={to}>
-      <h3 className="mt-3">
+      <h4 className="mt-3">
         <p>{title}</p>
-      </h3>
+      </h4>
     </Link>
     <div className="d-block">
       {tags.map(tag => (
@@ -53,6 +54,7 @@ export default ({ featuredImages, tags, github, live, title, to }) => (
           </a>
         </Button>
       )}
+    </div>
     </div>
   </div>
 )

@@ -171,16 +171,24 @@ $themes: (
   max-width: 95%;
   height: 27rem;
   border-radius: 0.9rem;
-  margin-bottom: 10rem;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
+    &:hover {
+      transform: translateY(-10px);
+      transition: all 0.15s ease-in;
+      box-shadow: 12px 14px 5px 5px themed("cardShadowColor");
+    }
   }
 }
 
+.resume-container {
+  max-width: 90%;
+}
+
 .card-container {
-  width: 30rem;
-  max-width: 95%;
-  height: 27rem;
+  width: 600px;
+  max-width: 99%;
+  height: 29rem;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     text-decoration-color: themed("hrefColor");

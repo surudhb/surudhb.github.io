@@ -135,35 +135,9 @@ nav {
 }
 
 .resume-icons {
-  font-size: 5rem;
-  margin: 2rem;
-}
-
-.about-icons {
-  font-size: 6rem;
-}
-
-.brand-icon {
   font-size: 4.5rem;
-  border-radius: 50%;
-  color: lightgreen;
-  background: white;
-  &:hover {
-    color: white;
-    background: lightgreen;
-  }
-  &.empire {
-    border-radius: 50%;
-    color: $white;
-    background: $black;
-    &:hover {
-      color: $black;
-      background: $white;
-    }
-  }
-}
-
-.resume-icons {
+  margin-bottom: 2rem;
+  margin-right: 2rem;
   &.bootstrap {
     color: $bootstrap;
   }
@@ -205,6 +179,34 @@ nav {
 
   &.docker {
     color: $docker;
+  }
+}
+
+.p-large {
+  font-size: 1.2rem;
+}
+
+.about-icons {
+  font-size: 6rem;
+}
+
+.brand-icon {
+  font-size: 4.5rem;
+  border-radius: 50%;
+  color: lightgreen;
+  background: white;
+  &:hover {
+    color: white;
+    background: lightgreen;
+  }
+  &.empire {
+    border-radius: 50%;
+    color: $white;
+    background: $black;
+    &:hover {
+      color: $black;
+      background: $white;
+    }
   }
 }
 

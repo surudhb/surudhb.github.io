@@ -46,7 +46,7 @@ module.exports = {
       {
         company: `University of Ottawa`,
         link: `https://engineering.uottawa.ca/undergraduate-programs/software-engineering`,
-        position: `B.SE Software Engineering (Honours, Dean's List, Year 1)`,
+        position: `Software Engineering (Honours, Dean's List, Year 1)`,
         startDate: `September, 2013`,
         endDate: `April 2014`,
         slug: `uottawa`,

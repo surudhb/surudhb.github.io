@@ -33,7 +33,7 @@ export default ({ data }) => {
       )
     })
 
-    setState({query, filteredData})
+    setState({ query, filteredData })
   }
 
   const { filteredData, query } = state
@@ -53,8 +53,9 @@ export default ({ data }) => {
           />
         </Form>
       </div>
-        <div className="blog-posts-container row m-auto">
-          {filteredPosts.map(({ node }) => (
+      <div className="blog-posts-container row m-auto">
+        {filteredPosts.map(
+          ({ node }) =>
             node.frontmatter.inProgress === false && (
               <BlogLink
                 key={node.id}
@@ -64,8 +65,9 @@ export default ({ data }) => {
                 subtitle={node.frontmatter.date}
                 excerpt={node.frontmatter.excerpt || node.excerpt}
               />
-          )))}
-        </div>
+            )
+        )}
+      </div>
     </PageLayout>
   )
 }
