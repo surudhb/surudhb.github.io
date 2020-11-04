@@ -172,7 +172,8 @@ $themes: (
   height: 27rem;
   border-radius: 0.9rem;
   animation-name: rotateAndFade;
-  animation-duration: 1s;
+  animation-duration: 0.6s;
+  transition-timing-function: ease-in-out;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     &:hover {
@@ -195,7 +196,7 @@ $themes: (
   max-width: 99%;
   height: 29rem;
   animation-name: scaleAndFade;
-  animation-duration: 0.75s;
+  animation-duration: 0.4s;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     text-decoration-color: themed("hrefColor");
@@ -220,7 +221,7 @@ $themes: (
 .blog-filter {
   max-width: 900px;
   animation-name: fadeAndPop;
-  animation-duration: 0.8s;
+  animation-duration: 1s;
   @include themify($themes) {
     & input {
       color: themed("titleColor");
@@ -239,7 +240,7 @@ $themes: (
   height: 4.5rem;
   margin: 1rem;
   animation-name: fadeAndPop;
-  animation-duration: 1s;
+  animation-duration: 0.8s;
   @include themify($themes) {
     box-shadow: 2px 4px 5px 5px themed("cardShadowColor");
     &:hover {
@@ -254,9 +255,6 @@ $themes: (
   from {
     opacity: 0;
     box-shadow: none;
-  }
-  to {
-    opacity: 1;
   }
 }
 
