@@ -130,6 +130,11 @@ $themes: (
   margin-left: 0;
   @include themify($themes) {
     box-shadow: 2px 3px 2px 2px themed("cardShadowColor");
+    &:hover {
+      transform: translateY(-4px);
+      transition: all 0.1s ease-out;
+      box-shadow: 6px 7px 2px 2px themed("cardShadowColor");
+    }
   }
 }
 
