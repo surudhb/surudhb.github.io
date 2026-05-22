@@ -14,7 +14,7 @@ export default ({ data }) => {
       <div className="text-center px-0 mx-0" style={{ marginTop: "15%" }}>
         <Typewriter
           options={{
-            strings: dialogues,
+            strings: ["How did you get over here? ", "This site is super old and outdated", "Check out my updated site on Notion"],
             delay: 24,
             deleteSpeed: 30,
             autoStart: true,
@@ -23,8 +23,9 @@ export default ({ data }) => {
         />
         <h1 className="display-1" style={{ fontSize: "7vmax" }}>
           <span className="first-name">{firstName}</span>&nbsp;
-          <span className="last-name">{lastName}</span>
+          <span className="last-name">{lastName}</span>&nbsp;
         </h1>
+        <h2>Legacy Site. Deprecated 2023.</h2>
       </div>
       <div className="d-flex flex-column flex-md-row d-md-inline-flex icons-container align-items-center">
         <div>
@@ -55,43 +56,43 @@ export default ({ data }) => {
         </div>
         <div>
           <a
-            href="https://angel.co/u/surudh-bhutani"
+            href="https://surudh-bhutani.notion.site/Surudh-Bhutani-35807b7853e08025bda6eb3c77548c1f?pvs=74"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FontAwesomeIcon
-              icon={["fab", "angellist"]}
+              icon={["fab", "notion"]}
               className="home-icons angellist"
-              title="Angel.co"
+              title="Notion"
             />
           </a>
         </div>
-        <div>
-          <a
-            href="https://triplebyte.com/tb/surudh-bhutani-jnj09dk"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              id="triplebyte"
-              src={`../../icons/triplebyte.png`}
-              alt="TripleByte"
-            />
-          </a>
-        </div>
-        <div>
-          <a
-            href="https://www.hackerrank.com/surudhbhutani"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={["fab", "hackerrank"]}
-              className="home-icons hr"
-              title="Hackerrank"
-            />
-          </a>
-        </div>
+        // <div>
+        //   <a
+        //     href="https://triplebyte.com/tb/surudh-bhutani-jnj09dk"
+        //     target="_blank"
+        //     rel="noopener noreferrer"
+        //   >
+        //     <Image
+        //       id="triplebyte"
+        //       src={`../../icons/triplebyte.png`}
+        //       alt="TripleByte"
+        //     />
+        //   </a>
+        // </div>
+        // <div>
+        //   <a
+        //     href="https://www.hackerrank.com/surudhbhutani"
+        //     target="_blank"
+        //     rel="noopener noreferrer"
+        //   >
+        //     <FontAwesomeIcon
+        //       icon={["fab", "hackerrank"]}
+        //       className="home-icons hr"
+        //       title="Hackerrank"
+        //     />
+        //   </a>
+        // </div>
         <div>
           <a
             href="mailto:surudhb@gmail.com"
@@ -105,15 +106,15 @@ export default ({ data }) => {
             />
           </a>
         </div>
-        <div>
-          <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
-            <FontAwesomeIcon
-              icon={["fas", "file-download"]}
-              className="home-icons file"
-              title="Resume"
-            />
-          </a>
-        </div>
+        // <div>
+        //   <a href="../../surudh_bhutani_resume.pdf" target="_blank" download>
+        //     <FontAwesomeIcon
+        //       icon={["fas", "file-download"]}
+        //       className="home-icons file"
+        //       title="Resume"
+        //     />
+        //   </a>
+        // </div>
       </div>
     </PageLayout>
   )
