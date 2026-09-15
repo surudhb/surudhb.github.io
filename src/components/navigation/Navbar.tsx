@@ -79,9 +79,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
 
     const direction: 'right' | 'left' = toIdx > fromIdx ? 'right' : 'left'
     const distance = Math.abs(toIdx - fromIdx)
-    const gapDelay = Math.min(80, Math.max(20, distance * 20))
-    const departDuration = 160
-    const arriveDuration = 180
+    const gapDelay = Math.min(80, Math.max(50, distance * 50))
+    const departDuration = 250
+    const arriveDuration = 250
 
     // Phase 1: Departure begins immediately on fromId
     currentActiveIdRef.current = toId

@@ -38,11 +38,11 @@ export const HeroSection: React.FC = () => {
     const initialAurebesh = new Set<number>()
 
     LETTER_INDICES.forEach((letterIdx) => {
-      // Pick random number of swaps between 2 and 10 inclusive
-      const numSwaps = Math.floor(Math.random() * 9) + 2
+      // Pick random number of swaps between 2 and 6 inclusive
+      const numSwaps = Math.floor(Math.random() * 5) + 2
 
-      // Final swap to English happens between 3200ms and 4850ms (safely before the 5.0s mark)
-      const finalTime = 3200 + Math.random() * 1650
+      // Final swap to English happens between 2000ms and 3650ms (safely before the 5.0s mark)
+      const finalTime = 2000 + Math.random() * 1650
 
       // Generate (numSwaps - 1) intermediate swap timestamps in (100ms, finalTime - 120ms)
       const rawTimes: number[] = []
@@ -108,7 +108,7 @@ export const HeroSection: React.FC = () => {
     const masterTimer = setTimeout(() => {
       setAurebeshLetters(new Set())
       timersRef.current = []
-    }, 5000)
+    }, 4000)
     newTimers.push(masterTimer)
 
     timersRef.current = newTimers
