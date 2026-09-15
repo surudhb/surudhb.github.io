@@ -1,0 +1,303 @@
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Minimal Custom Scrollbar */
+html {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--text-primary);
+}
+
+/* Code & Telemetry Mono */
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
+}
+
+.section-padding {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.responsive-two-col {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 2fr;
+  gap: 2.5rem;
+}
+
+.responsive-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+}
+
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+.hud-desktop {
+  display: flex;
+}
+
+/* ==========================================================================
+   Laser Bolt Navigation Underline (Desktop Nav)
+   ========================================================================== */
+
+.nav-laser-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-laser-bolt {
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.nav-laser-bolt.settled {
+  background: #ffffff;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.nav-laser-bolt.depart-right {
+  animation: laserDepartRight 160ms cubic-bezier(0.35, 0, 0.9, 1) forwards;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.3) 0%, #ffffff 60%, #00f0ff 100%);
+  box-shadow: 0 0 8px #00f0ff, 0 0 16px rgba(0, 240, 255, 0.7), 0 0 2px #ffffff;
+}
+
+.nav-laser-bolt.depart-left {
+  animation: laserDepartLeft 160ms cubic-bezier(0.35, 0, 0.9, 1) forwards;
+  background: linear-gradient(90deg, #00f0ff 0%, #ffffff 40%, rgba(0, 240, 255, 0.3) 100%);
+  box-shadow: 0 0 8px #00f0ff, 0 0 16px rgba(0, 240, 255, 0.7), 0 0 2px #ffffff;
+}
+
+.nav-laser-bolt.arrive-right {
+  animation: laserArriveRight 180ms cubic-bezier(0, 0, 0.25, 1) forwards;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.3) 0%, #ffffff 60%, #00f0ff 100%);
+  box-shadow: 0 0 8px #00f0ff, 0 0 16px rgba(0, 240, 255, 0.7), 0 0 2px #ffffff;
+}
+
+.nav-laser-bolt.arrive-left {
+  animation: laserArriveLeft 180ms cubic-bezier(0, 0, 0.25, 1) forwards;
+  background: linear-gradient(90deg, #00f0ff 0%, #ffffff 40%, rgba(0, 240, 255, 0.3) 100%);
+  box-shadow: 0 0 8px #00f0ff, 0 0 16px rgba(0, 240, 255, 0.7), 0 0 2px #ffffff;
+}
+
+@keyframes laserDepartRight {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0.85;
+  }
+}
+
+@keyframes laserDepartLeft {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0.85;
+  }
+}
+
+@keyframes laserArriveRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes laserArriveLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Viewport Perimeter Atmospheric Glow (Canopy Aura)
+   ========================================================================== */
+
+.viewport-perimeter-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 0 15px rgba(255, 255, 255, 0.25),
+    inset 0 0 35px rgba(255, 255, 255, 0.16),
+    inset 0 0 65px rgba(255, 255, 255, 0.08);
+  animation: perimeterAtmospherePulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes perimeterAtmospherePulse {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .viewport-perimeter-glow {
+    box-shadow:
+      inset 0 0 1px 1px rgba(255, 255, 255, 0.35),
+      inset 0 0 10px rgba(255, 255, 255, 0.2),
+      inset 0 0 25px rgba(255, 255, 255, 0.12),
+      inset 0 0 45px rgba(255, 255, 255, 0.06);
+  }
+
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .section-padding {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .responsive-two-col {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .responsive-grid-auto {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+
+  .hud-desktop {
+    display: none !important;
+  }
+}
+
+/* Subtle motion reduction */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

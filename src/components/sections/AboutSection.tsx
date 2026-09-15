@@ -1,0 +1,236 @@
+import React from 'react'
+import { profileData } from '../../data/profile'
+import { MotionReveal } from '../ui/MotionReveal'
+
+export const AboutSection: React.FC = () => {
+  return (
+    <section
+      id="about"
+      className="section-padding"
+      style={{
+        position: 'relative',
+        zIndex: 1
+      }}
+    >
+      <div className="container">
+        {/* Section Header */}
+        <MotionReveal>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.8rem',
+              letterSpacing: '0.12em',
+              color: 'var(--text-muted)',
+              marginBottom: '1.5rem'
+            }}
+          >
+            [DOSSIER // 01 // BACKGROUND & CRAFT]
+          </div>
+          <h2
+            style={{
+              fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.15,
+              marginBottom: '2.5rem',
+              color: '#ffffff'
+            }}
+          >
+            ENGINEERING AT THE INTERSECTION OF SCALE, CRAFT & RESILIENCE.
+          </h2>
+        </MotionReveal>
+
+        {/* Narrative Paragraphs */}
+        <div style={{ maxWidth: '820px', marginBottom: '5rem' }}>
+          {profileData.bio.map((paragraph, index) => (
+            <MotionReveal key={index} delay={0.1 * (index + 1)}>
+              <p
+                style={{
+                  fontSize: '1.15rem',
+                  lineHeight: 1.85,
+                  color: 'var(--text-secondary)',
+                  marginBottom: '1.75rem'
+                }}
+              >
+                {paragraph}
+              </p>
+            </MotionReveal>
+          ))}
+        </div>
+
+        {/* Education & Credentials */}
+        <MotionReveal delay={0.2}>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.78rem',
+              letterSpacing: '0.12em',
+              color: 'var(--text-muted)',
+              marginBottom: '2rem'
+            }}
+          >
+            [ACADEMIC CREDENTIALS]
+          </div>
+
+          <div
+            className="responsive-grid-auto"
+            style={{
+              marginBottom: '6rem'
+            }}
+          >
+            {profileData.education.map((edu, idx) => (
+              <div
+                key={idx}
+                style={{
+                  borderLeft: '1px solid var(--border-subtle)',
+                  paddingLeft: '1.5rem'
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.75rem',
+                    color: 'var(--text-muted)',
+                    marginBottom: '0.4rem'
+                  }}
+                >
+                  {edu.period}
+                </div>
+                <h3
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 600,
+                    marginBottom: '0.4rem',
+                    color: '#ffffff'
+                  }}
+                >
+                  {edu.institution}
+                </h3>
+                <div
+                  style={{
+                    fontSize: '0.95rem',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '0.25rem'
+                  }}
+                >
+                  {edu.degree}
+                </div>
+                {edu.honours && (
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.8rem',
+                      color: 'var(--text-muted)'
+                    }}
+                  >
+                    {edu.honours}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </MotionReveal>
+
+        {/* Cultural Influences & Reading Manifest */}
+        <div
+          className="responsive-grid-auto"
+          style={{
+            paddingTop: '2rem',
+            borderTop: '1px solid var(--border-subtle)'
+          }}
+        >
+          {/* Reading List */}
+          <MotionReveal delay={0.1}>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.78rem',
+                letterSpacing: '0.12em',
+                color: 'var(--text-muted)',
+                marginBottom: '1.5rem'
+              }}
+            >
+              [LITERATURE & DISPATCHES]
+            </div>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {profileData.readingList.map((book, idx) => (
+                <li key={idx}>
+                  <a
+                    href={book.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '1.05rem',
+                      fontWeight: 500,
+                      color: '#ffffff',
+                      display: 'block',
+                      marginBottom: '0.2rem'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                  >
+                    {book.title} ↗
+                  </a>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.82rem',
+                      color: 'var(--text-muted)'
+                    }}
+                  >
+                    {book.creator}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </MotionReveal>
+
+          {/* Watch List */}
+          <MotionReveal delay={0.2}>
+            <div
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.78rem',
+                letterSpacing: '0.12em',
+                color: 'var(--text-muted)',
+                marginBottom: '1.5rem'
+              }}
+            >
+              [CINEMATIC & NARRATIVE ARCHIVES]
+            </div>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {profileData.watchList.map((media, idx) => (
+                <li key={idx}>
+                  <a
+                    href={media.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '1.05rem',
+                      fontWeight: 500,
+                      color: '#ffffff',
+                      display: 'block',
+                      marginBottom: '0.2rem'
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                  >
+                    {media.title} ↗
+                  </a>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.82rem',
+                      color: 'var(--text-muted)'
+                    }}
+                  >
+                    {media.creator}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </MotionReveal>
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Aurebesh';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/Aurebesh/Aurebesh.woff') format('woff');
+  font-display: swap;
+}
+
+:root {
+  /* Color Palette - Industrial Deep Space */
+  --bg-primary: #070709;
+  --bg-secondary: #0d0e12;
+  --bg-tertiary: #14151b;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #999aa2;
+  --text-muted: #5e606b;
+  --text-dim: #383a45;
+  
+  --accent-cyan: #5ef1f2;
+  --accent-amber: #e6a23c;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: #ffffff;
+  
+  /* Typography Tokens */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-aurebesh: 'Aurebesh', sans-serif;
+
+  /* Spatial Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 10rem;
+
+  /* Layout Max Width */
+  --max-content-width: 1040px;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
