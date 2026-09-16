@@ -1,52 +1,31 @@
 ![](https://media1.tenor.com/images/fde400f153e4a0e5f335e864bb1b67db/tenor.gif)
 
 
-## 🛠 Installation & Set Up
+## 🛠 Stack
 
-1. Install the Gatsby CLI
+- **Framework:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build tool:** [Vite](https://vitejs.dev/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Deployment:** GitHub Actions → GitHub Pages (`source` → `master`)
 
-   ```sh
-   npm install -g gatsby-cli
-   ```
+## 🚀 Getting Started
 
-2. Install and use the correct version of Node using [NVM](https://github.com/nvm-sh/nvm)
-
-   ```sh
-   nvm install
-   ```
-
-3. Start the development server
+1. Install dependencies
 
    ```sh
-   npm start
+   npm install
    ```
 
-## 🐞 Development
-
-1. Running a local server
+2. Start the development server
 
    ```sh
-   npm run develop
+   npm run dev
    ```
 
-2. Clearing cache
+## 🔨 Other Commands
 
-    ```sh
-    npm run clean
-    ```
-
-## 🚀 Production
-
-1. Generate a full static production build
-
-   ```sh
-   npm run build
-   ```
-
-2. Preview the site as it will appear once deployed
-
-   ```sh
-   npm run serve
-   ```
-
-NOTE: Look at `package.json` for other useful scripts.
+| Command | Description |
+|---|---|
+| `npm run build` | Type-check and build for production (output in `dist/`) |
+| `npm run preview` | Preview the production build locally |
