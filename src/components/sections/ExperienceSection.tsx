@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { experienceData } from '../../data/experience'
+import { GalleryItem } from '../../types'
 import { MotionReveal } from '../ui/MotionReveal'
+import { GalleryModal } from '../ui/GalleryModal'
 
 export const ExperienceSection: React.FC = () => {
+  const [gallery, setGallery] = useState<{ title: string; items: GalleryItem[] } | null>(null)
+
   return (
     <section
       id="experience"
@@ -47,11 +52,12 @@ export const ExperienceSection: React.FC = () => {
                 className="responsive-two-col"
                 style={{
                   borderTop: '1px solid var(--border-subtle)',
-                  paddingTop: '2.5rem'
+                  paddingTop: '2.5rem',
+                  alignItems: 'start'
                 }}
               >
-                {/* Left Column: Period, Company, Location */}
-                <div>
+                {/* Left Column: sticky */}
+                <div style={{ position: 'sticky', top: '5.5rem' }}>
                   <div
                     style={{
                       fontFamily: 'var(--font-mono)',
@@ -105,6 +111,63 @@ export const ExperienceSection: React.FC = () => {
                   >
                     {exp.location}
                   </div>
+
+                  {/* External links */}
+                  {exp.links && exp.links.length > 0 && (
+                    <div
+                      style={{
+                        marginTop: '1rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.35rem'
+                      }}
+                    >
+                      {exp.links.map((link) => (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.78rem',
+                            letterSpacing: '0.06em',
+                            color: 'var(--text-muted)',
+                            transition: 'color 150ms'
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                        >
+                          {link.label} ↗
+                        </a>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Gallery trigger */}
+                  {exp.gallery && exp.gallery.length > 0 && (
+                    <button
+                      onClick={() => setGallery({ title: exp.company, items: exp.gallery! })}
+                      style={{
+                        marginTop: exp.links && exp.links.length > 0 ? '0.5rem' : '1rem',
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.78rem',
+                        letterSpacing: '0.06em',
+                        color: 'var(--text-muted)',
+                        transition: 'color 150ms',
+                        display: 'inline-flex',
+                        alignItems: 'center'
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    >
+                      SEE MORE ↗
+                    </button>
+                  )}
                 </div>
 
                 {/* Right Column: Bullets & Highlight */}
@@ -189,6 +252,17 @@ export const ExperienceSection: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* Gallery modal */}
+      <AnimatePresence>
+        {gallery && (
+          <GalleryModal
+            title={gallery.title}
+            items={gallery.items}
+            onClose={() => setGallery(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }

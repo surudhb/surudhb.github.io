@@ -1,6 +1,6 @@
 ---
 company: "Medlantis"
-location: "Toronto, ON"
+location: "Greater Toronto Area, ON"
 link: "https://www.medlantis.org/"
 position: "Full-Stack Developer Intern"
 tags: ["Wordpress", "PHP", "JS", "Auth0", "Mixpanel"]

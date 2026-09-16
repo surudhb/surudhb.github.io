@@ -1,25 +1,39 @@
 import { Experience } from '../types'
 
 export const experienceData: Experience[] = [
+    {
+    id: 'seeking-new-opportunities',
+    company: 'SEEKING NEW OPPORTUNITIES',
+    location: 'REMOTE, HYBRID, GREATER CALGARY AREA, GREATER VANCOUVER AREA',
+    position: 'Software Engineer',
+    period: 'APR 2026 — PRESENT',
+    startDate: '2026-04',
+    endDate: 'PRESENT',
+    tags: ['Software Engineer', 'Frontend Engineer', 'Backend Engineer', 'Solutions Engineer'],
+    bullets: [
+      'Seeking new opportunities that leverage my experience in full-stack development, technical program management and being a technical liaison to build interesting things.',
+    ],
+    highlight: 'Experimenting with agentic software development and getting dopamine rushes'
+  },
   {
     id: 'career-break',
     company: 'SELF EMPLOYED // CAREER BREAK',
-    location: 'CALGARY, AB',
-    position: 'Freelance Consultant',
+    location: 'GREATER CALGARY AREA, AB',
+    position: 'Consultant & Volunteer',
     period: 'APR 2025 — APR 2026',
     startDate: '2025-04',
     endDate: '2026-04',
-    tags: ['CONSULTING', 'VOLUNTEERING', 'ADVISORY', 'SYSTEMS'],
+    tags: ['CONSULTING', 'VOLUNTEERING', 'SIDE QUESTS', 'PERSONAL FINANCE'],
     bullets: [
-      'Delivering targeted one-off technical architecture projects, blending advisory engagements with open-source engineering.',
-      'Active volunteering, personal milestones, and technical exploration across emerging web and system primitives.'
+      'Active volunteering, personal milestones, and technical exploration with AI in the SDLC.',
+      'Personal projects, motovlogging & riding my MT-03 into the mountains, and exploring the Canadian Rockies.',
     ],
-    highlight: 'Dedicated sabbatical focusing on high-impact consulting, open-source work, and athletic/personal milestones.'
+    highlight: 'Dedicated sabbatical focusing on learning, self-development, and athletic/personal milestones.'
   },
   {
     id: 'hypotenuse-tpm',
     company: 'HYPOTENUSE LABS',
-    location: 'TORONTO, ON',
+    location: 'Greater Toronto Area, ON',
     position: 'Lead Technical Program Manager',
     period: 'APR 2024 — APR 2025',
     startDate: '2024-04',
@@ -39,27 +53,26 @@ export const experienceData: Experience[] = [
   {
     id: 'hypotenuse-swe',
     company: 'HYPOTENUSE LABS',
-    location: 'TORONTO, ON',
-    position: 'Software Engineer / Project Lead',
+    location: 'Greater Toronto Area, ON',
+    position: 'Software Engineer',
     period: 'JUN 2021 — APR 2024',
     startDate: '2021-06',
     endDate: '2024-04',
     link: 'https://hypotenuse.ca/',
-    tags: ['REACT', 'TYPESCRIPT', 'PYTHON', 'AWS LAMBDA', 'SQS', 'POSTGRESQL', 'REDIS', 'FLASK'],
+    tags: ['REACT', 'TYPESCRIPT', 'PYTHON', 'DOCKER', 'AWS LAMBDA', 'SQS', 'POSTGRESQL', 'REDIS', 'DIGITALOCEAN'],
     bullets: [
       'Processed 1M+ products/day for The Archivist by architecting high-throughput data ingestion ETL pipelines utilizing Python, ScrapingBee, AWS Lambda, SQS, and PostgreSQL.',
-      'Trimmed 10–15K lines of application code and resolved UX and performance-degrading bugs on Ambient, a $4B+ trading platform, by leading a multi-month React refactor standardizing components and migrating state management to React Context.',
-      'Overhauled release-engineering practices on Ambient to sustain 99% uptime and resolve deployment bottlenecks, mentoring developers to implement CI/CD, branch protection, and automated deployment tests.',
       'Delivered The Archivist’s resale analytics dashboard, enabling real-time market insights by designing interactive visualizations (Recharts) backed by custom APIs and data stores (Flask, Redis, Algolia).',
+      'Increased team velocity by roughly 66% (empowering a 3-person team to exceed a prior 5-person team’s output) and cleared a months-long PR backlog by restructuring sprint cadences and acceptance criteria as lead customer-facing engineer.',
       'Delivered custom gamification mechanisms for a DEX aggregator reward platform by engineering tiered-multiplier campaign logic atop a Uniswap v3 React fork, successfully leading client demos and onboarding new engineers.',
-      'Increased team velocity by roughly 66% (empowering a 3-person team to exceed a prior 5-person team’s output) and cleared a months-long PR backlog by restructuring sprint cadences and acceptance criteria as lead customer-facing engineer.'
+      'Trimmed 10–15K lines of application code and resolved UX and performance-degrading bugs on Ambient, a $4B+ trading platform, by leading a multi-month React refactor standardizing components and migrating state management to React Context.'
     ],
     highlight: 'Scaled 6 production platforms, deployed 1M+ product/day ingestion pipelines, and led client-facing delivery.'
   },
   {
     id: 'hypotenuse-freelance',
     company: 'HYPOTENUSE LABS',
-    location: 'TORONTO, ON',
+    location: 'Greater Toronto Area, ON',
     position: 'Freelance Software Engineer',
     period: 'DEC 2020 — JUN 2021',
     startDate: '2020-12',
@@ -93,7 +106,7 @@ export const experienceData: Experience[] = [
   {
     id: 'medlantis-coop',
     company: 'MEDLANTIS',
-    location: 'TORONTO, ON',
+    location: 'Greater Toronto Area, ON',
     position: 'Full-Stack Developer Intern',
     period: 'MAY 2016 — SEP 2016',
     startDate: '2016-05',

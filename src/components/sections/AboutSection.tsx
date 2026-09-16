@@ -35,7 +35,7 @@ export const AboutSection: React.FC = () => {
               color: '#ffffff'
             }}
           >
-            ENGINEERING AT THE INTERSECTION OF SCALE, CRAFT & RESILIENCE.
+            ENGINEERING ROOTS, BUILDER MINDSET.
           </h2>
         </MotionReveal>
 

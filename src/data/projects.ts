@@ -8,7 +8,7 @@ export const projectsData: Project[] = [
     description: 'A lightweight, anonymous ranked-choice group decision app engineered for offsites, team activities, and trips. Features animated drag-to-rank card physics with renumbering on drop, live Borda-count leaderboard tabulation, dynamic confetti physics, and an interactive drumroll slider revealing the winning venue with Google Maps integration.',
     tags: ['TYPESCRIPT', 'CLOUDFLARE WORKERS', 'KV STORAGE', 'NODE.JS', 'BORDA COUNT', 'INTERACTIVE UI'],
     githubUrl: 'https://github.com/surudhb/custom-survey',
-    date: '2024',
+    date: 'SEP 2026',
     featured: true,
     highlight: 'Zero-account voting using local token authorization with sub-50ms Cloudflare edge latency.'
   },

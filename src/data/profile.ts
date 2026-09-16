@@ -3,19 +3,20 @@ import { Profile } from '../types'
 export const profileData: Profile = {
   name: 'SURUDH BHUTANI',
   role: 'SOFTWARE ENGINEER // TECHNICAL PROGRAM MANAGER',
-  tagline: 'Full-stack software engineer with 6+ years shipping production systems across fin-tech, e-commerce, and high-throughput architectures.',
+  tagline: 'Full-stack software engineer with 6+ years shipping production systems across fin-tech, e-commerce, and gaming. Built data dashboards, marketplaces, gamified NFT drops, web3 apps and more from the ground up.',
   location: 'CALGARY, AB, CAN // OPEN TO HYBRID & REMOTE',
   bio: [
-    "Full-stack software engineer with 6+ years shipping production applications across fin-tech and e-commerce. Experienced shaping products, modernizing codebases, leading complex refactors, and owning features end-to-end on high-traffic platforms.",
-    "Side-quested for 1 year as a technical program manager in the company’s founding role translating between C-suite, compliance, product, engineering, and vendors; owning the critical path and empowering cross-functional distributed teams to ship fast, at scale, and on time.",
-    "Graduated from the University of Waterloo with a B.SE in Software Engineering (Honours, 2018). Currently based in Calgary, Alberta, and actively searching for Software Engineering roles."
+    "Full-stack software engineer with 6+ years shipping production systems across fin-tech, e-commerce, and gaming. Built data dashboards, web scrapers, marketplaces, gamified NFT drops, web3 apps and more from the ground up. Experienced shaping products, modernizing codebases, being customer-facing and owning features end-to-end on high-traffic platforms.",
+    "Side-quested for 1 year as a Lead Technical Program Manager in Hypotenuse Labs' founding role translating between C-suite, compliance, product, engineering, and vendors; owning the critical path and empowering remote, distributed teams to ship fast, at scale, and on time.",
+    "Graduated from the University of Waterloo with a B.SE in Software Engineering (Honours, 2018). Currently based in the Greater Calgary Area, Alberta, searching for my next adventure.",
+    "Currently seeking new opportunities!"
   ],
   education: [
     {
       institution: 'University of Waterloo',
       degree: 'B.S. Software Engineering (Honours)',
       period: '2014 — 2018',
-      honours: 'Honours Graduate, Faculty of Engineering (Year 1 at University of Ottawa, Dean’s Honour List)',
+      honours: 'Graduate, CO-OP',
       link: 'https://uwaterloo.ca/software-engineering/'
     },
     {
@@ -27,19 +28,19 @@ export const profileData: Profile = {
     },
     {
       institution: 'Notre Dame CSS',
-      degree: 'International Baccalaureate (IB) Diploma',
+      degree: 'IB Diploma',
       period: '2009 — 2013',
-      honours: 'Honour Roll Graduate'
+      honours: 'Honour Roll Graduate, Won 3rd place in Regional Chess Tournament representing Notre Dame'
     }
   ],
   skills: [
     {
       category: 'FRONTEND',
-      items: ['React', 'TypeScript', 'Vite', 'Swift', 'Tailwind CSS', 'Styled Components', 'Storybook', 'Jest']
+      items: ['React', 'TypeScript', 'Vite', 'Swift', 'Tailwind CSS', 'Styled Components', 'Storybook', 'Jest', 'Bootstrap']
     },
     {
       category: 'BACKEND & DATA',
-      items: ['Node.js', 'TypeScript', 'Python', 'PostgreSQL', 'Redis', 'GraphQL', 'PHP', 'Ruby on Rails']
+      items: ['Node.js', 'TypeScript', 'Python/Flask', 'PostgreSQL', 'MongoDB', 'Redis', 'GraphQL', 'PHP', 'Ruby on Rails', 'Supabase', 'Firebase', 'Algolia']
     },
     {
       category: 'INFRASTRUCTURE & TOOLING',
@@ -47,7 +48,7 @@ export const profileData: Profile = {
     },
     {
       category: 'DOMAINS',
-      items: ['Banking', 'Fin-tech', 'E-commerce', 'Web3 & DEX Protocols', 'Data Pipelines']
+      items: ['Banking', 'Fin-tech', 'E-commerce', 'Web3 & DEX Protocols', 'Data Pipelines', 'SaaS']
     }
   ],
   readingList: [

@@ -55,11 +55,12 @@ export const BlogSection: React.FC = () => {
                   className="responsive-two-col"
                   style={{
                     borderTop: '1px solid var(--border-subtle)',
-                    paddingTop: '2.5rem'
+                    paddingTop: '2.5rem',
+                    alignItems: 'start'
                   }}
                 >
                   {/* Left Column: Metadata */}
-                  <div>
+                  <div style={{ position: 'sticky', top: '5.5rem' }}>
                     <div
                       style={{
                         fontFamily: 'var(--font-mono)',
@@ -89,6 +90,38 @@ export const BlogSection: React.FC = () => {
                         </span>
                       ))}
                     </div>
+
+                    {/* External links */}
+                    {article.links && article.links.length > 0 && (
+                      <div
+                        style={{
+                          marginTop: '1rem',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '0.35rem'
+                        }}
+                      >
+                        {article.links.map((link) => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.78rem',
+                              letterSpacing: '0.06em',
+                              color: 'var(--text-muted)',
+                              transition: 'color 150ms'
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                          >
+                            {link.label} ↗
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   {/* Right Column: Title, Excerpt, Expanded Content */}

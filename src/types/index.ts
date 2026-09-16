@@ -11,6 +11,18 @@ export interface Project {
   highlight?: string
 }
 
+export interface GalleryItem {
+  title: string
+  description?: string
+  imageUrl?: string
+  linkUrl?: string
+}
+
+export interface ExternalLink {
+  label: string
+  href: string
+}
+
 export interface Experience {
   id: string
   company: string
@@ -23,6 +35,8 @@ export interface Experience {
   bullets: string[]
   highlight?: string
   link?: string
+  links?: ExternalLink[]
+  gallery?: GalleryItem[]
 }
 
 export interface Article {
@@ -34,6 +48,7 @@ export interface Article {
   excerpt: string
   readingTime: string
   content?: string
+  links?: ExternalLink[]
 }
 
 export interface MediaItem {
