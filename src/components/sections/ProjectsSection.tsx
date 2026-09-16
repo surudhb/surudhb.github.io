@@ -47,11 +47,12 @@ export const ProjectsSection: React.FC = () => {
                 className="responsive-two-col"
                 style={{
                   borderTop: '1px solid var(--border-subtle)',
-                  paddingTop: '2.5rem'
+                  paddingTop: '2.5rem',
+                  alignItems: 'start'
                 }}
               >
                 {/* Left Column: Number & Title */}
-                <div>
+                <div style={{ position: 'sticky', top: '5.5rem' }}>
                   <div
                     style={{
                       fontFamily: 'var(--font-mono)',
