@@ -23,7 +23,7 @@ interface FastStar {
   vy: number
   speedMultiplier: number
   size: number
-  colorType: 'white' | 'yellow' | 'cyan'
+  colorType: 'white' | 'yellow' | 'red' | 'green' | 'cyan'
 }
 
 export const StarfieldCanvas: React.FC = () => {
@@ -55,42 +55,28 @@ export const StarfieldCanvas: React.FC = () => {
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
-    // Star generation with subtle stellar color tints, long trails & shimmer
+    // 5 potential star colors evenly spread across the celestial canvas
+    const POTENTIAL_COLORS: ('white' | 'yellow' | 'red' | 'green' | 'cyan')[] = [
+      'white',
+      'yellow',
+      'red',
+      'green',
+      'cyan'
+    ]
+
     const starCount = 360
     const stars: Star[] = []
-    const veryBrightCount = Math.round(starCount * 0.02) // Exactly 2% of stars 
+    // Exactly 10 beacon stars (2 of each of the 5 potential colors)
+    const veryBrightCount = 10 
 
     for (let i = 0; i < starCount; i++) {
-      // 2% of stars are designated very bright ("first-magnitude" beacon stars)
+      // Beacon stars evenly distributed across all 5 colors (2 per color)
       const isVeryBright = i < veryBrightCount
 
-      // ~18% of stars receive a subtle stellar tint and meteor trails
-      const rand = Math.random()
-      let colorType: 'white' | 'yellow' | 'red' | 'green' | 'cyan' = 'white'
-      let hasLongTrail = false
-
-      if (rand < 0.07) {
-        colorType = 'yellow' // Solar amber / warm gold
-        hasLongTrail = true
-      } else if (rand < 0.13) {
-        colorType = 'red'    // Crimson dwarf
-        hasLongTrail = true
-      } else if (rand < 0.18) {
-        colorType = 'green'  // Aurora emerald
-        hasLongTrail = true
-      }
-
-      // Very bright stars can shine in vivid electric cyan, warm solar gold, or pure diamond white
-      if (isVeryBright) {
-        const brightRand = Math.random()
-        if (brightRand < 0.4) {
-          colorType = 'cyan' // Radiant electric blue/cyan beacon
-        } else if (brightRand < 0.65) {
-          colorType = 'yellow' // Brilliant warm gold
-        } else {
-          colorType = 'white' // Pure diamond brilliance
-        }
-      }
+      // Exactly even 20% distribution across all 5 potential colors (72 stars each)
+      const colorType = POTENTIAL_COLORS[i % POTENTIAL_COLORS.length]
+      // Meteor trails evenly distributed across ~25% of stars of all colors
+      const hasLongTrail = (i % 4 === 0) || isVeryBright
 
       // Full pulse animation from dim to bright takes 2-4 seconds for bright stars, 3-5 seconds for normal
       const pulseDurationSeconds = isVeryBright ? (2.0 + Math.random() * 1.5) : (3.0 + Math.random() * 2.0)
@@ -99,12 +85,12 @@ export const StarfieldCanvas: React.FC = () => {
       const starSize = isVeryBright
         ? Math.random() * 1.4 + 2.6 // Noticeably prominent (2.6 - 4.0)
         : hasLongTrail
-          ? Math.random() * 1.6 + 0.9
-          : Math.random() * 1.2 + 0.4
+          ? Math.random() * 1.6 + 1.0
+          : Math.random() * 1.2 + 0.6
 
       const starOpacity = isVeryBright
         ? 1.0 // Maximum brilliance
-        : Math.random() * 0.6 + 0.35
+        : Math.random() * 0.55 + 0.45
 
       stars.push({
         x: (Math.random() - 0.5) * width * 2,
@@ -114,7 +100,7 @@ export const StarfieldCanvas: React.FC = () => {
         size: starSize,
         baseOpacity: starOpacity,
         colorType,
-        hasLongTrail: hasLongTrail || isVeryBright,
+        hasLongTrail,
         shimmerPhase: Math.random() * Math.PI * 2,
         shimmerSpeed,
         isVeryBright
@@ -124,10 +110,12 @@ export const StarfieldCanvas: React.FC = () => {
     // Super-fast star state (10x faster than normal stars, spawning periodically)
     let activeFastStar: FastStar | null = null
     let fastStarTimer = 90 // Spawns after ~1.5 seconds initially, then every 3-6 seconds
+    let fastStarColorIndex = 0
 
     const spawnFastStar = (): FastStar => {
-      const colors: ('white' | 'yellow' | 'cyan')[] = ['white', 'yellow', 'cyan']
-      const chosenColor = colors[Math.floor(Math.random() * colors.length)]
+      // Cycle evenly across all 5 potential colors
+      const chosenColor = POTENTIAL_COLORS[fastStarColorIndex % POTENTIAL_COLORS.length]
+      fastStarColorIndex++
       return {
         x: (Math.random() - 0.5) * width * 1.6,
         y: (Math.random() - 0.5) * height * 1.6,
@@ -207,15 +195,15 @@ export const StarfieldCanvas: React.FC = () => {
     const getColor = (colorType: string, alpha: number) => {
       switch (colorType) {
         case 'yellow':
-          return `rgba(255, 200, 85, ${alpha})`   // Solar gold / amber glow
+          return `rgba(255, 205, 75, ${alpha})`   // Solar amber / warm gold glow
         case 'red':
-          return `rgba(255, 95, 95, ${alpha})`    // Crimson dwarf glow
+          return `rgba(255, 80, 80, ${alpha})`    // Crimson dwarf glow
         case 'green':
-          return `rgba(90, 245, 175, ${alpha})`   // Aurora emerald glow
+          return `rgba(75, 245, 155, ${alpha})`   // Aurora emerald glow
         case 'cyan':
-          return `rgba(100, 225, 255, ${alpha})`  // Electric cyan glow
+          return `rgba(60, 230, 255, ${alpha})`   // Electric cyan glow
         default:
-          return `rgba(200, 225, 255, ${alpha})`  // Stellar white-blue glow
+          return `rgba(225, 238, 255, ${alpha})`  // Stellar diamond white-blue glow
       }
     }
 
@@ -291,7 +279,7 @@ export const StarfieldCanvas: React.FC = () => {
       isVeryBright: boolean = false
     ) => {
       if (isVeryBright) {
-        // --- 2% VERY BRIGHT "FIRST-MAGNITUDE" BEACON STARS ---
+        // --- VERY BRIGHT "FIRST-MAGNITUDE" BEACON STARS ---
         // 1. Broad outer atmospheric radiance / corona
         const outerAuraRadius = starRadius * 4.8
         const auraGrad = ctx.createRadialGradient(px, py, 0, px, py, outerAuraRadius)
@@ -309,9 +297,9 @@ export const StarfieldCanvas: React.FC = () => {
         const innerGlowRadius = starRadius * 2.5
         const innerGrad = ctx.createRadialGradient(px, py, 0, px, py, innerGlowRadius)
         innerGrad.addColorStop(0, `rgba(255, 255, 255, ${depthAlpha})`)
-        innerGrad.addColorStop(0.28, `rgba(255, 255, 255, ${depthAlpha * 0.95})`)
-        innerGrad.addColorStop(0.52, getColor(colorType, depthAlpha * 0.9))
-        innerGrad.addColorStop(0.82, getColor(colorType, depthAlpha * 0.35))
+        innerGrad.addColorStop(0.25, `rgba(255, 255, 255, ${depthAlpha * 0.95})`)
+        innerGrad.addColorStop(0.5, getColor(colorType, depthAlpha * 0.9))
+        innerGrad.addColorStop(0.8, getColor(colorType, depthAlpha * 0.35))
         innerGrad.addColorStop(1, getColor(colorType, 0))
 
         ctx.beginPath()
@@ -319,7 +307,7 @@ export const StarfieldCanvas: React.FC = () => {
         ctx.arc(px, py, innerGlowRadius, 0, Math.PI * 2)
         ctx.fill()
 
-        // 3. Subtle 4-point stellar diffraction spikes (cross glint like astronomical telescopes & bright camera flares)
+        // 3. Subtle 4-point stellar diffraction spikes (cross glint like astronomical telescopes)
         const spikeLen = starRadius * 4.5
         const spikeWidth = Math.max(starRadius * 0.3, 0.75)
         if (spikeLen > 4 && depthAlpha > 0.3) {
@@ -327,64 +315,89 @@ export const StarfieldCanvas: React.FC = () => {
           ctx.translate(px, py)
           // Horizontal diffraction spike
           const hGrad = ctx.createLinearGradient(-spikeLen, 0, spikeLen, 0)
-          hGrad.addColorStop(0, 'rgba(255, 255, 255, 0)')
-          hGrad.addColorStop(0.5, `rgba(255, 255, 255, ${depthAlpha * 0.6})`)
-          hGrad.addColorStop(1, 'rgba(255, 255, 255, 0)')
+          hGrad.addColorStop(0, getColor(colorType, 0))
+          hGrad.addColorStop(0.5, colorType === 'white' ? `rgba(255, 255, 255, ${depthAlpha * 0.75})` : getColor(colorType, depthAlpha * 0.85))
+          hGrad.addColorStop(1, getColor(colorType, 0))
           ctx.fillStyle = hGrad
           ctx.fillRect(-spikeLen, -spikeWidth / 2, spikeLen * 2, spikeWidth)
 
           // Vertical diffraction spike
           const vGrad = ctx.createLinearGradient(0, -spikeLen, 0, spikeLen)
-          vGrad.addColorStop(0, 'rgba(255, 255, 255, 0)')
-          vGrad.addColorStop(0.5, `rgba(255, 255, 255, ${depthAlpha * 0.6})`)
-          vGrad.addColorStop(1, 'rgba(255, 255, 255, 0)')
+          vGrad.addColorStop(0, getColor(colorType, 0))
+          vGrad.addColorStop(0.5, colorType === 'white' ? `rgba(255, 255, 255, ${depthAlpha * 0.75})` : getColor(colorType, depthAlpha * 0.85))
+          vGrad.addColorStop(1, getColor(colorType, 0))
           ctx.fillStyle = vGrad
           ctx.fillRect(-spikeWidth / 2, -spikeLen, spikeWidth, spikeLen * 2)
           ctx.restore()
         }
 
-        // 4. Solid blown-out pure white nuclear core
+        // 4. Solid core with pure white nucleus
         ctx.beginPath()
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)'
+        ctx.fillStyle = colorType === 'white' ? 'rgba(255, 255, 255, 1)' : getColor(colorType, 1)
         ctx.arc(px, py, Math.max(starRadius * 0.52, 1.0), 0, Math.PI * 2)
         ctx.fill()
+
+        if (colorType !== 'white') {
+          ctx.beginPath()
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.95)'
+          ctx.arc(px, py, Math.max(starRadius * 0.28, 0.6), 0, Math.PI * 2)
+          ctx.fill()
+        }
         return
       }
 
-      if (starRadius < 0.9) {
-        // Distant pinpoint stars
+      if (starRadius < 1.05) {
+        // Distant pinpoint stars: distinct colored halo and core for colored stars
         if (colorType !== 'white') {
           ctx.beginPath()
-          ctx.fillStyle = getColor(colorType, depthAlpha * 0.6)
-          ctx.arc(px, py, starRadius * 1.6, 0, Math.PI * 2)
+          ctx.fillStyle = getColor(colorType, depthAlpha * 0.85)
+          ctx.arc(px, py, starRadius * 1.7, 0, Math.PI * 2)
           ctx.fill()
         }
         ctx.beginPath()
-        ctx.fillStyle = `rgba(255, 255, 255, ${depthAlpha})`
-        ctx.arc(px, py, starRadius * 0.7, 0, Math.PI * 2)
+        ctx.fillStyle = colorType === 'white' 
+          ? `rgba(255, 255, 255, ${depthAlpha})` 
+          : getColor(colorType, depthAlpha)
+        ctx.arc(px, py, Math.max(starRadius * 0.75, 0.5), 0, Math.PI * 2)
         ctx.fill()
         return
       }
 
-      // Medium and prominent stars: Chromatic glow halo with blown-out white core
-      const glowRadius = starRadius * 2.4
+      // Medium and prominent stars: Chromatic glow halo with bright nucleus
+      const glowRadius = starRadius * 2.5
       const radGrad = ctx.createRadialGradient(px, py, 0, px, py, glowRadius)
-      radGrad.addColorStop(0, `rgba(255, 255, 255, ${depthAlpha})`)
-      radGrad.addColorStop(0.24, `rgba(255, 255, 255, ${depthAlpha * 0.95})`)
-      radGrad.addColorStop(0.44, getColor(colorType, depthAlpha * 0.85))
-      radGrad.addColorStop(0.72, getColor(colorType, depthAlpha * 0.3))
-      radGrad.addColorStop(1, getColor(colorType, 0))
+      if (colorType === 'white') {
+        radGrad.addColorStop(0, `rgba(255, 255, 255, ${depthAlpha})`)
+        radGrad.addColorStop(0.28, `rgba(255, 255, 255, ${depthAlpha * 0.9})`)
+        radGrad.addColorStop(0.65, `rgba(215, 230, 255, ${depthAlpha * 0.35})`)
+        radGrad.addColorStop(1, 'rgba(215, 230, 255, 0)')
+      } else {
+        radGrad.addColorStop(0, `rgba(255, 255, 255, ${depthAlpha * 0.95})`)
+        radGrad.addColorStop(0.2, getColor(colorType, depthAlpha * 0.95))
+        radGrad.addColorStop(0.5, getColor(colorType, depthAlpha * 0.85))
+        radGrad.addColorStop(0.78, getColor(colorType, depthAlpha * 0.35))
+        radGrad.addColorStop(1, getColor(colorType, 0))
+      }
 
       ctx.beginPath()
       ctx.fillStyle = radGrad
       ctx.arc(px, py, glowRadius, 0, Math.PI * 2)
       ctx.fill()
 
-      // Solid blown-out white nucleus at the center
+      // Solid nucleus at the center
       ctx.beginPath()
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(depthAlpha * 1.25, 1)})`
-      ctx.arc(px, py, Math.max(starRadius * 0.42, 0.5), 0, Math.PI * 2)
+      ctx.fillStyle = colorType === 'white'
+        ? `rgba(255, 255, 255, ${Math.min(depthAlpha * 1.25, 1)})`
+        : getColor(colorType, Math.min(depthAlpha * 1.1, 1))
+      ctx.arc(px, py, Math.max(starRadius * 0.45, 0.5), 0, Math.PI * 2)
       ctx.fill()
+
+      if (colorType !== 'white' && starRadius > 1.6) {
+        ctx.beginPath()
+        ctx.fillStyle = `rgba(255, 255, 255, ${depthAlpha * 0.85})`
+        ctx.arc(px, py, starRadius * 0.22, 0, Math.PI * 2)
+        ctx.fill()
+      }
     }
 
     const render = () => {
@@ -431,7 +444,8 @@ export const StarfieldCanvas: React.FC = () => {
           star.y = (Math.random() - 0.5) * height * 2
           star.z = width
           star.pz = width
-          star.shimmerSpeed = Math.PI / ((3.0 + Math.random() * 2.0) * 60)
+          const pulseDurationSeconds = star.isVeryBright ? (2.0 + Math.random() * 1.5) : (3.0 + Math.random() * 2.0)
+          star.shimmerSpeed = Math.PI / (pulseDurationSeconds * 60)
         }
 
         // Shimmer oscillation for non-static, sparkling stars
@@ -457,13 +471,8 @@ export const StarfieldCanvas: React.FC = () => {
         const prevPx = star.x * pk + cx
         const prevPy = star.y * pk + cy
 
-        // Dynamic color transition: electric cyan / blazing white during hyperspace, cooling to natural stellar tints
-        let currentColorType = star.colorType
-        if (warpFactor > 0.35) {
-          currentColorType = i % 3 === 0 ? 'cyan' : 'white'
-        } else if (warpFactor > 0.12) {
-          currentColorType = i % 2 === 0 ? 'cyan' : star.colorType
-        }
+        // Evenly distributed stellar color maintained across all conditions and depths
+        const currentColorType = star.colorType
 
         if (px >= -30 && px <= width + 30 && py >= -30 && py <= height + 30) {
           const minAlpha = star.isVeryBright ? 0.45 : 0.08
