@@ -191,9 +191,42 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
     }
   }, [isMobileMenuOpen])
 
+  // Blur behind the header activates only once the top of the name begins scrolling above it
+  const [isBlurred, setIsBlurred] = useState(false)
+  const headerRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const nameEl = document.getElementById('hero-name-heading')
+      const headerEl = headerRef.current
+
+      if (nameEl && headerEl) {
+        const nameRect = nameEl.getBoundingClientRect()
+        const headerRect = headerEl.getBoundingClientRect()
+        // Top of the name begins scrolling above the bottom of the header / nav menu
+        setIsBlurred(nameRect.top <= headerRect.bottom)
+      } else if (nameEl) {
+        const nameRect = nameEl.getBoundingClientRect()
+        setIsBlurred(nameRect.top <= 75)
+      } else {
+        setIsBlurred(window.scrollY > 250)
+      }
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
+
   return (
     <>
       <header
+        ref={headerRef}
         style={{
           position: 'fixed',
           top: 0,
@@ -204,9 +237,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'linear-gradient(180deg, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.75) 60%, rgba(7, 7, 9, 0) 100%)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
+          background: isBlurred
+            ? 'linear-gradient(180deg, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.75) 60%, rgba(7, 7, 9, 0) 100%)'
+            : 'transparent',
+          backdropFilter: isBlurred ? 'blur(8px)' : 'none',
+          WebkitBackdropFilter: isBlurred ? 'blur(8px)' : 'none',
+          transition: 'background 280ms ease, backdrop-filter 280ms ease, -webkit-backdrop-filter 280ms ease',
           pointerEvents: 'none'
         }}
       >

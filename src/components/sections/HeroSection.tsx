@@ -30,6 +30,11 @@ export const HeroSection: React.FC = () => {
   const [hoveredSubKey, setHoveredSubKey] = useState<string | null>(null)
 
   const triggerDecode = () => {
+    // Dispatch lightspeed deceleration effect to starfield background
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('lightspeed:jump', { detail: { duration: 3000 } }))
+    }
+
     // Clear any previous running timers
     timersRef.current.forEach((t) => clearTimeout(t))
     timersRef.current = []
@@ -155,6 +160,7 @@ export const HeroSection: React.FC = () => {
       >
         {/* Main Name Heading with multi-swap Aurebesh decode and consistent English spacing */}
         <h1
+          id="hero-name-heading"
           onClick={triggerDecode}
           onMouseLeave={() => setHoveredIndex(null)}
           onPointerLeave={() => setHoveredIndex(null)}
