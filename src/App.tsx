@@ -8,6 +8,7 @@ import { ExperienceSection } from './components/sections/ExperienceSection'
 import { ProjectsSection } from './components/sections/ProjectsSection'
 import { BlogSection } from './components/sections/BlogSection'
 import { ExtrasSection } from './components/sections/ExtrasSection'
+import { TronDiscCursor } from './components/ui/TronDiscCursor'
 import { Footer } from './components/sections/Footer'
 import { useActiveSection } from './hooks/useActiveSection'
 
@@ -101,6 +102,9 @@ export const App: React.FC = () => {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
+      {/* Tron Legacy Rotating Identity Disc Cursor */}
+      <TronDiscCursor />
+
       {/* Deep Space Background Canvas with Subtle Colored Stars & Long Trails */}
       <StarfieldCanvas />
 
