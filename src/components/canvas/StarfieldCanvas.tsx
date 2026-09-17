@@ -7,10 +7,11 @@ interface Star {
   pz: number
   size: number
   baseOpacity: number
-  colorType: 'white' | 'yellow' | 'red' | 'green'
+  colorType: 'white' | 'yellow' | 'red' | 'green' | 'cyan'
   hasLongTrail: boolean
   shimmerPhase: number
   shimmerSpeed: number
+  isVeryBright: boolean
 }
 
 interface FastStar {
@@ -57,11 +58,15 @@ export const StarfieldCanvas: React.FC = () => {
     // Star generation with subtle stellar color tints, long trails & shimmer
     const starCount = 360
     const stars: Star[] = []
+    const veryBrightCount = Math.round(starCount * 0.02) // Exactly 2% of stars 
 
     for (let i = 0; i < starCount; i++) {
+      // 2% of stars are designated very bright ("first-magnitude" beacon stars)
+      const isVeryBright = i < veryBrightCount
+
       // ~18% of stars receive a subtle stellar tint and meteor trails
       const rand = Math.random()
-      let colorType: 'white' | 'yellow' | 'red' | 'green' = 'white'
+      let colorType: 'white' | 'yellow' | 'red' | 'green' | 'cyan' = 'white'
       let hasLongTrail = false
 
       if (rand < 0.07) {
@@ -75,21 +80,44 @@ export const StarfieldCanvas: React.FC = () => {
         hasLongTrail = true
       }
 
-      // Full pulse animation from dim to bright takes 3-5 seconds, randomized per star
-      const pulseDurationSeconds = 3.0 + Math.random() * 2.0
+      // Very bright stars can shine in vivid electric cyan, warm solar gold, or pure diamond white
+      if (isVeryBright) {
+        const brightRand = Math.random()
+        if (brightRand < 0.4) {
+          colorType = 'cyan' // Radiant electric blue/cyan beacon
+        } else if (brightRand < 0.65) {
+          colorType = 'yellow' // Brilliant warm gold
+        } else {
+          colorType = 'white' // Pure diamond brilliance
+        }
+      }
+
+      // Full pulse animation from dim to bright takes 2-4 seconds for bright stars, 3-5 seconds for normal
+      const pulseDurationSeconds = isVeryBright ? (2.0 + Math.random() * 1.5) : (3.0 + Math.random() * 2.0)
       const shimmerSpeed = Math.PI / (pulseDurationSeconds * 60)
+
+      const starSize = isVeryBright
+        ? Math.random() * 1.4 + 2.6 // Noticeably prominent (2.6 - 4.0)
+        : hasLongTrail
+          ? Math.random() * 1.6 + 0.9
+          : Math.random() * 1.2 + 0.4
+
+      const starOpacity = isVeryBright
+        ? 1.0 // Maximum brilliance
+        : Math.random() * 0.6 + 0.35
 
       stars.push({
         x: (Math.random() - 0.5) * width * 2,
         y: (Math.random() - 0.5) * height * 2,
         z: Math.random() * width,
         pz: Math.random() * width,
-        size: hasLongTrail ? Math.random() * 1.6 + 0.9 : Math.random() * 1.2 + 0.4,
-        baseOpacity: Math.random() * 0.6 + 0.35,
+        size: starSize,
+        baseOpacity: starOpacity,
         colorType,
-        hasLongTrail,
+        hasLongTrail: hasLongTrail || isVeryBright,
         shimmerPhase: Math.random() * Math.PI * 2,
-        shimmerSpeed
+        shimmerSpeed,
+        isVeryBright
       })
     }
 
@@ -148,6 +176,20 @@ export const StarfieldCanvas: React.FC = () => {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+
+    // Hyperspace / lightspeed transition state (Approach 1: 3.0s physics deceleration)
+    let warpStartTime = performance.now()
+    let warpDuration = 3000 // 3.0 seconds
+    let isWarping = true
+
+    const handleLightspeedJump = (e: Event) => {
+      const customEvent = e as CustomEvent<{ duration?: number }>
+      warpDuration = customEvent.detail?.duration || 3000
+      warpStartTime = performance.now()
+      isWarping = true
+    }
+
+    window.addEventListener('lightspeed:jump', handleLightspeedJump)
 
     // Render loop
     const baseSpeed = 0.45
@@ -238,14 +280,77 @@ export const StarfieldCanvas: React.FC = () => {
     }
 
     // Draws an authentic celestial star:
-    // Blown-out white nucleus (saturation of the human eye) surrounded by a soft chromatic glow halo
+    // Blown-out white nucleus (saturation of the human eye) surrounded by a soft chromatic glow halo.
+    // For 2% very bright stars: expansive radiant corona and subtle 4-point stellar diffraction spikes (lens glint)
     const drawStarBody = (
       px: number,
       py: number,
       starRadius: number,
       colorType: string,
-      depthAlpha: number
+      depthAlpha: number,
+      isVeryBright: boolean = false
     ) => {
+      if (isVeryBright) {
+        // --- 2% VERY BRIGHT "FIRST-MAGNITUDE" BEACON STARS ---
+        // 1. Broad outer atmospheric radiance / corona
+        const outerAuraRadius = starRadius * 4.8
+        const auraGrad = ctx.createRadialGradient(px, py, 0, px, py, outerAuraRadius)
+        auraGrad.addColorStop(0, getColor(colorType, depthAlpha * 0.6))
+        auraGrad.addColorStop(0.3, getColor(colorType, depthAlpha * 0.28))
+        auraGrad.addColorStop(0.65, getColor(colorType, depthAlpha * 0.08))
+        auraGrad.addColorStop(1, getColor(colorType, 0))
+
+        ctx.beginPath()
+        ctx.fillStyle = auraGrad
+        ctx.arc(px, py, outerAuraRadius, 0, Math.PI * 2)
+        ctx.fill()
+
+        // 2. High-intensity inner chromatic halo
+        const innerGlowRadius = starRadius * 2.5
+        const innerGrad = ctx.createRadialGradient(px, py, 0, px, py, innerGlowRadius)
+        innerGrad.addColorStop(0, `rgba(255, 255, 255, ${depthAlpha})`)
+        innerGrad.addColorStop(0.28, `rgba(255, 255, 255, ${depthAlpha * 0.95})`)
+        innerGrad.addColorStop(0.52, getColor(colorType, depthAlpha * 0.9))
+        innerGrad.addColorStop(0.82, getColor(colorType, depthAlpha * 0.35))
+        innerGrad.addColorStop(1, getColor(colorType, 0))
+
+        ctx.beginPath()
+        ctx.fillStyle = innerGrad
+        ctx.arc(px, py, innerGlowRadius, 0, Math.PI * 2)
+        ctx.fill()
+
+        // 3. Subtle 4-point stellar diffraction spikes (cross glint like astronomical telescopes & bright camera flares)
+        const spikeLen = starRadius * 4.5
+        const spikeWidth = Math.max(starRadius * 0.3, 0.75)
+        if (spikeLen > 4 && depthAlpha > 0.3) {
+          ctx.save()
+          ctx.translate(px, py)
+          // Horizontal diffraction spike
+          const hGrad = ctx.createLinearGradient(-spikeLen, 0, spikeLen, 0)
+          hGrad.addColorStop(0, 'rgba(255, 255, 255, 0)')
+          hGrad.addColorStop(0.5, `rgba(255, 255, 255, ${depthAlpha * 0.6})`)
+          hGrad.addColorStop(1, 'rgba(255, 255, 255, 0)')
+          ctx.fillStyle = hGrad
+          ctx.fillRect(-spikeLen, -spikeWidth / 2, spikeLen * 2, spikeWidth)
+
+          // Vertical diffraction spike
+          const vGrad = ctx.createLinearGradient(0, -spikeLen, 0, spikeLen)
+          vGrad.addColorStop(0, 'rgba(255, 255, 255, 0)')
+          vGrad.addColorStop(0.5, `rgba(255, 255, 255, ${depthAlpha * 0.6})`)
+          vGrad.addColorStop(1, 'rgba(255, 255, 255, 0)')
+          ctx.fillStyle = vGrad
+          ctx.fillRect(-spikeWidth / 2, -spikeLen, spikeWidth, spikeLen * 2)
+          ctx.restore()
+        }
+
+        // 4. Solid blown-out pure white nuclear core
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(255, 255, 255, 1)'
+        ctx.arc(px, py, Math.max(starRadius * 0.52, 1.0), 0, Math.PI * 2)
+        ctx.fill()
+        return
+      }
+
       if (starRadius < 0.9) {
         // Distant pinpoint stars
         if (colorType !== 'white') {
@@ -285,13 +390,29 @@ export const StarfieldCanvas: React.FC = () => {
     const render = () => {
       if (!isRunning) return
 
+      // Compute lightspeed warp factor (1.0 -> 0.0) with quartic ease-out
+      let warpFactor = 0
+      if (isWarping) {
+        const elapsed = performance.now() - warpStartTime
+        if (elapsed < warpDuration) {
+          const progress = elapsed / warpDuration
+          warpFactor = Math.pow(1 - progress, 2.5)
+        } else {
+          isWarping = false
+          warpFactor = 0
+        }
+      }
+
       // Smooth mouse lerp
       currentMouseX += (targetMouseX - currentMouseX) * 0.05
       currentMouseY += (targetMouseY - currentMouseY) * 0.05
 
       // Decay scroll boost
       scrollSpeed *= 0.92
-      const activeSpeed = baseSpeed + scrollSpeed
+
+      // High-velocity deceleration: peak speed ~50x normal speed, decaying smoothly down to baseSpeed
+      const maxWarpBoost = 50.0
+      const activeSpeed = baseSpeed + scrollSpeed + maxWarpBoost * warpFactor
 
       // Clear with deep void pitch black
       ctx.fillStyle = '#070709'
@@ -323,23 +444,51 @@ export const StarfieldCanvas: React.FC = () => {
         const py = star.y * k + cy
 
         // 3D projection for tail end position
-        // Stars with trails extend back significantly for a visible meteor tail
-        const trailDepth = star.hasLongTrail ? star.z + activeSpeed * 26 : star.pz
-        const pk = 220 / Math.min(trailDepth, width)
+        // In hyperspace warp, ALL stars stretch into luminous radial beams that contract back as speed drops
+        let trailDepth: number
+        if (warpFactor > 0.005) {
+          const warpTrailExtension = activeSpeed * (16 + warpFactor * 36)
+          trailDepth = star.z + warpTrailExtension
+        } else {
+          trailDepth = star.hasLongTrail ? star.z + activeSpeed * 26 : star.pz
+        }
+
+        const pk = 220 / Math.min(trailDepth, width * 2)
         const prevPx = star.x * pk + cx
         const prevPy = star.y * pk + cy
 
-        if (px >= -30 && px <= width + 30 && py >= -30 && py <= height + 30) {
-          const depthAlpha = Math.min(Math.max((1 - star.z / width) * star.baseOpacity * shimmer, 0.08), 1)
-          const starRadius = Math.max(star.size * k * 0.45 * (0.85 + shimmer * 0.15), 0.65)
+        // Dynamic color transition: electric cyan / blazing white during hyperspace, cooling to natural stellar tints
+        let currentColorType = star.colorType
+        if (warpFactor > 0.35) {
+          currentColorType = i % 3 === 0 ? 'cyan' : 'white'
+        } else if (warpFactor > 0.12) {
+          currentColorType = i % 2 === 0 ? 'cyan' : star.colorType
+        }
 
-          // Draw tapered meteor trail if moving fast or has long trail
-          if (star.hasLongTrail || activeSpeed > 1.2) {
-            drawMeteorTrail(px, py, prevPx, prevPy, starRadius, star.colorType, depthAlpha * 0.75)
+        if (px >= -30 && px <= width + 30 && py >= -30 && py <= height + 30) {
+          const minAlpha = star.isVeryBright ? 0.45 : 0.08
+          const depthAlpha = Math.min(
+            Math.max((1 - star.z / width) * star.baseOpacity * shimmer * (1 + warpFactor * 0.4), minAlpha),
+            1
+          )
+          const minRadius = star.isVeryBright ? 1.35 : 0.65
+          const starRadius = Math.max(star.size * k * 0.45 * (0.85 + shimmer * 0.15), minRadius)
+
+          // Draw tapered meteor trail if moving fast, has long trail, or in warp
+          if (star.hasLongTrail || activeSpeed > 1.2 || warpFactor > 0.008) {
+            drawMeteorTrail(
+              px,
+              py,
+              prevPx,
+              prevPy,
+              starRadius,
+              currentColorType,
+              depthAlpha * (0.75 + warpFactor * 0.22)
+            )
           }
 
-          // Draw star body: blown-out white center with chromatic glow halo
-          drawStarBody(px, py, starRadius, star.colorType, depthAlpha)
+          // Draw star body: blown-out white center with chromatic glow halo (plus glint for 2% bright stars)
+          drawStarBody(px, py, starRadius, currentColorType, depthAlpha, star.isVeryBright)
         }
 
         star.pz = star.z
@@ -347,7 +496,11 @@ export const StarfieldCanvas: React.FC = () => {
 
       // 2. Render 10x Super-Fast Star ("every now and then")
       if (!activeFastStar) {
-        fastStarTimer--
+        if (warpFactor < 0.05) {
+          fastStarTimer--
+        } else {
+          fastStarTimer = 120
+        }
         if (fastStarTimer <= 0) {
           activeFastStar = spawnFastStar()
           fastStarTimer = 180 + Math.random() * 260 // Next one in ~3 to 7 seconds
@@ -400,6 +553,7 @@ export const StarfieldCanvas: React.FC = () => {
       window.removeEventListener('touchstart', handleTouchMove)
       window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('lightspeed:jump', handleLightspeedJump)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
