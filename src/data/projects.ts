@@ -8,21 +8,9 @@ export const projectsData: Project[] = [
     description: 'A lightweight, anonymous ranked-choice group decision app engineered for offsites, team activities, and trips. Features animated drag-to-rank card physics with renumbering on drop, live Borda-count leaderboard tabulation, dynamic confetti physics, and an interactive drumroll slider revealing the winning venue with Google Maps integration.',
     tags: ['TYPESCRIPT', 'CLOUDFLARE WORKERS', 'KV STORAGE', 'NODE.JS', 'BORDA COUNT', 'INTERACTIVE UI'],
     githubUrl: 'https://github.com/surudhb/custom-survey',
-    date: 'SEP 2026',
+    date: '2026',
     featured: true,
     highlight: 'Zero-account voting using local token authorization with sub-50ms Cloudflare edge latency.'
-  },
-  {
-    id: 'avatar-tla-api',
-    title: 'AVATAR: THE LAST AIRBENDER API',
-    subtitle: 'RESTful API & Universe Data Service',
-    description: 'A comprehensive, high-throughput REST API cataloging characters, nations, elements, and episode transcripts from Avatar: The Last Airbender. Engineered with resilient schema validation, caching, and custom endpoints.',
-    tags: ['NODE.JS', 'EXPRESS', 'MONGODB ATLAS', 'REST API', 'PAPER CSS'],
-    liveUrl: 'https://avatar-the-last-airbender-api.herokuapp.com/',
-    githubUrl: 'https://github.com/surudhb/avatar-the-last-airbender-api',
-    date: '2020',
-    featured: true,
-    highlight: 'Engineered complete relational character graph and full text quote querying.'
   },
   {
     id: 'virtual-arcade',
@@ -36,16 +24,28 @@ export const projectsData: Project[] = [
     highlight: 'Sub-30ms bidirectional state synchronization across concurrent clients.'
   },
   {
+    id: 'avatar-tla-api',
+    title: 'AVATAR: THE LAST AIRBENDER API',
+    subtitle: 'RESTful API & Universe Data Service',
+    description: 'A REST API cataloging characters, nations, elements, and episode transcripts from Avatar: The Last Airbender. Engineered with resilient schema validation, caching, and custom endpoints.',
+    tags: ['NODE.JS', 'EXPRESS', 'CLOUDFLARE WORKERS', 'REST API', 'PAPER CSS'],
+    liveUrl: 'https://avatar-the-last-airbender-api.bsurudh.workers.dev/',
+    githubUrl: 'https://github.com/surudhb/avatar-the-last-airbender-api',
+    date: '2020',
+    featured: true,
+    highlight: 'Initially manually cleaned up data and engineered complete relational character graph.'
+  },
+  {
     id: 'gary-twitter-bot',
     title: 'GARY TWITTER BOT',
     subtitle: 'Automated Micro-Content Engine',
-    description: 'Autonomous cron-scheduled daemon streaming algorithmic daily humor, linguistics, and curated GIF pairings directly to Twitter using the Twitter Developer API and serverless workers.',
+    description: 'Autonomous cron-scheduled daemon streaming daily humor, bad jokes, and curated GIF pairings directly to Twitter using the Twitter Developer API and serverless workers.',
     tags: ['NODE.JS', 'TWITTER API', 'SERVERLESS', 'AUTOMATION'],
     githubUrl: 'https://github.com/surudhb/first-twitter-bot',
     liveUrl: 'https://twitter.com/GarySquarepan13',
     date: '2020',
     featured: true,
-    highlight: 'Zero-downtime execution running headless scheduled tasks.'
+    highlight: 'Twitter bots used to be fun right?'
   },
   {
     id: 'concentration',

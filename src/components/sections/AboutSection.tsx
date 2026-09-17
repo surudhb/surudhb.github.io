@@ -71,12 +71,7 @@ export const AboutSection: React.FC = () => {
             [ACADEMIC CREDENTIALS]
           </div>
 
-          <div
-            className="responsive-grid-auto"
-            style={{
-              marginBottom: '6rem'
-            }}
-          >
+          <div className="responsive-grid-auto">
             {profileData.education.map((edu, idx) => (
               <div
                 key={idx}
@@ -103,7 +98,20 @@ export const AboutSection: React.FC = () => {
                     color: '#ffffff'
                   }}
                 >
-                  {edu.institution}
+                  {edu.link ? (
+                    <a
+                      href={edu.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: '#ffffff', textDecoration: 'none' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                    >
+                      {edu.institution} ↗
+                    </a>
+                  ) : (
+                    edu.institution
+                  )}
                 </h3>
                 <div
                   style={{
@@ -125,111 +133,43 @@ export const AboutSection: React.FC = () => {
                     {edu.honours}
                   </div>
                 )}
+
+                {/* Optional external links */}
+                {edu.links && edu.links.length > 0 && (
+                  <div
+                    style={{
+                      marginTop: '0.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.35rem'
+                    }}
+                  >
+                    {edu.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.78rem',
+                          letterSpacing: '0.06em',
+                          color: 'var(--text-muted)',
+                          transition: 'color 150ms',
+                          textDecoration: 'none'
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                      >
+                        {link.label} ↗
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </MotionReveal>
-
-        {/* Cultural Influences & Reading Manifest */}
-        <div
-          className="responsive-grid-auto"
-          style={{
-            paddingTop: '2rem',
-            borderTop: '1px solid var(--border-subtle)'
-          }}
-        >
-          {/* Reading List */}
-          <MotionReveal delay={0.1}>
-            <div
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.78rem',
-                letterSpacing: '0.12em',
-                color: 'var(--text-muted)',
-                marginBottom: '1.5rem'
-              }}
-            >
-              [LITERATURE & DISPATCHES]
-            </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {profileData.readingList.map((book, idx) => (
-                <li key={idx}>
-                  <a
-                    href={book.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: '1.05rem',
-                      fontWeight: 500,
-                      color: '#ffffff',
-                      display: 'block',
-                      marginBottom: '0.2rem'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
-                  >
-                    {book.title} ↗
-                  </a>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.82rem',
-                      color: 'var(--text-muted)'
-                    }}
-                  >
-                    {book.creator}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </MotionReveal>
-
-          {/* Watch List */}
-          <MotionReveal delay={0.2}>
-            <div
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.78rem',
-                letterSpacing: '0.12em',
-                color: 'var(--text-muted)',
-                marginBottom: '1.5rem'
-              }}
-            >
-              [CINEMATIC & NARRATIVE ARCHIVES]
-            </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {profileData.watchList.map((media, idx) => (
-                <li key={idx}>
-                  <a
-                    href={media.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: '1.05rem',
-                      fontWeight: 500,
-                      color: '#ffffff',
-                      display: 'block',
-                      marginBottom: '0.2rem'
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
-                  >
-                    {media.title} ↗
-                  </a>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.82rem',
-                      color: 'var(--text-muted)'
-                    }}
-                  >
-                    {media.creator}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </MotionReveal>
-        </div>
       </div>
     </section>
   )

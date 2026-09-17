@@ -169,28 +169,63 @@ export const BlogSection: React.FC = () => {
                       </div>
                     )}
 
-                    <button
-                      onClick={() => toggleExpand(article.id)}
+                    <div
                       style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        letterSpacing: '0.06em',
-                        color: '#ffffff',
-                        padding: 0,
-                        marginTop: '0.5rem',
-                        display: 'inline-flex',
+                        display: 'flex',
                         alignItems: 'center',
-                        gap: '0.4rem'
+                        gap: '1.25rem',
+                        marginTop: '0.65rem',
+                        flexWrap: 'wrap'
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
                     >
-                      {isExpanded ? '[ COLLAPSE LOG - ]' : '[ READ TRANSMISSION + ]'}
-                    </button>
+                      <button
+                        onClick={() => toggleExpand(article.id)}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          cursor: 'pointer',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.8rem',
+                          fontWeight: 600,
+                          letterSpacing: '0.06em',
+                          color: '#ffffff',
+                          padding: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.4rem'
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                      >
+                        {isExpanded ? '[ COLLAPSE LOG - ]' : '[ EXPAND LOG + ]'}
+                      </button>
+
+                      {/* Read Full Transmission Button (Hidden for now until full blog post pages launch) */}
+                      {isExpanded && (
+                        <a
+                          href={`/blog/${article.slug || article.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Read full article on a dedicated page"
+                          style={{
+                            display: 'none', // Hidden for now as requested
+                            fontFamily: 'var(--font-mono)',
+                            fontSize: '0.8rem',
+                            fontWeight: 600,
+                            letterSpacing: '0.06em',
+                            color: 'var(--text-secondary)',
+                            textDecoration: 'none',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            transition: 'color 150ms ease'
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                        >
+                          [ READ FULL TRANSMISSION ↗ ]
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </article>
               </MotionReveal>

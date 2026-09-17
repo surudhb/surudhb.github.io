@@ -1,9 +1,17 @@
 import React from 'react'
 import { profileData } from '../../data/profile'
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (sectionId: string) => void
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (onNavigate) {
+      onNavigate('home')
+    } else {
+      window.scrollTo(0, 0)
+    }
   }
 
   return (

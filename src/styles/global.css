@@ -12,7 +12,7 @@ html {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -301,3 +301,13 @@ code, pre, .font-mono {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Tron Legacy Identity Disc Cursor
+   ========================================================================== */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+

@@ -1,6 +1,6 @@
 ---
 title: "Avatar: The Last Airbender API"
-live: "https://avatar-the-last-airbender-api.herokuapp.com/"
+live: "https://avatar-the-last-airbender-api.bsurudh.workers.dev/"
 github: "https://github.com/surudhb/avatar-the-last-airbender-api"
 inProgress: false
 tags: ["NodeJS", "ExpressJS", "MongoDB", "Paper CSS"]
