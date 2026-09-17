@@ -1,7 +1,7 @@
 import { Experience } from '../types'
 
 export const experienceData: Experience[] = [
-    {
+  {
     id: 'seeking-new-opportunities',
     company: 'SEEKING NEW OPPORTUNITIES',
     location: 'REMOTE, HYBRID, GREATER CALGARY AREA, GREATER VANCOUVER AREA',
@@ -9,6 +9,10 @@ export const experienceData: Experience[] = [
     period: 'APR 2026 — PRESENT',
     startDate: '2026-04',
     endDate: 'PRESENT',
+    links: [
+      { label: 'Github', href: 'https://github.com/surudhb' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/surudhb/' },
+    ],
     tags: ['Software Engineer', 'Frontend Engineer', 'Backend Engineer', 'Solutions Engineer'],
     bullets: [
       'Seeking new opportunities that leverage my experience in full-stack development, technical program management and being a technical liaison to build interesting things.',
@@ -38,8 +42,16 @@ export const experienceData: Experience[] = [
     period: 'APR 2024 — APR 2025',
     startDate: '2024-04',
     endDate: '2025-04',
-    link: 'https://hypotenuse.ca/',
-    tags: ['PROGRAM MANAGEMENT', 'DELIVERY', 'FINTECH', 'RISK MITIGATION', 'SR&ED', 'LINEAR'],
+    link: 'https://www.hypotenuselabs.com/',
+    links: [
+      { label: 'Kaidro - Web3 Gaming', href: 'https://kaidro.com/' },
+      { label: 'Cultured - Web3 Prediction Market', href: 'https://www.cultured.finance/' },
+      { label: 'Mansa Finance - Web3 Settlements', href: 'https://mansa.xyz/' },
+      { label: 'Ambient Finance - Web3 Exchange', href: 'https://ambient.finance/' },
+      { label: 'Animoca Brands - Web3', href: 'https://www.animocabrands.com/' },
+      { label: 'Berachain - Web3', href: 'https://www.berachain.com/' },
+    ],
+    tags: ['XFN', 'SDLC', 'PROGRAM MANAGEMENT', 'DELIVERY', 'RISK MITIGATION', 'SR&ED'],
     bullets: [
       'Owned end-to-end delivery across 10+ concurrent SaaS programs in fin-tech and e-commerce, reducing leadership escalations to 0 from scoping to launch as the single point of accountability on scope, timeline, and delivery risk.',
       'Recovered a joint venture stalled by 7 months of requirement misalignment, re-establishing a single source of truth on scope, decomposing partner requirements into tracked deliverables, and eliminating $1.2M in idle spend.',
@@ -58,8 +70,18 @@ export const experienceData: Experience[] = [
     period: 'JUN 2021 — APR 2024',
     startDate: '2021-06',
     endDate: '2024-04',
-    link: 'https://hypotenuse.ca/',
-    tags: ['REACT', 'TYPESCRIPT', 'PYTHON', 'DOCKER', 'AWS LAMBDA', 'SQS', 'POSTGRESQL', 'REDIS', 'DIGITALOCEAN'],
+    link: 'https://www.hypotenuselabs.com/',
+    links: [
+      { label: 'The Archivist - Resale E-commerce', href: 'https://www.businessoffashion.com/articles/technology/new-resale-start-up-sees-data-as-the-answer-to-courting-luxury-brands/' },
+      { label: 'Skio - Shopify Subscriptions', href: 'https://www.skio.com/' },
+      { label: 'Ambient Finance - Web3 Exchange', href: 'https://ambient.finance/' },
+      { label: 'Conductive AI - Web3 Analytics', href: 'https://www.linkedin.com/company/conductiveai/about/' },
+      { label: 'High Street - Web3 Real Estate', href: 'https://www.highstreet.market/' },
+      { label: 'Kaidro - Web3 Gaming', href: 'https://kaidro.com/' },
+      { label: 'Ampleforth - Web3', href: 'https://www.ampleforth.org/' },
+      { label: 'Disa - iOS Fitness Marketplace', href: 'https://iphone.apkpure.com/app/disa-fitness/com.disa.disaapp' },
+    ],
+    tags: ['REACT', 'TYPESCRIPT', 'NEXT.JS', 'SWIFT/SWIFTUI', 'PYTHON/FLASK', 'MONGODB', 'DOCKER', 'NOSQL', 'SQS', 'POSTGRESQL', 'REDIS', 'DIGITALOCEAN'],
     bullets: [
       'Processed 1M+ products/day for The Archivist by architecting high-throughput data ingestion ETL pipelines utilizing Python, ScrapingBee, AWS Lambda, SQS, and PostgreSQL.',
       'Delivered The Archivist’s resale analytics dashboard, enabling real-time market insights by designing interactive visualizations (Recharts) backed by custom APIs and data stores (Flask, Redis, Algolia).',
@@ -77,8 +99,11 @@ export const experienceData: Experience[] = [
     period: 'DEC 2020 — JUN 2021',
     startDate: '2020-12',
     endDate: '2021-06',
-    link: 'https://hypotenuse.ca/',
-    tags: ['REACT', 'TYPESCRIPT', 'TAILWIND', 'VOGUE FEATURED', 'E-COMMERCE'],
+    link: 'https://www.hypotenuselabs.com/',
+    links: [
+      { label: 'The Archivist - Resale E-commerce', href: 'https://www.businessoffashion.com/articles/technology/new-resale-start-up-sees-data-as-the-answer-to-courting-luxury-brands/' },
+    ],
+    tags: ['REACT', 'TYPESCRIPT', 'JEST', 'BOOTSTRAP', 'PYTHON/FLASK', 'VOGUE FEATURED', 'E-COMMERCE'],
     bullets: [
       'Co-architected the React marketplace frontend for The Archivist, an LVMH award-finalist and Vogue-featured resale platform.',
       'Established core frontend patterns, responsive typography, and client-side caching strategies from initial 0-to-1 prototype to production launch.'
@@ -93,8 +118,8 @@ export const experienceData: Experience[] = [
     period: 'JAN 2017 — DEC 2017',
     startDate: '2017-01',
     endDate: '2017-12',
-    link: 'https://app.futureadvisor.com/',
-    tags: ['REACT', 'WEBPACK', 'STORYBOOK', 'DOCKER', 'RUBY ON RAILS'],
+    link: 'https://www.ycombinator.com/companies/futureadvisor',
+    tags: ['REACT', 'JEST', 'STORYBOOK.JS', 'DOCKER', 'RUBY ON RAILS', 'WEALTH MANAGEMENT'],
     bullets: [
       'Migrated authentication and dashboard components from native JS and jQuery to React.js, improving client rendering performance.',
       'Built and maintained a shared UI component library deployed across a dozen major institutional banking portals in React Storybook.',
@@ -111,7 +136,7 @@ export const experienceData: Experience[] = [
     period: 'MAY 2016 — SEP 2016',
     startDate: '2016-05',
     endDate: '2016-09',
-    link: 'https://medlantis.org/',
+    link: 'https://medlantis.thinkific.com/',
     tags: ['PYTHON', 'PHP', 'AUTH0', 'MIXPANEL', 'K-MEANS'],
     bullets: [
       'Built a personalized video-lessons recommendation engine based on k-means clustering in Python for medical continuing education.',
@@ -128,6 +153,7 @@ export const experienceData: Experience[] = [
     period: 'SEP 2015 — DEC 2015',
     startDate: '2015-09',
     endDate: '2015-12',
+    link: 'https://www.rvh.on.ca/',
     tags: ['SWIFT', 'UIKIT', 'QUICK', 'XCTEST', 'ASP.NET', 'SQL SERVER'],
     bullets: [
       'Independently built an iOS-native hospital inventory data-visualization mobile app in Swift for clinical operations.',

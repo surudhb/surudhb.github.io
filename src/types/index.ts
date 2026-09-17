@@ -57,19 +57,22 @@ export interface MediaItem {
   link?: string
 }
 
+export interface EducationItem {
+  institution: string
+  degree: string
+  period: string
+  honours?: string
+  link?: string
+  links?: ExternalLink[]
+}
+
 export interface Profile {
   name: string
   role: string
   tagline: string
   location: string
   bio: string[]
-  education: {
-    institution: string
-    degree: string
-    period: string
-    honours?: string
-    link?: string
-  }[]
+  education: EducationItem[]
   skills: {
     category: string
     items: string[]
