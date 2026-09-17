@@ -17,7 +17,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
     { id: 'about', label: 'ABOUT', num: '02' },
     { id: 'experience', label: 'EXPERIENCE', num: '03' },
     { id: 'projects', label: 'PROJECTS', num: '04' },
-    { id: 'blog', label: 'BLOG', num: '05' }
+    { id: 'blog', label: 'BLOG', num: '05' },
+    { id: 'extras', label: 'EXTRAS', num: '06' }
   ]
 
   // Laser bolt state machine for desktop underline
@@ -158,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
     if (programmaticNavTimerRef.current) clearTimeout(programmaticNavTimerRef.current)
     programmaticNavTimerRef.current = setTimeout(() => {
       programmaticTargetRef.current = null
-    }, 1200)
+    }, 1800)
 
     startLaserBolt(currentActiveIdRef.current, sectionId)
     onNavigate(sectionId)
@@ -561,7 +562,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               <motion.button
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.04 * 5, duration: 0.18 }}
+                transition={{ delay: 0.04 * 6, duration: 0.18 }}
                 onClick={(e) => {
                   handleResumeDownload(e)
                   setIsMobileMenuOpen(false)
@@ -589,7 +590,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                       color: 'var(--text-muted)'
                     }}
                   >
-                    06 //
+                    07 //
                   </span>
                   <span
                     style={{
