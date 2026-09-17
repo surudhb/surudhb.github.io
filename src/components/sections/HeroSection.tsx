@@ -177,7 +177,7 @@ export const HeroSection: React.FC = () => {
           }}
         >
           {/* Word 1: SURUDH (keeps letters contiguous) */}
-          <span style={{ display: 'inline-flex', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+          <span style={{ display: 'inline-flex', whiteSpace: 'nowrap' }}>
             {FIRST_NAME.split('').map((char, charIdx) => {
               const index = charIdx
               const isHovered = hoveredIndex === index
@@ -216,7 +216,7 @@ export const HeroSection: React.FC = () => {
           </span>
 
           {/* Word 2: BHUTANI (keeps letters contiguous) */}
-          <span style={{ display: 'inline-flex', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+          <span style={{ display: 'inline-flex', whiteSpace: 'nowrap' }}>
             {LAST_NAME.split('').map((char, charIdx) => {
               const index = charIdx + 7
               const isHovered = hoveredIndex === index
