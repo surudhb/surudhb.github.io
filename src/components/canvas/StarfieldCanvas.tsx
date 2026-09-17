@@ -1,5 +1,30 @@
 import React, { useEffect, useRef } from 'react'
 
+// ============================================================================
+// Celestial Star Color Palette - Single Source of Truth
+// To add, remove, or modify star colors, simply edit this dictionary.
+// The engine automatically derives:
+// 1. Color type unions (StarColorType)
+// 2. Uniform per-color quotas across all depths
+// 3. Balanced beacon star assignments (equal per color)
+// 4. Uniform meteor trail distribution (equal per color)
+// 5. Hypersonic shooting star cycle
+// 6. Real-time RGBA shader color generation
+// ============================================================================
+export const STAR_COLOR_PALETTE = {
+  white: (alpha: number) => `rgba(230, 242, 255, ${alpha})`,     // Stellar diamond white
+  yellow: (alpha: number) => `rgba(255, 210, 80, ${alpha})`,     // Solar gold / amber glow
+  red: (alpha: number) => `rgba(255, 85, 85, ${alpha})`,        // Crimson dwarf glow
+  green: (alpha: number) => `rgba(80, 250, 160, ${alpha})`,     // Aurora emerald glow
+  cyan: (alpha: number) => `rgba(60, 230, 255, ${alpha})`,      // Electric hyperdrive cyan
+  blue: (alpha: number) => `rgba(65, 140, 255, ${alpha})`,      // Starry blue (deeper than cyan, royal sapphire)
+  purple: (alpha: number) => `rgba(170, 95, 255, ${alpha})`,    // Space-y cosmic purple
+  magenta: (alpha: number) => `rgba(255, 75, 200, ${alpha})`,   // Vibrant stellar magenta
+} as const
+
+export type StarColorType = keyof typeof STAR_COLOR_PALETTE
+export const POTENTIAL_COLORS = Object.keys(STAR_COLOR_PALETTE) as StarColorType[]
+
 interface Star {
   x: number
   y: number
@@ -7,7 +32,7 @@ interface Star {
   pz: number
   size: number
   baseOpacity: number
-  colorType: 'white' | 'yellow' | 'red' | 'green' | 'cyan'
+  colorType: StarColorType
   hasLongTrail: boolean
   shimmerPhase: number
   shimmerSpeed: number
@@ -23,7 +48,7 @@ interface FastStar {
   vy: number
   speedMultiplier: number
   size: number
-  colorType: 'white' | 'yellow' | 'red' | 'green' | 'cyan'
+  colorType: StarColorType
 }
 
 export const StarfieldCanvas: React.FC = () => {
@@ -55,28 +80,25 @@ export const StarfieldCanvas: React.FC = () => {
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
-    // 5 potential star colors evenly spread across the celestial canvas
-    const POTENTIAL_COLORS: ('white' | 'yellow' | 'red' | 'green' | 'cyan')[] = [
-      'white',
-      'yellow',
-      'red',
-      'green',
-      'cyan'
-    ]
+    const numColors = POTENTIAL_COLORS.length
+    // Allocate an equal number of stars per color to guarantee strict mathematical uniformity
+    const starsPerColor = Math.round(360 / numColors)
+    const starCount = starsPerColor * numColors
+    // Exactly equal number of beacon stars per color (e.g. 1 per color)
+    const beaconsPerColor = Math.max(1, Math.round((starCount * 0.02) / numColors))
 
-    const starCount = 360
     const stars: Star[] = []
-    // Exactly 10 beacon stars (2 of each of the 5 potential colors)
-    const veryBrightCount = 10 
 
     for (let i = 0; i < starCount; i++) {
-      // Beacon stars evenly distributed across all 5 colors (2 per color)
-      const isVeryBright = i < veryBrightCount
+      const colorIndex = i % numColors
+      const colorType = POTENTIAL_COLORS[colorIndex]
+      const colorInstanceIndex = Math.floor(i / numColors)
 
-      // Exactly even 20% distribution across all 5 potential colors (72 stars each)
-      const colorType = POTENTIAL_COLORS[i % POTENTIAL_COLORS.length]
-      // Meteor trails evenly distributed across ~25% of stars of all colors
-      const hasLongTrail = (i % 4 === 0) || isVeryBright
+      // Exactly beaconsPerColor beacon stars for EACH color
+      const isVeryBright = colorInstanceIndex < beaconsPerColor
+
+      // Exactly 1 in 4 stars of EACH color has a meteor trail (+ all beacon stars)
+      const hasLongTrail = (colorInstanceIndex % 4 === 0) || isVeryBright
 
       // Full pulse animation from dim to bright takes 2-4 seconds for bright stars, 3-5 seconds for normal
       const pulseDurationSeconds = isVeryBright ? (2.0 + Math.random() * 1.5) : (3.0 + Math.random() * 2.0)
@@ -113,7 +135,7 @@ export const StarfieldCanvas: React.FC = () => {
     let fastStarColorIndex = 0
 
     const spawnFastStar = (): FastStar => {
-      // Cycle evenly across all 5 potential colors
+      // Cycle evenly across all potential colors in the palette
       const chosenColor = POTENTIAL_COLORS[fastStarColorIndex % POTENTIAL_COLORS.length]
       fastStarColorIndex++
       return {
@@ -193,18 +215,8 @@ export const StarfieldCanvas: React.FC = () => {
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
     const getColor = (colorType: string, alpha: number) => {
-      switch (colorType) {
-        case 'yellow':
-          return `rgba(255, 205, 75, ${alpha})`   // Solar amber / warm gold glow
-        case 'red':
-          return `rgba(255, 80, 80, ${alpha})`    // Crimson dwarf glow
-        case 'green':
-          return `rgba(75, 245, 155, ${alpha})`   // Aurora emerald glow
-        case 'cyan':
-          return `rgba(60, 230, 255, ${alpha})`   // Electric cyan glow
-        default:
-          return `rgba(225, 238, 255, ${alpha})`  // Stellar diamond white-blue glow
-      }
+      const paletteFn = STAR_COLOR_PALETTE[colorType as StarColorType]
+      return paletteFn ? paletteFn(alpha) : STAR_COLOR_PALETTE.white(alpha)
     }
 
     // Draws a tapered meteor trail that starts as thick as the star circle and tapers to a fine tip
