@@ -327,7 +327,7 @@ export const experienceData: Experience[] = [
         tags: ['TYPESCRIPT', 'NEXT.JS', 'RONIN NETWORK', 'SMART CONTRACTS', 'WEB3 GAMING']
       },
       {
-        label: 'Internal Contributions - Engineering & Culture',
+        label: 'Bonus - Engineering & Culture',
         title: 'HYPOTENUSE LABS — ENGINEERING CULTURE & INTERNAL CONTRIBUTIONS',
         engagementWindow: 'Jun 2021 – Apr 2024',
         role: 'Software Engineer',
