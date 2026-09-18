@@ -135,7 +135,7 @@ export const experienceData: Experience[] = [
         tags: ['PROOF-OF-LIQUIDITY', 'L1 INFRASTRUCTURE', 'VALIDATOR TOOLING', 'TPM']
       },
       {
-        label: 'Internal Contributions - Ops & Scaling',
+        label: 'Bonus - Ops & Scaling',
         title: 'HYPOTENUSE LABS — OPERATIONS, SCALING & INTERNAL CONTRIBUTIONS',
         engagementWindow: 'Apr 2024 – Apr 2025',
         role: 'Lead Technical Program Manager',
@@ -327,7 +327,7 @@ export const experienceData: Experience[] = [
         tags: ['TYPESCRIPT', 'NEXT.JS', 'RONIN NETWORK', 'SMART CONTRACTS', 'WEB3 GAMING']
       },
       {
-        label: 'Internal Contributions - Engineering & Culture',
+        label: 'Bonus - Engineering & Culture',
         title: 'HYPOTENUSE LABS — ENGINEERING CULTURE & INTERNAL CONTRIBUTIONS',
         engagementWindow: 'Jun 2021 – Apr 2024',
         role: 'Software Engineer',
