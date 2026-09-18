@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Aurebesh";
+  font-weight: 400;
+  font-style: normal;
+  src: url("./Aurebesh/Aurebesh.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CavePainting";
+  font-weight: 400;
+  font-style: normal;
+  src: url("./CavePainting/CAVEPAID.TTF") format("truetype");
+  font-display: swap;
+}
