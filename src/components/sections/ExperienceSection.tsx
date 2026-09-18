@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { AppWindow } from 'lucide-react'
 import { experienceData } from '../../data/experience'
 import { GalleryItem, ExperienceLinkItem } from '../../types'
 import { MotionReveal } from '../ui/MotionReveal'
-import { GalleryModal } from '../ui/GalleryModal'
-import { ExperienceDetailModal } from '../ui/ExperienceDetailModal'
 import { useTheme } from '../../context/ThemeContext'
 import { THEME_CONFIG } from '../../config/themeConfig'
 import { ThemedText } from '../ui/ThemedText'
+
+const GalleryModal = lazy(() => import('../ui/GalleryModal').then(m => ({ default: m.GalleryModal })))
+const ExperienceDetailModal = lazy(() => import('../ui/ExperienceDetailModal').then(m => ({ default: m.ExperienceDetailModal })))
 
 export const ExperienceSection: React.FC = () => {
   const { theme } = useTheme()
@@ -293,27 +294,31 @@ export const ExperienceSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Gallery modal */}
-      <AnimatePresence>
-        {gallery && (
-          <GalleryModal
-            title={gallery.title}
-            items={gallery.items}
-            onClose={() => setGallery(null)}
-          />
-        )}
-      </AnimatePresence>
+      {/* Gallery modal — lazy loaded, only fetched on first open */}
+      <Suspense fallback={null}>
+        <AnimatePresence>
+          {gallery && (
+            <GalleryModal
+              title={gallery.title}
+              items={gallery.items}
+              onClose={() => setGallery(null)}
+            />
+          )}
+        </AnimatePresence>
+      </Suspense>
 
-      {/* Experience Detail Modal */}
-      <AnimatePresence>
-        {activeDetail && (
-          <ExperienceDetailModal
-            item={activeDetail.item}
-            companyContext={activeDetail.company}
-            onClose={() => setActiveDetail(null)}
-          />
-        )}
-      </AnimatePresence>
+      {/* Experience Detail Modal — lazy loaded, only fetched on first open */}
+      <Suspense fallback={null}>
+        <AnimatePresence>
+          {activeDetail && (
+            <ExperienceDetailModal
+              item={activeDetail.item}
+              companyContext={activeDetail.company}
+              onClose={() => setActiveDetail(null)}
+            />
+          )}
+        </AnimatePresence>
+      </Suspense>
     </section>
   )
 }

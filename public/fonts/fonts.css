@@ -1,15 +1,29 @@
+/* ─── Always-loaded fonts (serve from same origin) ─────────────────────────── */
+
 @font-face {
-  font-family: "Aurebesh";
-  font-weight: 400;
+  font-family: 'Space Grotesk';
+  font-weight: 300 700;
   font-style: normal;
-  src: url("./Aurebesh/Aurebesh.woff") format("woff");
   font-display: swap;
+  src: url('./SpaceGrotesk/SpaceGrotesk-Variable.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "CavePainting";
+  font-family: 'JetBrains Mono';
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+  src: url('./JetBrainsMono/JetBrainsMono-Variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Aurebesh';
   font-weight: 400;
   font-style: normal;
-  src: url("./CavePainting/CAVEPAID.TTF") format("truetype");
-  font-display: swap;
+  font-display: optional;
+  src: url('./Aurebesh/Aurebesh.woff') format('woff');
 }
+
+/* ─── Light-mode-only fonts (injected lazily by ThemeContext) ───────────────── */
+/* Press Start 2P, Silkscreen, and CavePainting are declared via JS when
+   the light theme is first activated so they never block dark-mode visitors. */
