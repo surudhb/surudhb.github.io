@@ -1,13 +1,8 @@
 import React from 'react'
 import { projectsData } from '../../data/projects'
 import { MotionReveal } from '../ui/MotionReveal'
-import { useTheme } from '../../context/ThemeContext'
-import { THEME_CONFIG } from '../../config/themeConfig'
-import { ThemedText } from '../ui/ThemedText'
 
 export const ProjectsSection: React.FC = () => {
-  const { theme } = useTheme()
-
   return (
     <section
       id="projects"
@@ -29,7 +24,7 @@ export const ProjectsSection: React.FC = () => {
               marginBottom: '1.5rem'
             }}
           >
-            <ThemedText text={THEME_CONFIG[theme].projectsHeader} />
+            [MANIFEST // 02 // SELECTED WORKS]
           </div>
           <h2
             style={{
@@ -37,7 +32,7 @@ export const ProjectsSection: React.FC = () => {
               letterSpacing: '-0.025em',
               lineHeight: 1.15,
               marginBottom: '4rem',
-              color: 'var(--text-primary)'
+              color: '#ffffff'
             }}
           >
             SYSTEMS, PLATFORMS & EXPERIMENTS.
@@ -66,14 +61,14 @@ export const ProjectsSection: React.FC = () => {
                       marginBottom: '0.5rem'
                     }}
                   >
-                    <ThemedText text={`0${index + 1} // ${project.date}`} />
+                    0{index + 1} // {project.date}
                   </div>
                   <h3
                     style={{
                       fontSize: '1.45rem',
                       fontWeight: 700,
                       letterSpacing: '-0.01em',
-                      color: 'var(--text-primary)',
+                      color: '#ffffff',
                       marginBottom: '0.5rem',
                       lineHeight: 1.2
                     }}
@@ -111,7 +106,7 @@ export const ProjectsSection: React.FC = () => {
                         fontFamily: 'var(--font-mono)',
                         fontSize: '0.82rem',
                         color: 'var(--text-muted)',
-                        borderLeft: '2px solid var(--border-subtle)',
+                        borderLeft: '2px solid rgba(255, 255, 255, 0.2)',
                         paddingLeft: '1rem',
                         marginBottom: '1.5rem'
                       }}
@@ -137,7 +132,7 @@ export const ProjectsSection: React.FC = () => {
                           fontSize: '0.72rem',
                           letterSpacing: '0.04em',
                           color: 'var(--text-muted)',
-                          background: 'var(--bg-card)',
+                          background: 'rgba(255, 255, 255, 0.03)',
                           border: '1px solid var(--border-subtle)',
                           padding: '0.2rem 0.6rem',
                           borderRadius: '2px'
@@ -160,13 +155,13 @@ export const ProjectsSection: React.FC = () => {
                           fontSize: '0.8rem',
                           fontWeight: 600,
                           letterSpacing: '0.05em',
-                          color: 'var(--text-primary)',
+                          color: '#ffffff',
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '0.35rem'
                         }}
                         onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
                       >
                         LIVE DEMO ↗
                       </a>
@@ -187,7 +182,7 @@ export const ProjectsSection: React.FC = () => {
                           alignItems: 'center',
                           gap: '0.35rem'
                         }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
                         onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
                       >
                         REPOSITORY ↗
