@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GalleryItem } from '../../types'
+import { useTheme } from '../../context/ThemeContext'
+import { CactusIcon } from './CactusIcon'
 
 interface GalleryModalProps {
   title: string
@@ -9,6 +12,7 @@ interface GalleryModalProps {
 }
 
 export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClose }) => {
+  const { isLightMode } = useTheme()
   const [activeIdx, setActiveIdx] = useState(0)
 
   useEffect(() => {
@@ -19,15 +23,20 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
     }
     document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
+    document.body.classList.add('modal-open')
+    window.dispatchEvent(new CustomEvent('modal:state', { detail: { isOpen: true } }))
+
     return () => {
       document.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
+      document.body.classList.remove('modal-open')
+      window.dispatchEvent(new CustomEvent('modal:state', { detail: { isOpen: false } }))
     }
   }, [items.length, onClose])
 
   const active = items[activeIdx]
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -37,9 +46,10 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 9000,
-        background: 'rgba(7, 7, 9, 0.92)',
-        backdropFilter: 'blur(12px)',
+        zIndex: 9999,
+        background: 'var(--bg-modal-backdrop)',
+        backdropFilter: 'var(--backdrop-filter-modal)',
+        WebkitBackdropFilter: 'var(--backdrop-filter-modal)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -56,10 +66,11 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
         style={{
           width: '100%',
           maxWidth: '860px',
-          background: 'rgba(255, 255, 255, 0.03)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'var(--bg-primary)',
+          border: '1px solid var(--border-subtle)',
           borderRadius: '4px',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          boxShadow: 'var(--modal-box-shadow)'
         }}
       >
         {/* Header */}
@@ -69,7 +80,8 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '1.25rem 1.75rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.07)'
+            borderBottom: '1px solid var(--border-subtle)',
+            background: 'var(--bg-card)'
           }}
         >
           <div>
@@ -79,16 +91,21 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
                 fontSize: '0.72rem',
                 letterSpacing: '0.1em',
                 color: 'var(--text-muted)',
-                marginBottom: '0.3rem'
+                marginBottom: '0.3rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
               }}
             >
-              [GALLERY // {activeIdx + 1} / {items.length}]
+              <span>[GALLERY</span>
+              {isLightMode ? <CactusIcon size="0.8em" /> : <span>//</span>}
+              <span>{activeIdx + 1} / {items.length}]</span>
             </div>
             <div
               style={{
                 fontSize: '1.05rem',
                 fontWeight: 600,
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 letterSpacing: '0.02em'
               }}
             >
@@ -100,7 +117,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
             aria-label="Close gallery"
             style={{
               background: 'none',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              border: '1px solid var(--border-subtle)',
               color: 'var(--text-muted)',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.78rem',
@@ -111,12 +128,12 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
               transition: 'color 150ms, border-color 150ms'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#ffffff'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'
+              e.currentTarget.style.color = 'var(--text-primary)'
+              e.currentTarget.style.borderColor = 'var(--border-active)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = 'var(--text-muted)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'
+              e.currentTarget.style.borderColor = 'var(--border-subtle)'
             }}
           >
             [ ESC ]
@@ -168,7 +185,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
               </div>
             )}
 
-            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#ffffff', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
               {active.title}
             </div>
             {active.description && (
@@ -192,14 +209,14 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.78rem',
                   letterSpacing: '0.06em',
-                  color: '#ffffff',
+                  color: 'var(--text-primary)',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.3rem',
                   marginTop: 'auto'
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
               >
                 OPEN LINK ↗
               </a>
@@ -277,6 +294,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
           </div>
         )}
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   )
 }

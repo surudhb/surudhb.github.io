@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import { ExperienceLinkItem } from '../../types'
+import { useTheme } from '../../context/ThemeContext'
+import { CactusIcon } from './CactusIcon'
 
 interface ExperienceDetailModalProps {
   item: ExperienceLinkItem
@@ -13,22 +16,28 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
   companyContext,
   onClose
 }) => {
+  const { isLightMode } = useTheme()
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
+    document.body.classList.add('modal-open')
+    window.dispatchEvent(new CustomEvent('modal:state', { detail: { isOpen: true } }))
 
     return () => {
       document.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
+      document.body.classList.remove('modal-open')
+      window.dispatchEvent(new CustomEvent('modal:state', { detail: { isOpen: false } }))
     }
   }, [onClose])
 
   const title = item.title || item.label
 
-  return (
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -38,10 +47,10 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 9000,
-        background: 'rgba(7, 7, 9, 0.92)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        zIndex: 9999,
+        background: 'var(--bg-modal-backdrop)',
+        backdropFilter: 'var(--backdrop-filter-modal)',
+        WebkitBackdropFilter: 'var(--backdrop-filter-modal)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -59,21 +68,21 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
           width: '100%',
           maxWidth: '860px',
           maxHeight: 'min(85vh, 720px)',
-          background: 'rgba(14, 14, 18, 0.98)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'var(--bg-primary)',
+          border: '1px solid var(--border-subtle)',
           borderRadius: '4px',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '0 24px 48px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.2)'
+          boxShadow: 'var(--modal-box-shadow)'
         }}
       >
         {/* Header */}
         <div
           style={{
             padding: '1.35rem 1.75rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-            background: 'rgba(255, 255, 255, 0.02)',
+            borderBottom: '1px solid var(--border-subtle)',
+            background: 'var(--bg-card)',
             flexShrink: 0
           }}
         >
@@ -90,10 +99,22 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.72rem',
                 letterSpacing: '0.12em',
-                color: 'var(--text-muted)'
+                color: 'var(--text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                flexWrap: 'wrap'
               }}
             >
-              [SYSTEM LOG // {companyContext ? `${companyContext.toUpperCase()} // ` : ''}PROJECT DOSSIER]
+              <span>{isLightMode ? '[EPOCH LOG' : '[SYSTEM LOG'}</span>
+              {isLightMode ? <CactusIcon size="0.8em" /> : <span>//</span>}
+              {companyContext && (
+                <>
+                  <span>{companyContext.toUpperCase()}</span>
+                  {isLightMode ? <CactusIcon size="0.8em" /> : <span>//</span>}
+                </>
+              )}
+              <span>{isLightMode ? 'EXPEDITION DOSSIER]' : 'PROJECT DOSSIER]'}</span>
             </div>
 
             <button
@@ -101,7 +122,7 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
               aria-label="Close modal"
               style={{
                 background: 'none',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
+                border: '1px solid var(--border-subtle)',
                 color: 'var(--text-muted)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.78rem',
@@ -113,12 +134,12 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                 flexShrink: 0
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#ffffff'
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.35)'
+                e.currentTarget.style.color = 'var(--text-primary)'
+                e.currentTarget.style.borderColor = 'var(--border-active)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = 'var(--text-muted)'
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)'
+                e.currentTarget.style.borderColor = 'var(--border-subtle)'
               }}
             >
               [ ESC ]
@@ -130,7 +151,7 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
             style={{
               fontSize: 'clamp(1.2rem, 2.8vw, 1.55rem)',
               fontWeight: 600,
-              color: '#ffffff',
+              color: 'var(--text-primary)',
               letterSpacing: '-0.015em',
               margin: '0 0 0.65rem 0',
               lineHeight: 1.25
@@ -168,7 +189,7 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     transition: 'color 150ms ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#ffffff'
+                    e.currentTarget.style.color = 'var(--text-primary)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = 'var(--text-muted)'
@@ -247,8 +268,8 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
           <div
             style={{
               padding: '0.9rem 1.75rem',
-              borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-              background: 'rgba(0, 0, 0, 0.25)',
+              borderTop: '1px solid var(--border-subtle)',
+              background: 'var(--bg-card)',
               display: 'flex',
               flexWrap: 'wrap',
               gap: '0.5rem',
@@ -263,7 +284,7 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                   fontSize: '0.72rem',
                   letterSpacing: '0.04em',
                   color: 'var(--text-muted)',
-                  background: 'rgba(255, 255, 255, 0.03)',
+                  background: 'var(--bg-primary)',
                   border: '1px solid var(--border-subtle)',
                   padding: '0.2rem 0.55rem',
                   borderRadius: '2px'
@@ -275,6 +296,7 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
           </div>
         )}
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   )
 }

@@ -6,8 +6,12 @@ import { GalleryItem, ExperienceLinkItem } from '../../types'
 import { MotionReveal } from '../ui/MotionReveal'
 import { GalleryModal } from '../ui/GalleryModal'
 import { ExperienceDetailModal } from '../ui/ExperienceDetailModal'
+import { useTheme } from '../../context/ThemeContext'
+import { THEME_CONFIG } from '../../config/themeConfig'
+import { ThemedText } from '../ui/ThemedText'
 
 export const ExperienceSection: React.FC = () => {
+  const { theme } = useTheme()
   const [gallery, setGallery] = useState<{ title: string; items: GalleryItem[] } | null>(null)
   const [activeDetail, setActiveDetail] = useState<{ item: ExperienceLinkItem; company: string } | null>(null)
 
@@ -32,7 +36,7 @@ export const ExperienceSection: React.FC = () => {
               marginBottom: '1.5rem'
             }}
           >
-            [SYSTEM LOG // 03 // WORK CHRONICLE]
+            <ThemedText text={THEME_CONFIG[theme].experienceHeader} />
           </div>
           <h2
             style={{
@@ -40,7 +44,7 @@ export const ExperienceSection: React.FC = () => {
               letterSpacing: '-0.025em',
               lineHeight: 1.15,
               marginBottom: '4rem',
-              color: '#ffffff'
+              color: 'var(--text-primary)'
             }}
           >
             PRODUCTION TRACK RECORD & LEADERSHIP.
@@ -75,7 +79,7 @@ export const ExperienceSection: React.FC = () => {
                     style={{
                       fontSize: '1.45rem',
                       fontWeight: 700,
-                      color: '#ffffff',
+                      color: 'var(--text-primary)',
                       marginBottom: '0.35rem',
                       lineHeight: 1.2
                     }}
@@ -85,14 +89,14 @@ export const ExperienceSection: React.FC = () => {
                         href={exp.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: '#ffffff' }}
+                        style={{ color: 'var(--text-primary)' }}
                         onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                       >
-                        {exp.company} ↗
+                        <ThemedText text={exp.company} /> ↗
                       </a>
                     ) : (
-                      exp.company
+                      <ThemedText text={exp.company} />
                     )}
                   </h3>
                   <div
@@ -148,7 +152,7 @@ export const ExperienceSection: React.FC = () => {
                               alignItems: 'center',
                               gap: '0.35rem'
                             }}
-                            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                           >
                             <span>{link.label}</span>
@@ -170,7 +174,7 @@ export const ExperienceSection: React.FC = () => {
                               alignItems: 'center',
                               gap: '0.35rem'
                             }}
-                            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                           >
                             {link.label} ↗
@@ -198,7 +202,7 @@ export const ExperienceSection: React.FC = () => {
                         display: 'inline-flex',
                         alignItems: 'center'
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                       onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                     >
                       SEE MORE ↗
@@ -252,7 +256,7 @@ export const ExperienceSection: React.FC = () => {
                         fontFamily: 'var(--font-mono)',
                         fontSize: '0.82rem',
                         color: 'var(--text-muted)',
-                        borderLeft: '2px solid rgba(255, 255, 255, 0.2)',
+                        borderLeft: '2px solid var(--border-subtle)',
                         paddingLeft: '1rem',
                         marginBottom: '1.5rem',
                         lineHeight: 1.6
@@ -272,7 +276,7 @@ export const ExperienceSection: React.FC = () => {
                           fontSize: '0.72rem',
                           letterSpacing: '0.04em',
                           color: 'var(--text-muted)',
-                          background: 'rgba(255, 255, 255, 0.03)',
+                          background: 'var(--bg-card)',
                           border: '1px solid var(--border-subtle)',
                           padding: '0.2rem 0.6rem',
                           borderRadius: '2px'

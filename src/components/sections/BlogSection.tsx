@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { articlesData } from '../../data/articles'
 import { MotionReveal } from '../ui/MotionReveal'
+import { useTheme } from '../../context/ThemeContext'
+import { THEME_CONFIG } from '../../config/themeConfig'
+import { ThemedText } from '../ui/ThemedText'
 
 export const BlogSection: React.FC = () => {
+  const { theme } = useTheme()
   const [expandedId, setExpandedId] = useState<string | null>(null)
 
   const toggleExpand = (id: string) => {
@@ -30,7 +34,7 @@ export const BlogSection: React.FC = () => {
               marginBottom: '1.5rem'
             }}
           >
-            [TRANSMISSIONS // 04 // ESSAYS & LOGS]
+            <ThemedText text={THEME_CONFIG[theme].blogHeader} />
           </div>
           <h2
             style={{
@@ -38,7 +42,7 @@ export const BlogSection: React.FC = () => {
               letterSpacing: '-0.025em',
               lineHeight: 1.15,
               marginBottom: '4rem',
-              color: '#ffffff'
+              color: 'var(--text-primary)'
             }}
           >
             NOTES ON LOGIC, CRAFT & CULTURE.
@@ -69,7 +73,7 @@ export const BlogSection: React.FC = () => {
                         marginBottom: '0.4rem'
                       }}
                     >
-                      {article.date} // {article.readingTime}
+                      <ThemedText text={`${article.date} // ${article.readingTime}`} />
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.8rem' }}>
                       {article.tags.map((tag) => (
@@ -114,7 +118,7 @@ export const BlogSection: React.FC = () => {
                               color: 'var(--text-muted)',
                               transition: 'color 150ms'
                             }}
-                            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                           >
                             {link.label} ↗
@@ -130,14 +134,14 @@ export const BlogSection: React.FC = () => {
                       style={{
                         fontSize: '1.45rem',
                         fontWeight: 700,
-                        color: '#ffffff',
+                        color: 'var(--text-primary)',
                         marginBottom: '0.85rem',
                         lineHeight: 1.2,
                         cursor: 'pointer'
                       }}
                       onClick={() => toggleExpand(article.id)}
                     >
-                      {article.title}
+                      <ThemedText text={article.title} />
                     </h3>
                     <p
                       style={{
@@ -156,10 +160,10 @@ export const BlogSection: React.FC = () => {
                         style={{
                           marginTop: '1.5rem',
                           padding: '1.75rem',
-                          background: 'rgba(255, 255, 255, 0.02)',
-                          borderLeft: '2px solid rgba(255, 255, 255, 0.3)',
+                          background: 'var(--bg-card)',
+                          borderLeft: '2px solid var(--border-subtle)',
                           borderRadius: '2px',
-                          color: '#ffffff',
+                          color: 'var(--text-primary)',
                           fontSize: '1rem',
                           lineHeight: 1.85,
                           whiteSpace: 'pre-line'
@@ -188,14 +192,14 @@ export const BlogSection: React.FC = () => {
                           fontSize: '0.8rem',
                           fontWeight: 600,
                           letterSpacing: '0.06em',
-                          color: '#ffffff',
+                          color: 'var(--text-primary)',
                           padding: 0,
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '0.4rem'
                         }}
                         onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                       >
                         {isExpanded ? '[ COLLAPSE LOG - ]' : '[ EXPAND LOG + ]'}
                       </button>
