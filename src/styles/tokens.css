@@ -6,6 +6,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'CavePainting';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/CavePainting/CAVEPAID.TTF') format('truetype');
+  font-display: swap;
+}
+
 :root {
   /* Color Palette - Industrial Deep Space */
   --bg-primary: #070709;
@@ -27,7 +35,23 @@
   --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-pixel: 'Silkscreen', 'JetBrains Mono', monospace;
+  --font-arcade: 'Press Start 2P', monospace;
   --font-aurebesh: 'Aurebesh', sans-serif;
+  --font-cave: 'CavePainting', sans-serif;
+
+  /* Card and Surface Tokens (Dark Default) */
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --border-card: rgba(255, 255, 255, 0.1);
+  --shadow-card: none;
+  --divider-symbol-color: rgba(255, 255, 255, 0.45);
+
+  /* Modal Backdrop Tokens (Dark Default - soft frosted glass, not pitch black) */
+  --bg-modal-backdrop: rgba(7, 7, 9, 0.65);
+  --backdrop-filter-modal: blur(16px);
+  --modal-box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --bg-mobile-blur-tint: rgba(7, 7, 9, 0.35);
 
   /* Spatial Scale */
   --space-xs: 0.25rem;
@@ -47,3 +71,34 @@
   --transition-smooth: 300ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+[data-theme="light"] {
+  /* Color Palette - Minimalist Chrome Dinosaur / Offline Runner */
+  --bg-primary: #f7f7f7;
+  --bg-secondary: #eeeeee;
+  --bg-tertiary: #e2e2e2;
+  
+  --text-primary: #202124;
+  --text-secondary: #535353;
+  --text-muted: #757575;
+  --text-dim: #9aa0a6;
+  
+  --accent-cyan: #202124;
+  --accent-amber: #d93025;
+  --border-subtle: rgba(83, 83, 83, 0.22);
+  --border-active: #202124;
+
+  /* Card and Surface Tokens (Light Mode) */
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f5f5;
+  --border-card: #535353;
+  --shadow-card: 3px 3px 0px #535353;
+  --divider-symbol-color: #535353;
+
+  /* Modal Backdrop Tokens (Light Mode - airy frosted glass blur without darkening) */
+  --bg-modal-backdrop: rgba(247, 247, 247, 0.55);
+  --backdrop-filter-modal: blur(16px);
+  --modal-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(83, 83, 83, 0.35);
+  --bg-mobile-blur-tint: rgba(247, 247, 247, 0.28);
+}
+
