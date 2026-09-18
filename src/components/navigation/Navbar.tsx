@@ -1,138 +1,98 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { CactusIcon } from '../ui/CactusIcon'
 import { useScrollY } from '../../hooks/useScrollY'
+import { NavLaserBolt } from './NavLaserBolt'
+import { NavMobileDrawer } from './NavMobileDrawer'
 
 interface NavbarProps {
   activeSection: string
   onNavigate: (sectionId: string) => void
 }
 
+const NAV_ITEMS = [
+  { id: 'home',       label: 'HOME',       num: '01' },
+  { id: 'about',      label: 'ABOUT',      num: '02' },
+  { id: 'experience', label: 'EXPERIENCE', num: '03' },
+  { id: 'projects',   label: 'PROJECTS',   num: '04' },
+  { id: 'blog',       label: 'BLOG',       num: '05' },
+  { id: 'extras',     label: 'EXTRAS',     num: '06' },
+]
+
+interface LaserState {
+  activeId: string
+  departingId: string | null
+  arrivingId: string | null
+  direction: 'right' | 'left'
+  inFlight: boolean
+}
+
 export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
   const { isLightMode, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // Experience placed above Projects as requested
-  const navItems = [
-    { id: 'home', label: 'HOME', num: '01' },
-    { id: 'about', label: 'ABOUT', num: '02' },
-    { id: 'experience', label: 'EXPERIENCE', num: '03' },
-    { id: 'projects', label: 'PROJECTS', num: '04' },
-    { id: 'blog', label: 'BLOG', num: '05' },
-    { id: 'extras', label: 'EXTRAS', num: '06' }
-  ]
-
-  // Laser bolt state machine for desktop underline
-  const [laserState, setLaserState] = useState<{
-    activeId: string
-    departingId: string | null
-    arrivingId: string | null
-    direction: 'right' | 'left'
-    inFlight: boolean
-  }>({
+  const [laserState, setLaserState] = useState<LaserState>({
     activeId: activeSection || 'home',
     departingId: null,
     arrivingId: null,
     direction: 'right',
-    inFlight: false
+    inFlight: false,
   })
 
-  const departTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const arriveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const settleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const departTimerRef          = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const arriveTimerRef          = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const settleTimerRef          = useRef<ReturnType<typeof setTimeout> | null>(null)
   const programmaticNavTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const programmaticTargetRef = useRef<string | null>(null)
-  const currentActiveIdRef = useRef<string>(activeSection || 'home')
+  const programmaticTargetRef   = useRef<string | null>(null)
+  const currentActiveIdRef      = useRef<string>(activeSection || 'home')
 
   const clearAllTimers = () => {
-    if (departTimerRef.current) clearTimeout(departTimerRef.current)
-    if (arriveTimerRef.current) clearTimeout(arriveTimerRef.current)
-    if (settleTimerRef.current) clearTimeout(settleTimerRef.current)
+    if (departTimerRef.current)  clearTimeout(departTimerRef.current)
+    if (arriveTimerRef.current)  clearTimeout(arriveTimerRef.current)
+    if (settleTimerRef.current)  clearTimeout(settleTimerRef.current)
   }
 
   const startLaserBolt = useCallback((fromId: string, toId: string) => {
     if (fromId === toId) {
       currentActiveIdRef.current = toId
-      setLaserState({
-        activeId: toId,
-        departingId: null,
-        arrivingId: null,
-        direction: 'right',
-        inFlight: false
-      })
+      setLaserState({ activeId: toId, departingId: null, arrivingId: null, direction: 'right', inFlight: false })
       return
     }
 
-    const fromIdx = navItems.findIndex((n) => n.id === fromId)
-    const toIdx = navItems.findIndex((n) => n.id === toId)
+    const fromIdx = NAV_ITEMS.findIndex(n => n.id === fromId)
+    const toIdx   = NAV_ITEMS.findIndex(n => n.id === toId)
     if (fromIdx === -1 || toIdx === -1) {
       currentActiveIdRef.current = toId
-      setLaserState({
-        activeId: toId,
-        departingId: null,
-        arrivingId: null,
-        direction: 'right',
-        inFlight: false
-      })
+      setLaserState({ activeId: toId, departingId: null, arrivingId: null, direction: 'right', inFlight: false })
       return
     }
 
     clearAllTimers()
 
     const direction: 'right' | 'left' = toIdx > fromIdx ? 'right' : 'left'
-    const distance = Math.abs(toIdx - fromIdx)
-    const gapDelay = Math.min(80, Math.max(50, distance * 50))
+    const distance      = Math.abs(toIdx - fromIdx)
+    const gapDelay      = Math.min(80, Math.max(50, distance * 50))
     const departDuration = 250
     const arriveDuration = 250
 
-    // Phase 1: Departure begins immediately on fromId
     currentActiveIdRef.current = toId
-    setLaserState({
-      activeId: toId,
-      departingId: fromId,
-      arrivingId: null,
-      direction,
-      inFlight: false
-    })
+    setLaserState({ activeId: toId, departingId: fromId, arrivingId: null, direction, inFlight: false })
 
-    // Phase 2: Departure finishes -> laser bolt in flight (completely gone from fromId)
     departTimerRef.current = setTimeout(() => {
-      setLaserState({
-        activeId: toId,
-        departingId: null,
-        arrivingId: null,
-        direction,
-        inFlight: true
-      })
+      setLaserState({ activeId: toId, departingId: null, arrivingId: null, direction, inFlight: true })
 
-      // Phase 3: Laser bolt arrives at toId
       arriveTimerRef.current = setTimeout(() => {
-        setLaserState({
-          activeId: toId,
-          departingId: null,
-          arrivingId: toId,
-          direction,
-          inFlight: false
-        })
+        setLaserState({ activeId: toId, departingId: null, arrivingId: toId, direction, inFlight: false })
 
-        // Phase 4: Arrival completes -> settled
         settleTimerRef.current = setTimeout(() => {
-          setLaserState({
-            activeId: toId,
-            departingId: null,
-            arrivingId: null,
-            direction,
-            inFlight: false
-          })
+          setLaserState({ activeId: toId, departingId: null, arrivingId: null, direction, inFlight: false })
         }, arriveDuration)
       }, gapDelay)
     }, departDuration)
-  }, [navItems])
+  }, [])
 
   useEffect(() => {
-    // If programmatic click navigation is in progress, ignore intermediate scroll events
     if (programmaticTargetRef.current) {
       if (activeSection === programmaticTargetRef.current) {
         programmaticTargetRef.current = null
@@ -140,14 +100,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
       }
       return
     }
-
-    // Normal scroll-based section change
     if (activeSection && activeSection !== currentActiveIdRef.current) {
       startLaserBolt(currentActiveIdRef.current, activeSection)
     }
   }, [activeSection, startLaserBolt])
 
-  // Cleanup timers on unmount
   useEffect(() => {
     return () => {
       clearAllTimers()
@@ -157,13 +114,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
 
   const handleDesktopNavClick = (sectionId: string) => {
     if (sectionId === currentActiveIdRef.current) return
-
     programmaticTargetRef.current = sectionId
     if (programmaticNavTimerRef.current) clearTimeout(programmaticNavTimerRef.current)
-    programmaticNavTimerRef.current = setTimeout(() => {
-      programmaticTargetRef.current = null
-    }, 1800)
-
+    programmaticNavTimerRef.current = setTimeout(() => { programmaticTargetRef.current = null }, 1800)
     startLaserBolt(currentActiveIdRef.current, sectionId)
     onNavigate(sectionId)
   }
@@ -178,35 +131,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
     document.body.removeChild(link)
   }
 
-  const handleMobileNavClick = (sectionId: string) => {
-    setIsMobileMenuOpen(false)
-    onNavigate(sectionId)
-  }
-
-  // Prevent background scrolling when mobile drawer is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
-    return () => {
-      document.body.style.overflow = 'auto'
-    }
-  }, [isMobileMenuOpen])
-
-  // Blur behind the header activates only once the top of the name begins scrolling above it
   const [isBlurred, setIsBlurred] = useState(false)
   const headerRef = useRef<HTMLElement | null>(null)
   const scrollY = useScrollY()
 
   useEffect(() => {
-    const nameEl = document.getElementById('hero-name-heading')
+    const nameEl   = document.getElementById('hero-name-heading')
     const headerEl = headerRef.current
     if (nameEl && headerEl) {
-      const nameRect = nameEl.getBoundingClientRect()
-      const headerRect = headerEl.getBoundingClientRect()
-      setIsBlurred(nameRect.top <= headerRect.bottom)
+      setIsBlurred(nameEl.getBoundingClientRect().top <= headerEl.getBoundingClientRect().bottom)
     } else if (nameEl) {
       setIsBlurred(nameEl.getBoundingClientRect().top <= 75)
     } else {
@@ -239,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           pointerEvents: 'none'
         }}
       >
-        {/* Mobile-Only Header Brand Indicator */}
+        {/* Mobile-only brand indicator */}
         <div className="mobile-only" style={{ pointerEvents: 'auto', alignItems: 'center' }}>
           <button
             onClick={() => onNavigate('home')}
@@ -268,22 +201,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           </button>
         </div>
 
-        {/* Desktop-Only Left Navigation Links */}
+        {/* Desktop nav links */}
         <nav
           className="desktop-only"
-          style={{
-            alignItems: 'center',
-            gap: '2.25rem',
-            pointerEvents: 'auto'
-          }}
+          style={{ alignItems: 'center', gap: '2.25rem', pointerEvents: 'auto' }}
           aria-label="Main Navigation"
         >
-          {navItems.map((item) => {
+          {NAV_ITEMS.map((item) => {
             const isSelected = laserState.activeId === item.id
             const isDeparting = laserState.departingId === item.id
-            const isArriving = laserState.arrivingId === item.id
-            const isSettled = isSelected && !laserState.departingId && !laserState.arrivingId && !laserState.inFlight
-            const isBright = isSelected || isDeparting
+            const isArriving  = laserState.arrivingId  === item.id
+            const isSettled   = isSelected && !laserState.departingId && !laserState.arrivingId && !laserState.inFlight
+            const isBright    = isSelected || isDeparting
 
             return (
               <button
@@ -302,39 +231,22 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                   transition: 'color 180ms ease',
                   position: 'relative'
                 }}
-                onMouseEnter={(e) => {
-                  if (!isBright) e.currentTarget.style.color = 'var(--text-primary)'
-                }}
-                onMouseLeave={(e) => {
-                  if (!isBright) e.currentTarget.style.color = 'var(--text-secondary)'
-                }}
+                onMouseEnter={(e) => { if (!isBright) e.currentTarget.style.color = 'var(--text-primary)' }}
+                onMouseLeave={(e) => { if (!isBright) e.currentTarget.style.color = 'var(--text-secondary)' }}
               >
                 {item.label}
-
-                {/* Moving Laser Bolt Underline */}
                 {(isSettled || isDeparting || isArriving) && (
-                  <div className="nav-laser-track">
-                    <div
-                      className={`nav-laser-bolt ${
-                        isSettled
-                          ? 'settled'
-                          : isDeparting
-                          ? laserState.direction === 'right'
-                            ? 'depart-right'
-                            : 'depart-left'
-                          : laserState.direction === 'right'
-                          ? 'arrive-right'
-                          : 'arrive-left'
-                      }`}
-                      style={isLightMode ? { background: '#535353', boxShadow: 'none' } : undefined}
-                    />
-                  </div>
+                  <NavLaserBolt
+                    isSettled={isSettled}
+                    isDeparting={isDeparting}
+                    direction={laserState.direction}
+                    isLightMode={isLightMode}
+                  />
                 )}
               </button>
             )
           })}
 
-          {/* Direct PDF Resume Download Link */}
           <button
             onClick={handleResumeDownload}
             title="Download Surudh Bhutani's Software Engineering Resume PDF"
@@ -360,9 +272,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           </button>
         </nav>
 
-        {/* Top Right Controls (Theme Switcher + Mobile Menu Toggle) */}
+        {/* Top-right controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', pointerEvents: 'auto' }}>
-          {/* Light/Dark Mode Switcher */}
           <button
             onClick={toggleTheme}
             title={isLightMode ? 'Switch to Dark Traversal (Tron Deep Space)' : 'Switch to Light Traversal (Chrome Offline Runner)'}
@@ -380,18 +291,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = 'var(--border-active)'
-              e.currentTarget.style.background = 'var(--bg-card-hover)'
+              e.currentTarget.style.background  = 'var(--bg-card-hover)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = 'var(--border-subtle)'
-              e.currentTarget.style.background = 'var(--bg-card)'
+              e.currentTarget.style.background  = 'var(--bg-card)'
             }}
           >
-            {isLightMode ? (
-              <Sun size={15} color="var(--text-primary)" />
-            ) : (
-              <Moon size={15} color="var(--text-primary)" />
-            )}
+            {isLightMode
+              ? <Sun  size={15} color="var(--text-primary)" />
+              : <Moon size={15} color="var(--text-primary)" />}
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
@@ -404,7 +313,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             </span>
           </button>
 
-          {/* Mobile Menu Hamburger Toggle (Visible ONLY on <= 768px) */}
+          {/* Mobile hamburger */}
           <div className="mobile-only">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -424,7 +333,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                 transition: 'all 200ms ease'
               }}
             >
-              {isMobileMenuOpen ? <X size={17} color="var(--text-primary)" /> : <Menu size={17} color="var(--text-primary)" />}
+              {isMobileMenuOpen
+                ? <X    size={17} color="var(--text-primary)" />
+                : <Menu size={17} color="var(--text-primary)" />}
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -441,250 +352,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer / Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 99,
-              backgroundColor: 'var(--bg-primary)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              padding: '5.25rem 1.5rem 1.75rem 1.5rem',
-              overflowY: 'auto'
-            }}
-          >
-            {/* Top Telemetry Heading */}
-            <div
-              style={{
-                borderBottom: '1px solid var(--border-subtle)',
-                paddingBottom: '0.75rem',
-                marginBottom: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.12em',
-                  color: 'var(--text-muted)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.35rem'
-                }}
-              >
-                {isLightMode ? (
-                  <>
-                    <span>[ PREHISTORIC</span>
-                    <CactusIcon size="0.8em" />
-                    <span>SECTOR DIRECTORY ]</span>
-                  </>
-                ) : (
-                  '[ TRANSPONDER // SECTOR DIRECTORY ]'
-                )}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  color: 'var(--text-secondary)'
-                }}
-              >
-                {isLightMode ? 'PREHISTORIC' : 'SEC 04'}
-              </div>
-            </div>
-
-            {/* Nav Items List */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {navItems.map((item, idx) => {
-                const isActive = activeSection === item.id
-                return (
-                  <motion.button
-                    key={item.id}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04 * idx, duration: 0.18 }}
-                    onClick={() => handleMobileNavClick(item.id)}
-                    style={{
-                      background: isActive ? 'var(--bg-card-hover)' : 'var(--bg-card)',
-                      border: '1px solid',
-                      borderColor: isActive ? 'var(--border-active)' : 'var(--border-subtle)',
-                      borderRadius: '4px',
-                      padding: '0.85rem 1.15rem',
-                      minHeight: '48px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      textAlign: 'left',
-                      cursor: 'pointer',
-                      width: '100%',
-                      transition: 'all 150ms ease'
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.75rem',
-                          color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.2rem'
-                        }}
-                      >
-                        <span>{item.num}</span>
-                        {isLightMode ? <CactusIcon size="0.75em" /> : <span>//</span>}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-heading)',
-                          fontSize: '1.15rem',
-                          fontWeight: 700,
-                          letterSpacing: '0.05em',
-                          color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)'
-                        }}
-                      >
-                        {item.label}
-                      </span>
-                    </div>
-                    {isActive && (
-                      <span
-                        style={{
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.68rem',
-                          color: 'var(--text-primary)',
-                          letterSpacing: '0.1em'
-                        }}
-                      >
-                        [ACTIVE]
-                      </span>
-                    )}
-                  </motion.button>
-                )
-              })}
-
-              {/* Mobile Direct Resume Download Button */}
-              <motion.button
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.04 * 6, duration: 0.18 }}
-                onClick={(e) => {
-                  handleResumeDownload(e)
-                  setIsMobileMenuOpen(false)
-                }}
-                style={{
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: '4px',
-                  padding: '0.85rem 1.15rem',
-                  minHeight: '48px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  width: '100%',
-                  marginTop: '0.25rem'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
-                      color: 'var(--text-muted)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.2rem'
-                    }}
-                  >
-                    <span>07</span>
-                    {isLightMode ? <CactusIcon size="0.75em" /> : <span>//</span>}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-heading)',
-                      fontSize: '1.15rem',
-                      fontWeight: 700,
-                      letterSpacing: '0.05em',
-                      color: 'var(--text-primary)'
-                    }}
-                  >
-                    RESUME [PDF]
-                  </span>
-                </div>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.85rem',
-                    color: 'var(--text-secondary)'
-                  }}
-                >
-                  ↓
-                </span>
-              </motion.button>
-            </div>
-
-            {/* Bottom Drawer Telemetry & Close */}
-            <div
-              style={{
-                borderTop: '1px solid var(--border-subtle)',
-                paddingTop: '1rem',
-                marginTop: '1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.68rem',
-                  color: 'var(--text-muted)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.35rem'
-                }}
-              >
-                {isLightMode ? (
-                  <>
-                    <span>LAT 51.04° N</span>
-                    <CactusIcon size="0.75em" />
-                    <span>LON 114.07° W</span>
-                  </>
-                ) : (
-                  'LAT 51.04° N // LON 114.07° W'
-                )}
-              </div>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  letterSpacing: '0.08em',
-                  color: 'var(--text-secondary)',
-                  padding: '0.4rem 0.6rem'
-                }}
-              >
-                [ CLOSE ✕ ]
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <NavMobileDrawer
+        isOpen={isMobileMenuOpen}
+        isLightMode={isLightMode}
+        activeSection={activeSection}
+        navItems={NAV_ITEMS}
+        onNavigate={onNavigate}
+        onClose={() => setIsMobileMenuOpen(false)}
+        onResumeDownload={handleResumeDownload}
+      />
     </>
   )
 }
