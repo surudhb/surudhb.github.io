@@ -145,9 +145,9 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '0.65rem',
+                gap: '1rem',
                 alignItems: 'center',
-                marginTop: '0.35rem'
+                marginTop: '0.45rem'
               }}
             >
               {item.links.map((subLink) => (
@@ -159,27 +159,19 @@ export const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                   style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.78rem',
-                    letterSpacing: '0.05em',
+                    letterSpacing: '0.06em',
                     color: 'var(--text-muted)',
                     textDecoration: 'none',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.35rem',
-                    padding: '0.25rem 0.65rem',
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    borderRadius: '2px',
-                    transition: 'all 150ms ease'
+                    transition: 'color 150ms ease'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = '#ffffff'
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.35)'
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = 'var(--text-muted)'
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)'
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'
                   }}
                 >
                   {subLink.label} ↗

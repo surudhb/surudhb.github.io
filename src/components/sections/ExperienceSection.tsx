@@ -59,8 +59,8 @@ export const ExperienceSection: React.FC = () => {
                   alignItems: 'start'
                 }}
               >
-                {/* Left Column: sticky */}
-                <div style={{ position: 'sticky', top: '5.5rem' }}>
+                {/* Left Column: sticky on desktop */}
+                <div className="sticky-desktop">
                   <div
                     style={{
                       fontFamily: 'var(--font-mono)',

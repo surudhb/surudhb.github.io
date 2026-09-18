@@ -27,6 +27,8 @@ export interface ExperienceLinkItem {
   label: string
   href?: string
   title?: string
+  engagementWindow?: string
+  role?: string
   links?: ExternalLink[]
   bullets?: string[]
   tags?: string[]

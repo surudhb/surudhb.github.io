@@ -13,7 +13,7 @@ export const experienceData: Experience[] = [
       { label: 'Github', href: 'https://github.com/surudhb' },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/surudhb/' },
     ],
-    tags: ['Software Engineer', 'Frontend Engineer', 'Backend Engineer', 'Solutions Engineer'],
+    tags: ['REACT', 'TYPESCRIPT', 'NODE.JS', 'PYTHON', 'POSTGRESQL', 'SYSTEM ARCHITECTURE', 'FULL-STACK', 'DISTRIBUTED SYSTEMS'],
     bullets: [
       'Seeking new opportunities that leverage my experience in full-stack development, technical program management and being a technical liaison to build interesting things.',
     ],
@@ -27,7 +27,7 @@ export const experienceData: Experience[] = [
     period: 'APR 2025 — APR 2026',
     startDate: '2025-04',
     endDate: '2026-04',
-    tags: ['CONSULTING', 'VOLUNTEERING', 'SIDE QUESTS', 'PERSONAL FINANCE'],
+    tags: ['AI/LLM IN SDLC', 'AGENTIC WORKFLOWS', 'SYSTEM ARCHITECTURE', 'TECHNICAL CONSULTING', 'SABBATICAL'],
     bullets: [
       'Active volunteering, personal milestones, and technical exploration with AI in the SDLC.',
       'Personal projects, motovlogging & riding my MT-03 into the mountains, and exploring the Canadian Rockies.',
@@ -47,6 +47,8 @@ export const experienceData: Experience[] = [
       {
         label: 'Kaidro - Web3 Gaming',
         title: 'KAIDRO — TRANSMEDIA WEB3 GAMING ECOSYSTEM',
+        engagementWindow: 'Apr 2024 – Apr 2025',
+        role: 'Lead Technical Program Manager',
         links: [
           { label: 'Kaidro Official', href: 'https://kaidro.com/' },
           { label: 'Ronin Network', href: 'https://roninchain.com/' }
@@ -56,11 +58,13 @@ export const experienceData: Experience[] = [
           'Decomposed multi-platform tokenomics and NFT minting requirements into trackable sprint milestones, ensuring zero launch delays across major drop events.',
           'Architected portal infrastructure facilitating frictionless custodial and non-custodial wallet onboarding for non-crypto native players.'
         ],
-        tags: ['PROGRAM MANAGEMENT', 'RONIN NETWORK', 'SMART CONTRACTS', 'GAMING']
+        tags: ['RONIN NETWORK', 'SMART CONTRACTS', 'TYPESCRIPT', 'SYSTEM ARCHITECTURE', 'TECHNICAL PROGRAM MANAGEMENT', 'WEB3 GAMING']
       },
       {
         label: 'Cultured - Web3 Prediction Market',
         title: 'CULTURED — DECENTRALIZED PREDICTION MARKETS',
+        engagementWindow: 'Mid 2024',
+        role: 'Technical Program Manager',
         links: [
           { label: 'Cultured App', href: 'https://www.cultured.finance/' }
         ],
@@ -69,11 +73,13 @@ export const experienceData: Experience[] = [
           'Coordinated market resolution oracle integrations, liquidity pool mechanics, and real-time odds calculation service delivery.',
           'Unified delivery cadences across frontend client interfaces, smart contract security audits, and backend indexing subgraphs.'
         ],
-        tags: ['EVM', 'ORACLES', 'SUBGRAPHS', 'PREDICTION MARKETS']
+        tags: ['EVM', 'ORACLES', 'SUBGRAPHS', 'TYPESCRIPT', 'SMART CONTRACTS', 'PREDICTION MARKETS', 'DEFI']
       },
       {
         label: 'Mansa Finance - Web3 Settlements',
         title: 'MANSA FINANCE — CROSS-BORDER LIQUIDITY PROTOCOL',
+        engagementWindow: '2024',
+        role: 'Technical Program Manager',
         links: [
           { label: 'Mansa Platform', href: 'https://mansa.xyz/' }
         ],
@@ -82,11 +88,13 @@ export const experienceData: Experience[] = [
           'Facilitated requirement alignment between fintech liquidity providers, smart contract auditors, and regulatory compliance stakeholders.',
           'Oversaw risk mitigation strategies and deployment timelines across staging testnets and production.'
         ],
-        tags: ['CROSS-BORDER PAYMENTS', 'FINTECH', 'DEFI', 'DELIVERY RISK']
+        tags: ['SMART CONTRACTS', 'CROSS-BORDER PAYMENTS', 'FINTECH', 'DEFI', 'DELIVERY RISK']
       },
       {
         label: 'Ambient Finance - Web3 Exchange',
         title: 'AMBIENT FINANCE — ZERO-TO-ONE DEX PLATFORM',
+        engagementWindow: '2023 – 2024',
+        role: 'Technical Program Manager & Release Lead',
         links: [
           { label: 'Ambient Finance App', href: 'https://ambient.finance/' },
           { label: 'Documentation', href: 'https://docs.ambient.finance/' }
@@ -96,11 +104,13 @@ export const experienceData: Experience[] = [
           'Eliminated preventable downtime by implementing continuous integration verification and automated smoke tests across concurrent testnets and mainnet.',
           'Streamlined cross-functional engineering handoffs between core protocol researchers, contract engineers, and frontend teams.'
         ],
-        tags: ['TPM', 'DEX', 'RELEASE ENGINEERING', 'CYCLE TIME OPTIMIZATION']
+        tags: ['REACT', 'TYPESCRIPT', 'CI/CD', 'AUTOMATED TESTING', 'RELEASE ENGINEERING', 'DEX', 'DEFI']
       },
       {
         label: 'Animoca Brands - Web3',
         title: 'ANIMOCA BRANDS — ECOSYSTEM INITIATIVES',
+        engagementWindow: '2024',
+        role: 'Technical Program Manager',
         links: [
           { label: 'Animoca Brands', href: 'https://www.animocabrands.com/' }
         ],
@@ -108,11 +118,13 @@ export const experienceData: Experience[] = [
           'Managed cross-portfolio program delivery coordination across select partner gaming studios and infrastructure initiatives.',
           'Established transparent RYG reporting cadences tracking shared milestone dependencies and unblocking partner integrations.'
         ],
-        tags: ['XFN MANAGEMENT', 'ECOSYSTEM DELIVERY', 'GAMING']
+        tags: ['ECOSYSTEM DELIVERY', 'XFN MANAGEMENT', 'WEB3 GAMING']
       },
       {
         label: 'Berachain - Web3',
         title: 'BERACHAIN — ECOSYSTEM PROTOCOL DELIVERY',
+        engagementWindow: '2024',
+        role: 'Technical Program Manager',
         links: [
           { label: 'Berachain Network', href: 'https://www.berachain.com/' }
         ],
@@ -120,10 +132,10 @@ export const experienceData: Experience[] = [
           'Coordinated protocol deployment roadmap and testing cadences for ecosystem partners preparing for testnet launch.',
           'Aligned partner developer teams on Proof-of-Liquidity mechanics and validator tooling integration requirements.'
         ],
-        tags: ['PROOF-OF-LIQUIDITY', 'L1 INFRASTRUCTURE', 'TPM']
+        tags: ['PROOF-OF-LIQUIDITY', 'L1 INFRASTRUCTURE', 'VALIDATOR TOOLING', 'TPM']
       },
     ],
-    tags: ['XFN', 'SDLC', 'PROGRAM MANAGEMENT', 'DELIVERY', 'RISK MITIGATION', 'SR&ED'],
+    tags: ['TYPESCRIPT', 'PYTHON', 'POSTGRESQL', 'AWS', 'DOCKER', 'SYSTEM ARCHITECTURE', 'RELEASE ENGINEERING', 'SDLC', 'TECHNICAL PROGRAM MANAGEMENT', 'FINTECH', 'SR&ED'],
     bullets: [
       'Owned end-to-end delivery across 10+ concurrent SaaS programs in fin-tech and e-commerce, reducing leadership escalations to 0 from scoping to launch as the single point of accountability on scope, timeline, and delivery risk.',
       'Recovered a joint venture stalled by 7 months of requirement misalignment, re-establishing a single source of truth on scope, decomposing partner requirements into tracked deliverables, and eliminating $1.2M in idle spend.',
@@ -147,72 +159,146 @@ export const experienceData: Experience[] = [
       {
         label: 'The Archivist - Resale E-commerce',
         title: 'THE ARCHIVIST — LUXURY RESALE E-COMMERCE',
+        engagementWindow: 'Dec 2020 – May 2022',
+        role: 'Founding Software Engineer & Lead Frontend Engineer',
         links: [
           { label: 'Business of Fashion Feature', href: 'https://www.businessoffashion.com/articles/technology/new-resale-start-up-sees-data-as-the-answer-to-courting-luxury-brands/' },
           { label: 'LVMH Innovation Finalist', href: 'https://www.lvmh.com/en/news-and-documents/news/lvmh-innovation-award-the-30-shortlisted-startups/' }
         ],
         bullets: [
+          'Owned the React frontend development and architecture for the white-label luxury marketplace, Seller Hub, and Corporate Information System from 0-to-1 prototype through production launch (LVMH Innovation Award finalist, Vogue-featured).',
           'Processed 1M+ products/day by architecting high-throughput data ingestion ETL pipelines utilizing Python, ScrapingBee, AWS Lambda, SQS, and PostgreSQL.',
-          'Delivered real-time market insights resale analytics dashboard with interactive visualizations (Recharts) backed by custom APIs and data stores (Flask, Redis, Algolia).',
-          'Co-architected the React marketplace frontend for The Archivist, an LVMH award-finalist and Vogue-featured resale platform.',
-          'Established core frontend patterns, responsive typography, and client-side caching strategies from initial 0-to-1 prototype to production launch.'
+          'Built a complete checkout and billing overhaul integrating Stripe Invoicing and the invite-only Stripe Tax system, generating itemized invoices and computing location-based tax rates via product tax codes.',
+          'Streamlined backend checkout logic and state machine by eliminating redundant API calls, adding a "finalized" status field on orders to prevent spoofing without cloning objects, and adding checkout pagination.',
+          'Migrated the analytics pipeline to TimescaleDB for handling time-series data, building real-time dashboard stats (GMV, daily % change) with materialized views for fast reads.',
+          'Developed "Godmode" admin features including vendor-specific data filtering, content moderation UIs (vendor banning/approval), and multi-format export tools (Customer CSVs, Vendor CSVs, and expanded summary PDFs).',
+          'Refactored and maintained resilient web scrapers targeting Farfetch, TheRealReal, eBay, Poshmark, StockX, and Goat to bypass updated anti-scraping protections.',
+          'Built transactional HTML email templates (order confirmations, shipping updates, verification), vendor product listing draft states, payment method selection, and navbar mobile support.'
         ],
-        tags: ['REACT', 'TYPESCRIPT', 'PYTHON', 'AWS LAMBDA', 'SQS', 'POSTGRESQL', 'REDIS', 'ALGOLIA']
+        tags: ['REACT', 'TYPESCRIPT', 'PYTHON (FLASK)', 'POSTGRESQL', 'TIMESCALEDB', 'STRIPE (INVOICING & TAX APIS)', 'ALGOLIA', 'AWS (LAMBDA/SQS)', 'DATADOG', 'E-COMMERCE', 'LUXURY RESALE']
       },
       {
         label: 'Skio - Shopify Subscriptions',
-        title: 'SKIO — ENTERPRISE SHOPIFY SUBSCRIPTIONS',
+        title: 'SKIO — ENTERPRISE SHOPIFY SUBSCRIPTIONS & MIGRATIONS',
+        engagementWindow: 'Jul 25 – Oct 24, 2022',
+        role: 'Data Analytics & Scripting Engineer / IC',
         links: [
           { label: 'Skio Platform', href: 'https://www.skio.com/' },
           { label: 'Shopify App Store', href: 'https://apps.shopify.com/skio-subscriptions' }
         ],
         bullets: [
-          'Engineered performant, headless subscription checkout extensions and customer portal widgets for high-volume enterprise Shopify Plus merchants.',
-          'Optimized client-side bundle sizes and script loading to maintain near-zero impact on merchant storefront Core Web Vitals and Lighthouse scores.',
-          'Integrated seamless one-click subscription management flows using React, TypeScript, and Shopify Storefront APIs.'
+          'Built vendor-specific Python data-normalization scripts to execute automated product catalog and subscription migrations from Shopify to Skio.',
+          'Resolved complex edge cases where non-standard vendor product structures caused SKU mismatching, metadata corruption, or incorrect subscription plan mapping.',
+          'Engineered performant, headless subscription checkout extensions and customer portal widgets for high-volume enterprise Shopify Plus merchants with near-zero impact on storefront Core Web Vitals.'
         ],
-        tags: ['REACT', 'TYPESCRIPT', 'SHOPIFY PLUS', 'HEADLESS COMMERCE', 'PERFORMANCE']
+        tags: ['PYTHON', 'SHOPIFY API', 'SKIO API', 'REACT', 'TYPESCRIPT', 'DATA MIGRATIONS', 'SUBSCRIPTIONS', 'SHOPIFY PLUS']
       },
       {
         label: 'Ambient Finance - Web3 Exchange',
         title: 'AMBIENT FINANCE — FRONTEND ARCHITECTURE & REFACTOR',
+        engagementWindow: 'May 22, 2023 – Jan 8, 2024',
+        role: 'Lead Frontend Developer / Frontend Refactor & Execution Lead',
         links: [
           { label: 'Ambient Finance App', href: 'https://ambient.finance/' },
           { label: 'Documentation', href: 'https://docs.ambient.finance/' }
         ],
         bullets: [
-          'Trimmed 10–15K lines of application code and resolved UX and performance-degrading bugs on Ambient, a $4B+ trading platform, by leading a multi-month React refactor standardizing components and migrating state management to React Context.',
-          'Delivered custom gamification mechanisms for a DEX aggregator reward platform by engineering tiered-multiplier campaign logic atop a Uniswap v3 React fork, successfully leading client demos and onboarding new engineers.'
+          'Led a large-scale, multi-month refactor of a high-concurrency DEX codebase combining concentrated and ambient constant-product liquidity ($4B+ cumulative volume).',
+          'Deleted 50,000+ lines of redundant/dead code (eliminating duplicate files like widget.tsx, widget2.tsx), and split 3,000–5,000 line monolith files into clean modules capped at 500 lines.',
+          'Upgraded React, restructured state management using React Contexts, and eliminated nested useEffect hooks that caused component flickering, race conditions, and unnecessary re-renders.',
+          'Modernized build pipelines by migrating to Vite and introducing Tailwind CSS with Styled Components, eliminating thousands of lines of overridden CSS files.',
+          'Implemented pre-commit hooks, strict TypeScript linting, unit tests for math-heavy code, bi-weekly PR review cadences, and GitHub issue template enforcement.'
         ],
-        tags: ['REACT', 'TYPESCRIPT', 'WEB3', 'STATE MANAGEMENT', 'DEX']
+        tags: ['REACT', 'TYPESCRIPT', 'VITE', 'TAILWIND CSS', 'STYLED COMPONENTS', 'REACT CONTEXTS', 'GITHUB ACTIONS', 'DEX', 'DEFI']
       },
       {
-        label: 'Conductive AI - Web3 Analytics',
-        title: 'CONDUCTIVE AI — GAME PLAYER ENGAGEMENT PLATFORM',
+        label: 'Kaskade - Web3 Rewards Platform',
+        title: 'KASKADE — GAMIFIED LIQUIDITY & REWARDS ENGINE',
+        engagementWindow: 'Jan 15 – Mar 18, 2024',
+        role: 'Lead Frontend Engineer',
+        links: [
+          { label: 'Kaskade Finance', href: 'https://www.kaskade.finance/' }
+        ],
+        bullets: [
+          'Engineered custom frontend components and application pages to support tiered reward multiplier campaigns that incentivized token swapping across specific liquidity pools.',
+          'Forked and streamlined the Uniswap v3 interface codebase, stripping out unnecessary components to leave a lean UI tailored to Kaskade\'s brand.',
+          'Integrated custom campaign frontend with Uniswap\'s DEX aggregator order router and connected on-chain/off-chain data services with backend engineers.',
+          'Onboarded and mentored incoming client engineers on the codebase to ensure continuous delivery.'
+        ],
+        tags: ['REACT', 'TYPESCRIPT', 'UNISWAP V3', 'WEB3.JS / ETHERS.JS', 'SUPABASE', 'AWS', 'DEFI', 'INCENTIVE MECHANISMS']
+      },
+      {
+        label: 'Conductive.ai - Staking & Analytics',
+        title: 'CONDUCTIVE.AI — HYPERPERK & SOFTSTAKING PLATFORM',
+        engagementWindow: 'May 9 – Jul 25, 2022',
+        role: 'Frontend Engineer / IC with partial product ownership',
         links: [
           { label: 'Company Profile', href: 'https://www.linkedin.com/company/conductiveai/about/' }
         ],
         bullets: [
-          'Engineered web3 game analytics dashboard components providing game studios with real-time on-chain player retention and attribution insights.',
-          'Built scalable API adapters aggregating player wallet activity with in-game telemetry events.'
+          'Developed user-facing frontend components and state architecture for Hyperperk SoftStaking, an off-chain token staking microservice designed as a Web2 alternative to smart contracts.',
+          'Implemented UI and validation logic for staking epoch increments, reward token claims, unstaking actions, and admin payout authorization.',
+          'Worked independently to adapt frontend structures as backend requirements and staking pool definitions evolved without a fixed product manager.',
+          'Engineered web3 game analytics dashboard components providing game studios with real-time on-chain player retention and attribution insights.'
         ],
-        tags: ['TYPESCRIPT', 'NEXT.JS', 'DATA VISUALIZATION', 'WEB3 ANALYTICS']
+        tags: ['REACT', 'TYPESCRIPT', 'PYTHON (FASTAPI)', 'PEEWEE ORM', 'POSTGRESQL', 'DOCKER', 'LINEAR', 'WEB3 GAMING', 'TOKEN STAKING']
       },
       {
-        label: 'High Street - Web3 Real Estate',
-        title: 'HIGHSTREET — COMMERCE-DRIVEN METAVERSE',
+        label: 'Highstreet - Metaverse & Marketplace',
+        title: 'HIGHSTREET — COMMERCE-DRIVEN METAVERSE & NFT MARKETPLACE',
+        engagementWindow: 'Jan 17 – Feb 28, 2022',
+        role: 'Frontend Engineer (IC)',
         links: [
           { label: 'Highstreet Market', href: 'https://www.highstreet.market/' }
         ],
         bullets: [
-          'Contributed to decentralized physical-backed token (phygital) marketplace smart contract integrations and web storefront interface.',
-          'Ensured sub-second real-time pricing and inventory synchronization during high-traffic drops with Shopify API connectors.'
+          'Engineered a server-validated, environment-variable-configurable countdown timer; prevented tech-savvy users from bypassing client-side clocks to leak upcoming NFT drop details early.',
+          'Contributed to a unified hybrid authentication scheme linking Web2 Auth0 accounts with Web3 MetaMask wallets for seamless phygital commerce.',
+          'Onboarded to build core launch features, including an NFT marketplace visibility toggle to reveal upcoming product drops, header navigation, and marketplace layouts from Figma.'
         ],
-        tags: ['WEB3 COMMERCE', 'REACT', 'SHOPIFY INTEGRATION', 'ETHEREUM']
+        tags: ['REACT', 'TYPESCRIPT', 'AUTH0', 'METAMASK', 'SASS', 'BOOTSTRAP', 'HEROKU', 'WEB3 COMMERCE', 'NFT MARKETPLACE']
+      },
+      {
+        label: 'ButtonLend / Ampleforth - Web3 Lending',
+        title: 'BUTTONLEND / AMPLEFORTH — DECENTRALIZED LENDING PROTOCOL',
+        engagementWindow: 'Early Full-Time IC Phase',
+        role: 'Frontend Individual Contributor (IC)',
+        links: [
+          { label: 'Ampleforth Protocol', href: 'https://www.ampleforth.org/' },
+          { label: 'Buttonwood Network', href: 'https://buttonwood.network/' }
+        ],
+        bullets: [
+          'Integrated smart contracts to deposit AMPL into ButtonTranche contracts, splitting tokens into risk-stratified tranches (stable/unstable) and converting tranches into USDT/USDC via Uniswap.',
+          'Built the React frontend integrated with MetaMask for a pseudonymous, zero-interest USDT lending application using AMPL elastic-supply tokens as collateral.',
+          'Designed and developed the collateral selection UI, interest-rate-versus-collateral charts, and automated selection logic to deposit funds into perpetual bonds.',
+          'Constructed the "My Loans" page displaying active loan positions, backing bond values, tranche ratios, and maturation dates.',
+          'Built a "Pro/Advanced" interface for liquidity providers to search, filter, and deposit AMPL directly into specific ButtonTranche contracts via Buttonwood Subgraphs.'
+        ],
+        tags: ['REACT', 'TYPESCRIPT', 'WEB3.JS / ETHERS.JS', 'GRAPHQL (SUBGRAPHS)', 'METAMASK', 'UNISWAP', 'DEFI', 'DECENTRALIZED LENDING']
+      },
+      {
+        label: 'Disa - iOS & watchOS Fitness Platform',
+        title: 'DISA — IOS & WATCHOS FITNESS PLATFORM',
+        engagementWindow: 'Nov 24, 2022 – May 8, 2023',
+        role: 'Full-Stack Mobile Engineer & Product Lead (2-person team)',
+        links: [
+          { label: 'App Overview', href: 'https://iphone.apkpure.com/app/disa-fitness/com.disa.disaapp' }
+        ],
+        bullets: [
+          'Built an Apple Watch and iOS fitness tracking app from concept to App Store launch in 4 months using SwiftUI as engineering lead on a 2-person team.',
+          'Bypassed watchOS Firebase SDK limitations by building a custom REST API layer with manual Swift JSON encoders/decoders to interface directly with Cloud Firestore.',
+          'Designed and developed a standalone watch-only interface enabling students to find workouts, check into classes, and review performance metrics without a phone.',
+          'Integrated IPFS and Polygon L2 smart contracts to cryptographically log student KPI evaluations on-chain.',
+          'Implemented location-based check-in/out logic via Apple\'s location libraries, and prototyped alternative "tonal handshake" mechanics using acoustic/vibration signals for watch-to-watch session verification.',
+          'Managed App Store submission, screenshots, Apple UX compliance, and TestFlight builds.'
+        ],
+        tags: ['SWIFT', 'SWIFTUI', 'WATCHOS SDK', 'CLOUDFIRESTORE (REST API)', 'FIREBASE AUTH', 'POLYGON L2', 'IPFS', 'XCODE', 'MOBILE HEALTH', 'WEARABLES']
       },
       {
         label: 'Kaidro - Web3 Gaming',
         title: 'KAIDRO — GAMING WEB PORTAL & TOKEN LAUNCH',
+        engagementWindow: 'Late 2023 – Early 2024',
+        role: 'Full-Stack Software Engineer',
         links: [
           { label: 'Kaidro Official', href: 'https://kaidro.com/' },
           { label: 'Ronin Network', href: 'https://roninchain.com/' }
@@ -221,35 +307,10 @@ export const experienceData: Experience[] = [
           'Engineered full-stack portal features for NFT avatar customization, staking pools, and quest reward progression.',
           'Implemented responsive web3 wallet connection flows supporting Ronin, MetaMask, and WalletConnect.'
         ],
-        tags: ['REACT', 'NEXT.JS', 'RONIN', 'WEB3 GAMING']
-      },
-      {
-        label: 'Ampleforth - Web3',
-        title: 'AMPLEFORTH — ELASTIC SUPPLY PROTOCOL TOOLS',
-        links: [
-          { label: 'Ampleforth Protocol', href: 'https://www.ampleforth.org/' }
-        ],
-        bullets: [
-          'Developed analytics tools and dashboards monitoring daily supply rebase mechanisms and oracle price feeds.',
-          'Assisted in frontend UI optimizations and data visualization for protocol health metrics.'
-        ],
-        tags: ['DEFI', 'REACT', 'WEB3', 'ORACLES']
-      },
-      {
-        label: 'Disa - iOS Fitness Marketplace',
-        title: 'DISA — MOBILE FITNESS TRAINER MARKETPLACE',
-        links: [
-          { label: 'App Overview', href: 'https://iphone.apkpure.com/app/disa-fitness/com.disa.disaapp' }
-        ],
-        bullets: [
-          'Independently built native iOS mobile client components in Swift and SwiftUI, delivering a seamless two-sided marketplace connecting fitness trainers with remote clients.',
-          'Implemented interactive workout scheduling, real-time video coaching session bookings, and in-app subscription payments.',
-          'Built resilient offline data synchronization and caching layers for client workout plans and progress metrics.'
-        ],
-        tags: ['SWIFT', 'SWIFTUI', 'IOS', 'CORE DATA', 'IN-APP PURCHASES']
+        tags: ['REACT', 'TYPESCRIPT', 'NEXT.JS', 'RONIN NETWORK', 'SMART CONTRACTS', 'WEB3 GAMING']
       },
     ],
-    tags: ['REACT', 'TYPESCRIPT', 'NEXT.JS', 'SWIFT/SWIFTUI', 'PYTHON/FLASK', 'MONGODB', 'DOCKER', 'NOSQL', 'SQS', 'POSTGRESQL', 'REDIS', 'DIGITALOCEAN'],
+    tags: ['REACT', 'TYPESCRIPT', 'PYTHON/FLASK', 'SWIFT/SWIFTUI', 'POSTGRESQL', 'TIMESCALEDB', 'REDIS', 'AWS (LAMBDA/SQS)', 'DOCKER', 'ETHERS.JS', 'FULL-STACK', 'DEFI', 'E-COMMERCE'],
     bullets: [
       'Processed 1M+ products/day for The Archivist by architecting high-throughput data ingestion ETL pipelines utilizing Python, ScrapingBee, AWS Lambda, SQS, and PostgreSQL.',
       'Delivered The Archivist’s resale analytics dashboard, enabling real-time market insights by designing interactive visualizations (Recharts) backed by custom APIs and data stores (Flask, Redis, Algolia).',
@@ -272,6 +333,8 @@ export const experienceData: Experience[] = [
       {
         label: 'The Archivist - Resale E-commerce',
         title: 'THE ARCHIVIST — 0-TO-1 FRONTEND ARCHITECTURE',
+        engagementWindow: 'Dec 2020 – Jun 2021',
+        role: 'Freelance Software Engineer & Frontend Architect',
         links: [
           { label: 'Business of Fashion Feature', href: 'https://www.businessoffashion.com/articles/technology/new-resale-start-up-sees-data-as-the-answer-to-courting-luxury-brands/' },
           { label: 'LVMH Innovation Finalist', href: 'https://www.lvmh.com/en/news-and-documents/news/lvmh-innovation-award-the-30-shortlisted-startups/' }
@@ -280,10 +343,10 @@ export const experienceData: Experience[] = [
           'Co-architected the React marketplace frontend for The Archivist, an LVMH award-finalist and Vogue-featured resale platform.',
           'Established core frontend patterns, responsive typography, and client-side caching strategies from initial 0-to-1 prototype to production launch.'
         ],
-        tags: ['REACT', 'TYPESCRIPT', 'JEST', 'BOOTSTRAP', 'PYTHON/FLASK', 'VOGUE FEATURED', 'E-COMMERCE']
+        tags: ['REACT', 'TYPESCRIPT', 'PYTHON/FLASK', 'JEST', 'BOOTSTRAP', 'FRONTEND ARCHITECTURE', 'E-COMMERCE', 'LUXURY RESALE']
       },
     ],
-    tags: ['REACT', 'TYPESCRIPT', 'JEST', 'BOOTSTRAP', 'PYTHON/FLASK', 'VOGUE FEATURED', 'E-COMMERCE'],
+    tags: ['REACT', 'TYPESCRIPT', 'PYTHON/FLASK', 'JEST', 'POSTGRESQL', 'FRONTEND ARCHITECTURE', 'E-COMMERCE', 'LUXURY RESALE'],
     bullets: [
       'Co-architected the React marketplace frontend for The Archivist, an LVMH award-finalist and Vogue-featured resale platform.',
       'Established core frontend patterns, responsive typography, and client-side caching strategies from initial 0-to-1 prototype to production launch.'
@@ -299,7 +362,7 @@ export const experienceData: Experience[] = [
     startDate: '2017-01',
     endDate: '2017-12',
     link: 'https://www.ycombinator.com/companies/futureadvisor',
-    tags: ['REACT', 'JEST', 'STORYBOOK.JS', 'DOCKER', 'RUBY ON RAILS', 'WEALTH MANAGEMENT'],
+    tags: ['REACT', 'TYPESCRIPT', 'RUBY ON RAILS', 'WEBPACK', 'DOCKER', 'STORYBOOK.JS', 'JEST', 'WEALTH MANAGEMENT', 'FINTECH'],
     bullets: [
       'Migrated authentication and dashboard components from native JS and jQuery to React.js, improving client rendering performance.',
       'Built and maintained a shared UI component library deployed across a dozen major institutional banking portals in React Storybook.',
@@ -317,7 +380,7 @@ export const experienceData: Experience[] = [
     startDate: '2016-05',
     endDate: '2016-09',
     link: 'https://medlantis.thinkific.com/',
-    tags: ['PYTHON', 'PHP', 'AUTH0', 'MIXPANEL', 'K-MEANS'],
+    tags: ['PYTHON', 'PHP', 'AUTH0', 'MIXPANEL', 'SCIKIT-LEARN (K-MEANS)', 'REST APIS', 'HEALTHTECH'],
     bullets: [
       'Built a personalized video-lessons recommendation engine based on k-means clustering in Python for medical continuing education.',
       'Refactored identity and user authentication services with Auth0 integration, augmenting analytical instrumentation via Mixpanel.',
@@ -334,7 +397,7 @@ export const experienceData: Experience[] = [
     startDate: '2015-09',
     endDate: '2015-12',
     link: 'https://www.rvh.on.ca/',
-    tags: ['SWIFT', 'UIKIT', 'QUICK', 'XCTEST', 'ASP.NET', 'SQL SERVER'],
+    tags: ['SWIFT', 'UIKIT', 'ASP.NET', 'SQL SERVER', 'XCTEST', 'REST APIS', 'CLINICAL MOBILITY', 'HEALTHTECH'],
     bullets: [
       'Independently built an iOS-native hospital inventory data-visualization mobile app in Swift for clinical operations.',
       'Achieved >90% code coverage across the application using Quick and XCTest.',
@@ -351,7 +414,7 @@ export const experienceData: Experience[] = [
     startDate: '2015-01',
     endDate: '2015-04',
     link: 'https://solink.com/',
-    tags: ['PYTHON', 'PUPPET', 'COMPUTER VISION', 'POWERSHELL'],
+    tags: ['PYTHON', 'PUPPET', 'OPENCV', 'POWERSHELL', 'AUTOMATION', 'COMPUTER VISION', 'IOT'],
     bullets: [
       'Replaced an in-person client deployment process with a remote, version-controlled automation service using Puppet.',
       'Shipped Python improvements to an edge image-processing and video-analytics platform, reducing overexposure and lighting errors.'
