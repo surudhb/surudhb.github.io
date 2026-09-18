@@ -39,6 +39,8 @@
   --font-arcade: 'Press Start 2P', monospace;
   --font-aurebesh: 'Aurebesh', sans-serif;
   --font-cave: 'CavePainting', sans-serif;
+  /* Active decode font: Aurebesh in dark, CavePainting in light */
+  --font-decode: 'Aurebesh', sans-serif;
 
   /* Card and Surface Tokens (Dark Default) */
   --bg-card: rgba(255, 255, 255, 0.03);
@@ -46,6 +48,17 @@
   --border-card: rgba(255, 255, 255, 0.1);
   --shadow-card: none;
   --divider-symbol-color: rgba(255, 255, 255, 0.45);
+
+  /* Hero section tokens (dark defaults) */
+  --hero-badge-color: var(--text-secondary);
+  --hero-badge-border: 1px solid rgba(94, 241, 242, 0.3);
+  --hero-badge-shadow: 0 0 14px rgba(94, 241, 242, 0.14), inset 0 0 10px rgba(94, 241, 242, 0.05);
+  --hero-subtitle-divider-shadow: 0 0 8px rgba(94, 241, 242, 0.25);
+  --hero-char-default-color: rgba(255, 255, 255, 0.9);
+  --hero-char-hover-color: #ffffff;
+  --hero-char-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 16px rgba(94, 241, 242, 0.3);
+  --hero-char-shadow-hover: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 24px rgba(94, 241, 242, 0.65), 0 0 36px rgba(94, 241, 242, 0.35);
+  --hero-name-shadow-hover: 0 0 16px rgba(255, 255, 255, 0.9), 0 0 28px rgba(94, 241, 242, 0.6), 0 0 42px rgba(94, 241, 242, 0.35);
 
   /* Modal Backdrop Tokens (Dark Default - soft frosted glass, not pitch black) */
   --bg-modal-backdrop: rgba(7, 7, 9, 0.65);
@@ -100,5 +113,17 @@
   --backdrop-filter-modal: blur(16px);
   --modal-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(83, 83, 83, 0.35);
   --bg-mobile-blur-tint: rgba(247, 247, 247, 0.28);
+
+  /* Hero section tokens (light overrides) */
+  --font-decode: 'CavePainting', sans-serif;
+  --hero-badge-color: var(--text-muted);
+  --hero-badge-border: 1px solid var(--border-subtle);
+  --hero-badge-shadow: 1px 1px 0px rgba(83, 83, 83, 0.2);
+  --hero-subtitle-divider-shadow: none;
+  --hero-char-default-color: var(--text-secondary);
+  --hero-char-hover-color: var(--text-primary);
+  --hero-char-shadow: none;
+  --hero-char-shadow-hover: none;
+  --hero-name-shadow-hover: none;
 }
 
