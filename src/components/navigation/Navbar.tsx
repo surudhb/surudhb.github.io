@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTheme } from '../../context/ThemeContext'
+import { CactusIcon } from '../ui/CactusIcon'
 
 interface NavbarProps {
   activeSection: string
@@ -8,7 +10,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => {
-  const [isLightMode, setIsLightMode] = useState(false)
+  const { isLightMode, toggleTheme } = useTheme()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Experience placed above Projects as requested
@@ -239,7 +241,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           alignItems: 'center',
           justifyContent: 'space-between',
           background: isBlurred
-            ? 'linear-gradient(180deg, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.75) 60%, rgba(7, 7, 9, 0) 100%)'
+            ? isLightMode
+              ? 'linear-gradient(180deg, rgba(247, 247, 247, 0.96) 0%, rgba(247, 247, 247, 0.85) 60%, rgba(247, 247, 247, 0) 100%)'
+              : 'linear-gradient(180deg, rgba(7, 7, 9, 0.95) 0%, rgba(7, 7, 9, 0.75) 60%, rgba(7, 7, 9, 0) 100%)'
             : 'transparent',
           backdropFilter: isBlurred ? 'blur(8px)' : 'none',
           WebkitBackdropFilter: isBlurred ? 'blur(8px)' : 'none',
@@ -258,15 +262,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
-              color: '#ffffff',
+              color: 'var(--text-primary)',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.78rem',
               fontWeight: 700,
               letterSpacing: '0.1em'
             }}
           >
-            <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>+</span>
-            <span>SB // SEC 04</span>
+            <span style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center' }}>
+              {isLightMode ? <CactusIcon size="0.85em" /> : '+'}
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+              <span>SB</span>
+              {isLightMode ? <CactusIcon size="0.85em" /> : <span>//</span>}
+              <span>{isLightMode ? 'PREHISTORIC' : 'SEC 04'}</span>
+            </span>
           </button>
         </div>
 
@@ -299,13 +309,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                   fontSize: '0.85rem',
                   fontWeight: 600,
                   letterSpacing: '0.08em',
-                  color: isBright ? '#ffffff' : 'var(--text-secondary)',
+                  color: isBright ? 'var(--text-primary)' : 'var(--text-secondary)',
                   paddingBottom: '6px',
                   transition: 'color 180ms ease',
                   position: 'relative'
                 }}
                 onMouseEnter={(e) => {
-                  if (!isBright) e.currentTarget.style.color = '#ffffff'
+                  if (!isBright) e.currentTarget.style.color = 'var(--text-primary)'
                 }}
                 onMouseLeave={(e) => {
                   if (!isBright) e.currentTarget.style.color = 'var(--text-secondary)'
@@ -328,6 +338,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                           ? 'arrive-right'
                           : 'arrive-left'
                       }`}
+                      style={isLightMode ? { background: '#535353', boxShadow: 'none' } : undefined}
                     />
                   </div>
                 )}
@@ -354,7 +365,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               alignItems: 'center',
               gap: '0.3rem'
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
           >
             RESUME ↓
@@ -365,33 +376,33 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', pointerEvents: 'auto' }}>
           {/* Light/Dark Mode Switcher */}
           <button
-            onClick={() => setIsLightMode(!isLightMode)}
-            title={isLightMode ? 'Switch to Dark Traversal' : 'Switch to Light Traversal (Upcoming)'}
+            onClick={toggleTheme}
+            title={isLightMode ? 'Switch to Dark Traversal (Tron Deep Space)' : 'Switch to Light Traversal (Chrome Offline Runner)'}
             style={{
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-subtle)',
               borderRadius: '9999px',
               padding: '0.35rem 0.65rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
-              color: '#ffffff',
+              color: 'var(--text-primary)',
               transition: 'all 250ms ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)'
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'
+              e.currentTarget.style.borderColor = 'var(--border-active)'
+              e.currentTarget.style.background = 'var(--bg-card-hover)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)'
+              e.currentTarget.style.borderColor = 'var(--border-subtle)'
+              e.currentTarget.style.background = 'var(--bg-card)'
             }}
           >
             {isLightMode ? (
-              <Sun size={15} color="#ffffff" />
+              <Sun size={15} color="var(--text-primary)" />
             ) : (
-              <Moon size={15} color="#ffffff" />
+              <Moon size={15} color="var(--text-primary)" />
             )}
             <span
               style={{
@@ -412,8 +423,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               aria-label={isMobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
               aria-expanded={isMobileMenuOpen}
               style={{
-                background: isMobileMenuOpen ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                background: isMobileMenuOpen ? 'var(--bg-card-hover)' : 'var(--bg-card)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '4px',
                 padding: '0.4rem 0.65rem',
                 minHeight: '38px',
@@ -421,17 +432,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.45rem',
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 transition: 'all 200ms ease'
               }}
             >
-              {isMobileMenuOpen ? <X size={17} color="#ffffff" /> : <Menu size={17} color="#ffffff" />}
+              {isMobileMenuOpen ? <X size={17} color="var(--text-primary)" /> : <Menu size={17} color="var(--text-primary)" />}
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.72rem',
                   letterSpacing: '0.08em',
-                  fontWeight: 600
+                  fontWeight: 600,
+                  color: 'var(--text-primary)'
                 }}
               >
                 {isMobileMenuOpen ? 'CLOSE' : 'MENU'}
@@ -453,7 +465,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               position: 'fixed',
               inset: 0,
               zIndex: 99,
-              backgroundColor: '#070709',
+              backgroundColor: 'var(--bg-primary)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -477,10 +489,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.72rem',
                   letterSpacing: '0.12em',
-                  color: 'var(--text-muted)'
+                  color: 'var(--text-muted)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.35rem'
                 }}
               >
-                [ TRANSPONDER // SECTOR DIRECTORY ]
+                {isLightMode ? (
+                  <>
+                    <span>[ PREHISTORIC</span>
+                    <CactusIcon size="0.8em" />
+                    <span>SECTOR DIRECTORY ]</span>
+                  </>
+                ) : (
+                  '[ TRANSPONDER // SECTOR DIRECTORY ]'
+                )}
               </div>
               <div
                 style={{
@@ -489,7 +512,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                   color: 'var(--text-secondary)'
                 }}
               >
-                SEC 04
+                {isLightMode ? 'PREHISTORIC' : 'SEC 04'}
               </div>
             </div>
 
@@ -505,9 +528,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                     transition={{ delay: 0.04 * idx, duration: 0.18 }}
                     onClick={() => handleMobileNavClick(item.id)}
                     style={{
-                      background: isActive ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                      background: isActive ? 'var(--bg-card-hover)' : 'var(--bg-card)',
                       border: '1px solid',
-                      borderColor: isActive ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.07)',
+                      borderColor: isActive ? 'var(--border-active)' : 'var(--border-subtle)',
                       borderRadius: '4px',
                       padding: '0.85rem 1.15rem',
                       minHeight: '48px',
@@ -525,10 +548,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                         style={{
                           fontFamily: 'var(--font-mono)',
                           fontSize: '0.75rem',
-                          color: isActive ? '#ffffff' : 'var(--text-muted)'
+                          color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.2rem'
                         }}
                       >
-                        {item.num} //
+                        <span>{item.num}</span>
+                        {isLightMode ? <CactusIcon size="0.75em" /> : <span>//</span>}
                       </span>
                       <span
                         style={{
@@ -536,7 +563,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                           fontSize: '1.15rem',
                           fontWeight: 700,
                           letterSpacing: '0.05em',
-                          color: isActive ? '#ffffff' : 'var(--text-secondary)'
+                          color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)'
                         }}
                       >
                         {item.label}
@@ -547,7 +574,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                         style={{
                           fontFamily: 'var(--font-mono)',
                           fontSize: '0.68rem',
-                          color: '#ffffff',
+                          color: 'var(--text-primary)',
                           letterSpacing: '0.1em'
                         }}
                       >
@@ -568,8 +595,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                   setIsMobileMenuOpen(false)
                 }}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-subtle)',
                   borderRadius: '4px',
                   padding: '0.85rem 1.15rem',
                   minHeight: '48px',
@@ -587,10 +614,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                     style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.75rem',
-                      color: 'var(--text-muted)'
+                      color: 'var(--text-muted)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.2rem'
                     }}
                   >
-                    07 //
+                    <span>07</span>
+                    {isLightMode ? <CactusIcon size="0.75em" /> : <span>//</span>}
                   </span>
                   <span
                     style={{
@@ -598,7 +629,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                       fontSize: '1.15rem',
                       fontWeight: 700,
                       letterSpacing: '0.05em',
-                      color: '#ffffff'
+                      color: 'var(--text-primary)'
                     }}
                   >
                     RESUME [PDF]
@@ -631,10 +662,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.68rem',
-                  color: 'var(--text-muted)'
+                  color: 'var(--text-muted)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.35rem'
                 }}
               >
-                LAT 51.04° N // LON 114.07° W
+                {isLightMode ? (
+                  <>
+                    <span>LAT 51.04° N</span>
+                    <CactusIcon size="0.75em" />
+                    <span>LON 114.07° W</span>
+                  </>
+                ) : (
+                  'LAT 51.04° N // LON 114.07° W'
+                )}
               </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
