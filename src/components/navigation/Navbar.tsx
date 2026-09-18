@@ -3,6 +3,7 @@ import { Sun, Moon, Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { CactusIcon } from '../ui/CactusIcon'
+import { useScrollY } from '../../hooks/useScrollY'
 
 interface NavbarProps {
   activeSection: string
@@ -197,34 +198,21 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
   // Blur behind the header activates only once the top of the name begins scrolling above it
   const [isBlurred, setIsBlurred] = useState(false)
   const headerRef = useRef<HTMLElement | null>(null)
+  const scrollY = useScrollY()
 
   useEffect(() => {
-    const handleScroll = () => {
-      const nameEl = document.getElementById('hero-name-heading')
-      const headerEl = headerRef.current
-
-      if (nameEl && headerEl) {
-        const nameRect = nameEl.getBoundingClientRect()
-        const headerRect = headerEl.getBoundingClientRect()
-        // Top of the name begins scrolling above the bottom of the header / nav menu
-        setIsBlurred(nameRect.top <= headerRect.bottom)
-      } else if (nameEl) {
-        const nameRect = nameEl.getBoundingClientRect()
-        setIsBlurred(nameRect.top <= 75)
-      } else {
-        setIsBlurred(window.scrollY > 250)
-      }
+    const nameEl = document.getElementById('hero-name-heading')
+    const headerEl = headerRef.current
+    if (nameEl && headerEl) {
+      const nameRect = nameEl.getBoundingClientRect()
+      const headerRect = headerEl.getBoundingClientRect()
+      setIsBlurred(nameRect.top <= headerRect.bottom)
+    } else if (nameEl) {
+      setIsBlurred(nameEl.getBoundingClientRect().top <= 75)
+    } else {
+      setIsBlurred(scrollY > 250)
     }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
-    }
-  }, [])
+  }, [scrollY])
 
   return (
     <>

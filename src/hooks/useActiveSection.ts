@@ -4,31 +4,28 @@ export function useActiveSection(sectionIds: string[]) {
   const [activeSection, setActiveSection] = useState<string>(sectionIds[0] || 'home')
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200
+    // A horizontal band spanning the middle 20% of the viewport.
+    // Whichever section enters this band becomes active.
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries.filter(e => e.isIntersecting)
+        if (visible.length === 0) return
+        // When multiple sections intersect (transition zone), prefer the one
+        // that appears earlier in the declared section order.
+        const best = visible.sort(
+          (a, b) => sectionIds.indexOf(a.target.id) - sectionIds.indexOf(b.target.id)
+        )[0]
+        setActiveSection(best.target.id)
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+    )
 
-      for (const id of sectionIds) {
-        const element = document.getElementById(id)
-        if (element) {
-          const top = element.offsetTop
-          const height = element.offsetHeight
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(id)
-            return
-          }
-        }
-      }
+    const elements = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean) as Element[]
 
-      // If at bottom of page, activate last section
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-        setActiveSection(sectionIds[sectionIds.length - 1])
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-
-    return () => window.removeEventListener('scroll', handleScroll)
+    elements.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
   }, [sectionIds])
 
   return activeSection
