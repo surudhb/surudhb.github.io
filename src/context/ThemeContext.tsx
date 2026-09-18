@@ -55,6 +55,37 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         ? 'Surudh Bhutani — Software Engineer 🌵 Technical Program Manager'
         : 'Surudh Bhutani — Software Engineer // Technical Program Manager'
     }
+
+    // Lazily inject light-mode-only @font-face declarations on first switch to light.
+    // These fonts are never fetched for dark-mode visitors.
+    if (theme === 'light' && !document.getElementById('light-mode-fonts')) {
+      const style = document.createElement('style')
+      style.id = 'light-mode-fonts'
+      style.textContent = `
+        @font-face {
+          font-family: 'Press Start 2P';
+          font-weight: 400;
+          font-style: normal;
+          font-display: optional;
+          src: url('/fonts/PressStart2P/PressStart2P-Regular.woff2') format('woff2');
+        }
+        @font-face {
+          font-family: 'Silkscreen';
+          font-weight: 400;
+          font-style: normal;
+          font-display: optional;
+          src: url('/fonts/Silkscreen/Silkscreen-Regular.woff2') format('woff2');
+        }
+        @font-face {
+          font-family: 'CavePainting';
+          font-weight: 400;
+          font-style: normal;
+          font-display: optional;
+          src: url('/fonts/CavePainting/CavePainting.woff2') format('woff2');
+        }
+      `
+      document.head.appendChild(style)
+    }
   }, [theme])
 
   const value = useMemo(
