@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { AppWindow } from 'lucide-react'
 import { experienceData } from '../../data/experience'
-import { GalleryItem } from '../../types'
+import { GalleryItem, ExperienceLinkItem } from '../../types'
 import { MotionReveal } from '../ui/MotionReveal'
 import { GalleryModal } from '../ui/GalleryModal'
+import { ExperienceDetailModal } from '../ui/ExperienceDetailModal'
 
 export const ExperienceSection: React.FC = () => {
   const [gallery, setGallery] = useState<{ title: string; items: GalleryItem[] } | null>(null)
+  const [activeDetail, setActiveDetail] = useState<{ item: ExperienceLinkItem; company: string } | null>(null)
 
   return (
     <section
@@ -56,8 +59,8 @@ export const ExperienceSection: React.FC = () => {
                   alignItems: 'start'
                 }}
               >
-                {/* Left Column: sticky */}
-                <div style={{ position: 'sticky', top: '5.5rem' }}>
+                {/* Left Column: sticky on desktop */}
+                <div className="sticky-desktop">
                   <div
                     style={{
                       fontFamily: 'var(--font-mono)',
@@ -112,7 +115,7 @@ export const ExperienceSection: React.FC = () => {
                     {exp.location}
                   </div>
 
-                  {/* External links */}
+                  {/* Engagement / External links */}
                   {exp.links && exp.links.length > 0 && (
                     <div
                       style={{
@@ -122,25 +125,58 @@ export const ExperienceSection: React.FC = () => {
                         gap: '0.35rem'
                       }}
                     >
-                      {exp.links.map((link) => (
-                        <a
-                          key={link.href}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '0.78rem',
-                            letterSpacing: '0.06em',
-                            color: 'var(--text-muted)',
-                            transition: 'color 150ms'
-                          }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-                        >
-                          {link.label} ↗
-                        </a>
-                      ))}
+                      {exp.links.map((link, lIdx) => {
+                        const isModal = Boolean((link.bullets && link.bullets.length > 0) || (link.links && link.links.length > 0) || link.title)
+                        return isModal ? (
+                          <button
+                            key={link.title || link.label || lIdx}
+                            type="button"
+                            onClick={() => setActiveDetail({ item: link, company: exp.company })}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              padding: 0,
+                              margin: 0,
+                              cursor: 'pointer',
+                              textAlign: 'left',
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.78rem',
+                              letterSpacing: '0.06em',
+                              color: 'var(--text-muted)',
+                              transition: 'color 150ms',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem'
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                          >
+                            <span>{link.label}</span>
+                            <AppWindow size={12} strokeWidth={1.75} style={{ opacity: 0.85, flexShrink: 0 }} aria-hidden="true" />
+                          </button>
+                        ) : (
+                          <a
+                            key={link.href || lIdx}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.78rem',
+                              letterSpacing: '0.06em',
+                              color: 'var(--text-muted)',
+                              transition: 'color 150ms',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem'
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                          >
+                            {link.label} ↗
+                          </a>
+                        )
+                      })}
                     </div>
                   )}
 
@@ -260,6 +296,17 @@ export const ExperienceSection: React.FC = () => {
             title={gallery.title}
             items={gallery.items}
             onClose={() => setGallery(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Experience Detail Modal */}
+      <AnimatePresence>
+        {activeDetail && (
+          <ExperienceDetailModal
+            item={activeDetail.item}
+            companyContext={activeDetail.company}
+            onClose={() => setActiveDetail(null)}
           />
         )}
       </AnimatePresence>

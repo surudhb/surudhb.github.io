@@ -23,6 +23,17 @@ export interface ExternalLink {
   href: string
 }
 
+export interface ExperienceLinkItem {
+  label: string
+  href?: string
+  title?: string
+  engagementWindow?: string
+  role?: string
+  links?: ExternalLink[]
+  bullets?: string[]
+  tags?: string[]
+}
+
 export interface Experience {
   id: string
   company: string
@@ -35,7 +46,7 @@ export interface Experience {
   bullets: string[]
   highlight?: string
   link?: string
-  links?: ExternalLink[]
+  links?: ExperienceLinkItem[]
   gallery?: GalleryItem[]
 }
 

@@ -113,6 +113,17 @@ code, pre, .font-mono {
   gap: 2.5rem;
 }
 
+.sticky-desktop {
+  position: static;
+}
+
+@media (min-width: 769px) {
+  .sticky-desktop {
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+
 .desktop-only {
   display: flex !important;
 }
@@ -272,6 +283,12 @@ code, pre, .font-mono {
   .responsive-two-col {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
+  }
+
+  .sticky-desktop,
+  .responsive-two-col > div[style*="sticky"] {
+    position: static !important;
+    top: auto !important;
   }
 
   .responsive-grid-auto {

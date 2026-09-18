@@ -51,8 +51,8 @@ export const ProjectsSection: React.FC = () => {
                   alignItems: 'start'
                 }}
               >
-                {/* Left Column: Number & Title */}
-                <div style={{ position: 'sticky', top: '5.5rem' }}>
+                {/* Left Column: Number & Title (sticky on desktop) */}
+                <div className="sticky-desktop">
                   <div
                     style={{
                       fontFamily: 'var(--font-mono)',

@@ -59,8 +59,8 @@ export const BlogSection: React.FC = () => {
                     alignItems: 'start'
                   }}
                 >
-                  {/* Left Column: Metadata */}
-                  <div style={{ position: 'sticky', top: '5.5rem' }}>
+                  {/* Left Column: Metadata (sticky on desktop) */}
+                  <div className="sticky-desktop">
                     <div
                       style={{
                         fontFamily: 'var(--font-mono)',
