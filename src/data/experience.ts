@@ -134,6 +134,26 @@ export const experienceData: Experience[] = [
         ],
         tags: ['PROOF-OF-LIQUIDITY', 'L1 INFRASTRUCTURE', 'VALIDATOR TOOLING', 'TPM']
       },
+      {
+        label: 'Internal Contributions - Ops & Scaling',
+        title: 'HYPOTENUSE LABS — OPERATIONS, SCALING & INTERNAL CONTRIBUTIONS',
+        engagementWindow: 'Apr 2024 – Apr 2025',
+        role: 'Lead Technical Program Manager',
+        links: [
+          { label: 'Hypotenuse Labs', href: 'https://www.hypotenuselabs.com/' }
+        ],
+        bullets: [
+          'Synthesized multi-product technical documentation standards across the company (PRDs, Linear tickets, release notes, compliance logs) into formal R&D methodologies, securing over $1.2M+ in Canadian government SR&ED tax incentives.',
+          'Created and championed project one-pagers ("Black Books") in Notion, centralizing business objectives, system architecture, invariants, and technical debt ("dirty laundry") to ensure 100% project context survival during lead rotations.',
+          'Drafted and enforced the Policy on Scoping and Project Proposals, instituting a structured sales-to-engineering handoff that captured critical unknowns early and eliminated ad-hoc kickoff delays.',
+          'Authored the formal On-Call Service Level Agreement (SLA), instituting strict <30-minute response times for Critical (SEV-1) production incidents (e.g., liquidation engine failures, contract exploits) while protecting developer bandwidth from non-emergency escalations.',
+          'Spearheaded the organizational transition to a globally distributed contractor model, designing structured onboarding systems, timezone-aware async communication cadences, and regular 1:1 check-ins across global team members.',
+          'Partnered with executive leadership to extract technical metrics from 12+ completed portfolio programs (including Ambient, The Archivist, Disa, Shrapnel, Aptos DX Audit), authoring master case study assets that accelerated enterprise sales conversion.',
+          'Standardized the candidate assessment methodology, establishing a multi-vector qualitative rating formula (Recruiting + Pairing + Technical + Resume) backed by leadership sanity checks to ensure candidates hit the Senior or Intermediate-Senior bar.',
+          'Instituted the Monday/Wednesday/Friday check-in cadence (commitments, mid-sprint progress, retrospectives) and enforced the 4P Test (People, Purpose, Process, Product) to eliminate low-value meetings across all active accounts.'
+        ],
+        tags: ['NOTION', 'LINEAR', 'SR&ED TAX INCENTIVES', 'ON-CALL SLAS', 'SYSTEM ARCHITECTURE', 'SDLC PLAYBOOKS', 'TECHNICAL PROGRAM MANAGEMENT', 'OPERATIONS']
+      },
     ],
     tags: ['TYPESCRIPT', 'PYTHON', 'POSTGRESQL', 'AWS', 'DOCKER', 'SYSTEM ARCHITECTURE', 'RELEASE ENGINEERING', 'SDLC', 'TECHNICAL PROGRAM MANAGEMENT', 'FINTECH', 'SR&ED'],
     bullets: [
@@ -305,6 +325,25 @@ export const experienceData: Experience[] = [
           'Implemented responsive web3 wallet connection flows supporting Ronin, MetaMask, and WalletConnect.'
         ],
         tags: ['TYPESCRIPT', 'NEXT.JS', 'RONIN NETWORK', 'SMART CONTRACTS', 'WEB3 GAMING']
+      },
+      {
+        label: 'Internal Contributions - Engineering & Culture',
+        title: 'HYPOTENUSE LABS — ENGINEERING CULTURE & INTERNAL CONTRIBUTIONS',
+        engagementWindow: 'Jun 2021 – Apr 2024',
+        role: 'Software Engineer',
+        links: [
+          { label: 'Hypotenuse Labs', href: 'https://www.hypotenuselabs.com/' }
+        ],
+        bullets: [
+          'Co-authored and executed the standardized technical pair-programming interview process using custom sandbox codebases (hype-coin for Web3/Blockchain and texas-hypem-web3 for Full-Stack), establishing a strict rubric prioritizing collaborative problem-solving and architectural reasoning.',
+          'Established an interviewer shadowing framework where intermediate and senior engineers completed 3–4 live pairing observation sessions before leading technical evaluations independently, standardizing candidate scoring across the engineering org.',
+          'Structured and led an engineering mentorship program pairing full-time senior engineers with contract developers (~5 hours/week), cross-pollinating code quality standards, conducting architecture reviews, and providing technical safety nets.',
+          'Co-created project one-pagers ("Black Books") in Notion to document system architecture, core API constants, and technical debt ("dirty laundry"), ensuring new engineering joiners could onboard and ship code within days.',
+          'Designed framework proposals to upskill engineers during bench periods (including shadowing senior leads on Solana smart contract implementations), facilitating cross-chain and full-stack technical growth without disrupting client delivery.',
+          'Personally conducted technical pairing rounds and culture evaluations across major engineering hiring pushes, maintaining a rigorous technical bar for Senior and Intermediate-Senior full-stack and web3 talent.',
+          'Extracted technical benchmarks, architecture diagrams, and performance achievements from completed engineering engagements (including The Archivist, Ambient Finance, and Disa) for master case study documentation.'
+        ],
+        tags: ['PAIR PROGRAMMING', 'TECHNICAL EVALUATION', 'SYSTEM ARCHITECTURE', 'ENGINEERING MENTORSHIP', 'DEVELOPER ONBOARDING', 'CODE QUALITY', 'FULL-STACK']
       },
     ],
     tags: ['REACT', 'TYPESCRIPT', 'PYTHON/FLASK', 'SWIFT/SWIFTUI', 'POSTGRESQL', 'TIMESCALEDB', 'REDIS', 'AWS (LAMBDA/SQS)', 'DOCKER', 'ETHERS.JS', 'FULL-STACK', 'DEFI', 'E-COMMERCE'],
