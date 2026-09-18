@@ -135,7 +135,7 @@ export const experienceData: Experience[] = [
         tags: ['PROOF-OF-LIQUIDITY', 'L1 INFRASTRUCTURE', 'VALIDATOR TOOLING', 'TPM']
       },
       {
-        label: 'Internal Contributions - Ops & Scaling',
+        label: 'Bonus - Ops & Scaling',
         title: 'HYPOTENUSE LABS — OPERATIONS, SCALING & INTERNAL CONTRIBUTIONS',
         engagementWindow: 'Apr 2024 – Apr 2025',
         role: 'Lead Technical Program Manager',
