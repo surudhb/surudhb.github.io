@@ -56,7 +56,7 @@ export const experienceData: Experience[] = [
         bullets: [
           'Steered technical program delivery across game client, smart contract, and web portal teams for a major transmedia gaming franchise on the Ronin network.',
           'Decomposed multi-platform tokenomics and NFT minting requirements into trackable sprint milestones, ensuring zero launch delays across major drop events.',
-          'Architected portal infrastructure facilitating frictionless custodial and non-custodial wallet onboarding for non-crypto native players.'
+          'Coordinated the design and delivery of portal infrastructure facilitating frictionless custodial and non-custodial wallet onboarding for non-crypto native players.'
         ],
         tags: ['RONIN NETWORK', 'SMART CONTRACTS', 'TYPESCRIPT', 'SYSTEM ARCHITECTURE', 'TECHNICAL PROGRAM MANAGEMENT', 'WEB3 GAMING']
       },
@@ -101,7 +101,7 @@ export const experienceData: Experience[] = [
         ],
         bullets: [
           'Cut delivery cycle time from 14+ days to under 7 on Ambient, a $4B+ trading platform, by tracing user drop-off to an unsustainable hotfix rate and overhauling release practices.',
-          'Eliminated preventable downtime by implementing continuous integration verification and automated smoke tests across concurrent testnets and mainnet.',
+          'Eliminated preventable downtime by implementing continuous integration verification, automated smoke tests on testnets, and environment health checks against mainnet.',
           'Streamlined cross-functional engineering handoffs between core protocol researchers, contract engineers, and frontend teams.'
         ],
         tags: ['REACT', 'TYPESCRIPT', 'CI/CD', 'AUTOMATED TESTING', 'RELEASE ENGINEERING', 'DEX', 'DEFI']
@@ -140,7 +140,7 @@ export const experienceData: Experience[] = [
       'Owned end-to-end delivery across 10+ concurrent SaaS programs in fin-tech and e-commerce, reducing leadership escalations to 0 from scoping to launch as the single point of accountability on scope, timeline, and delivery risk.',
       'Recovered a joint venture stalled by 7 months of requirement misalignment, re-establishing a single source of truth on scope, decomposing partner requirements into tracked deliverables, and eliminating $1.2M in idle spend.',
       'Cut delivery cycle time from 14+ days to under 7 on Ambient, a $4B+ trading platform, by tracing user drop-off to an unsustainable hotfix rate, overhauling release practices, and eliminating preventable downtime.',
-      'Unlocked upwards of $3M+ in net new value across select programs by replacing ad-hoc updates with a trusted RYG reporting cadence, giving leadership decision-ready visibility.',
+      'Unlocked $3M+ in net new value across select programs by replacing ad-hoc updates with a trusted RYG reporting cadence, giving leadership decision-ready visibility.',
       'Eliminated $1.5M in annualized cost by building portfolio-wide visibility into skills gaps and delivery risk, converting precautionary contractor hiring into evidence-based staffing decisions.',
       'Streamlined qualification for $1.4M+ in government R&D (SR&ED) grants by standardizing technical documentation and continuous evidence collection across a $10M+ portfolio.'
     ],
