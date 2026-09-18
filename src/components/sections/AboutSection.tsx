@@ -1,8 +1,13 @@
 import React from 'react'
 import { profileData } from '../../data/profile'
 import { MotionReveal } from '../ui/MotionReveal'
+import { useTheme } from '../../context/ThemeContext'
+import { THEME_CONFIG } from '../../config/themeConfig'
+import { ThemedText } from '../ui/ThemedText'
 
 export const AboutSection: React.FC = () => {
+  const { theme } = useTheme()
+
   return (
     <section
       id="about"
@@ -24,7 +29,7 @@ export const AboutSection: React.FC = () => {
               marginBottom: '1.5rem'
             }}
           >
-            [DOSSIER // 01 // BACKGROUND & CRAFT]
+            <ThemedText text={THEME_CONFIG[theme].aboutHeader} />
           </div>
           <h2
             style={{
@@ -32,7 +37,7 @@ export const AboutSection: React.FC = () => {
               letterSpacing: '-0.025em',
               lineHeight: 1.15,
               marginBottom: '2.5rem',
-              color: '#ffffff'
+              color: 'var(--text-primary)'
             }}
           >
             ENGINEERING ROOTS, BUILDER MINDSET.
@@ -95,7 +100,7 @@ export const AboutSection: React.FC = () => {
                     fontSize: '1.2rem',
                     fontWeight: 600,
                     marginBottom: '0.4rem',
-                    color: '#ffffff'
+                    color: 'var(--text-primary)'
                   }}
                 >
                   {edu.link ? (
@@ -103,9 +108,9 @@ export const AboutSection: React.FC = () => {
                       href={edu.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: '#ffffff', textDecoration: 'none' }}
+                      style={{ color: 'var(--text-primary)', textDecoration: 'none' }}
                       onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                     >
                       {edu.institution} ↗
                     </a>
@@ -158,7 +163,7 @@ export const AboutSection: React.FC = () => {
                           transition: 'color 150ms',
                           textDecoration: 'none'
                         }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
                         onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
                       >
                         {link.label} ↗
