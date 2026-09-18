@@ -1,20 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { profileData } from '../../data/profile'
-import { useTheme } from '../../context/ThemeContext'
-import { THEME_CONFIG } from '../../config/themeConfig'
-import { CactusIcon } from '../ui/CactusIcon'
 
 const FIRST_NAME = 'SURUDH'
 const LAST_NAME = 'BHUTANI'
 // Non-space letter indices in "SURUDH BHUTANI" (index 6 is a space)
 const LETTER_INDICES = [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13]
 
-export const HeroSection: React.FC = () => {
-  const { theme, isLightMode } = useTheme()
-  const subtitleTokens = THEME_CONFIG[theme].subtitleTokens
-  const statusBadge = THEME_CONFIG[theme].statusBadge
+const SUBTITLE_TOKENS = ['SOFTWARE', 'ENGINEER', '//', 'TECHNICAL', 'PROGRAM', 'MANAGER']
 
+export const HeroSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -163,67 +158,6 @@ export const HeroSection: React.FC = () => {
           alignItems: 'center'
         }}
       >
-        {/* Status Badge: Prehistoric Offline in Light Mode, Sci-Fi Transponder in Dark Mode */}
-        {statusBadge && (
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem',
-              height: '30px',
-              minHeight: '30px',
-              maxHeight: '30px',
-              boxSizing: 'border-box',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.72rem',
-              lineHeight: 1,
-              letterSpacing: '0.12em',
-              color: isLightMode ? 'var(--text-muted)' : 'var(--text-secondary)',
-              border: isLightMode ? '1px solid var(--border-subtle)' : '1px solid rgba(94, 241, 242, 0.3)',
-              background: 'var(--bg-card)',
-              padding: '0 0.75rem',
-              borderRadius: '4px',
-              marginBottom: '1.25rem',
-              boxShadow: isLightMode
-                ? '1px 1px 0px rgba(83, 83, 83, 0.2)'
-                : '0 0 14px rgba(94, 241, 242, 0.14), inset 0 0 10px rgba(94, 241, 242, 0.05)',
-              transition: 'color 200ms ease, background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease',
-              whiteSpace: 'nowrap'
-            }}
-          >
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '8px',
-                height: '8px',
-                flexShrink: 0
-              }}
-              aria-hidden="true"
-            >
-              {isLightMode ? (
-                <svg width="7" height="7" viewBox="0 0 8 8" style={{ display: 'block' }}>
-                  <polygon points="4,1 8,7 0,7" fill="var(--accent-amber)" />
-                </svg>
-              ) : (
-                <span
-                  style={{
-                    display: 'block',
-                    width: '6px',
-                    height: '6px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--accent-cyan)',
-                    boxShadow: '0 0 8px var(--accent-cyan)'
-                  }}
-                />
-              )}
-            </span>
-            <span style={{ lineHeight: 1, whiteSpace: 'nowrap' }}>{statusBadge}</span>
-          </div>
-        )}
-
         {/* Main Name Heading with multi-swap Aurebesh decode and consistent English spacing */}
         <h1
           id="hero-name-heading"
@@ -236,7 +170,7 @@ export const HeroSection: React.FC = () => {
             fontWeight: 700,
             letterSpacing: '0.01em',
             lineHeight: 1.12,
-            color: 'var(--text-primary)',
+            color: '#ffffff',
             margin: '0 0 1.25rem 0',
             userSelect: 'none',
             minHeight: '1.15em',
@@ -254,7 +188,6 @@ export const HeroSection: React.FC = () => {
               const index = charIdx
               const isHovered = hoveredIndex === index
               const isAurebesh = isHovered || aurebeshLetters.has(index)
-              const decodeFont = isLightMode ? 'CavePainting, sans-serif' : 'Aurebesh, sans-serif'
 
               return (
                 <span
@@ -264,11 +197,11 @@ export const HeroSection: React.FC = () => {
                   onMouseLeave={() => setHoveredIndex((prev) => (prev === index ? null : prev))}
                   onPointerEnter={() => setHoveredIndex(index)}
                   onPointerLeave={() => setHoveredIndex((prev) => (prev === index ? null : prev))}
-                  title={isAurebesh ? (isLightMode ? `Cave Art [${char}]` : `Aurebesh [${char}]`) : char}
+                  title={isAurebesh ? `Aurebesh [${char}]` : char}
                   style={{
                     display: 'inline-block',
-                    fontFamily: isAurebesh ? decodeFont : 'var(--font-display)',
-                    fontSize: isAurebesh ? (isLightMode ? '0.72em' : '0.80em') : '1em',
+                    fontFamily: isAurebesh ? 'Aurebesh, sans-serif' : 'var(--font-display)',
+                    fontSize: isAurebesh ? '0.88em' : '1em',
                     lineHeight: 1,
                     verticalAlign: 'baseline',
                     position: 'relative',
@@ -277,11 +210,9 @@ export const HeroSection: React.FC = () => {
                     transition: 'transform 120ms ease, text-shadow 150ms ease, color 120ms ease',
                     transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
                     textShadow: isHovered
-                      ? isLightMode
-                        ? 'none'
-                        : '0 0 16px rgba(255, 255, 255, 0.9), 0 0 28px rgba(94, 241, 242, 0.6), 0 0 42px rgba(94, 241, 242, 0.35)'
+                      ? '0 0 16px rgba(255, 255, 255, 0.9), 0 0 28px rgba(94, 241, 242, 0.6), 0 0 42px rgba(94, 241, 242, 0.35)'
                       : 'none',
-                    color: isHovered ? 'var(--text-primary)' : 'inherit'
+                    color: isHovered ? '#ffffff' : 'inherit'
                   }}
                 >
                   {char}
@@ -296,7 +227,6 @@ export const HeroSection: React.FC = () => {
               const index = charIdx + 7
               const isHovered = hoveredIndex === index
               const isAurebesh = isHovered || aurebeshLetters.has(index)
-              const decodeFont = isLightMode ? 'CavePainting, sans-serif' : 'Aurebesh, sans-serif'
 
               return (
                 <span
@@ -306,11 +236,11 @@ export const HeroSection: React.FC = () => {
                   onMouseLeave={() => setHoveredIndex((prev) => (prev === index ? null : prev))}
                   onPointerEnter={() => setHoveredIndex(index)}
                   onPointerLeave={() => setHoveredIndex((prev) => (prev === index ? null : prev))}
-                  title={isAurebesh ? (isLightMode ? `Cave Art [${char}]` : `Aurebesh [${char}]`) : char}
+                  title={isAurebesh ? `Aurebesh [${char}]` : char}
                   style={{
                     display: 'inline-block',
-                    fontFamily: isAurebesh ? decodeFont : 'var(--font-display)',
-                    fontSize: isAurebesh ? (isLightMode ? '0.72em' : '0.80em') : '1em',
+                    fontFamily: isAurebesh ? 'Aurebesh, sans-serif' : 'var(--font-display)',
+                    fontSize: isAurebesh ? '0.88em' : '1em',
                     lineHeight: 1,
                     verticalAlign: 'baseline',
                     position: 'relative',
@@ -319,11 +249,9 @@ export const HeroSection: React.FC = () => {
                     transition: 'transform 120ms ease, text-shadow 150ms ease, color 120ms ease',
                     transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
                     textShadow: isHovered
-                      ? isLightMode
-                        ? 'none'
-                        : '0 0 16px rgba(255, 255, 255, 0.9), 0 0 28px rgba(94, 241, 242, 0.6), 0 0 42px rgba(94, 241, 242, 0.35)'
+                      ? '0 0 16px rgba(255, 255, 255, 0.9), 0 0 28px rgba(94, 241, 242, 0.6), 0 0 42px rgba(94, 241, 242, 0.35)'
                       : 'none',
-                    color: isHovered ? 'var(--text-primary)' : 'inherit'
+                    color: isHovered ? '#ffffff' : 'inherit'
                   }}
                 >
                   {char}
@@ -333,7 +261,7 @@ export const HeroSection: React.FC = () => {
           </span>
         </h1>
 
-        {/* Subtitle / Discipline with Aurebesh / Cave Art letter hover effect & consistent English spacing */}
+        {/* Subtitle / Discipline with Aurebesh letter hover effect & consistent English spacing */}
         <motion.div
           initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -349,7 +277,6 @@ export const HeroSection: React.FC = () => {
             textTransform: 'uppercase',
             marginBottom: '1.75rem',
             lineHeight: 1.5,
-            minHeight: '1.8rem',
             padding: '0 0.5rem',
             display: 'inline-flex',
             alignItems: 'center',
@@ -359,25 +286,20 @@ export const HeroSection: React.FC = () => {
             rowGap: '0.25em'
           }}
         >
-          {subtitleTokens.map((token, tokenIdx) => {
-            if (token === '//' || token === '■' || token === '🌵') {
+          {SUBTITLE_TOKENS.map((token, tokenIdx) => {
+            if (token === '//') {
               return (
                 <span
                   key={tokenIdx}
                   style={{
-                    color: 'var(--divider-symbol-color)',
-                    textShadow: isLightMode ? 'none' : '0 0 8px rgba(94, 241, 242, 0.25)',
+                    color: 'rgba(255, 255, 255, 0.45)',
+                    textShadow: '0 0 8px rgba(94, 241, 242, 0.25)',
                     fontWeight: 600,
                     userSelect: 'none',
-                    margin: '0 0.25em',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '1.2em',
-                    lineHeight: 1
+                    margin: '0 0.1em'
                   }}
                 >
-                  {isLightMode ? <CactusIcon size="1.05em" style={{ verticalAlign: '0' }} /> : '//'}
+                  //
                 </span>
               )
             }
@@ -404,15 +326,11 @@ export const HeroSection: React.FC = () => {
                       onMouseLeave={() => setHoveredSubKey((prev) => (prev === key ? null : prev))}
                       onPointerEnter={() => setHoveredSubKey(key)}
                       onPointerLeave={() => setHoveredSubKey((prev) => (prev === key ? null : prev))}
-                      title={isHovered ? (isLightMode ? `Cave Art [${char}]` : `Aurebesh [${char}]`) : char}
+                      title={isHovered ? `Aurebesh [${char}]` : char}
                       style={{
                         display: 'inline-block',
-                        fontFamily: isHovered
-                          ? isLightMode
-                            ? 'CavePainting, sans-serif'
-                            : 'Aurebesh, sans-serif'
-                          : 'var(--font-heading)',
-                        fontSize: isHovered ? (isLightMode ? '1.1em' : '0.88em') : '1em',
+                        fontFamily: isHovered ? 'Aurebesh, sans-serif' : 'var(--font-heading)',
+                        fontSize: isHovered ? '0.88em' : '1em',
                         lineHeight: 1,
                         verticalAlign: 'baseline',
                         position: 'relative',
@@ -420,18 +338,10 @@ export const HeroSection: React.FC = () => {
                         userSelect: 'none',
                         transition: 'transform 120ms ease, text-shadow 150ms ease, color 120ms ease',
                         transform: isHovered ? 'translateY(-1.5px)' : 'translateY(0)',
-                        textShadow: isLightMode
-                          ? 'none'
-                          : isHovered
-                            ? '0 0 14px rgba(255, 255, 255, 0.9), 0 0 24px rgba(94, 241, 242, 0.65), 0 0 36px rgba(94, 241, 242, 0.35)'
-                            : '0 0 8px rgba(255, 255, 255, 0.5), 0 0 16px rgba(94, 241, 242, 0.3)',
-                        color: isLightMode
-                          ? isHovered
-                            ? 'var(--text-primary)'
-                            : 'var(--text-secondary)'
-                          : isHovered
-                            ? '#ffffff'
-                            : 'rgba(255, 255, 255, 0.9)'
+                        textShadow: isHovered
+                          ? '0 0 14px rgba(255, 255, 255, 0.9), 0 0 24px rgba(94, 241, 242, 0.65), 0 0 36px rgba(94, 241, 242, 0.35)'
+                          : '0 0 8px rgba(255, 255, 255, 0.5), 0 0 16px rgba(94, 241, 242, 0.3)',
+                        color: isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.9)'
                       }}
                     >
                       {char}
@@ -474,7 +384,7 @@ export const HeroSection: React.FC = () => {
                 alignItems: 'center',
                 gap: '0.25rem'
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
             >
               {link.label} ↗

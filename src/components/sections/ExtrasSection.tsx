@@ -1,14 +1,8 @@
 import React from 'react'
 import { profileData } from '../../data/profile'
 import { MotionReveal } from '../ui/MotionReveal'
-import { useTheme } from '../../context/ThemeContext'
-import { THEME_CONFIG } from '../../config/themeConfig'
-import { ThemedText } from '../ui/ThemedText'
-import { CactusIcon } from '../ui/CactusIcon'
 
 export const ExtrasSection: React.FC = () => {
-  const { theme, isLightMode } = useTheme()
-
   return (
     <section
       id="extras"
@@ -30,7 +24,7 @@ export const ExtrasSection: React.FC = () => {
               marginBottom: '1.5rem'
             }}
           >
-            <ThemedText text={THEME_CONFIG[theme].extrasHeader} />
+            [ARCHIVES // 05 // EXTRAS & INFLUENCES]
           </div>
           <h2
             style={{
@@ -38,7 +32,7 @@ export const ExtrasSection: React.FC = () => {
               letterSpacing: '-0.025em',
               lineHeight: 1.15,
               marginBottom: '4rem',
-              color: 'var(--text-primary)'
+              color: '#ffffff'
             }}
           >
             LITERATURE & CINEMATIC CANON.
@@ -68,7 +62,7 @@ export const ExtrasSection: React.FC = () => {
                 gap: '0.5rem'
               }}
             >
-              <span>{isLightMode ? <CactusIcon size="0.85em" /> : '+'}</span>
+              <span>+</span>
               <span>[LITERATURE & DISPATCHES]</span>
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.75rem', padding: 0 }}>
@@ -88,7 +82,7 @@ export const ExtrasSection: React.FC = () => {
                     style={{
                       fontSize: '1.1rem',
                       fontWeight: 600,
-                      color: 'var(--text-primary)',
+                      color: '#ffffff',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.35rem',
@@ -97,7 +91,7 @@ export const ExtrasSection: React.FC = () => {
                       transition: 'color 180ms ease'
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
                   >
                     <span>{book.title}</span>
                     <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>↗</span>
@@ -130,7 +124,7 @@ export const ExtrasSection: React.FC = () => {
                 gap: '0.5rem'
               }}
             >
-              <span>{isLightMode ? <CactusIcon size="0.85em" /> : '+'}</span>
+              <span>+</span>
               <span>[CINEMATIC & NARRATIVE ARCHIVES]</span>
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.75rem', padding: 0 }}>
@@ -150,7 +144,7 @@ export const ExtrasSection: React.FC = () => {
                     style={{
                       fontSize: '1.1rem',
                       fontWeight: 600,
-                      color: 'var(--text-primary)',
+                      color: '#ffffff',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.35rem',
@@ -159,7 +153,7 @@ export const ExtrasSection: React.FC = () => {
                       transition: 'color 180ms ease'
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
                   >
                     <span>{media.title}</span>
                     <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>↗</span>

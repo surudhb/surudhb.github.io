@@ -1,10 +1,7 @@
-import React, { useCallback, useRef, useEffect, useState } from 'react'
-import { ThemeProvider, useTheme } from './context/ThemeContext'
+import React, { useCallback, useRef, useEffect } from 'react'
 import { StarfieldCanvas } from './components/canvas/StarfieldCanvas'
-import { DinoRunnerCanvas } from './components/canvas/DinoRunnerCanvas'
 import { Navbar } from './components/navigation/Navbar'
 import { CoordinatesHud } from './components/telemetry/CoordinatesHud'
-import { DinoScoreHud } from './components/telemetry/DinoScoreHud'
 import { HeroSection } from './components/sections/HeroSection'
 import { AboutSection } from './components/sections/AboutSection'
 import { ExperienceSection } from './components/sections/ExperienceSection'
@@ -12,38 +9,15 @@ import { ProjectsSection } from './components/sections/ProjectsSection'
 import { BlogSection } from './components/sections/BlogSection'
 import { ExtrasSection } from './components/sections/ExtrasSection'
 import { TronDiscCursor } from './components/ui/TronDiscCursor'
-import { BoneCursor } from './components/ui/BoneCursor'
 import { Footer } from './components/sections/Footer'
 import { useActiveSection } from './hooks/useActiveSection'
 
 // Experience is placed above Projects as requested
 const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'blog', 'extras']
 
-const AppContent: React.FC = () => {
-  const { isLightMode } = useTheme()
+export const App: React.FC = () => {
   const activeSection = useActiveSection(SECTION_IDS)
   const scrollAnimationRef = useRef<number | null>(null)
-  const [isScrolledToAbout, setIsScrolledToAbout] = useState(false)
-
-  // Track when mobile view has scrolled down to the about section or beyond
-  useEffect(() => {
-    const handleScroll = () => {
-      const aboutElem = document.getElementById('about')
-      if (!aboutElem) {
-        setIsScrolledToAbout(activeSection !== 'home')
-        return
-      }
-      const aboutTop = aboutElem.offsetTop
-      // Activate blur when the user has scrolled such that About section enters view
-      const shouldBlur = window.scrollY >= aboutTop - window.innerHeight * 0.65
-      setIsScrolledToAbout(shouldBlur)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [activeSection])
 
   const handleNavigate = useCallback((sectionId: string) => {
     // Cancel any running programmatic scroll
@@ -128,26 +102,20 @@ const AppContent: React.FC = () => {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
-      {/* Dynamic Cursor: Monochromatic Chicken Bone in Light Mode, Tron Identity Disc in Dark Mode */}
-      {isLightMode ? <BoneCursor /> : <TronDiscCursor />}
+      {/* Tron Legacy Rotating Identity Disc Cursor */}
+      <TronDiscCursor />
 
-      {/* Dynamic Background: Chrome Offline Dino Runner in Light Mode, Deep Space Starfield in Dark Mode */}
-      {isLightMode ? <DinoRunnerCanvas /> : <StarfieldCanvas />}
+      {/* Deep Space Background Canvas with Subtle Colored Stars & Long Trails */}
+      <StarfieldCanvas />
 
-      {/* Mobile-only background blur layer when scrolled down to the About section or beyond */}
-      <div
-        className={`mobile-scrolled-bg-blur ${isScrolledToAbout ? 'active' : ''}`}
-        aria-hidden="true"
-      />
-
-      {/* Viewport Perimeter Atmosphere Glow / Line Frame */}
+      {/* Viewport Perimeter Atmosphere Glow (White Canopy Aura) */}
       <div className="viewport-perimeter-glow" aria-hidden="true" />
 
       {/* Floating Minimal Navigation Bar */}
       <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
 
-      {/* Dynamic Sector / Scoreboard Telemetry (Bottom Right) */}
-      {isLightMode ? <DinoScoreHud /> : <CoordinatesHud />}
+      {/* Dynamic Cursor-Driven Visitor Telemetry (Bottom Right) */}
+      <CoordinatesHud />
 
       {/* Main Single-Page Scroll Content */}
       <main style={{ position: 'relative', zIndex: 1 }}>
@@ -162,14 +130,6 @@ const AppContent: React.FC = () => {
       {/* Footer */}
       <Footer onNavigate={handleNavigate} />
     </div>
-  )
-}
-
-export const App: React.FC = () => {
-  return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
   )
 }
 
