@@ -3,12 +3,13 @@ import { Profile } from '../types'
 export const profileData: Profile = {
   name: 'SURUDH BHUTANI',
   role: 'SOFTWARE ENGINEER // TECHNICAL PROGRAM MANAGER',
-  tagline: 'Full-stack software engineer with 6+ years shipping production systems across fin-tech, e-commerce, and gaming. Built data dashboards, marketplaces, gamified NFT drops, web3 apps and more from the ground up.',
+  tagline: 'I am a full-stack software engineer with 6+ years shipping production systems across fin-tech, e-commerce, and gaming. Built data dashboards, marketplaces, gamified NFT drops, web3 apps and more from the ground up.',
   location: 'CALGARY, AB, CAN // OPEN TO HYBRID & REMOTE',
   bio: [
-    "Full-stack software engineer with 6+ years shipping production systems across fin-tech, e-commerce, and gaming. Built data dashboards, web scrapers, marketplaces, gamified NFT drops, web3 apps and more from the ground up. Experienced shaping products, modernizing codebases, being customer-facing and owning features end-to-end on high-traffic platforms.",
-    "Side-quested for 1 year as a Lead Technical Program Manager in Hypotenuse Labs' founding role translating between C-suite, compliance, product, engineering, and vendors; owning the critical path and empowering remote, distributed teams to ship fast, at scale, and on time.",
-    "Graduated from the University of Waterloo with a B.SE in Software Engineering (Honours, 2018). Currently based in the Greater Calgary Area, Alberta, searching for my next adventure.",
+    "I am a software engineer with 6+ years of experience building products across fin-tech, e-commerce, and gaming. I have the most experience with Typescript and Python and the frameworks built around them, and a blend of experience across IaaS tools best suited for the task.",
+    "I have side-quested for 1 year as a Lead Technical Program Manager in Hypotenuse Labs' founding role owning and locking down technical delivery across a $5M portfolio",
+    "I graduated from the University of Waterloo with a B.SE in Software Engineering in 2018",
+    "I am currently based in the Greater Calgary Area, Alberta, searching for my next adventure.",
     "Currently seeking new opportunities!"
   ],
   education: [

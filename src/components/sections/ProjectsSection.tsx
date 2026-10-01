@@ -40,7 +40,7 @@ export const ProjectsSection: React.FC = () => {
               color: 'var(--text-primary)'
             }}
           >
-            SYSTEMS, PLATFORMS & EXPERIMENTS.
+            Lessons & Experiments
           </h2>
         </MotionReveal>
 

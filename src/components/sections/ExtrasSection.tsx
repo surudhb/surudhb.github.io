@@ -41,7 +41,7 @@ export const ExtrasSection: React.FC = () => {
               color: 'var(--text-primary)'
             }}
           >
-            LITERATURE & CINEMATIC CANON.
+            Recommendations
           </h2>
         </MotionReveal>
 

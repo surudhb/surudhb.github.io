@@ -45,7 +45,7 @@ export const BlogSection: React.FC = () => {
               color: 'var(--text-primary)'
             }}
           >
-            NOTES ON LOGIC, CRAFT & CULTURE.
+            Thoughts & Comments
           </h2>
         </MotionReveal>
 

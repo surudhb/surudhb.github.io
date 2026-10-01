@@ -40,7 +40,7 @@ export const AboutSection: React.FC = () => {
               color: 'var(--text-primary)'
             }}
           >
-            ENGINEERING ROOTS, BUILDER MINDSET.
+            Hello, World
           </h2>
         </MotionReveal>
 

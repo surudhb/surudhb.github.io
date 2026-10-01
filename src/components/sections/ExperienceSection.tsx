@@ -48,7 +48,7 @@ export const ExperienceSection: React.FC = () => {
               color: 'var(--text-primary)'
             }}
           >
-            PRODUCTION TRACK RECORD & LEADERSHIP.
+            Career Timeline
           </h2>
         </MotionReveal>
 
