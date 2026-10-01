@@ -203,6 +203,7 @@ export const DinoRunnerCanvas: React.FC = () => {
     if (!ctx) return
 
     let animationFrameId: number
+    let isRunning = !document.hidden
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
     let dpr = window.devicePixelRatio || 1
@@ -606,13 +607,20 @@ export const DinoRunnerCanvas: React.FC = () => {
       }
       ctx.restore()
 
-      animationFrameId = requestAnimationFrame(animate)
+      if (isRunning) animationFrameId = requestAnimationFrame(animate)
     }
 
-    animationFrameId = requestAnimationFrame(animate)
+    const handleVisibilityChange = () => {
+      isRunning = !document.hidden
+      if (isRunning) animationFrameId = requestAnimationFrame(animate)
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    if (isRunning) animationFrameId = requestAnimationFrame(animate)
 
     return () => {
       window.removeEventListener('resize', setCanvasSize)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
