@@ -10,7 +10,11 @@ const LAST_NAME = 'BHUTANI'
 // Non-space letter indices in "SURUDH BHUTANI" (index 6 is a space)
 const LETTER_INDICES = [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13]
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onNavigate: (id: string) => void
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   const { theme, isLightMode } = useTheme()
   const subtitleTokens = THEME_CONFIG[theme].subtitleTokens
   const statusBadge = THEME_CONFIG[theme].statusBadge
@@ -142,7 +146,8 @@ export const HeroSection: React.FC = () => {
       id="home"
       ref={sectionRef}
       style={{
-        minHeight: '100vh',
+        height: '100svh',
+        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -479,20 +484,25 @@ export const HeroSection: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Subtle scroll status hint */}
-        <motion.div
+        {/* Link to the about page (home is a single screen, no scrolling) */}
+        <motion.a
+          href="/about-me"
+          onClick={(e) => { e.preventDefault(); onNavigate('about') }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.8 }}
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.74rem',
+            fontSize: '0.78rem',
             letterSpacing: '0.12em',
-            color: 'var(--text-muted)'
+            color: 'var(--text-muted)',
+            transition: 'color 200ms ease'
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
         >
-          [ SCROLL TO EXPLORE ARCHIVES ]
-        </motion.div>
+          [ ABOUT ME → ]
+        </motion.a>
       </motion.div>
     </section>
   )

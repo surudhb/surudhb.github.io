@@ -21,6 +21,14 @@ export interface ExperienceLinkItem {
   tags?: string[]
 }
 
+export interface TrajectoryStop {
+  company: string
+  period: string
+  coop?: boolean
+  current?: boolean
+  link?: string
+}
+
 export interface Experience {
   id: string
   company: string

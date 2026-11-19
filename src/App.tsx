@@ -1,16 +1,12 @@
-import React, { useCallback, useRef, useEffect, useMemo, lazy, Suspense } from 'react'
+import React, { useCallback, useEffect, lazy, Suspense } from 'react'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Navbar } from './components/navigation/Navbar'
 import { HeroSection } from './components/sections/HeroSection'
-import { AboutSection } from './components/sections/AboutSection'
-import { ExperienceSection } from './components/sections/ExperienceSection'
 import { TronDiscCursor } from './components/ui/TronDiscCursor'
 import { BoneCursor } from './components/ui/BoneCursor'
-import { Footer } from './components/sections/Footer'
-import { useActiveSection } from './hooks/useActiveSection'
-import { useScrollY } from './hooks/useScrollY'
-import { FEATURES } from './config/features'
+import { AboutPage } from './components/pages/AboutPage'
+import { useRoute } from './hooks/useRoute'
 
 // Lazy-load canvas and HUD components — decorative, never needed for first paint
 const StarfieldCanvas = lazy(() => import('./components/canvas/StarfieldCanvas').then(m => ({ default: m.StarfieldCanvas })))
@@ -18,106 +14,20 @@ const DinoRunnerCanvas = lazy(() => import('./components/canvas/DinoRunnerCanvas
 const CoordinatesHud = lazy(() => import('./components/telemetry/CoordinatesHud').then(m => ({ default: m.CoordinatesHud })))
 const DinoScoreHud = lazy(() => import('./components/telemetry/DinoScoreHud').then(m => ({ default: m.DinoScoreHud })))
 
-const SECTION_IDS = ['home', 'about', ...(FEATURES.experienceSection ? ['experience'] : [])]
-
 const AppContent: React.FC = () => {
   const { isLightMode } = useTheme()
-  const activeSection = useActiveSection(SECTION_IDS)
-  const scrollY = useScrollY()
-  const scrollAnimationRef = useRef<number | null>(null)
+  const [route, navigate] = useRoute()
+  const isHome = route === 'home'
 
-  // Measure about section offset once on mount so we never read offsetTop in the hot path
-  const aboutOffsetRef = useRef(0)
+  // Home is a single screen: lock page scroll there, release it on other pages.
   useEffect(() => {
-    const el = document.getElementById('about')
-    if (el) aboutOffsetRef.current = el.offsetTop
-  }, [])
+    document.documentElement.classList.toggle('no-scroll', isHome)
+    return () => document.documentElement.classList.remove('no-scroll')
+  }, [isHome])
 
-  const isScrolledToAbout = useMemo(
-    () => scrollY >= aboutOffsetRef.current - window.innerHeight * 0.65,
-    [scrollY]
-  )
-
-  const handleNavigate = useCallback((sectionId: string) => {
-    // Cancel any running programmatic scroll
-    if (scrollAnimationRef.current !== null) {
-      cancelAnimationFrame(scrollAnimationRef.current)
-      scrollAnimationRef.current = null
-    }
-
-    let targetY = 0
-    if (sectionId !== 'home') {
-      const element = document.getElementById(sectionId)
-      if (!element) return
-      targetY = element.getBoundingClientRect().top + window.scrollY
-    }
-
-    const startY = window.scrollY
-    const distance = targetY - startY
-
-    // If already at destination, no-op
-    if (Math.abs(distance) < 4) return
-
-    // Comfortable, cinematic scroll duration:
-    // Scale gently between ~850ms (short jumps) and ~1500ms (long cross-page jumps)
-    const duration = Math.min(Math.max(650 + Math.pow(Math.abs(distance), 0.45) * 18, 850), 1500)
-    let startTime: number | null = null
-
-    // Smooth cubic ease-in-out curve for gentle start, readable cruising, and soft landing
-    const easeInOutCubic = (t: number): number => {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-    }
-
-    const cleanup = () => {
-      if (scrollAnimationRef.current !== null) {
-        cancelAnimationFrame(scrollAnimationRef.current)
-        scrollAnimationRef.current = null
-      }
-      window.removeEventListener('wheel', cancelOnUserInteraction)
-      window.removeEventListener('touchmove', cancelOnUserInteraction)
-      window.removeEventListener('keydown', cancelOnKeyInteraction)
-    }
-
-    const cancelOnUserInteraction = () => {
-      cleanup()
-    }
-
-    const cancelOnKeyInteraction = (e: KeyboardEvent) => {
-      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) {
-        cleanup()
-      }
-    }
-
-    window.addEventListener('wheel', cancelOnUserInteraction, { passive: true })
-    window.addEventListener('touchmove', cancelOnUserInteraction, { passive: true })
-    window.addEventListener('keydown', cancelOnKeyInteraction, { passive: true })
-
-    const step = (currentTime: number) => {
-      if (startTime === null) startTime = currentTime
-      const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const ease = easeInOutCubic(progress)
-
-      window.scrollTo(0, startY + distance * ease)
-
-      if (progress < 1) {
-        scrollAnimationRef.current = requestAnimationFrame(step)
-      } else {
-        cleanup()
-      }
-    }
-
-    scrollAnimationRef.current = requestAnimationFrame(step)
-  }, [])
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (scrollAnimationRef.current !== null) {
-        cancelAnimationFrame(scrollAnimationRef.current)
-      }
-    }
-  }, [])
+  const handleNavigate = useCallback((id: string) => {
+    if (id === 'home' || id === 'about') navigate(id)
+  }, [navigate])
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', backgroundColor: 'var(--bg-primary)' }}>
@@ -143,7 +53,7 @@ const AppContent: React.FC = () => {
 
       {/* Mobile-only background blur layer when scrolled down to the About section or beyond */}
       <div
-        className={`mobile-scrolled-bg-blur ${isScrolledToAbout ? 'active' : ''}`}
+        className={`mobile-scrolled-bg-blur ${isHome ? '' : 'active'}`}
         aria-hidden="true"
       />
 
@@ -151,22 +61,17 @@ const AppContent: React.FC = () => {
       <div className="viewport-perimeter-glow" aria-hidden="true" />
 
       {/* Floating Minimal Navigation Bar */}
-      <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
+      <Navbar activeSection={route} onNavigate={handleNavigate} />
 
       {/* Telemetry HUD — lazy loaded */}
       <Suspense fallback={null}>
         {isLightMode ? <DinoScoreHud /> : <CoordinatesHud />}
       </Suspense>
 
-      {/* Main Single-Page Scroll Content */}
+      {/* Page content: home is the hero only; about lives at /about-me */}
       <main style={{ position: 'relative', zIndex: 1 }}>
-        <HeroSection />
-        <AboutSection />
-        {FEATURES.experienceSection && <ExperienceSection />}
+        {isHome ? <HeroSection onNavigate={handleNavigate} /> : <AboutPage />}
       </main>
-
-      {/* Footer */}
-      <Footer onNavigate={handleNavigate} />
     </div>
   )
 }
