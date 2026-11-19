@@ -5,20 +5,16 @@ import { CactusIcon } from '../ui/CactusIcon'
 import { useScrollY } from '../../hooks/useScrollY'
 import { NavLaserBolt } from './NavLaserBolt'
 import { NavMobileDrawer } from './NavMobileDrawer'
-import { FEATURES } from '../../config/features'
 
 interface NavbarProps {
   activeSection: string
   onNavigate: (sectionId: string) => void
 }
 
-const ALL_NAV_ITEMS = [
+const NAV_ITEMS = [
   { id: 'home',       label: 'HOME',       num: '01' },
   { id: 'about',      label: 'ABOUT',      num: '02' },
-  { id: 'experience', label: 'EXPERIENCE', num: '03' },
 ]
-
-const NAV_ITEMS = ALL_NAV_ITEMS.filter(item => item.id !== 'experience' || FEATURES.experienceSection)
 
 interface LaserState {
   activeId: string
@@ -119,16 +115,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
     programmaticNavTimerRef.current = setTimeout(() => { programmaticTargetRef.current = null }, 1800)
     startLaserBolt(currentActiveIdRef.current, sectionId)
     onNavigate(sectionId)
-  }
-
-  const handleResumeDownload = (e: React.MouseEvent) => {
-    e.preventDefault()
-    const link = document.createElement('a')
-    link.href = '/surudh_bhutani_resume.pdf'
-    link.download = 'surudh_bhutani_resume.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
   }
 
   const [isBlurred, setIsBlurred] = useState(false)
@@ -246,30 +232,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
               </button>
             )
           })}
-
-          <button
-            onClick={handleResumeDownload}
-            title="Download Surudh Bhutani's Software Engineering Resume PDF"
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontFamily: 'var(--font-heading)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              color: 'var(--text-secondary)',
-              paddingBottom: '6px',
-              transition: 'all 200ms ease',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.3rem'
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-          >
-            RESUME ↓
-          </button>
         </nav>
 
         {/* Top-right controls */}
@@ -359,7 +321,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
         navItems={NAV_ITEMS}
         onNavigate={onNavigate}
         onClose={() => setIsMobileMenuOpen(false)}
-        onResumeDownload={handleResumeDownload}
       />
     </>
   )

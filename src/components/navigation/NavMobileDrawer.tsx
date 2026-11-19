@@ -15,7 +15,6 @@ interface NavMobileDrawerProps {
   navItems: NavItem[]
   onNavigate: (sectionId: string) => void
   onClose: () => void
-  onResumeDownload: (e: React.MouseEvent) => void
 }
 
 export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
@@ -25,7 +24,6 @@ export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
   navItems,
   onNavigate,
   onClose,
-  onResumeDownload,
 }) => {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto'
@@ -169,63 +167,6 @@ export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
               )
             })}
 
-            {/* Mobile resume download */}
-            <motion.button
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.04 * 6, duration: 0.18 }}
-              onClick={(e) => { onResumeDownload(e); onClose() }}
-              style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: '4px',
-                padding: '0.85rem 1.15rem',
-                minHeight: '48px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                textAlign: 'left',
-                cursor: 'pointer',
-                width: '100%',
-                marginTop: '0.25rem'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem' }}>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.75rem',
-                    color: 'var(--text-muted)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.2rem'
-                  }}
-                >
-                  <span>07</span>
-                  {isLightMode ? <CactusIcon size="0.75em" /> : <span>//</span>}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1.15rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.05em',
-                    color: 'var(--text-primary)'
-                  }}
-                >
-                  RESUME [PDF]
-                </span>
-              </div>
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.85rem',
-                  color: 'var(--text-secondary)'
-                }}
-              >
-                ↓
-              </span>
-            </motion.button>
           </div>
 
           {/* Bottom telemetry & close */}

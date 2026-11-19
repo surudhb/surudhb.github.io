@@ -23,6 +23,7 @@ export const profileData: Profile = {
   socialLinks: [
     { label: 'GITHUB', href: 'https://github.com/surudhb' },
     { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/surudh-bhutani/' },
-    { label: 'EMAIL', href: 'mailto:surudhb@gmail.com' }
+    { label: 'EMAIL', href: 'mailto:surudhb@gmail.com' },
+    { label: 'RESUME', href: '/surudh_bhutani_resume.pdf' }
   ]
 }
