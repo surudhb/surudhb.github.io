@@ -4,7 +4,7 @@ export const profileData: Profile = {
   name: 'SURUDH BHUTANI',
   role: 'TECHNICAL PROGRAM MANAGER // SOFTWARE ENGINEER',
   tagline: 'Software engineer turned technical program manager. Ran delivery across a $10M+ portfolio of 10+ programs.',
-  seeking: 'Seeking technical program, project & IT project management roles',
+  seeking: 'Open to New Opportunities!',
   location: 'CALGARY, AB // OPEN TO HYBRID & REMOTE',
   bio: [
     "I started out writing code and grew into running delivery. Over 4.5 years at Hypotenuse Labs, a Toronto software consultancy, I went from building client products to running the firm's whole portfolio as its first Lead TPM.",
