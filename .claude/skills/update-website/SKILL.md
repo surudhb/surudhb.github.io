@@ -14,7 +14,7 @@ For ANY bio, about text, tagline, headline, project or experience description, i
 - `reference/candidate-profile.md`: identity
 - `reference/tone-and-verbiage.md`: voice
 
-Hard voice rules: no em dashes anywhere (use commas, periods, colons); past tense in summaries and narrative; no Web3/crypto jargon (reframe to fintech/finance); never "career break", "sabbatical" or "gap year" (use "Freelance Technical Consultant"). Existing copy in `src/data/` may violate these (e.g. `id: 'career-break'`, "side-quested", "web3", "NFT", em dashes in titles); fix when touched and flag the rest.
+Hard voice rules: no em dashes anywhere (use commas, periods, colons); past tense in summaries and narrative; no Web3/crypto jargon (reframe to fintech/finance); never "career break", "sabbatical" or "gap year" (use "Freelance Technical Consultant"). Site positioning: TPM / PM / IT PM / project coordinator roles, audience is startups and public sector; keep copy casual, lean, and low-density.
 
 ## 2. Locate the change
 Read `reference/site-map.md` for which file owns what. Copy lives in `src/data/*.ts` (typed by `src/types/index.ts`); layout in `src/components/sections/`; colors in `src/styles/tokens.css`. Read `reference/conventions.md` before styling or adding components.
