@@ -52,8 +52,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     if (typeof document !== 'undefined') {
       document.title = theme === 'light'
-        ? 'Surudh Bhutani — Software Engineer 🌵 Technical Program Manager'
-        : 'Surudh Bhutani — Software Engineer // Technical Program Manager'
+        ? 'Surudh Bhutani 🌵 Technical Program Manager'
+        : 'Surudh Bhutani | Technical Program Manager'
     }
 
     // Lazily inject light-mode-only @font-face declarations on first switch to light.
