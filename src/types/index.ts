@@ -50,6 +50,7 @@ export interface Profile {
   name: string
   role: string
   tagline: string
+  seeking: string
   location: string
   bio: string[]
   education: EducationItem[]

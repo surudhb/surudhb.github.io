@@ -4,19 +4,6 @@ import { Experience } from '../types'
 // Keep bullets short, past tense, no em dashes, no Web3 jargon.
 export const experienceData: Experience[] = [
   {
-    id: 'open-to-roles',
-    company: 'OPEN TO NEW ROLES',
-    location: 'Calgary, AB // Hybrid or Remote',
-    position: 'Technical Program / Project Manager',
-    period: 'NOW',
-    startDate: '2026-04',
-    endDate: 'PRESENT',
-    tags: ['TECHNICAL PROGRAM MANAGEMENT', 'PROJECT MANAGEMENT', 'IT PROJECTS', 'PROJECT COORDINATION'],
-    bullets: [
-      'Looking for technical program, project, and IT project management roles, at startups or in the public sector.'
-    ]
-  },
-  {
     id: 'freelance-consultant',
     company: 'SELF EMPLOYED',
     location: 'Calgary, AB',

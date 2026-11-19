@@ -334,7 +334,7 @@ export const HeroSection: React.FC = () => {
             letterSpacing: '0.12em',
             color: 'var(--text-secondary)',
             textTransform: 'uppercase',
-            marginBottom: '1.75rem',
+            marginBottom: '0.9rem',
             lineHeight: 1.5,
             minHeight: '1.8rem',
             padding: '0 0.5rem',
@@ -419,6 +419,26 @@ export const HeroSection: React.FC = () => {
             )
           })}
         </motion.div>
+
+        {/* Seeking line: what roles Surudh is open to */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)',
+            letterSpacing: '0.08em',
+            color: 'var(--text-muted)',
+            textTransform: 'uppercase',
+            margin: '0 auto 1.75rem',
+            padding: '0 1rem',
+            maxWidth: '42rem',
+            lineHeight: 1.6
+          }}
+        >
+          {profileData.seeking}
+        </motion.p>
 
         {/* Social Links directly beneath the subtitle */}
         <motion.div
