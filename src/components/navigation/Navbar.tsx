@@ -5,17 +5,20 @@ import { CactusIcon } from '../ui/CactusIcon'
 import { useScrollY } from '../../hooks/useScrollY'
 import { NavLaserBolt } from './NavLaserBolt'
 import { NavMobileDrawer } from './NavMobileDrawer'
+import { FEATURES } from '../../config/features'
 
 interface NavbarProps {
   activeSection: string
   onNavigate: (sectionId: string) => void
 }
 
-const NAV_ITEMS = [
+const ALL_NAV_ITEMS = [
   { id: 'home',       label: 'HOME',       num: '01' },
   { id: 'about',      label: 'ABOUT',      num: '02' },
   { id: 'experience', label: 'EXPERIENCE', num: '03' },
 ]
+
+const NAV_ITEMS = ALL_NAV_ITEMS.filter(item => item.id !== 'experience' || FEATURES.experienceSection)
 
 interface LaserState {
   activeId: string

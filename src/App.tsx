@@ -10,6 +10,7 @@ import { BoneCursor } from './components/ui/BoneCursor'
 import { Footer } from './components/sections/Footer'
 import { useActiveSection } from './hooks/useActiveSection'
 import { useScrollY } from './hooks/useScrollY'
+import { FEATURES } from './config/features'
 
 // Lazy-load canvas and HUD components — decorative, never needed for first paint
 const StarfieldCanvas = lazy(() => import('./components/canvas/StarfieldCanvas').then(m => ({ default: m.StarfieldCanvas })))
@@ -17,7 +18,7 @@ const DinoRunnerCanvas = lazy(() => import('./components/canvas/DinoRunnerCanvas
 const CoordinatesHud = lazy(() => import('./components/telemetry/CoordinatesHud').then(m => ({ default: m.CoordinatesHud })))
 const DinoScoreHud = lazy(() => import('./components/telemetry/DinoScoreHud').then(m => ({ default: m.DinoScoreHud })))
 
-const SECTION_IDS = ['home', 'about', 'experience']
+const SECTION_IDS = ['home', 'about', ...(FEATURES.experienceSection ? ['experience'] : [])]
 
 const AppContent: React.FC = () => {
   const { isLightMode } = useTheme()
@@ -161,7 +162,7 @@ const AppContent: React.FC = () => {
       <main style={{ position: 'relative', zIndex: 1 }}>
         <HeroSection />
         <AboutSection />
-        <ExperienceSection />
+        {FEATURES.experienceSection && <ExperienceSection />}
       </main>
 
       {/* Footer */}
