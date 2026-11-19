@@ -1,11 +1,11 @@
 # Site map
 
-Single page; section order and ids are set in `src/App.tsx` (`SECTION_IDS`: home, about, experience). Projects, Blog, and Extras were removed in Nov 2026; GitHub link covers projects, blog will later point to Medium/Substack. `App.tsx` also owns smooth scroll navigation, theme-conditional cursors (TronDiscCursor dark, BoneCursor light), and lazy canvases/HUDs.
+Single page; section order and ids are set in `src/App.tsx` (`SECTION_IDS`: home, about, plus experience when its feature flag is on). Projects, Blog, and Extras were removed in Nov 2026; GitHub link covers projects, blog will later point to Medium/Substack. `App.tsx` also owns smooth scroll navigation, theme-conditional cursors (TronDiscCursor dark, BoneCursor light), and lazy canvases/HUDs.
 
 | Want to change | File |
 |---|---|
 | Name, role, tagline, bio, location, education, links | `src/data/profile.ts` |
-| Jobs, roles, bullets, company links/logos | `src/data/experience.ts` (entries: open-to-roles, freelance-consultant, hypotenuse-tpm/swe/freelance, co-ops) |
+| Jobs, roles, bullets, company links/logos | `src/data/experience.ts` (entries: freelance-consultant, hypotenuse-tpm/swe/freelance, co-ops). Section is hidden by `FEATURES.experienceSection` in `src/config/features.ts` |
 | Data shapes | `src/types/index.ts` |
 | Hero | `components/sections/HeroSection.tsx` |
 | About | `components/sections/AboutSection.tsx` |
