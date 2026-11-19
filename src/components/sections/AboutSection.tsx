@@ -40,7 +40,7 @@ export const AboutSection: React.FC = () => {
               color: 'var(--text-primary)'
             }}
           >
-            Hello, World
+            Hi, I'm Surudh.
           </h2>
         </MotionReveal>
 

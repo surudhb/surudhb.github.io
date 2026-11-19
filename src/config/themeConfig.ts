@@ -10,16 +10,16 @@ export interface ThemeContentConfig {
 
 export const THEME_CONFIG: Record<Theme, ThemeContentConfig> = {
   dark: {
-    subtitleTokens: ['SOFTWARE', 'ENGINEER', '//', 'TECHNICAL', 'PROGRAM', 'MANAGER'],
-    aboutHeader: '[DOSSIER // 01 // BACKGROUND & CRAFT]',
-    experienceHeader: '[SYSTEM LOG // 03 // WORK CHRONICLE]',
+    subtitleTokens: ['TECHNICAL', 'PROGRAM', 'MANAGER', '//', 'SOFTWARE', 'ENGINEER'],
+    aboutHeader: '[DOSSIER // 01 // BACKGROUND]',
+    experienceHeader: '[SYSTEM LOG // 02 // WORK HISTORY]',
     hudLabel: 'SECTOR TELEMETRY',
     statusBadge: 'SYS_ONLINE // LINK ESTABLISHED'
   },
   light: {
-    subtitleTokens: ['SOFTWARE', 'ENGINEER', '🌵', 'TECHNICAL', 'PROGRAM', 'MANAGER'],
+    subtitleTokens: ['TECHNICAL', 'PROGRAM', 'MANAGER', '🌵', 'SOFTWARE', 'ENGINEER'],
     aboutHeader: '[EPOCH 01 🌵 PREHISTORIC ROOTS 🌵 ORIGINS]',
-    experienceHeader: '[EPOCH 02 🌵 EXPEDITIONS 🌵 HUNT & GATHER 🌵 IMPACT]',
+    experienceHeader: '[EPOCH 02 🌵 EXPEDITIONS 🌵 IMPACT]',
     hudLabel: 'PREHISTORIC MODE',
     statusBadge: 'ERR_INTERNET_DISCONNECTED'
   }

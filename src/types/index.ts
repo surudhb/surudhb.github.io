@@ -53,11 +53,6 @@ export interface Profile {
   location: string
   bio: string[]
   education: EducationItem[]
-  skills: {
-    category: string
-    items: string[]
-  }[]
-  dialogues: string[]
   socialLinks: {
     label: string
     href: string
