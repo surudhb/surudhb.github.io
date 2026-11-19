@@ -5,9 +5,6 @@ import { Navbar } from './components/navigation/Navbar'
 import { HeroSection } from './components/sections/HeroSection'
 import { AboutSection } from './components/sections/AboutSection'
 import { ExperienceSection } from './components/sections/ExperienceSection'
-import { ProjectsSection } from './components/sections/ProjectsSection'
-import { BlogSection } from './components/sections/BlogSection'
-import { ExtrasSection } from './components/sections/ExtrasSection'
 import { TronDiscCursor } from './components/ui/TronDiscCursor'
 import { BoneCursor } from './components/ui/BoneCursor'
 import { Footer } from './components/sections/Footer'
@@ -20,8 +17,7 @@ const DinoRunnerCanvas = lazy(() => import('./components/canvas/DinoRunnerCanvas
 const CoordinatesHud = lazy(() => import('./components/telemetry/CoordinatesHud').then(m => ({ default: m.CoordinatesHud })))
 const DinoScoreHud = lazy(() => import('./components/telemetry/DinoScoreHud').then(m => ({ default: m.DinoScoreHud })))
 
-// Experience is placed above Projects as requested
-const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'blog', 'extras']
+const SECTION_IDS = ['home', 'about', 'experience']
 
 const AppContent: React.FC = () => {
   const { isLightMode } = useTheme()
@@ -166,9 +162,6 @@ const AppContent: React.FC = () => {
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
-        <ProjectsSection />
-        <BlogSection />
-        <ExtrasSection />
       </main>
 
       {/* Footer */}

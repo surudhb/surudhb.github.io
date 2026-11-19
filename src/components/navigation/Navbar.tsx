@@ -15,9 +15,6 @@ const NAV_ITEMS = [
   { id: 'home',       label: 'HOME',       num: '01' },
   { id: 'about',      label: 'ABOUT',      num: '02' },
   { id: 'experience', label: 'EXPERIENCE', num: '03' },
-  { id: 'projects',   label: 'PROJECTS',   num: '04' },
-  { id: 'blog',       label: 'BLOG',       num: '05' },
-  { id: 'extras',     label: 'EXTRAS',     num: '06' },
 ]
 
 interface LaserState {

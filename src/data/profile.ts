@@ -52,50 +52,6 @@ export const profileData: Profile = {
       items: ['Banking', 'Fin-tech', 'E-commerce', 'Web3 & DEX Protocols', 'Data Pipelines', 'SaaS']
     }
   ],
-  readingList: [
-    {
-      title: 'Sapiens: A Brief History of Humankind',
-      creator: 'Yuval Noah Harari',
-      link: 'https://www.goodreads.com/book/show/23692271-sapiens'
-    },
-    {
-      title: 'Behave: The Biology of Humans at our Best and Worst',
-      creator: 'Robert Sapolsky',
-      link: 'https://www.goodreads.com/book/show/31170723-behave'
-    },
-    {
-      title: 'The Gene: An Intimate History',
-      creator: 'Siddhartha Mukherjee',
-      link: 'https://www.goodreads.com/book/show/27276428-the-gene'
-    },
-    {
-      title: 'The Body Keeps the Score: Brain, Mind, and Body',
-      creator: 'Bessel A. van der Kolk',
-      link: 'https://www.goodreads.com/book/show/18693771-the-body-keeps-the-score'
-    }
-  ],
-  watchList: [
-    {
-      title: 'Avatar: The Last Airbender',
-      creator: 'Michael Dante DiMartino, Bryan Konietzko',
-      link: 'https://www.imdb.com/title/tt0417299/'
-    },
-    {
-      title: 'Ex Machina',
-      creator: 'Alex Garland',
-      link: 'https://www.imdb.com/title/tt0470752/'
-    },
-    {
-      title: 'Love, Death & Robots',
-      creator: 'Tim Miller',
-      link: 'https://www.imdb.com/title/tt9561862/'
-    },
-    {
-      title: 'Star Wars: Andor & The Clone Wars',
-      creator: 'Tony Gilroy, Dave Filoni',
-      link: 'https://www.imdb.com/title/tt9253284/'
-    }
-  ],
   dialogues: [
     "Full-stack SWE with 6+ years shipping high-throughput production systems.",
     "System status: Nominal. Cruising velocity steady at 0.42c.",

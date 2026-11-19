@@ -1,16 +1,3 @@
-export interface Project {
-  id: string
-  title: string
-  subtitle: string
-  description: string
-  tags: string[]
-  liveUrl?: string
-  githubUrl?: string
-  date: string
-  featured?: boolean
-  highlight?: string
-}
-
 export interface GalleryItem {
   title: string
   description?: string
@@ -50,24 +37,6 @@ export interface Experience {
   gallery?: GalleryItem[]
 }
 
-export interface Article {
-  id: string
-  title: string
-  slug: string
-  date: string
-  tags: string[]
-  excerpt: string
-  readingTime: string
-  content?: string
-  links?: ExternalLink[]
-}
-
-export interface MediaItem {
-  title: string
-  creator: string
-  link?: string
-}
-
 export interface EducationItem {
   institution: string
   degree: string
@@ -88,8 +57,6 @@ export interface Profile {
     category: string
     items: string[]
   }[]
-  readingList: MediaItem[]
-  watchList: MediaItem[]
   dialogues: string[]
   socialLinks: {
     label: string
