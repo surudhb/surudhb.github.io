@@ -60,6 +60,10 @@
   --modal-box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
   --bg-mobile-blur-tint: rgba(7, 7, 9, 0.35);
 
+  /* About page career trajectory */
+  --trajectory-node-glow: 0 0 10px rgba(94, 241, 242, 0.55);
+  --trajectory-current-glow: 0 0 12px rgba(230, 162, 60, 0.6);
+
   /* Spatial Scale */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -80,6 +84,8 @@
 }
 
 [data-theme="light"] {
+  --trajectory-node-glow: none;
+  --trajectory-current-glow: none;
   /* Color Palette - Minimalist Chrome Dinosaur / Offline Runner */
   --bg-primary: #f7f7f7;
   --bg-secondary: #eeeeee;

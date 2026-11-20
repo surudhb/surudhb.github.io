@@ -8,6 +8,8 @@ interface MotionRevealProps {
   yOffset?: number
   className?: string
   style?: React.CSSProperties
+  /** Animate on mount instead of on scroll-into-view (for pages that do not scroll) */
+  onMount?: boolean
 }
 
 export const MotionReveal: React.FC<MotionRevealProps> = ({
@@ -16,13 +18,16 @@ export const MotionReveal: React.FC<MotionRevealProps> = ({
   duration = 0.85,
   yOffset = 36,
   className,
-  style
+  style,
+  onMount = false
 }) => {
+  const reveal = { opacity: 1, y: 0, filter: 'blur(0px)' }
   return (
     <motion.div
       initial={{ opacity: 0, y: yOffset, filter: 'blur(8px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-60px' }}
+      {...(onMount
+        ? { animate: reveal }
+        : { whileInView: reveal, viewport: { once: true, margin: '-60px' } })}
       transition={{
         duration,
         delay,

@@ -3,32 +3,29 @@ import { Theme } from '../context/ThemeContext'
 export interface ThemeContentConfig {
   subtitleTokens: string[]
   aboutHeader: string
+  credentialsHeader: string
+  trajectoryHeader: string
   experienceHeader: string
-  projectsHeader: string
-  blogHeader: string
-  extrasHeader: string
   hudLabel: string
   statusBadge?: string
 }
 
 export const THEME_CONFIG: Record<Theme, ThemeContentConfig> = {
   dark: {
-    subtitleTokens: ['SOFTWARE', 'ENGINEER', '//', 'TECHNICAL', 'PROGRAM', 'MANAGER'],
-    aboutHeader: '[DOSSIER // 01 // BACKGROUND & CRAFT]',
-    experienceHeader: '[SYSTEM LOG // 03 // WORK CHRONICLE]',
-    projectsHeader: '[MANIFEST // 02 // SELECTED WORKS]',
-    blogHeader: '[TRANSMISSIONS // 04 // ESSAYS & LOGS]',
-    extrasHeader: '[ARCHIVES // 05 // EXTRAS & INFLUENCES]',
+    subtitleTokens: ['TECHNICAL', 'PROGRAM', 'MANAGER', '//', 'SOFTWARE', 'ENGINEER'],
+    aboutHeader: '[DOSSIER // 01 // BACKGROUND]',
+    credentialsHeader: '[CREDENTIALS // 02 // ACADEMIC]',
+    trajectoryHeader: '[TRAJECTORY // 03 // CAREER]',
+    experienceHeader: '[SYSTEM LOG // 04 // WORK HISTORY]',
     hudLabel: 'SECTOR TELEMETRY',
     statusBadge: 'SYS_ONLINE // LINK ESTABLISHED'
   },
   light: {
-    subtitleTokens: ['SOFTWARE', 'ENGINEER', '🌵', 'TECHNICAL', 'PROGRAM', 'MANAGER'],
+    subtitleTokens: ['TECHNICAL', 'PROGRAM', 'MANAGER', '🌵', 'SOFTWARE', 'ENGINEER'],
     aboutHeader: '[EPOCH 01 🌵 PREHISTORIC ROOTS 🌵 ORIGINS]',
-    experienceHeader: '[EPOCH 02 🌵 EXPEDITIONS 🌵 HUNT & GATHER 🌵 IMPACT]',
-    projectsHeader: '[EPOCH 03 🌵 STONE TOOLS 🌵 INVENTIONS]',
-    blogHeader: '[EPOCH 04 🌵 CAVE DRAWINGS 🌵 DISPATCHES]',
-    extrasHeader: '[EPOCH 05 🌵 BONE PILE & RELICS 🌵 ARTIFACTS]',
+    credentialsHeader: '[EPOCH 02 🌵 SCHOOLING]',
+    trajectoryHeader: '[EPOCH 03 🌵 MIGRATION PATH]',
+    experienceHeader: '[EPOCH 04 🌵 EXPEDITIONS 🌵 IMPACT]',
     hudLabel: 'PREHISTORIC MODE',
     statusBadge: 'ERR_INTERNET_DISCONNECTED'
   }

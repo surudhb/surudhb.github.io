@@ -386,3 +386,91 @@ code, pre, .font-mono {
   }
 }
 
+
+/* Home is a single screen: App toggles this class on <html> for the home route */
+html.no-scroll,
+html.no-scroll body {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+/* About page (/about-me): fits one desktop screen; stacks and scrolls on mobile */
+.about-page {
+  padding-top: 5.75rem;
+  padding-bottom: 3rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Career trajectory: vertical chain, oldest to newest */
+.trajectory {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trajectory-item {
+  position: relative;
+  padding-left: 1.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.trajectory-item::before {
+  content: '';
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0;
+  left: 0.27rem;
+  width: 1px;
+  background: var(--border-subtle);
+}
+
+.trajectory-item:last-child::before {
+  background: linear-gradient(180deg, var(--border-subtle), transparent);
+}
+
+.trajectory-marker {
+  position: absolute;
+  top: 0.05rem;
+  left: 0;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.trajectory-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: var(--trajectory-node-glow);
+}
+
+.trajectory-dot.current {
+  background: var(--accent-amber);
+  box-shadow: var(--trajectory-current-glow);
+}
+
+/* Light (dino) theme: dashed trail between cactus markers */
+[data-theme="light"] .trajectory-item::before {
+  top: 1.15rem;
+  left: 0.45rem;
+  background: repeating-linear-gradient(180deg, var(--text-dim) 0 4px, transparent 4px 8px);
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    padding-top: 6rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

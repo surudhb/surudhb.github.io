@@ -10,7 +10,11 @@ const LAST_NAME = 'BHUTANI'
 // Non-space letter indices in "SURUDH BHUTANI" (index 6 is a space)
 const LETTER_INDICES = [0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13]
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onNavigate: (id: string) => void
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   const { theme, isLightMode } = useTheme()
   const subtitleTokens = THEME_CONFIG[theme].subtitleTokens
   const statusBadge = THEME_CONFIG[theme].statusBadge
@@ -142,7 +146,8 @@ export const HeroSection: React.FC = () => {
       id="home"
       ref={sectionRef}
       style={{
-        minHeight: '100vh',
+        height: '100svh',
+        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -334,7 +339,7 @@ export const HeroSection: React.FC = () => {
             letterSpacing: '0.12em',
             color: 'var(--text-secondary)',
             textTransform: 'uppercase',
-            marginBottom: '1.75rem',
+            marginBottom: '0.9rem',
             lineHeight: 1.5,
             minHeight: '1.8rem',
             padding: '0 0.5rem',
@@ -420,6 +425,26 @@ export const HeroSection: React.FC = () => {
           })}
         </motion.div>
 
+        {/* Seeking line: what roles Surudh is open to */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)',
+            letterSpacing: '0.08em',
+            color: 'var(--text-muted)',
+            textTransform: 'uppercase',
+            margin: '0 auto 1.75rem',
+            padding: '0 1rem',
+            maxWidth: '42rem',
+            lineHeight: 1.6
+          }}
+        >
+          {profileData.seeking}
+        </motion.p>
+
         {/* Social Links directly beneath the subtitle */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -459,20 +484,25 @@ export const HeroSection: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Subtle scroll status hint */}
-        <motion.div
+        {/* Link to the about page (home is a single screen, no scrolling) */}
+        <motion.a
+          href="/about-me"
+          onClick={(e) => { e.preventDefault(); onNavigate('about') }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.35 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.8 }}
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.74rem',
+            fontSize: '0.78rem',
             letterSpacing: '0.12em',
-            color: 'var(--text-muted)'
+            color: 'var(--text-muted)',
+            transition: 'color 200ms ease'
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
         >
-          [ SCROLL TO EXPLORE ARCHIVES ]
-        </motion.div>
+          [ ABOUT ME → ]
+        </motion.a>
       </motion.div>
     </section>
   )
