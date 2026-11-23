@@ -4,6 +4,7 @@ import { profileData } from '../../data/profile'
 import { useTheme } from '../../context/ThemeContext'
 import { THEME_CONFIG } from '../../config/themeConfig'
 import { CactusIcon } from '../ui/CactusIcon'
+import { HeroPortrait } from '../ui/HeroPortrait'
 
 const FIRST_NAME = 'SURUDH'
 const LAST_NAME = 'BHUTANI'
@@ -168,6 +169,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           alignItems: 'center'
         }}
       >
+        <HeroPortrait />
+
         {/* Status Badge: Prehistoric Offline in Light Mode, Sci-Fi Transponder in Dark Mode */}
         {statusBadge && (
           <div
@@ -179,6 +182,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               height: '30px',
               minHeight: '30px',
               maxHeight: '30px',
+              width: 'min(var(--hero-badge-width), calc(100vw - 2rem))',
               boxSizing: 'border-box',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',

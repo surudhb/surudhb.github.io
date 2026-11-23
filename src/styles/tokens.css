@@ -38,6 +38,10 @@
   /* Decode glyph sizes, relative to the letter they replace */
   --decode-name-size: 0.6em;
   --decode-sub-size: 0.76em;
+  /* Hero portrait: shrinks on short screens so the home page never scrolls */
+  --portrait-size: clamp(92px, calc(32svh - 95px), 190px);
+  /* Same status badge width in both themes (fits the longer dark label) */
+  --hero-badge-width: 18.25rem;
 
   /* Card and Surface Tokens (Dark Default) */
   --bg-card: rgba(255, 255, 255, 0.03);
