@@ -45,6 +45,16 @@ interface Palette { base: string; dark: string; light: string; core: string; glo
 
 const SHAPE_PX = 160
 
+/** Any CSS color as rgba() with the given alpha (canvas gradients need plain colors). */
+const withAlpha = (color: string, alpha: number) => {
+  const probe = document.createElement('canvas').getContext('2d')!
+  probe.fillStyle = color
+  const hex = String(probe.fillStyle)
+  if (!hex.startsWith('#')) return color
+  const n = parseInt(hex.slice(1, 7), 16)
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`
+}
+
 /** Draws one lumpy, cratered, side-lit rock into an offscreen canvas. */
 const makeRockSprite = (p: Palette): HTMLCanvasElement => {
   const c = document.createElement('canvas')
@@ -140,11 +150,28 @@ export const RockField: React.FC = () => {
       base: cssVar('--game-rock-base', '#6f6862'),
       dark: cssVar('--game-rock-dark', '#2b2825'),
       light: cssVar('--game-rock-light', '#b3aaa0'),
-      core: cssVar('--game-laser-core', '#ffffff'),
-      glow: cssVar('--game-laser-glow', 'rgba(94,241,242,0.9)'),
+      core: cssVar('--game-laser-core', '#eaffe4'),
+      glow: cssVar('--game-laser-glow', '#39ff14'),
       star: 'rgba(230, 242, 255, 1)'
     }
     const shapes = Array.from({ length: 8 }, () => makeRockSprite(palette))
+
+    // Soft green bloom, painted once and reused for bolt tips and muzzle flashes
+    const GLOW_PX = 128
+    const glowDot = document.createElement('canvas')
+    glowDot.width = glowDot.height = GLOW_PX
+    {
+      const g = glowDot.getContext('2d')!
+      const r = GLOW_PX / 2
+      const grad = g.createRadialGradient(r, r, 0, r, r, r)
+      grad.addColorStop(0, palette.core)
+      grad.addColorStop(0.12, palette.glow)
+      grad.addColorStop(0.4, withAlpha(palette.glow, 0.35))
+      grad.addColorStop(1, withAlpha(palette.glow, 0))
+      g.fillStyle = grad
+      g.fillRect(0, 0, GLOW_PX, GLOW_PX)
+    }
+    let muzzle = 0 // 1 right after a volley, fades out
 
     let rocks: Rock[] = []
     let bolts: Bolt[] = []
@@ -255,6 +282,7 @@ export const RockField: React.FC = () => {
         [size.width * 0.86, size.height + 6]
       ]
       for (const [sx, sy] of corners) bolts.push({ ax, ay, z: Z_HIT, prevZ: Z_HIT, sx, sy })
+      muzzle = 1
     }
 
     const takeHit = (rock: Rock) => {
@@ -354,6 +382,7 @@ export const RockField: React.FC = () => {
         return sx > -rpx * 2 && sx < size.width + rpx * 2 && sy > -rpx * 2 && sy < size.height + rpx * 2
       })
 
+      muzzle = Math.max(0, muzzle - dt / 140)
       for (const d of dust) {
         d.life += dt
         d.x += d.vx * s
@@ -413,8 +442,17 @@ export const RockField: React.FC = () => {
       }
       ctx.globalAlpha = 1
 
-      // Lasers: from a bottom corner toward the aim point, thinning with depth
+      // Lasers: green beams from the bottom corners toward the aim point,
+      // thinning with depth. Additive blending stacks the glow passes into a
+      // bloom like a real laser; the core stays near-white.
       ctx.lineCap = 'round'
+      ctx.globalCompositeOperation = 'lighter'
+      const GLOW_PASSES: [number, number][] = [
+        [16, 0.07],
+        [9, 0.13],
+        [4.5, 0.26],
+        [2.2, 0.55]
+      ]
       for (const b of bolts) {
         const ex = cx + b.ax * STAR_FOCAL
         const ey = cy + b.ay * STAR_FOCAL
@@ -424,22 +462,39 @@ export const RockField: React.FC = () => {
         const hy = b.sy + (ey - b.sy) * t
         const tx = b.sx + (ex - b.sx) * tt
         const ty = b.sy + (ey - b.sy) * tt
-        const w = 1 + 5 * (Z_HIT / b.z)
+        const w = 1.6 + 5 * (Z_HIT / b.z)
         ctx.strokeStyle = palette.glow
-        ctx.lineWidth = w * 2.6
-        ctx.globalAlpha = 0.35
-        ctx.beginPath()
-        ctx.moveTo(tx, ty)
-        ctx.lineTo(hx, hy)
-        ctx.stroke()
+        for (const [mul, alpha] of GLOW_PASSES) {
+          ctx.globalAlpha = alpha
+          ctx.lineWidth = w * mul
+          ctx.beginPath()
+          ctx.moveTo(tx, ty)
+          ctx.lineTo(hx, hy)
+          ctx.stroke()
+        }
         ctx.globalAlpha = 1
         ctx.strokeStyle = palette.core
-        ctx.lineWidth = w
+        ctx.lineWidth = w * 0.8
         ctx.beginPath()
         ctx.moveTo(tx, ty)
         ctx.lineTo(hx, hy)
         ctx.stroke()
+        // Hot spot at the tip
+        const tip = w * 10
+        ctx.globalAlpha = 0.85
+        ctx.drawImage(glowDot, hx - tip / 2, hy - tip / 2, tip, tip)
       }
+
+      // Muzzle flash at both emitters right after a volley
+      if (muzzle > 0) {
+        const m = 110 + 70 * muzzle
+        ctx.globalAlpha = muzzle * 0.9
+        for (const fx of [width * 0.14, width * 0.86]) {
+          ctx.drawImage(glowDot, fx - m / 2, height - m / 2, m, m)
+        }
+      }
+      ctx.globalAlpha = 1
+      ctx.globalCompositeOperation = 'source-over'
     }
 
     const onMove = (e: PointerEvent) => {
