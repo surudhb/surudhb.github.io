@@ -61,6 +61,7 @@ export function useTelemetry() {
   const currentX = useRef(0)
   const currentY = useRef(0)
   const rafId = useRef<number | null>(null)
+  const lastRef = useRef<TelemetryData | null>(null)
 
   useEffect(() => {
     // 1. Resolve initial base coordinate from user timezone (zero permissions)
@@ -72,18 +73,6 @@ export function useTelemetry() {
     } catch {
       // Fallback stays as default
     }
-
-    // 2. Silent background geo-lookup fallback (no permission prompt)
-    fetch('https://api.country.is/')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.country) {
-          // If in Canada / US and no exact tz match, maintain regional accuracy
-        }
-      })
-      .catch(() => {
-        // Silent catch
-      })
 
     const handleMouseMove = (e: MouseEvent) => {
       const width = window.innerWidth
@@ -115,7 +104,7 @@ export function useTelemetry() {
       const vy = (currentY.current * 18.0).toFixed(1)
       const speed = (0.42 + Math.abs(currentX.current + currentY.current) * 0.05).toFixed(2)
 
-      setTelemetry({
+      const next: TelemetryData = {
         sector: '04',
         lat: latStr,
         lon: lonStr,
@@ -123,7 +112,14 @@ export function useTelemetry() {
         vectorY: vy.startsWith('-') ? vy : `+${vy}`,
         velocity: `${speed}c`,
         region: baseCoords.current.region
-      })
+      }
+      // Only re-render when a displayed value actually changed. Once the mouse
+      // settles this drops from 60 renders a second to none.
+      const prev = lastRef.current
+      if (!prev || prev.lat !== next.lat || prev.lon !== next.lon || prev.vectorX !== next.vectorX || prev.vectorY !== next.vectorY || prev.velocity !== next.velocity || prev.region !== next.region) {
+        lastRef.current = next
+        setTelemetry(next)
+      }
 
       rafId.current = requestAnimationFrame(updateLoop)
     }

@@ -268,8 +268,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   title={isAurebesh ? `Decode [${char}]` : char}
                   style={{
                     display: 'inline-block',
-                    fontFamily: isAurebesh ? 'var(--font-decode)' : 'var(--font-display)',
-                    fontSize: isAurebesh ? '0.76em' : '1em',
+                    fontFamily: 'var(--font-display)',
                     lineHeight: 1,
                     verticalAlign: 'baseline',
                     position: 'relative',
@@ -281,7 +280,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                     color: isHovered ? 'var(--text-primary)' : 'inherit'
                   }}
                 >
-                  {char}
+                  {/* English glyph always sets the box width, so decoding never shifts spacing */}
+                  <span style={{ visibility: isAurebesh ? 'hidden' : 'visible' }}>{char}</span>
+                  {isAurebesh && (
+                    <span aria-hidden="true" className="decode-glyph" style={{ fontFamily: 'var(--font-decode)', fontSize: 'var(--decode-name-size)' }}>
+                      {char}
+                    </span>
+                  )}
                 </span>
               )
             })}
@@ -305,8 +310,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   title={isAurebesh ? `Decode [${char}]` : char}
                   style={{
                     display: 'inline-block',
-                    fontFamily: isAurebesh ? 'var(--font-decode)' : 'var(--font-display)',
-                    fontSize: isAurebesh ? '0.76em' : '1em',
+                    fontFamily: 'var(--font-display)',
                     lineHeight: 1,
                     verticalAlign: 'baseline',
                     position: 'relative',
@@ -318,7 +322,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                     color: isHovered ? 'var(--text-primary)' : 'inherit'
                   }}
                 >
-                  {char}
+                  {/* English glyph always sets the box width, so decoding never shifts spacing */}
+                  <span style={{ visibility: isAurebesh ? 'hidden' : 'visible' }}>{char}</span>
+                  {isAurebesh && (
+                    <span aria-hidden="true" className="decode-glyph" style={{ fontFamily: 'var(--font-decode)', fontSize: 'var(--decode-name-size)' }}>
+                      {char}
+                    </span>
+                  )}
                 </span>
               )
             })}
@@ -399,8 +409,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                       title={isHovered ? `Decode [${char}]` : char}
                       style={{
                         display: 'inline-block',
-                        fontFamily: isHovered ? 'var(--font-decode)' : 'var(--font-heading)',
-                        fontSize: isHovered ? '0.92em' : '1em',
+                        fontFamily: 'var(--font-heading)',
                         lineHeight: 1,
                         verticalAlign: 'baseline',
                         position: 'relative',
@@ -416,7 +425,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                           : 'var(--hero-char-default-color)'
                       }}
                     >
-                      {char}
+                      {/* English glyph always sets the box width, so decoding never shifts spacing */}
+                      <span style={{ visibility: isHovered ? 'hidden' : 'visible' }}>{char}</span>
+                      {isHovered && (
+                        <span aria-hidden="true" className="decode-glyph" style={{ fontFamily: 'var(--font-decode)', fontSize: 'var(--decode-sub-size)' }}>
+                          {char}
+                        </span>
+                      )}
                     </span>
                   )
                 })}

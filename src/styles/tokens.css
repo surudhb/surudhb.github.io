@@ -35,6 +35,9 @@
   --font-cave: 'CavePainting', sans-serif;
   /* Active decode font: Aurebesh in dark, CavePainting in light */
   --font-decode: 'Aurebesh', sans-serif;
+  /* Decode glyph sizes, relative to the letter they replace */
+  --decode-name-size: 0.6em;
+  --decode-sub-size: 0.76em;
 
   /* Card and Surface Tokens (Dark Default) */
   --bg-card: rgba(255, 255, 255, 0.03);
@@ -63,6 +66,34 @@
   /* About page career trajectory */
   --trajectory-node-glow: 0 0 10px rgba(94, 241, 242, 0.55);
   --trajectory-current-glow: 0 0 12px rgba(230, 162, 60, 0.6);
+
+  /* Play mode: egg button and games (dark defaults) */
+  --egg-shell: #11131a;
+  --egg-stroke: rgba(94, 241, 242, 0.55);
+  --egg-speck: rgba(94, 241, 242, 0.85);
+  --egg-sheen: rgba(255, 255, 255, 0.22);
+  --egg-glow: drop-shadow(0 0 6px rgba(94, 241, 242, 0.35));
+  --egg-label-font: var(--font-mono);
+  --egg-label-color: var(--accent-cyan);
+  --egg-label-bg: rgba(7, 7, 9, 0.85);
+  --egg-label-border: 1px solid rgba(94, 241, 242, 0.45);
+  --egg-label-shadow: 0 0 12px rgba(94, 241, 242, 0.3);
+  --egg-label-radius: 999px;
+  --game-font: var(--font-mono);
+  --game-hud-color: var(--text-secondary);
+  --game-hud-bg: transparent;
+  --game-health-fill: var(--accent-cyan);
+  --game-health-track: rgba(255, 255, 255, 0.12);
+  --game-health-glow: 0 0 8px rgba(94, 241, 242, 0.6);
+  --game-danger: rgba(255, 70, 70, 0.75);
+  --game-rock-base: #6f6862;
+  --game-rock-dark: #2b2825;
+  --game-rock-light: #b3aaa0;
+  --game-laser-core: #ffffff;
+  --game-laser-glow: rgba(94, 241, 242, 0.9);
+  --game-sprite-color: #535353;
+  --game-sprite-dark: #202124;
+  --game-sprite-light: #f7f7f7;
 
   /* Spatial Scale */
   --space-xs: 0.25rem;
@@ -116,6 +147,8 @@
 
   /* Hero section tokens (light overrides) */
   --font-decode: 'CavePainting', sans-serif;
+  --decode-name-size: 0.58em;
+  --decode-sub-size: 0.74em;
   --hero-badge-color: var(--text-muted);
   --hero-badge-border: 1px solid var(--border-subtle);
   --hero-badge-shadow: 1px 1px 0px rgba(83, 83, 83, 0.2);
@@ -125,5 +158,24 @@
   --hero-char-shadow: none;
   --hero-char-shadow-hover: none;
   --hero-name-shadow-hover: none;
+
+  /* Play mode (light overrides) */
+  --egg-shell: #ffffff;
+  --egg-stroke: #535353;
+  --egg-speck: #535353;
+  --egg-sheen: transparent;
+  --egg-glow: drop-shadow(2px 2px 0 rgba(83, 83, 83, 0.25));
+  --egg-label-font: var(--font-pixel);
+  --egg-label-color: #535353;
+  --egg-label-bg: #ffffff;
+  --egg-label-border: 1px solid #535353;
+  --egg-label-shadow: 2px 2px 0 #535353;
+  --egg-label-radius: 3px;
+  --game-font: var(--font-pixel);
+  --game-hud-bg: rgba(247, 247, 247, 0.9);
+  --game-health-fill: #535353;
+  --game-health-track: rgba(83, 83, 83, 0.18);
+  --game-health-glow: none;
+  --game-danger: rgba(217, 48, 37, 0.4);
 }
 

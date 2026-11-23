@@ -4,6 +4,8 @@ import {
   DINO_SPRITES_HDPI,
   SpriteRect
 } from './dinoSprites'
+import { AMBIENT_GROUND_SPEED, easeToward, gameBus, horizonYFor, ambientDinoXFor } from '../../game/gameBus'
+import { MAX_DPR } from '../../game/engine'
 
 interface CloudInstance {
   x: number
@@ -211,7 +213,7 @@ export const DinoRunnerCanvas: React.FC = () => {
     const setCanvasSize = () => {
       width = window.innerWidth
       height = window.innerHeight
-      dpr = window.devicePixelRatio || 1
+      dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR)
       canvas.width = width * dpr
       canvas.height = height * dpr
       canvas.style.width = `${width}px`
@@ -229,7 +231,11 @@ export const DinoRunnerCanvas: React.FC = () => {
 
     // Ground scroll state
     let groundOffsetX = 0
-    const GROUND_SPEED = 2.4 // steady pace
+    const GROUND_SPEED = AMBIENT_GROUND_SPEED // steady pace
+    // Live values eased toward targets the game sets on gameBus
+    let groundSpeed = GROUND_SPEED
+    let ambientHide = gameBus.ambientDinoHideTarget
+    let decorDim = gameBus.decorDimTarget
 
     // T-Rex state
     let runFrame = 0
@@ -356,8 +362,15 @@ export const DinoRunnerCanvas: React.FC = () => {
     let lastTime = performance.now()
 
     const animate = (currentTime: number) => {
-      const dt = Math.min(currentTime - lastTime, 100)
+      const dt = Math.min(currentTime - lastTime, 50)
       lastTime = currentTime
+      // Frame-rate independent motion: 1.0 at 60fps
+      const k = dt / (1000 / 60)
+      groundSpeed = easeToward(groundSpeed, gameBus.groundSpeedTarget, dt, 350)
+      gameBus.groundSpeed = groundSpeed
+      const groundMul = groundSpeed / GROUND_SPEED
+      ambientHide = easeToward(ambientHide, gameBus.ambientDinoHideTarget, dt, 90)
+      decorDim = easeToward(decorDim, gameBus.decorDimTarget, dt, 220)
 
       // Clear canvas
       ctx.clearRect(0, 0, width, height)
@@ -366,13 +379,13 @@ export const DinoRunnerCanvas: React.FC = () => {
       ctx.imageSmoothingEnabled = false
 
       // Horizon line Y coordinate
-      const horizonY = Math.min(height - 110, height * 0.88)
+      const horizonY = horizonYFor(height)
 
       // 1. Draw Clouds
       ctx.save()
       const cloudSprite = DINO_SPRITES_HDPI.CLOUD
       for (const cloud of clouds) {
-        cloud.x -= cloud.speed
+        cloud.x -= cloud.speed * k
         const renderW = cloudSprite.dw * cloud.scale
         const renderH = cloudSprite.dh * cloud.scale
         if (cloud.x + renderW < -50) {
@@ -403,7 +416,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       ctx.save()
       for (const c of cacti) {
         if (c.layer !== 'bg') continue
-        c.x -= c.speed
+        c.x -= c.speed * groundMul * k
         const renderW = c.sprite.dw * c.scale
         const renderH = c.sprite.dh * c.scale
 
@@ -416,7 +429,7 @@ export const DinoRunnerCanvas: React.FC = () => {
 
         // Draw background cactus sitting behind the horizon ridge
         const cactusY = horizonY - renderH + c.yOffset
-        ctx.globalAlpha = c.opacity
+        ctx.globalAlpha = c.opacity * decorDim
         if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
           ctx.drawImage(
             spriteSheet,
@@ -435,7 +448,7 @@ export const DinoRunnerCanvas: React.FC = () => {
 
       // 2.5 Draw Transmission Towers & Sagging Power Lines (middle altitude corridor between T-Rex and Pterodactyls)
       for (const t of towers) {
-        t.x -= GROUND_SPEED
+        t.x -= groundSpeed * k
       }
 
       // Recycle towers that go past the left edge (keep generous 2x buffer so power lines never cut off)
@@ -456,7 +469,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       drawTransmissionTowersAndLines(ctx, towers, horizonY, towerH)
 
       // 3. Draw Ground Line & Scrolling Horizon Terrain
-      groundOffsetX = (groundOffsetX + GROUND_SPEED) % 600
+      groundOffsetX = (groundOffsetX + groundSpeed * k) % 600
       ctx.save()
       ctx.globalAlpha = 0.48
 
@@ -489,7 +502,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       ctx.save()
       for (const c of cacti) {
         if (c.layer !== 'fg') continue
-        c.x -= c.speed
+        c.x -= c.speed * groundMul * k
         const renderW = c.sprite.dw * c.scale
         const renderH = c.sprite.dh * c.scale
 
@@ -501,7 +514,7 @@ export const DinoRunnerCanvas: React.FC = () => {
         }
 
         const cactusY = horizonY + c.yOffset
-        ctx.globalAlpha = c.opacity
+        ctx.globalAlpha = c.opacity * decorDim
         if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
           ctx.drawImage(
             spriteSheet,
@@ -530,12 +543,13 @@ export const DinoRunnerCanvas: React.FC = () => {
       const dinoScale = 1.08
       const dinoW = activeDinoSprite.dw * dinoScale
       const dinoH = activeDinoSprite.dh * dinoScale
-      const dinoX = Math.max(60, width * 0.08)
+      const dinoX = ambientDinoXFor(width)
       const dinoY = horizonY - dinoH + 2 // securely placed on the horizon line
 
       ctx.save()
-      ctx.globalAlpha = 0.72
-      if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
+      // Hidden while a game runs: the player takes over this exact spot
+      ctx.globalAlpha = 0.72 * (1 - ambientHide)
+      if (ambientHide < 0.99 && spriteSheet.complete && spriteSheet.naturalWidth > 0) {
         ctx.drawImage(
           spriteSheet,
           activeDinoSprite.sx,
@@ -570,7 +584,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       ctx.save()
       for (let i = pterodactyls.length - 1; i >= 0; i--) {
         const p = pterodactyls[i]
-        p.x -= p.speed
+        p.x -= p.speed * k
         p.wingTimer += dt
         if (p.wingTimer >= 160) {
           p.wingTimer = 0
@@ -585,7 +599,7 @@ export const DinoRunnerCanvas: React.FC = () => {
         const pteroW = pteroSprite.dw * p.scale
         const pteroH = pteroSprite.dh * p.scale
 
-        ctx.globalAlpha = 0.62
+        ctx.globalAlpha = 0.62 * decorDim
         if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
           ctx.drawImage(
             spriteSheet,
@@ -610,9 +624,15 @@ export const DinoRunnerCanvas: React.FC = () => {
       if (isRunning) animationFrameId = requestAnimationFrame(animate)
     }
 
+    // Stop drawing while the tab is hidden. Cancel before rescheduling so a quick
+    // hide/show can never leave two loops running.
     const handleVisibilityChange = () => {
       isRunning = !document.hidden
-      if (isRunning) animationFrameId = requestAnimationFrame(animate)
+      cancelAnimationFrame(animationFrameId)
+      if (isRunning) {
+        lastTime = performance.now()
+        animationFrameId = requestAnimationFrame(animate)
+      }
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
