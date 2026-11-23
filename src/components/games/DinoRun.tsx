@@ -3,6 +3,7 @@ import { useGameMode } from '../../context/GameModeContext'
 import { AMBIENT_GROUND_SPEED, ambientDinoXFor, gameBus, horizonYFor } from '../../game/gameBus'
 import { cssVar, fitCanvas, grayscaleFrames, loadImage, readHighScore, startLoop, writeHighScore, CanvasSize } from '../../game/engine'
 import { GameOverLine, HitFlash, QuitButton, isOnControl, pad5, pulse } from './GameChrome'
+import { TREX_DEAD, TREX_H, TREX_W, TREX_WALK, paintStrip } from './trexSprite'
 
 // Endless runner on top of the live light-theme background. The ground,
 // horizon and starting position all come from the background itself, and the
@@ -12,16 +13,15 @@ import { GameOverLine, HitFlash, QuitButton, isOnControl, pad5, pulse } from './
 const HIGH_SCORE_KEY = 'surudh_dinorun_best'
 const SPRITE_BASE = '/sprites/games/tiny-dinos'
 
-// Sprite sheets: horizontal strips of square frames (Myaumya, "Dinosaur sprites").
-// The source art faces RIGHT. The player runs right, so it is drawn as-is;
-// obstacles travel left toward the player, so they are mirrored to face it.
-// PLAYER is a placeholder until the main character sprite is chosen.
+// Obstacle sprite sheets: horizontal strips of square frames (Myaumya,
+// "Dinosaur sprites"). The source art faces RIGHT; obstacles travel left toward
+// the player, so they are mirrored to face it. The player is the T-rex in
+// trexSprite.ts (pixel data, faces right, drawn as-is).
 export const DINO_RUN_SPRITES = {
-  player: { src: `${SPRITE_BASE}/ptero-walk.png`, frame: 16, flip: false, frameMs: 130 },
-  playerDeath: { src: `${SPRITE_BASE}/ptero-death.png`, frame: 16, flip: false, frameMs: 120 },
   walker: { src: `${SPRITE_BASE}/ptero-walk.png`, frame: 16, flip: true, frameMs: 140 },
   flyer: { src: `${SPRITE_BASE}/ptero-fly.png`, frame: 16, flip: true, frameMs: 90 }
 } as const
+const PLAYER_FRAME_MS = 130
 
 export const preloadDinoRunSprites = () => Object.values(DINO_RUN_SPRITES).forEach((s) => void loadImage(s.src))
 
@@ -64,13 +64,22 @@ export const DinoRun: React.FC = () => {
     const ctx = canvas?.getContext('2d')
     if (!canvas || !ctx) return
 
+    // Only the current run may drive the background (see gameBus.session)
+    const session = gameBus.session
+    const live = () => session !== 0 && gameBus.session === session
+
     const size: CanvasSize = { width: window.innerWidth, height: window.innerHeight }
     const unfit = fitCanvas(canvas, ctx, size)
     const inkDark = cssVar('--game-sprite-dark', '#202124')
     const inkLight = cssVar('--game-sprite-light', '#f7f7f7')
 
     type Frames = HTMLCanvasElement[]
-    const frames: Record<keyof typeof DINO_RUN_SPRITES, Frames> = { player: [], playerDeath: [], walker: [], flyer: [] }
+    const frames: Record<keyof typeof DINO_RUN_SPRITES | 'player' | 'playerDeath', Frames> = {
+      player: grayscaleFrames(paintStrip(TREX_WALK), TREX_W, inkDark, inkLight),
+      playerDeath: grayscaleFrames(paintStrip([TREX_DEAD]), TREX_W, inkDark, inkLight),
+      walker: [],
+      flyer: []
+    }
     let ready = false
     Promise.all(
       (Object.keys(DINO_RUN_SPRITES) as (keyof typeof DINO_RUN_SPRITES)[]).map(async (key) => {
@@ -104,6 +113,7 @@ export const DinoRun: React.FC = () => {
     let scoreNow = 0
 
     const startRun = () => {
+      if (!live()) return
       gameBus.ambientDinoHideTarget = 1
       gameBus.decorDimTarget = 0.45
       speedTarget = START_SPEED
@@ -131,11 +141,13 @@ export const DinoRun: React.FC = () => {
       untilSpawn = base * (1 + Math.random() * 0.8) + (kind === 'flyHigh' ? 160 : 0)
     }
 
+    // The T-rex frame is 23px wide: tail on the left (cols 0-8), body and head
+    // on the right. The hitbox covers the body and head only, so the tail is forgiving.
     const playerBox = () => {
       const x = ambientDinoXFor(size.width)
-      const h = 16 * PX
+      const h = TREX_H * PX
       const top = horizonYFor(size.height) + 2 - h - y
-      return { x: x + 3 * PX, y: top + 3 * PX, w: 16 * PX - 6 * PX, h: h - 5 * PX }
+      return { x: x + 9 * PX, y: top + 2 * PX, w: 11 * PX, h: h - 4 * PX }
     }
     const obstacleBox = (o: Obstacle) => {
       const h = 16 * PX
@@ -164,7 +176,7 @@ export const DinoRun: React.FC = () => {
       deathClock = 0
       setScore(scoreNow)
       setOver(true)
-      gameBus.groundSpeedTarget = AMBIENT_GROUND_SPEED
+      if (live()) gameBus.groundSpeedTarget = AMBIENT_GROUND_SPEED
       setBest((prev) => {
         const next = Math.max(prev, scoreNow)
         if (next > prev) writeHighScore(HIGH_SCORE_KEY, next)
@@ -195,7 +207,10 @@ export const DinoRun: React.FC = () => {
       const s = dt / 1000
       appear = Math.min(1, appear + dt / 450)
 
-      if (!isOver) {
+      // After exit the run keeps animating through the fade, but frozen:
+      // no scoring, spawning, hits, or bus writes.
+      const running = !isOver && live()
+      if (running) {
         speedTarget = Math.min(MAX_SPEED, speedTarget + 0.12 * s)
         gameBus.groundSpeedTarget = speedTarget
         const moved = groundPxPerSec() * s
@@ -237,7 +252,7 @@ export const DinoRun: React.FC = () => {
       }
       obstacles = obstacles.filter((o) => o.x > -80)
 
-      if (!isOver && invuln <= 0) {
+      if (running && invuln <= 0) {
         const pb = playerBox()
         for (const o of obstacles) {
           if (overlap(pb, obstacleBox(o))) {
@@ -276,17 +291,32 @@ export const DinoRun: React.FC = () => {
       // Player: blink while invulnerable, play death strip once on game over
       const blinkHidden = invuln > 0 && Math.floor(invuln / 90) % 2 === 0
       if (!blinkHidden) {
-        let f: HTMLCanvasElement | undefined
+        const px = ambientDinoXFor(size.width)
+        const feetY = horizon + 2 - y
+        ctx.globalAlpha = 0.85 * appear
         if (deathClock >= 0) {
-          const i = Math.min(frames.playerDeath.length - 1, Math.floor(deathClock / DINO_RUN_SPRITES.playerDeath.frameMs))
-          f = frames.playerDeath[i]
-        } else if (!grounded) {
+          // Falling: tip forward onto its face, pivoting on the front toe, with a small settle
+          const f = frames.playerDeath[0]
+          const t = Math.min(1, deathClock / 420)
+          const fall = 1 - Math.pow(1 - t, 3)
+          const settle = t >= 1 ? Math.sin(Math.min(1, (deathClock - 420) / 260) * Math.PI) * 0.06 : 0
+          const angle = (Math.PI / 2) * fall - settle
+          const pivotX = px + 19 * PX
+          ctx.save()
+          ctx.translate(Math.round(pivotX), Math.round(feetY))
+          ctx.rotate(angle)
+          if (f) ctx.drawImage(f, -19 * PX, -TREX_H * PX, f.width * PX, f.height * PX)
+          ctx.restore()
+          ctx.globalAlpha = 1
+          return
+        }
+        let f: HTMLCanvasElement | undefined
+        if (!grounded) {
           f = frames.player[0]
         } else {
-          f = frames.player[Math.floor(runClock / DINO_RUN_SPRITES.player.frameMs) % frames.player.length]
+          f = frames.player[Math.floor(runClock / PLAYER_FRAME_MS) % frames.player.length]
         }
-        ctx.globalAlpha = 0.85 * appear
-        drawFrame(f, ambientDinoXFor(size.width), horizon + 2 - 16 * PX - y)
+        drawFrame(f, px, feetY - TREX_H * PX)
       }
       ctx.globalAlpha = 1
     }

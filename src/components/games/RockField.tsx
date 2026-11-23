@@ -128,6 +128,10 @@ export const RockField: React.FC = () => {
     const ctx = canvas?.getContext('2d')
     if (!canvas || !ctx) return
 
+    // Only the current run may drive the starfield (see gameBus.session)
+    const session = gameBus.session
+    const live = () => session !== 0 && gameBus.session === session
+
     const size: CanvasSize = { width: window.innerWidth, height: window.innerHeight }
     const unfit = fitCanvas(canvas, ctx, size)
     ctx.imageSmoothingEnabled = true
@@ -155,7 +159,7 @@ export const RockField: React.FC = () => {
     let mx = size.width / 2
     let my = size.height / 2
 
-    gameBus.starBoostTarget = 0.9
+    if (live()) gameBus.starBoostTarget = 0.9
 
     const center = () => ({
       cx: gameBus.starCenterX || size.width / 2,
@@ -261,7 +265,7 @@ export const RockField: React.FC = () => {
         isOver = true
         firing = false
         setOver(true)
-        gameBus.starBoostTarget = 0.25
+        if (live()) gameBus.starBoostTarget = 0.25
         setBest((prev) => {
           const next = Math.max(prev, scoreNow)
           if (next > prev) writeHighScore(HIGH_SCORE_KEY, next)
@@ -281,12 +285,15 @@ export const RockField: React.FC = () => {
       setHull(MAX_HULL)
       setScore(0)
       setOver(false)
-      gameBus.starBoostTarget = 0.9
+      if (live()) gameBus.starBoostTarget = 0.9
     }
 
     const step = (dt: number) => {
       const s = dt / 1000
-      if (!isOver) {
+      // After exit the run keeps animating through the fade, but frozen:
+      // no spawning, firing, or damage.
+      const running = !isOver && live()
+      if (running) {
         elapsed += s
         spawnTimer -= dt
         if (spawnTimer <= 0) {
@@ -311,7 +318,7 @@ export const RockField: React.FC = () => {
         r.flash = Math.max(0, r.flash - s * 6)
         if (!r.judged && r.z <= Z_HIT) {
           r.judged = true
-          if (!isOver && Math.hypot(r.x, r.y) < hitWorldR + ROCK[r.size].r * 0.5) {
+          if (running && Math.hypot(r.x, r.y) < hitWorldR + ROCK[r.size].r * 0.5) {
             const { sx, sy, k } = project(r.x, r.y, Math.max(r.z, 1))
             burst(sx, sy, ROCK[r.size].r * k * 0.5, 26)
             takeHit(r)

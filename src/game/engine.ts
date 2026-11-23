@@ -93,7 +93,7 @@ const parseRgb = (color: string): [number, number, number] => {
  * Runs once at load, never per frame.
  */
 export const grayscaleFrames = (
-  img: HTMLImageElement,
+  img: HTMLImageElement | HTMLCanvasElement,
   frameW: number,
   dark: string,
   light: string,

@@ -9,6 +9,12 @@
 export const AMBIENT_GROUND_SPEED = 2.4 // px per 60fps frame (light background)
 
 export const gameBus = {
+  // Id of the run currently allowed to drive the backgrounds; 0 = no game.
+  // A game keeps animating through its fade-out after exit, so every write
+  // below is gated on still owning the session. Otherwise a late write
+  // (e.g. a game over during the fade) would leave the background fast.
+  session: 0,
+
   // Light theme (DinoRunnerCanvas)
   groundSpeedTarget: AMBIENT_GROUND_SPEED,
   groundSpeed: AMBIENT_GROUND_SPEED, // published by the background each frame
@@ -22,6 +28,21 @@ export const gameBus = {
 }
 
 export const STAR_FOCAL = 220 // must match the starfield projection (k = 220 / z)
+
+let lastSession = 0
+
+/** Starts a new run and returns its id. Called by GameModeContext.start. */
+export const beginGameSession = () => {
+  lastSession += 1
+  gameBus.session = lastSession
+  return lastSession
+}
+
+/** Ends the run: no game may write to the bus until the next session begins. */
+export const endGameSession = () => {
+  gameBus.session = 0
+  resetGameBus()
+}
 
 export const resetGameBus = () => {
   gameBus.groundSpeedTarget = AMBIENT_GROUND_SPEED
