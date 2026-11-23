@@ -50,6 +50,7 @@ export const TronDiscCursor: React.FC = () => {
       if (!isVisibleRef.current) {
         isVisibleRef.current = true
         if (cursorEl) cursorEl.style.opacity = '1'
+        wake()
       }
     }
 
@@ -103,6 +104,7 @@ export const TronDiscCursor: React.FC = () => {
     const handleMouseEnter = () => {
       isVisibleRef.current = true
       if (cursorEl) cursorEl.style.opacity = '1'
+      wake()
     }
 
     // 5. Mechanical Rack-and-Pinion Gear Coupling:
@@ -126,8 +128,9 @@ export const TronDiscCursor: React.FC = () => {
     }
 
     // 6. Continuous requestAnimationFrame Physics Engine
-    let animId: number
+    let animId = 0
     let lastTime = performance.now()
+    let spinning = false
 
     const tick = (now: number) => {
       const dt = Math.min((now - lastTime) / 1000, 0.1) // Clamped delta time
@@ -161,10 +164,17 @@ export const TronDiscCursor: React.FC = () => {
         innerRingRef.current.style.transform = `rotate(${innerAngle.toFixed(2)}deg)`
       }
 
-      animId = requestAnimationFrame(tick)
+      // Sleep while the cursor is off-page; wake() restarts on the next pointer event
+      if (isVisibleRef.current) animId = requestAnimationFrame(tick)
+      else spinning = false
     }
 
-    animId = requestAnimationFrame(tick)
+    const wake = () => {
+      if (spinning) return
+      spinning = true
+      lastTime = performance.now()
+      animId = requestAnimationFrame(tick)
+    }
 
     // Register high-performance event listeners
     window.addEventListener('pointermove', handlePointerMove, { passive: true })

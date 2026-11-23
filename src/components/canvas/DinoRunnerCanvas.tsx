@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   SPRITE_SHEET_2X_URL,
   DINO_SPRITES_HDPI,
   SpriteRect
 } from './dinoSprites'
 import { AMBIENT_GROUND_SPEED, easeToward, gameBus, horizonYFor, ambientDinoXFor } from '../../game/gameBus'
-import { MAX_DPR } from '../../game/engine'
+import { MAX_DPR, isLowPowerDevice, watchReducedMotion } from '../../game/engine'
 
 interface CloudInstance {
   x: number
@@ -196,6 +196,8 @@ function drawTransmissionTowersAndLines(
 
 export const DinoRunnerCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  // Low-power devices: 30fps cap and no CSS blur (a full-screen filter recomposited every frame)
+  const [lowPower] = useState(isLowPowerDevice)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -360,13 +362,26 @@ export const DinoRunnerCanvas: React.FC = () => {
     }
 
     let lastTime = performance.now()
+    const FRAME_MIN_MS = lowPower ? 1000 / 30 - 1 : 0
+    let reduceMotion = false
+    const stopWatchingMotion = watchReducedMotion((reduce) => {
+      reduceMotion = reduce
+    })
 
     const animate = (currentTime: number) => {
+      if (currentTime - lastTime < FRAME_MIN_MS) {
+        if (isRunning) animationFrameId = requestAnimationFrame(animate)
+        return
+      }
       const dt = Math.min(currentTime - lastTime, 50)
       lastTime = currentTime
       // Frame-rate independent motion: 1.0 at 60fps
-      const k = dt / (1000 / 60)
-      groundSpeed = easeToward(groundSpeed, gameBus.groundSpeedTarget, dt, 350)
+      const frameK = dt / (1000 / 60)
+      // Reduced motion slows the ambient scene to a gentle drift. Never during a
+      // game, where the ground must stay locked to the obstacles.
+      const ambientScale = reduceMotion && gameBus.session === 0 ? 0.25 : 1
+      const k = frameK * ambientScale // clouds and birds; ground uses groundSpeed, already scaled
+      groundSpeed = easeToward(groundSpeed, gameBus.groundSpeedTarget * ambientScale, dt, 350)
       gameBus.groundSpeed = groundSpeed
       const groundMul = groundSpeed / GROUND_SPEED
       ambientHide = easeToward(ambientHide, gameBus.ambientDinoHideTarget, dt, 90)
@@ -416,7 +431,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       ctx.save()
       for (const c of cacti) {
         if (c.layer !== 'bg') continue
-        c.x -= c.speed * groundMul * k
+        c.x -= c.speed * groundMul * frameK
         const renderW = c.sprite.dw * c.scale
         const renderH = c.sprite.dh * c.scale
 
@@ -448,7 +463,7 @@ export const DinoRunnerCanvas: React.FC = () => {
 
       // 2.5 Draw Transmission Towers & Sagging Power Lines (middle altitude corridor between T-Rex and Pterodactyls)
       for (const t of towers) {
-        t.x -= groundSpeed * k
+        t.x -= groundSpeed * frameK
       }
 
       // Recycle towers that go past the left edge (keep generous 2x buffer so power lines never cut off)
@@ -469,7 +484,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       drawTransmissionTowersAndLines(ctx, towers, horizonY, towerH)
 
       // 3. Draw Ground Line & Scrolling Horizon Terrain
-      groundOffsetX = (groundOffsetX + groundSpeed * k) % 600
+      groundOffsetX = (groundOffsetX + groundSpeed * frameK) % 600
       ctx.save()
       ctx.globalAlpha = 0.48
 
@@ -502,7 +517,7 @@ export const DinoRunnerCanvas: React.FC = () => {
       ctx.save()
       for (const c of cacti) {
         if (c.layer !== 'fg') continue
-        c.x -= c.speed * groundMul * k
+        c.x -= c.speed * groundMul * frameK
         const renderW = c.sprite.dw * c.scale
         const renderH = c.sprite.dh * c.scale
 
@@ -641,9 +656,10 @@ export const DinoRunnerCanvas: React.FC = () => {
     return () => {
       window.removeEventListener('resize', setCanvasSize)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      stopWatchingMotion()
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [lowPower])
 
   return (
     <canvas
@@ -657,8 +673,8 @@ export const DinoRunnerCanvas: React.FC = () => {
         height: 'calc(100vh + 8px)',
         pointerEvents: 'none',
         zIndex: 0,
-        filter: 'blur(0.5px)',
-        WebkitFilter: 'blur(0.5px)',
+        filter: lowPower ? 'none' : 'blur(0.5px)',
+        WebkitFilter: lowPower ? 'none' : 'blur(0.5px)',
         transform: 'translateZ(0)'
       }}
     />

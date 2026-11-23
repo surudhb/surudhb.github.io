@@ -149,3 +149,25 @@ export const writeHighScore = (key: string, score: number) => {
 
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+/** Calls back with the current reduced-motion preference now and on every change. Returns cleanup. */
+export const watchReducedMotion = (cb: (reduce: boolean) => void) => {
+  const m = window.matchMedia('(prefers-reduced-motion: reduce)')
+  const onChange = () => cb(m.matches)
+  cb(m.matches)
+  m.addEventListener('change', onChange)
+  return () => m.removeEventListener('change', onChange)
+}
+
+/**
+ * Phones, tablets and low-core machines: draw lighter backgrounds (fewer stars,
+ * 30fps, no blur filter) so the decoration never competes with the content.
+ */
+export const isLowPowerDevice = () => {
+  if (typeof window === 'undefined') return false
+  const cores = navigator.hardwareConcurrency ?? 8
+  return window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768 || cores <= 4
+}
+
+/** Converts a per-60fps-frame lerp factor into the factor for a frame of `dtMs`. */
+export const lerpFactor = (perFrame: number, dtMs: number) => 1 - Math.pow(1 - perFrame, dtMs / (1000 / 60))

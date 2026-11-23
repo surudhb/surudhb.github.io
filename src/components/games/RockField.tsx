@@ -442,46 +442,62 @@ export const RockField: React.FC = () => {
       }
       ctx.globalAlpha = 1
 
-      // Lasers: green beams from the bottom corners toward the aim point,
-      // thinning with depth. Additive blending stacks the glow passes into a
-      // bloom like a real laser; the core stays near-white.
-      ctx.lineCap = 'round'
+      // Lasers: green beams from the bottom corners toward the aim point. Each
+      // bolt is a tapered capsule, thickest at the end nearest the ship and
+      // narrowing to a fine tip as it travels away. Additive blending stacks the
+      // glow passes into a bloom; the core stays near-white.
       ctx.globalCompositeOperation = 'lighter'
+      // Many faint passes rather than a few strong ones, so the bloom has no visible bands
       const GLOW_PASSES: [number, number][] = [
-        [16, 0.07],
-        [9, 0.13],
-        [4.5, 0.26],
-        [2.2, 0.55]
+        [16, 0.025],
+        [11.5, 0.035],
+        [8.2, 0.05],
+        [5.9, 0.07],
+        [4.2, 0.1],
+        [3, 0.14],
+        [2.2, 0.2],
+        [1.6, 0.28]
       ]
+      // Capsule joined along the true tangents of its two end circles
+      const taperedBeam = (x0: number, y0: number, r0: number, x1: number, y1: number, r1: number) => {
+        const d = Math.hypot(x1 - x0, y1 - y0)
+        ctx.beginPath()
+        if (d <= Math.abs(r0 - r1)) {
+          // One end fully contains the other (a bolt that is very short on screen)
+          ctx.arc(r0 >= r1 ? x0 : x1, r0 >= r1 ? y0 : y1, Math.max(r0, r1), 0, Math.PI * 2)
+        } else {
+          const a = Math.atan2(y1 - y0, x1 - x0)
+          const n = Math.PI / 2 - Math.asin((r0 - r1) / d)
+          ctx.arc(x0, y0, r0, a + n, a - n)
+          ctx.arc(x1, y1, r1, a - n, a + n)
+          ctx.closePath()
+        }
+        ctx.fill()
+      }
       for (const b of bolts) {
         const ex = cx + b.ax * STAR_FOCAL
         const ey = cy + b.ay * STAR_FOCAL
+        const tailZ = Math.max(Z_HIT, b.z - 900)
         const t = 1 - Z_HIT / b.z
-        const tt = 1 - Z_HIT / Math.max(Z_HIT, b.z - 900)
+        const tt = 1 - Z_HIT / tailZ
         const hx = b.sx + (ex - b.sx) * t
         const hy = b.sy + (ey - b.sy) * t
         const tx = b.sx + (ex - b.sx) * tt
         const ty = b.sy + (ey - b.sy) * tt
-        const w = 1.6 + 5 * (Z_HIT / b.z)
-        ctx.strokeStyle = palette.glow
+        // Width at each end: the near end shrinks with depth, the far end is a fine point
+        const nearW = 1.6 + 5 * (Z_HIT / tailZ)
+        const farW = Math.max(0.35, nearW * 0.22)
+        ctx.fillStyle = palette.glow
         for (const [mul, alpha] of GLOW_PASSES) {
           ctx.globalAlpha = alpha
-          ctx.lineWidth = w * mul
-          ctx.beginPath()
-          ctx.moveTo(tx, ty)
-          ctx.lineTo(hx, hy)
-          ctx.stroke()
+          taperedBeam(tx, ty, (nearW * mul) / 2, hx, hy, (farW * mul) / 2)
         }
         ctx.globalAlpha = 1
-        ctx.strokeStyle = palette.core
-        ctx.lineWidth = w * 0.8
-        ctx.beginPath()
-        ctx.moveTo(tx, ty)
-        ctx.lineTo(hx, hy)
-        ctx.stroke()
-        // Hot spot at the tip
-        const tip = w * 10
-        ctx.globalAlpha = 0.85
+        ctx.fillStyle = palette.core
+        taperedBeam(tx, ty, nearW * 0.4, hx, hy, farW * 0.4)
+        // Small spark at the tip, sized to the thin end so it doesn't re-thicken it
+        const tip = farW * 8
+        ctx.globalAlpha = 0.6
         ctx.drawImage(glowDot, hx - tip / 2, hy - tip / 2, tip, tip)
       }
 

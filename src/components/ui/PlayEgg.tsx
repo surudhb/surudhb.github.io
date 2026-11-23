@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { useTheme } from '../../context/ThemeContext'
 import { useGameMode, preloadGame } from '../../context/GameModeContext'
 
@@ -101,9 +101,13 @@ export const PlayEgg: React.FC = () => {
 
   const warm = () => {
     setOpen(true)
-    void preloadGame(kind).then((m) => {
-      if ('preloadDinoRunSprites' in m) m.preloadDinoRunSprites()
-    })
+    preloadGame(kind)
+      .then((m) => {
+        if ('preloadDinoRunSprites' in m) m.preloadDinoRunSprites()
+      })
+      .catch(() => {
+        // Warm-up only; a real failure is handled when the game starts
+      })
   }
 
   return (
@@ -146,17 +150,17 @@ export const PlayEgg: React.FC = () => {
             </defs>
           )}
           <EggArt pixel={isLightMode} half="bottom" id={id} />
-          <motion.g
+          <m.g
             animate={open ? { y: -13, x: -3, rotate: -18 } : { y: 0, x: 0, rotate: 0 }}
             transition={{ type: 'spring', stiffness: 380, damping: 22 }}
             style={{ originX: '10%', originY: '50%' }}
           >
             <EggArt pixel={isLightMode} half="top" id={id} />
-          </motion.g>
+          </m.g>
         </svg>
 
         {/* The button inside the egg */}
-        <motion.span
+        <m.span
           initial={false}
           animate={open ? { opacity: 1, y: -6, scale: 1 } : { opacity: 0, y: 6, scale: 0.6 }}
           transition={{ type: 'spring', stiffness: 420, damping: 24 }}
@@ -179,7 +183,7 @@ export const PlayEgg: React.FC = () => {
           }}
         >
           ▶ PLAY
-        </motion.span>
+        </m.span>
       </div>
     </button>
   )

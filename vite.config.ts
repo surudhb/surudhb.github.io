@@ -29,9 +29,13 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          motion: ['framer-motion']
+        // React rarely changes between deploys, so keep it in its own long-cached
+        // chunk. (The old object form matched only the package entry points and
+        // left react-dom/client and scheduler in the main bundle.) framer-motion
+        // is left to Rollup so LazyMotion's animation features split into an
+        // async chunk instead of loading up front.
+        manualChunks(id) {
+          if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) return 'vendor'
         }
       }
     }

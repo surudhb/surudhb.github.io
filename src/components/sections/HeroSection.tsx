@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { profileData } from '../../data/profile'
 import { useTheme } from '../../context/ThemeContext'
 import { THEME_CONFIG } from '../../config/themeConfig'
@@ -158,7 +158,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         padding: '0 2rem'
       }}
     >
-      <motion.div
+      <m.div
         style={{
           y: yParallax,
           opacity: opacityParallax,
@@ -336,7 +336,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         </h1>
 
         {/* Subtitle / Discipline with Aurebesh / Cave Art letter hover effect & consistent English spacing */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.0, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
@@ -438,10 +438,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               </span>
             )
           })}
-        </motion.div>
+        </m.div>
 
         {/* Seeking line: what roles Surudh is open to */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
@@ -458,10 +458,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           }}
         >
           {profileData.seeking}
-        </motion.p>
+        </m.p>
 
         {/* Social Links directly beneath the subtitle */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
@@ -497,10 +497,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               {link.label} ↗
             </a>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Link to the about page (home is a single screen, no scrolling) */}
-        <motion.a
+        <m.a
           href="/about-me"
           onClick={(e) => { e.preventDefault(); onNavigate('about') }}
           initial={{ opacity: 0 }}
@@ -517,8 +517,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
         >
           [ ABOUT ME → ]
-        </motion.a>
-      </motion.div>
+        </m.a>
+      </m.div>
     </section>
   )
 }

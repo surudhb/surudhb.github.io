@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { gameBus } from '../../game/gameBus'
-import { MAX_DPR } from '../../game/engine'
+import { MAX_DPR, isLowPowerDevice, lerpFactor, watchReducedMotion } from '../../game/engine'
 
 // ============================================================================
 // Celestial Star Color Palette - Single Source of Truth
@@ -82,9 +82,15 @@ export const StarfieldCanvas: React.FC = () => {
     setCanvasSize()
     window.addEventListener('resize', setCanvasSize)
 
+    // Low-power devices get fewer stars and a 30fps cap; reduced-motion users
+    // get a slow drift with no warp or parallax.
+    const lowPower = isLowPowerDevice()
+    const FRAME_MIN_MS = lowPower ? 1000 / 30 - 1 : 0
+    let reduceMotion = false
+
     const numColors = POTENTIAL_COLORS.length
     // Allocate an equal number of stars per color to guarantee strict mathematical uniformity
-    const starsPerColor = Math.round(360 / numColors)
+    const starsPerColor = Math.round((lowPower ? 200 : 360) / numColors)
     const starCount = starsPerColor * numColors
     // Exactly equal number of beacon stars per color (e.g. 1 per color)
     const beaconsPerColor = Math.max(1, Math.round((starCount * 0.02) / numColors))
@@ -195,6 +201,7 @@ export const StarfieldCanvas: React.FC = () => {
     let isWarping = true
 
     const handleLightspeedJump = (e: Event) => {
+      if (reduceMotion) return
       const customEvent = e as CustomEvent<{ duration?: number }>
       warpDuration = customEvent.detail?.duration || 3000
       warpStartTime = performance.now()
@@ -214,9 +221,15 @@ export const StarfieldCanvas: React.FC = () => {
       isRunning = !document.hidden
       cancelAnimationFrame(animationFrameId)
       if (isRunning) {
+        lastFrame = performance.now()
         animationFrameId = requestAnimationFrame(render)
       }
     }
+
+    const stopWatchingMotion = watchReducedMotion((reduce) => {
+      reduceMotion = reduce
+      if (reduce) isWarping = false
+    })
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
@@ -448,8 +461,21 @@ export const StarfieldCanvas: React.FC = () => {
       }
     }
 
+    let lastFrame = performance.now()
+
     const render = () => {
       if (!isRunning) return
+
+      // Frame-rate independence: every speed below is "per 60fps frame" and is
+      // scaled by k, so stars move the same on 60Hz and 120Hz screens.
+      const now = performance.now()
+      if (now - lastFrame < FRAME_MIN_MS) {
+        animationFrameId = requestAnimationFrame(render)
+        return
+      }
+      const dt = Math.min(now - lastFrame, 50)
+      lastFrame = now
+      const k = dt / (1000 / 60)
 
       // Compute lightspeed warp factor (1.0 -> 0.0) with quartic ease-out
       let warpFactor = 0
@@ -465,16 +491,20 @@ export const StarfieldCanvas: React.FC = () => {
       }
 
       // Smooth mouse lerp
-      currentMouseX += (targetMouseX - currentMouseX) * 0.05
-      currentMouseY += (targetMouseY - currentMouseY) * 0.05
+      const mouseEase = lerpFactor(0.05, dt)
+      const parallaxX = reduceMotion ? 0 : targetMouseX
+      const parallaxY = reduceMotion ? 0 : targetMouseY
+      currentMouseX += (parallaxX - currentMouseX) * mouseEase
+      currentMouseY += (parallaxY - currentMouseY) * mouseEase
 
       // Decay scroll boost
-      scrollSpeed *= 0.92
+      scrollSpeed *= Math.pow(0.92, k)
 
       // High-velocity deceleration: peak speed ~50x normal speed, decaying smoothly down to baseSpeed
       const maxWarpBoost = 50.0
-      gameBoost += (gameBus.starBoostTarget - gameBoost) * 0.03
-      const activeSpeed = baseSpeed + scrollSpeed + maxWarpBoost * warpFactor + gameBoost
+      gameBoost += (gameBus.starBoostTarget - gameBoost) * lerpFactor(0.03, dt)
+      const motionScale = reduceMotion ? 0.25 : 1
+      const activeSpeed = (baseSpeed + scrollSpeed + maxWarpBoost * warpFactor + gameBoost) * motionScale
 
       // Clear with deep void pitch black
       ctx.fillStyle = '#070709'
@@ -489,7 +519,7 @@ export const StarfieldCanvas: React.FC = () => {
       // 1. Render normal stars
       for (let i = 0; i < starCount; i++) {
         const star = stars[i]
-        star.z -= activeSpeed
+        star.z -= activeSpeed * k
 
         if (star.z <= 0) {
           star.x = (Math.random() - 0.5) * width * 2
@@ -501,13 +531,13 @@ export const StarfieldCanvas: React.FC = () => {
         }
 
         // Shimmer oscillation for non-static, sparkling stars
-        star.shimmerPhase += star.shimmerSpeed
+        star.shimmerPhase += star.shimmerSpeed * k
         const shimmer = 0.72 + Math.sin(star.shimmerPhase) * 0.28
 
         // 3D projection for current position
-        const k = 220 / star.z
-        const px = star.x * k + cx
-        const py = star.y * k + cy
+        const proj = 220 / star.z
+        const px = star.x * proj + cx
+        const py = star.y * proj + cy
 
         // 3D projection for tail end position
         // In hyperspace warp, ALL stars stretch into luminous radial beams that contract back as speed drops
@@ -516,7 +546,8 @@ export const StarfieldCanvas: React.FC = () => {
           const warpTrailExtension = activeSpeed * (16 + warpFactor * 36)
           trailDepth = star.z + warpTrailExtension
         } else {
-          trailDepth = star.hasLongTrail ? star.z + activeSpeed * 26 : star.pz
+          // Trail = one 60fps frame of travel, so trail length is refresh-rate independent
+          trailDepth = star.hasLongTrail ? star.z + activeSpeed * 26 : star.z + activeSpeed
         }
 
         const pk = 220 / Math.min(trailDepth, width * 2)
@@ -533,7 +564,7 @@ export const StarfieldCanvas: React.FC = () => {
             1
           )
           const minRadius = star.isVeryBright ? 1.35 : 0.65
-          const starRadius = Math.max(star.size * k * 0.45 * (0.85 + shimmer * 0.15), minRadius)
+          const starRadius = Math.max(star.size * proj * 0.45 * (0.85 + shimmer * 0.15), minRadius)
 
           // Draw tapered meteor trail if moving fast, has long trail, or in warp
           if (star.hasLongTrail || activeSpeed > 1.2 || warpFactor > 0.008) {
@@ -558,7 +589,7 @@ export const StarfieldCanvas: React.FC = () => {
       // 2. Render 10x Super-Fast Star ("every now and then")
       if (!activeFastStar) {
         if (warpFactor < 0.05) {
-          fastStarTimer--
+          fastStarTimer -= k
         } else {
           fastStarTimer = 120
         }
@@ -570,9 +601,9 @@ export const StarfieldCanvas: React.FC = () => {
         const fast = activeFastStar
         const fastZStep = activeSpeed * fast.speedMultiplier
 
-        fast.z -= fastZStep
-        fast.x += fast.vx * activeSpeed * 6
-        fast.y += fast.vy * activeSpeed * 6
+        fast.z -= fastZStep * k
+        fast.x += fast.vx * activeSpeed * 6 * k
+        fast.y += fast.vy * activeSpeed * 6 * k
 
         if (fast.z <= 10) {
           activeFastStar = null
@@ -615,6 +646,7 @@ export const StarfieldCanvas: React.FC = () => {
       window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
       window.removeEventListener('lightspeed:jump', handleLightspeedJump)
+      stopWatchingMotion()
       cancelAnimationFrame(animationFrameId)
     }
   }, [])

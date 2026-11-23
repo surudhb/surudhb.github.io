@@ -74,11 +74,21 @@ export function useTelemetry() {
       // Fallback stays as default
     }
 
+    // The easing loop only runs while the readout is still catching up to the
+    // mouse; once settled it sleeps until the next mouse move.
+    let running = false
+    const wake = () => {
+      if (running) return
+      running = true
+      rafId.current = requestAnimationFrame(updateLoop)
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       const width = window.innerWidth
       const height = window.innerHeight
       targetX.current = (e.clientX / width) * 2 - 1
       targetY.current = (e.clientY / height) * 2 - 1
+      wake()
     }
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
@@ -121,10 +131,13 @@ export function useTelemetry() {
         setTelemetry(next)
       }
 
-      rafId.current = requestAnimationFrame(updateLoop)
+      const settled =
+        Math.abs(targetX.current - currentX.current) < 0.0005 && Math.abs(targetY.current - currentY.current) < 0.0005
+      if (settled) running = false
+      else rafId.current = requestAnimationFrame(updateLoop)
     }
 
-    rafId.current = requestAnimationFrame(updateLoop)
+    wake()
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)

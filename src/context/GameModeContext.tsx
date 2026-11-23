@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { beginGameSession, endGameSession, gameBus } from '../game/gameBus'
+import { isChunkLoadError, reloadForStaleChunk } from '../components/ui/SafeBoundary'
 
 export type GameKind = 'space' | 'dino'
 
@@ -24,11 +25,16 @@ export const GameModeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const start = useCallback((next: GameKind) => {
     // Wait for the chunk so the first game frame is never blank.
-    preloadGame(next).then(() => {
-      if (gameBus.session !== 0) return // a run is already live (e.g. a double click)
-      beginGameSession()
-      setKind(next)
-    })
+    preloadGame(next)
+      .then(() => {
+        if (gameBus.session !== 0) return // a run is already live (e.g. a double click)
+        beginGameSession()
+        setKind(next)
+      })
+      .catch((err) => {
+        // Usually a stale tab after a deploy: reload once to get the new build
+        if (isChunkLoadError(err)) reloadForStaleChunk()
+      })
   }, [])
 
   const exit = useCallback(() => {

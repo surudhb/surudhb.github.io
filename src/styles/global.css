@@ -545,3 +545,10 @@ html.no-scroll body {
   line-height: 1;
   white-space: nowrap;
 }
+
+/* Animation chunk failed to load: show content in its final state, unanimated */
+.motion-failed main [style*="opacity"] {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}

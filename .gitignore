@@ -70,3 +70,6 @@ yarn-error.log
 
 # Vite cache
 .vite/
+# Compiled copies of vite.config.ts. Vite would load these instead of the .ts
+vite.config.js
+vite.config.d.ts

@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 interface MotionRevealProps {
   children: React.ReactNode
@@ -23,7 +23,7 @@ export const MotionReveal: React.FC<MotionRevealProps> = ({
 }) => {
   const reveal = { opacity: 1, y: 0, filter: 'blur(0px)' }
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: yOffset, filter: 'blur(8px)' }}
       {...(onMount
         ? { animate: reveal }
@@ -37,6 +37,6 @@ export const MotionReveal: React.FC<MotionRevealProps> = ({
       style={style}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }

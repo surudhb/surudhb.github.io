@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, lazy, Suspense } from 'react'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, LazyMotion, m } from 'framer-motion'
 import { Navbar } from './components/navigation/Navbar'
 import { HeroSection } from './components/sections/HeroSection'
 import { TronDiscCursor } from './components/ui/TronDiscCursor'
@@ -9,6 +9,7 @@ import { AboutPage } from './components/pages/AboutPage'
 import { useRoute } from './hooks/useRoute'
 import { GameModeProvider, useGameMode, loadRockField, loadDinoRun } from './context/GameModeContext'
 import { PlayEgg } from './components/ui/PlayEgg'
+import { SafeBoundary, reloadForStaleChunk } from './components/ui/SafeBoundary'
 
 // Lazy-load canvas and HUD components — decorative, never needed for first paint
 const StarfieldCanvas = lazy(() => import('./components/canvas/StarfieldCanvas').then(m => ({ default: m.StarfieldCanvas })))
@@ -18,6 +19,27 @@ const DinoScoreHud = lazy(() => import('./components/telemetry/DinoScoreHud').th
 // Games load only when the egg is hovered or clicked
 const RockField = lazy(() => loadRockField().then(m => ({ default: m.RockField })))
 const DinoRun = lazy(() => loadDinoRun().then(m => ({ default: m.DinoRun })))
+
+/** If a game fails to load or crashes, leave play mode so the site comes back. */
+const ExitOnMount: React.FC<{ onExit: () => void }> = ({ onExit }) => {
+  useEffect(() => {
+    onExit()
+  }, [onExit])
+  return null
+}
+
+// Animation features arrive in their own chunk; m.* components render their
+// initial state until it lands. `strict` flags any full `motion.*` import that
+// would pull the whole library back into the startup bundle.
+// If the chunk can't load, m.* elements would stay at their hidden initial state,
+// so reveal the content without animation rather than leave the page blank.
+const loadMotionFeatures = () =>
+  import('./motionFeatures')
+    .then((mod) => mod.default)
+    .catch(() => {
+      if (!reloadForStaleChunk()) document.documentElement.classList.add('motion-failed')
+      return new Promise<never>(() => {})
+    })
 
 const AppContent: React.FC = () => {
   const { isLightMode } = useTheme()
@@ -48,7 +70,7 @@ const AppContent: React.FC = () => {
       {/* Canvas background — lazy loaded, fades in to avoid pop-in.
           AnimatePresence cross-fades when theme switches. */}
       <AnimatePresence mode="sync">
-        <motion.div
+        <m.div
           key={isLightMode ? 'canvas-light' : 'canvas-dark'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -56,10 +78,12 @@ const AppContent: React.FC = () => {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}
         >
-          <Suspense fallback={null}>
-            {isLightMode ? <DinoRunnerCanvas /> : <StarfieldCanvas />}
-          </Suspense>
-        </motion.div>
+          <SafeBoundary>
+            <Suspense fallback={null}>
+              {isLightMode ? <DinoRunnerCanvas /> : <StarfieldCanvas />}
+            </Suspense>
+          </SafeBoundary>
+        </m.div>
       </AnimatePresence>
 
       {/* Viewport Perimeter Atmosphere Glow / Line Frame */}
@@ -79,9 +103,11 @@ const AppContent: React.FC = () => {
       <Navbar activeSection={route} onNavigate={handleNavigate} />
 
       {/* Telemetry HUD — lazy loaded */}
-      <Suspense fallback={null}>
-        {isLightMode ? <DinoScoreHud /> : <CoordinatesHud />}
-      </Suspense>
+      <SafeBoundary key={isLightMode ? 'hud-light' : 'hud-dark'}>
+        <Suspense fallback={null}>
+          {isLightMode ? <DinoScoreHud /> : <CoordinatesHud />}
+        </Suspense>
+      </SafeBoundary>
 
       {/* Page content: home is the hero only; about lives at /about-me */}
       <main style={{ position: 'relative', zIndex: 1 }}>
@@ -95,7 +121,7 @@ const AppContent: React.FC = () => {
       {/* Game layer: transparent canvas over the live background */}
       <AnimatePresence>
         {gameActive && (
-          <motion.div
+          <m.div
             key="game-layer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -103,10 +129,12 @@ const AppContent: React.FC = () => {
             transition={{ duration: 0.45, ease: 'easeInOut' }}
             style={{ position: 'fixed', inset: 0, zIndex: 5 }}
           >
-            <Suspense fallback={null}>
-              {gameKind === 'space' ? <RockField /> : <DinoRun />}
-            </Suspense>
-          </motion.div>
+            <SafeBoundary fallback={<ExitOnMount onExit={exitGame} />}>
+              <Suspense fallback={null}>
+                {gameKind === 'space' ? <RockField /> : <DinoRun />}
+              </Suspense>
+            </SafeBoundary>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -115,11 +143,13 @@ const AppContent: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <GameModeProvider>
-        <AppContent />
-      </GameModeProvider>
-    </ThemeProvider>
+    <LazyMotion features={loadMotionFeatures} strict>
+      <ThemeProvider>
+        <GameModeProvider>
+          <AppContent />
+        </GameModeProvider>
+      </ThemeProvider>
+    </LazyMotion>
   )
 }
 
