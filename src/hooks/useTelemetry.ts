@@ -61,6 +61,7 @@ export function useTelemetry() {
   const currentX = useRef(0)
   const currentY = useRef(0)
   const rafId = useRef<number | null>(null)
+  const lastRef = useRef<TelemetryData | null>(null)
 
   useEffect(() => {
     // 1. Resolve initial base coordinate from user timezone (zero permissions)
@@ -73,23 +74,21 @@ export function useTelemetry() {
       // Fallback stays as default
     }
 
-    // 2. Silent background geo-lookup fallback (no permission prompt)
-    fetch('https://api.country.is/')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.country) {
-          // If in Canada / US and no exact tz match, maintain regional accuracy
-        }
-      })
-      .catch(() => {
-        // Silent catch
-      })
+    // The easing loop only runs while the readout is still catching up to the
+    // mouse; once settled it sleeps until the next mouse move.
+    let running = false
+    const wake = () => {
+      if (running) return
+      running = true
+      rafId.current = requestAnimationFrame(updateLoop)
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       const width = window.innerWidth
       const height = window.innerHeight
       targetX.current = (e.clientX / width) * 2 - 1
       targetY.current = (e.clientY / height) * 2 - 1
+      wake()
     }
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
@@ -115,7 +114,7 @@ export function useTelemetry() {
       const vy = (currentY.current * 18.0).toFixed(1)
       const speed = (0.42 + Math.abs(currentX.current + currentY.current) * 0.05).toFixed(2)
 
-      setTelemetry({
+      const next: TelemetryData = {
         sector: '04',
         lat: latStr,
         lon: lonStr,
@@ -123,12 +122,22 @@ export function useTelemetry() {
         vectorY: vy.startsWith('-') ? vy : `+${vy}`,
         velocity: `${speed}c`,
         region: baseCoords.current.region
-      })
+      }
+      // Only re-render when a displayed value actually changed. Once the mouse
+      // settles this drops from 60 renders a second to none.
+      const prev = lastRef.current
+      if (!prev || prev.lat !== next.lat || prev.lon !== next.lon || prev.vectorX !== next.vectorX || prev.vectorY !== next.vectorY || prev.velocity !== next.velocity || prev.region !== next.region) {
+        lastRef.current = next
+        setTelemetry(next)
+      }
 
-      rafId.current = requestAnimationFrame(updateLoop)
+      const settled =
+        Math.abs(targetX.current - currentX.current) < 0.0005 && Math.abs(targetY.current - currentY.current) < 0.0005
+      if (settled) running = false
+      else rafId.current = requestAnimationFrame(updateLoop)
     }
 
-    rafId.current = requestAnimationFrame(updateLoop)
+    wake()
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)

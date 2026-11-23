@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { profileData } from '../../data/profile'
 import { useTheme } from '../../context/ThemeContext'
 import { THEME_CONFIG } from '../../config/themeConfig'
 import { CactusIcon } from '../ui/CactusIcon'
+import { HeroPortrait } from '../ui/HeroPortrait'
 
 const FIRST_NAME = 'SURUDH'
 const LAST_NAME = 'BHUTANI'
@@ -158,7 +159,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         padding: '0 2rem'
       }}
     >
-      <motion.div
+      <m.div
         style={{
           y: yParallax,
           opacity: opacityParallax,
@@ -168,6 +169,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           alignItems: 'center'
         }}
       >
+        <HeroPortrait />
+
         {/* Status Badge: Prehistoric Offline in Light Mode, Sci-Fi Transponder in Dark Mode */}
         {statusBadge && (
           <div
@@ -179,6 +182,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               height: '30px',
               minHeight: '30px',
               maxHeight: '30px',
+              width: 'min(var(--hero-badge-width), calc(100vw - 2rem))',
               boxSizing: 'border-box',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
@@ -268,8 +272,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   title={isAurebesh ? `Decode [${char}]` : char}
                   style={{
                     display: 'inline-block',
-                    fontFamily: isAurebesh ? 'var(--font-decode)' : 'var(--font-display)',
-                    fontSize: isAurebesh ? '0.76em' : '1em',
+                    fontFamily: 'var(--font-display)',
                     lineHeight: 1,
                     verticalAlign: 'baseline',
                     position: 'relative',
@@ -281,7 +284,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                     color: isHovered ? 'var(--text-primary)' : 'inherit'
                   }}
                 >
-                  {char}
+                  {/* English glyph always sets the box width, so decoding never shifts spacing */}
+                  <span style={{ visibility: isAurebesh ? 'hidden' : 'visible' }}>{char}</span>
+                  {isAurebesh && (
+                    <span aria-hidden="true" className="decode-glyph" style={{ fontFamily: 'var(--font-decode)', fontSize: 'var(--decode-name-size)' }}>
+                      {char}
+                    </span>
+                  )}
                 </span>
               )
             })}
@@ -305,8 +314,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                   title={isAurebesh ? `Decode [${char}]` : char}
                   style={{
                     display: 'inline-block',
-                    fontFamily: isAurebesh ? 'var(--font-decode)' : 'var(--font-display)',
-                    fontSize: isAurebesh ? '0.76em' : '1em',
+                    fontFamily: 'var(--font-display)',
                     lineHeight: 1,
                     verticalAlign: 'baseline',
                     position: 'relative',
@@ -318,7 +326,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                     color: isHovered ? 'var(--text-primary)' : 'inherit'
                   }}
                 >
-                  {char}
+                  {/* English glyph always sets the box width, so decoding never shifts spacing */}
+                  <span style={{ visibility: isAurebesh ? 'hidden' : 'visible' }}>{char}</span>
+                  {isAurebesh && (
+                    <span aria-hidden="true" className="decode-glyph" style={{ fontFamily: 'var(--font-decode)', fontSize: 'var(--decode-name-size)' }}>
+                      {char}
+                    </span>
+                  )}
                 </span>
               )
             })}
@@ -326,7 +340,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         </h1>
 
         {/* Subtitle / Discipline with Aurebesh / Cave Art letter hover effect & consistent English spacing */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.0, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
@@ -399,8 +413,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                       title={isHovered ? `Decode [${char}]` : char}
                       style={{
                         display: 'inline-block',
-                        fontFamily: isHovered ? 'var(--font-decode)' : 'var(--font-heading)',
-                        fontSize: isHovered ? '0.92em' : '1em',
+                        fontFamily: 'var(--font-heading)',
                         lineHeight: 1,
                         verticalAlign: 'baseline',
                         position: 'relative',
@@ -416,17 +429,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                           : 'var(--hero-char-default-color)'
                       }}
                     >
-                      {char}
+                      {/* English glyph always sets the box width, so decoding never shifts spacing */}
+                      <span style={{ visibility: isHovered ? 'hidden' : 'visible' }}>{char}</span>
+                      {isHovered && (
+                        <span aria-hidden="true" className="decode-glyph" style={{ fontFamily: 'var(--font-decode)', fontSize: 'var(--decode-sub-size)' }}>
+                          {char}
+                        </span>
+                      )}
                     </span>
                   )
                 })}
               </span>
             )
           })}
-        </motion.div>
+        </m.div>
 
         {/* Seeking line: what roles Surudh is open to */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
@@ -443,10 +462,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           }}
         >
           {profileData.seeking}
-        </motion.p>
+        </m.p>
 
         {/* Social Links directly beneath the subtitle */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
@@ -482,10 +501,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               {link.label} ↗
             </a>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Link to the about page (home is a single screen, no scrolling) */}
-        <motion.a
+        <m.a
           href="/about-me"
           onClick={(e) => { e.preventDefault(); onNavigate('about') }}
           initial={{ opacity: 0 }}
@@ -502,8 +521,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
         >
           [ ABOUT ME → ]
-        </motion.a>
-      </motion.div>
+        </m.a>
+      </m.div>
     </section>
   )
 }

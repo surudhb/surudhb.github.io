@@ -1,0 +1,29 @@
+name: CI
+
+# Type-check and build every pull request and every branch push except
+# `source` (which deploy.yml already builds), so errors surface before deploy.
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - source
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check and build
+        run: npm run build

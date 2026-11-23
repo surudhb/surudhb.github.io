@@ -80,11 +80,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           font-family: 'CavePainting';
           font-weight: 400;
           font-style: normal;
-          font-display: optional;
+          font-display: swap;
           src: url('/fonts/CavePainting/CavePainting.woff2') format('woff2');
         }
       `
       document.head.appendChild(style)
+    }
+
+    // Decorative fonts are only requested by the browser on first use (the name
+    // hover). Fetch them as soon as the theme is active so the hieroglyph and
+    // Aurebesh effects are ready on the first hover instead of being skipped.
+    const families = theme === 'light' ? ['CavePainting', 'Silkscreen', 'Press Start 2P'] : ['Aurebesh']
+    if ('fonts' in document) {
+      families.forEach((f) => {
+        document.fonts.load(`1em "${f}"`).catch(() => {})
+      })
     }
   }, [theme])
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { CactusIcon } from '../ui/CactusIcon'
 
 interface NavItem {
@@ -38,7 +38,7 @@ export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -103,7 +103,7 @@ export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
             {navItems.map((item, idx) => {
               const isActive = activeSection === item.id
               return (
-                <motion.button
+                <m.button
                   key={item.id}
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -163,7 +163,7 @@ export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
                       [ACTIVE]
                     </span>
                   )}
-                </motion.button>
+                </m.button>
               )
             })}
 
@@ -216,7 +216,7 @@ export const NavMobileDrawer: React.FC<NavMobileDrawerProps> = ({
               [ CLOSE ✕ ]
             </button>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

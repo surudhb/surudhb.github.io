@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { GalleryItem } from '../../types'
 import { useTheme } from '../../context/ThemeContext'
 import { CactusIcon } from './CactusIcon'
@@ -37,7 +37,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
   const active = items[activeIdx]
 
   return createPortal(
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -57,7 +57,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
         padding: '2rem'
       }}
     >
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 16, scale: 0.97 }}
@@ -142,7 +142,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
 
         {/* Main slide */}
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={activeIdx}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -221,7 +221,7 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
                 OPEN LINK ↗
               </a>
             )}
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         {/* Navigation footer */}
@@ -293,8 +293,8 @@ export const GalleryModal: React.FC<GalleryModalProps> = ({ title, items, onClos
             </button>
           </div>
         )}
-      </motion.div>
-    </motion.div>,
+      </m.div>
+    </m.div>,
     document.body
   )
 }

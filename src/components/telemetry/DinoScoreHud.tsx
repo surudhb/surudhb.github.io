@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { CactusIcon } from '../ui/CactusIcon'
 
 export const DinoScoreHud: React.FC = () => {
-  const [distance, setDistance] = useState(1337)
+  const distanceRef = useRef(1337)
+  const scoreElRef = useRef<HTMLSpanElement | null>(null)
   const [isPaused, setIsPaused] = useState(false)
 
   // Listen for modal open/close events to pause and blur the scoreboard
@@ -27,18 +28,28 @@ export const DinoScoreHud: React.FC = () => {
     }
   }, [])
 
-  // Telemetry distance counter: pauses when a modal is open
+  // Telemetry distance counter: pauses when a modal is open or the tab is hidden.
+  // Writes the digits straight to the DOM so it never re-renders React.
   useEffect(() => {
     if (isPaused) return
-
-    const timer = setInterval(() => {
-      setDistance((prev) => (prev >= 99999 ? 100 : prev + 1))
-    }, 120)
-
-    return () => clearInterval(timer)
+    let timer: ReturnType<typeof setInterval> | null = null
+    const tick = () => {
+      distanceRef.current = distanceRef.current >= 99999 ? 100 : distanceRef.current + 1
+      if (scoreElRef.current) scoreElRef.current.textContent = String(distanceRef.current).padStart(5, '0')
+    }
+    const sync = () => {
+      if (timer) clearInterval(timer)
+      timer = document.hidden ? null : setInterval(tick, 120)
+    }
+    sync()
+    document.addEventListener('visibilitychange', sync)
+    return () => {
+      if (timer) clearInterval(timer)
+      document.removeEventListener('visibilitychange', sync)
+    }
   }, [isPaused])
 
-  const formattedScore = String(distance).padStart(5, '0')
+  const formattedScore = String(distanceRef.current).padStart(5, '0')
 
   return (
     <aside
@@ -73,7 +84,7 @@ export const DinoScoreHud: React.FC = () => {
         }}
       >
         <span style={{ color: 'var(--text-muted)' }}>HI 09999</span>
-        <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{formattedScore}</span>
+        <span ref={scoreElRef} style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{formattedScore}</span>
         <CactusIcon size={12} color="var(--divider-symbol-color)" style={{ margin: '0 0.15rem' }} />
         <span style={{ fontSize: '0.7rem' }}>{isPaused ? 'PAUSED' : 'ERR_OFFLINE'}</span>
       </div>
